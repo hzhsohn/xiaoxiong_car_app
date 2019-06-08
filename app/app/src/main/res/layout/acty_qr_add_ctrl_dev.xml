@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:screenOrientation="portrait"
+    android:orientation="vertical">
+
+    <!-- navigationItemLeftButton -->
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbarId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@android:color/holo_blue_light"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme">
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/qr_bind_device"
+            android:textColor="#FFF"
+            android:textSize="20sp" />
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/toolbarId"
+        android:background="#eee"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal">
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/row4"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@android:color/white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:text="@string/qr_product_id"
+                android:textColor="#333"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/txt_product_id"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:layout_weight="1"
+                android:gravity="right|center_vertical"
+                android:paddingRight="15dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/row6"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@android:color/white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:text="@string/qr_mark"
+                android:textColor="#333"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/txt_mark"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:layout_weight="1"
+                android:gravity="right|center_vertical"
+                android:paddingRight="15dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal">
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/result"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="..."
+            android:textColor="#FF3939"
+            android:textSize="24sp" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="click_bind"
+            android:text="@string/qr_bind_dev" />
+    </LinearLayout>
+</RelativeLayout>
+

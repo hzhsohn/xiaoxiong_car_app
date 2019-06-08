@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <compositeConfiguration>
+          <compositeBuild compositeDefinitionSource="SCRIPT" />
+        </compositeConfiguration>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/cam_dahua" />
+            <option value="$PROJECT_DIR$/compent-kg" />
+            <option value="$PROJECT_DIR$/compent-led_rgbw" />
+            <option value="$PROJECT_DIR$/compent-tt_module" />
+            <option value="$PROJECT_DIR$/compent-xtsys" />
+            <option value="$PROJECT_DIR$/compent_base" />
+            <option value="$PROJECT_DIR$/jjdxm-dialogui" />
+            <option value="$PROJECT_DIR$/nfc" />
+          </set>
+        </option>
+        <option name="resolveModulePerSourceSet" value="false" />
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>

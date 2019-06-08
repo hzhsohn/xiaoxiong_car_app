@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:minHeight="80dp"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="150dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/imgOnline"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_marginTop="20dp"
+            android:layout_weight="0"
+            android:gravity="center_vertical"
+            app:srcCompat="@drawable/devlst_cell_online0" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/devname"
+            android:layout_weight="1"
+            android:gravity="bottom|center_horizontal">
+
+            <ImageView
+                android:id="@+id/img_yun"
+                android:layout_width="18dp"
+                android:layout_height="22dp"
+                android:layout_marginBottom="6dp"
+                android:layout_weight="1"
+                android:visibility="visible"
+                app:srcCompat="@drawable/cell_yun" />
+
+            <ImageView
+                android:id="@+id/img_lan"
+                android:layout_width="18dp"
+                android:layout_height="22dp"
+                android:layout_marginBottom="6dp"
+                android:layout_weight="1"
+                android:visibility="visible"
+                app:srcCompat="@drawable/cell_wifi" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="5dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <TextView
+            android:id="@+id/devname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="bottom"
+            android:text="@string/tip_devname"
+            android:textColor="@android:color/background_dark"
+            android:textSize="20sp"></TextView>
+
+        <TextView
+            android:id="@+id/tip_addr"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="6dp"
+            android:gravity="bottom|center_vertical"
+            android:text="@string/tip_devflag"
+            android:textColor="@color/text_gray"
+            android:textSize="14sp"></TextView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="left|center_vertical"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="10dp"
+            app:srcCompat="@drawable/rightk" />
+
+    </LinearLayout>
+
+</LinearLayout>
