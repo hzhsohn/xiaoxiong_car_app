@@ -294,7 +294,6 @@ public class CAIDMagr extends BaseActivity {
             Bundle bundle = data.getExtras();
             String autoid = bundle.getString("autoid");
             String caid = bundle.getString("caid");
-            String sharekey = bundle.getString("sharekey");
             for (int i = 0; i < webDataList.size(); i++) {
                 if (webDataList.get(i).autoid.equals(autoid)) {
                     break;

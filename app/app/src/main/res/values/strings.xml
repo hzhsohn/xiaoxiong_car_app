@@ -247,8 +247,6 @@
     <string name="caidadd_fail_already_exist">添加失败,CAID已经存在</string>
     <string name="caid_get_fail">获取CAID失败</string>
     <string name="caideadd_caid_notnull">CAID不能为空</string>
-    <string name="caidadd_sharekey">分享码:</string>
-    <string name="caidadd_sharekey_fail">分享码错误</string>
 
     <!-- qr -->
     <string name="qr_title">扫一扫</string>
