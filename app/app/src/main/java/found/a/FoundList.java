@@ -17,6 +17,7 @@ import android.zh.home.BaseFragment;
 import com.dou361.dialogui.DialogUIUtils;
 import com.hx_kong.freesha.R;
 
+import ext.magr.HTTPData;
 import myinfo.logic.LoginInfo;
 
 
@@ -64,11 +65,11 @@ public class FoundList extends BaseFragment {
         //WEBView浏览器
         webView = (WebView) view.findViewById(R.id.webView);
         if(key.equals("")) {
-            urlstr ="http://home.hx-kong.com/store";
+            urlstr = HTTPData.sAppindexUrl;
         }
         else
         {
-            urlstr="http://home.hx-kong.com/store/?key=" + key;
+            urlstr=HTTPData.sAppindexUrl+"/?key=" + key;
         }
         webView.loadUrl(urlstr);
         //覆盖WebView默认使用第三方或系统默认浏览器打开网页的行为，使网页用WebView打开
