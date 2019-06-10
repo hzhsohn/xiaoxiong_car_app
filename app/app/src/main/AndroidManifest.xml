@@ -109,6 +109,9 @@
         <activity android:name="myinfo.logged.setting.about_softw.AboutSoftware" />
         <activity android:name="myinfo.logged.setting.about_softw.AboutSoftWeb" />
         <activity android:name="myinfo.qrscan.result.QRAddCtrlDevice" />
+        <activity android:name="myinfo.logged.caid.remote.RemoveDevBind" />
+        <activity android:name="myinfo.logged.caid.remote.DeviceDetail" />
+        <activity android:name="myinfo.logged.caid.remote.RemoteDeviceDetail" />
     </application>
 
 </manifest>

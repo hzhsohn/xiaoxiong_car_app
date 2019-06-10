@@ -1,23 +1,17 @@
 package myinfo.qrscan.result;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.zh.home.BaseActivity;
 import com.hx_kong.freesha.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
@@ -32,6 +26,7 @@ import myinfo.logic.LoginInfo;
 public class QRAddCtrlDevice extends BaseActivity {
     WebProc web = null;
     WebProc web2 = null;
+    WebProc web3 = null;
     Context context = null;
     String productID=null;
     String devuuid=null;
@@ -41,8 +36,10 @@ public class QRAddCtrlDevice extends BaseActivity {
     private static final String DECODED_BITMAP_KEY = "codedBitmap";
     TextView txtProductID;
     TextView txtMark;
+    TextView txtFrmCAID;
     TextView txtResult;
     Button btnBind;
+    Timer tim;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,6 +52,9 @@ public class QRAddCtrlDevice extends BaseActivity {
         web2 = new WebProc();
         web2.addListener(wls2);
 
+        web3 = new WebProc();
+        web3.addListener(wls3);
+
         //
         initToolbar(0,
                 R.id.toolbarId,
@@ -66,8 +66,9 @@ public class QRAddCtrlDevice extends BaseActivity {
                 null);
 
         //
-        txtProductID= (TextView) findViewById(R.id.txt_product_id);
-        txtMark= (TextView) findViewById(R.id.txt_mark);
+        txtProductID= (TextView) findViewById(R.id.txt1);
+        txtMark= (TextView) findViewById(R.id.txt_flag);
+        txtFrmCAID= (TextView) findViewById(R.id.txt_curfrm_caid);
         txtResult= (TextView) findViewById(R.id.result);
         btnBind= (Button) findViewById(R.id.button);
         //
@@ -77,6 +78,10 @@ public class QRAddCtrlDevice extends BaseActivity {
         Map<String, String> mss= urlSplit(content);
         productID=mss.get("product_id");
         webNetDevInfo(productID);
+
+        //
+        // 添加一个Timer，可以让程序运行起来了
+        tim = new Timer();
     }
 
     /**
@@ -143,6 +148,9 @@ public class QRAddCtrlDevice extends BaseActivity {
     void webNetBindDev(String devUUID,String caid) {
         web2.getHtml(HTTPData.sIotBindDevUrl + "/set_caid.php", "device_uuid="+devUUID+"&caid="+caid);
     }
+    void webNetBindDevCheck(String devUUID,String caid) {
+        web3.getHtml(HTTPData.sIotBindDevUrl + "/set_caid_check.php", "device_uuid="+devUUID+"&caid="+caid);
+    }
 
     public WebProcListener wls = new WebProcListener() {
         @Override
@@ -167,9 +175,15 @@ public class QRAddCtrlDevice extends BaseActivity {
 
                         txtProductID.setText(productID);
                         txtMark.setText(mark);
+                        txtFrmCAID.setText(LoginInfo.currentCAID_frm);
                         if(bind_caid.equals(""))
                         {
                             txtResult.setText(getString(R.string.qr_dev_enable_bind));
+                            btnBind.setVisibility(View.VISIBLE);
+                        }
+                        else if(bind_caid.equals(LoginInfo.currentCAID_frm))
+                        {
+                            txtResult.setText(getString(R.string.qr_dev_retry_bind));
                             btnBind.setVisibility(View.VISIBLE);
                         }
                         else
@@ -223,8 +237,10 @@ public class QRAddCtrlDevice extends BaseActivity {
                 switch (nRet) {
                     case 1://
                     {
-                        txtResult.setText(getString(R.string.qr_bind_ok)+" CAID:"+LoginInfo.currentCAID_frm);
+                        txtResult.setText(getString(R.string.qr_try_bind)+" CAID:"+LoginInfo.currentCAID_frm);
                         btnBind.setVisibility(View.GONE);
+                        //检测是否成功
+                        tim.schedule(task, 500, 2000); // 延时500ms后执行，2000ms执行一次
                     }
                     break;
                     case 2://设备已经被绑定
@@ -259,7 +275,62 @@ public class QRAddCtrlDevice extends BaseActivity {
 
         }
     };
+    public WebProcListener wls3 = new WebProcListener() {
+        @Override
+        public void cookies(String url, String cookie) {
 
+        }
+
+        @Override
+        public void success_html(String url, String html) {
+
+            int nRet = 0;
+            try {
+                JSONObject person = new JSONObject(html);
+                nRet = person.getInt("ret");
+                switch (nRet) {
+                    case 1://
+                    {
+                        tim.cancel();
+                        txtResult.setText(getString(R.string.qr_bind_ok)+" CAID:"+LoginInfo.currentCAID_frm);
+                        btnBind.setVisibility(View.GONE);
+                    }
+                    break;
+                    case 2://CAID未设置成功
+                    {
+                    }
+                    case 3://未知产品设备
+                    {
+                        tim.cancel();
+                        AssertAlert.show(context, R.string.alert, R.string.qr_unknow_devuuid);
+                    }
+                    break;
+                    case 4://数据库操作失败
+                    {
+                        tim.cancel();
+                        AssertAlert.show(context, R.string.alert, R.string.myprofile_operat_fail);
+                    }
+                    break;
+                    case 5://缺少参数
+                    {
+                        tim.cancel();
+                        AssertAlert.show(context, R.string.alert, R.string.myprofile_lost_param);
+                    }
+                    break;
+                }
+            } catch (JSONException e) {
+                tim.cancel();
+                e.printStackTrace();
+                AssertAlert.show(context, getString(R.string.lost_json_parameter), e.getMessage());
+            }
+
+        }
+
+        @Override
+        public void fail(String url, String errMsg) {
+
+        }
+    };
     private View.OnClickListener onBackClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -272,5 +343,14 @@ public class QRAddCtrlDevice extends BaseActivity {
     {
         webNetBindDev(devuuid,LoginInfo.currentCAID_frm);
     }
+
+    //////////////////////////////////////////////////
+    private TimerTask task = new TimerTask() {
+
+        public void run() {
+            webNetBindDevCheck(devuuid,LoginInfo.currentCAID_frm);
+            System.gc();//这一句最好加上.垃圾回收机制生效.防止某些版本系统关闭不了定时器
+        }
+    };
 
 }

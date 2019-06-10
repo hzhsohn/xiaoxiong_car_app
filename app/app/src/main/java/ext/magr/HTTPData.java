@@ -29,7 +29,7 @@ public class HTTPData {
     static public final String sIotDevUrl="http://iot.d.hx-kong.com:8088";
     static public final String sIotDevUrl_get_dev_by_caid = HTTPData.sIotDevUrl + "/get-dev.php";
     static public final String sIotDevUrl_get_online_by_caid = HTTPData.sIotDevUrl + "/get-online.php";
-    static public final String sIotDevUrl_remove_dev_by_caid = HTTPData.sIotDevUrl + "/remove-dev.php";
+    static public final String sIotDevUrl_remove_dev = HTTPData.sIotDevUrl + "/remove-dev.php";
     static public final String sIotDevUrl_get_online_by_uuid= HTTPData.sIotDevUrl +"/check-online.php";
     
     /* 例子

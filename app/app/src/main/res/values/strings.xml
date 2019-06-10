@@ -65,8 +65,6 @@
     <string name="msg_not_null_nickname">呢称不能为空</string>
     <string name="lost_json_parameter">缺少JSON参数</string>
     <string name="btn_mod">确定修改</string>
-    <string name="online">在线</string>
-    <string name="offline">离线</string>
     <string name="yunline">云在线</string>
     <string name="frist_use_dev">第一次使用请填写设备控制密码</string>
     <string name="input_passwd_tip">请输入硬件密码</string>
@@ -226,6 +224,8 @@
     <string name="cmagr_del_dev_http_fail">删除失败,请重新尝试操作</string>
     <string name="cmagr_online_undel">在线设备不允许删除</string>
     <string name="cmagr_del">成功移除离线设备</string>
+    <string name="cmagr_try_reset_caid">正在尝试解除设备绑定...</string>
+    <string name="cmagr_reset_caid">成功解除绑定</string>
 
     <!-- caid share -->
     <string name="cshare_code">分享码:</string>
@@ -385,11 +385,30 @@
     <string name="qr_product_id">产品ID</string>
     <string name="qr_devuuid">设备ID</string>
     <string name="qr_mark">备注</string>
+    <string name="qr_cur_caid_frm">当前区域CAID</string>
     <string name="qr_unknow_product_id">未知产品编号</string>
     <string name="qr_unknow_devuuid">未知设备ID</string>
     <string name="qr_dev_already_bind">设备已经被绑定</string>
     <string name="qr_dev_enable_bind">设备可绑定</string>
+    <string name="qr_dev_retry_bind">重新绑定设备</string>
     <string name="qr_bind_dev">点击绑定</string>
+    <string name="qr_try_bind">正在绑定设备...</string>
     <string name="qr_bind_ok">绑定成功</string>
+
+
+    <string name="dev_uuid">设备ID</string>
+    <string name="dev_flag">设备标识</string>
+    <string name="remove_bind_dev">点击解除设备绑定</string>
+    <string name="remove_bind_dev_http_fail">解除绑定失败,请重新尝试操作</string>
+    <string name="getdevlist_json_fail">获取设备列表失败.数据异常</string>
+    <string name="bind_caid_n">已绑定区域CAID</string>
+    <string name="detail_device">设备详细</string>
+
+    <string name="detail_device_online">联网状态</string>
+
+    <string name="status_online">状态 : 在线</string>
+    <string name="status_offline">状态 : 离线</string>
+    <string name="online">在线</string>
+    <string name="offline">离线</string>
 </resources>
 

@@ -24,6 +24,7 @@ import com.hx_kong.freesha.R;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,36 +40,30 @@ import myinfo.logic.LoginInfo;
 import myinfo.qrscan.zxing.android.CaptureActivity;
 
 class RemoteStatusItem {
-    public String dpid;
-    public String devname;
-    public String uuid;
-    public String flag;
+    //已经绑定设备的信息
+    public String product_id;
+    public String price;
+    public String device_uuid;
+    public String mark;
+    public String use_time;
+    //已经联网的信息
+    // public String devname;
+    // public String flag;
     public boolean isOnline;
-
 };
 
 class RemoteStatusAdapter extends BaseAdapter {
     private List<RemoteStatusItem> items;
     private LayoutInflater mInflater;
     private Context mContext = null;
-    private boolean IsShowDelete;
-    View.OnClickListener deleteCL;
 
-    public RemoteStatusAdapter(Context context, List<RemoteStatusItem> lstData, View.OnClickListener dcl) {
+    public RemoteStatusAdapter(Context context, List<RemoteStatusItem> lstData) {
         mContext = context;
         mInflater = LayoutInflater.from(mContext);
         if (null != items) {
             items.clear();
         }
         items = lstData;
-        IsShowDelete = false;
-        deleteCL = dcl;
-    }
-
-    public void setShowDelete(boolean showDelete) {
-
-        IsShowDelete = showDelete;
-        this.notifyDataSetChanged();
     }
 
     public void clear() {
@@ -91,7 +86,6 @@ class RemoteStatusAdapter extends BaseAdapter {
                         android.view.ViewGroup parent) {
         final TextView indexTitle;
         final ImageView indexImage;
-        final ImageButton delBtn;
         if (convertView == null) {
             // 和item_custom.xml脚本关联
             convertView = mInflater.inflate(R.layout.list_item_dev_status, null);
@@ -101,37 +95,26 @@ class RemoteStatusAdapter extends BaseAdapter {
 
         indexTitle = (TextView) convertView.findViewById(R.id.devname);
         indexImage = (ImageView) convertView.findViewById(R.id.img1);
-        delBtn = (ImageButton) convertView.findViewById(R.id.btn1);
 
         //
-        indexTitle.setText(it.devname);
-        //
-        delBtn.setTag(it);
-        delBtn.setOnClickListener(deleteCL);
+        indexTitle.setText(it.product_id);
 
         //在线状态图标更改
         if (it.isOnline) {
-            indexImage.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.devlst_cell_online1));
+            ((TextView)convertView.findViewById(R.id.textView6)).
+                    setText(convertView.getResources().getString(R.string.status_online));
         } else {
-            indexImage.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.devlst_cell_online0));
+            ((TextView)convertView.findViewById(R.id.textView6)).
+                    setText(convertView.getResources().getString(R.string.status_offline));
         }
-
-        //显示 和隐藏删除按键
-        if (IsShowDelete) {
-            convertView.findViewById(R.id.btn1).setVisibility(View.VISIBLE);
-        } else {
-            convertView.findViewById(R.id.btn1).setVisibility(View.GONE);
-        }
-
         return convertView;
     }
 };
 
 public class RemoteStatus extends BaseActivity {
     RemoteStatusAdapter adapter;
-    boolean isEditing;
     WebProc web = null;
-    WebProc web3 = null;
+    WebProc web2 = null;
     List<RemoteStatusItem> webDataList = new ArrayList<RemoteStatusItem>();
     String caid = null;
     String title = null;
@@ -143,8 +126,9 @@ public class RemoteStatus extends BaseActivity {
         //
         web = new WebProc();
         web.addListener(wls);
-        web3 = new WebProc();
-        web3.addListener(wls3);
+        //
+        web2 = new WebProc();
+        web2.addListener(wls2);
         //
         initToolbar(0,
                 R.id.toolbarId,
@@ -165,16 +149,14 @@ public class RemoteStatus extends BaseActivity {
 
         //
         ListView listView = (ListView) findViewById(R.id.lv);
-        adapter = new RemoteStatusAdapter(this, webDataList, onDeleteClick);
+        adapter = new RemoteStatusAdapter(this, webDataList);
         listView.setOnItemClickListener(lvListern);
         listView.setAdapter(adapter);
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
         //刷新设备
         GetNetData();
     }
@@ -191,11 +173,6 @@ public class RemoteStatus extends BaseActivity {
         @Override
         public boolean onMenuItemClick(MenuItem menuItem) {
             switch (menuItem.getItemId()) {
-                case R.id.action_0: {
-                    isEditing = !isEditing;
-                    adapter.setShowDelete(isEditing);
-                }
-                break;
                 case R.id.action_1:{
                     Intent intent = new Intent(RemoteStatus.this, CaptureActivity.class);
                     Bundle bundle = new Bundle();//该类用作携带数据
@@ -209,20 +186,6 @@ public class RemoteStatus extends BaseActivity {
         }
     };
 
-    private View.OnClickListener onDeleteClick = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            ImageButton btn = (ImageButton) v;
-            RemoteStatusItem rsi = (RemoteStatusItem) v.getTag();
-            if (rsi.isOnline) {
-                Toast.makeText(RemoteStatus.this, getString(R.string.cmagr_online_undel), Toast.LENGTH_SHORT).show();
-            } else {
-                //Toast.makeText(RemoteStatus.this, "删除记录=" + rsi.devname, Toast.LENGTH_SHORT).show();
-                GetNetDeleteDev(rsi.uuid);
-            }
-        }
-    };
-
     //----------点击item事件:
     public AdapterView.OnItemClickListener lvListern = new AdapterView.OnItemClickListener() {
         @Override
@@ -232,17 +195,25 @@ public class RemoteStatus extends BaseActivity {
             //跳转到对应的控制界面
             /*if (item.isOnline) {}*/
 
+            //跳到下一个窗体
+            Intent intent = new Intent(RemoteStatus.this, RemoteDeviceDetail.class);
+            Bundle bundle = new Bundle();//该类用作携带数据
+            bundle.putString("caid",caid);
+            bundle.putString("product_id",item.product_id);
+            bundle.putString("uuid",item.device_uuid);
+            bundle.putString("mark",item.mark);
+            bundle.putBoolean("isonline",item.isOnline);
+            intent.putExtras(bundle);//附带上额外的数据
+            //带返回结果
+            startActivityForResult(intent, 201);
+            overridePendingTransition(R.anim.in_0, R.anim.in_1);
 
 
         }
     };
 
     void GetNetData() {
-        web.getHtml(HTTPData.sIotDevUrl_get_dev_by_caid, "caid=" + caid);
-    }
-
-    void GetNetDeleteDev(String uuid) {
-        web3.getHtml(HTTPData.sIotDevUrl_remove_dev_by_caid, "caid=" + caid + "&uuid=" + uuid);
+        web.getHtml(HTTPData.sIotBindDevUrl+"/devlist_by_caid.php", "caid=" + caid);
     }
 
     //设备列表
@@ -258,20 +229,29 @@ public class RemoteStatus extends BaseActivity {
             int nRet = 0;
             try {
                 JSONObject person = new JSONObject(html);
+                int ret=person.getInt("ret");
+                if(1==ret) {
+                    JSONArray dev = person.getJSONArray("dev");
+                    webDataList.clear();
+                    for (int i = 0; i < dev.length(); i++) {
+                        JSONObject p2 = dev.getJSONObject(i);
+                        RemoteStatusItem item = new RemoteStatusItem();
+                        item.product_id = p2.getString("product_id");
+                        item.price = p2.getString("price");
+                        item.device_uuid = p2.getString("device_uuid");
+                        item.mark = p2.getString("mark");
+                        item.use_time = p2.getString("use_time");
+                        webDataList.add(item);
+                    }
+                    adapter.notifyDataSetChanged();
 
-                JSONArray dev = person.getJSONArray("dev");
-                webDataList.clear();
-                for (int i = 0; i < dev.length(); i++) {
-                    JSONObject p2 = dev.getJSONObject(i);
-                    RemoteStatusItem item = new RemoteStatusItem();
-                    item.dpid = p2.getString("dpid");
-                    item.devname = p2.getString("name");
-                    item.uuid = p2.getString("uuid");
-                    item.flag = p2.getString("flag");
-                    item.isOnline = p2.getInt("online") != 0 ? true : false;
-                    webDataList.add(item);
+                    //获取设备在线状态
+                    web2.getHtml(HTTPData.sIotDevUrl_get_online_by_caid,  "caid="+caid);
                 }
-                adapter.notifyDataSetChanged();
+                else
+                {
+                    Toast.makeText(getApplicationContext(), getString(R.string.getdevlist_json_fail), Toast.LENGTH_SHORT).show();
+                }
             } catch (JSONException e) {
                 e.printStackTrace();
                 AssertAlert.show(RemoteStatus.this, getString(R.string.lost_json_parameter), e.getMessage());
@@ -293,8 +273,9 @@ public class RemoteStatus extends BaseActivity {
         }
     };
 
-    //删除设备
-    public WebProcListener wls3 = new WebProcListener() {
+
+    //设备在线列表
+    public WebProcListener wls2 = new WebProcListener() {
         @Override
         public void cookies(String url, String cookie) {
 
@@ -306,19 +287,19 @@ public class RemoteStatus extends BaseActivity {
             int nRet = 0;
             try {
                 JSONObject person = new JSONObject(html);
-                String del_caid = (String) person.get("caid");
-                String del_uuid = (String) person.get("uuid");
-                if (del_caid.equals(caid)) {
-                    String dev_name = null;
-                    for (int j = 0; j < webDataList.size(); j++) {
-                        if (webDataList.get(j).uuid.equals(del_uuid)) {
-                            dev_name = webDataList.get(j).devname;
-                            webDataList.remove(j);
+                JSONArray dev = person.getJSONArray("uuid");
+                for(RemoteStatusItem r : webDataList )
+                {
+                    for (int i = 0; i < dev.length(); i++) {
+                        String online_uuid = dev.get(i).toString();
+                        if (online_uuid.equals(r.device_uuid))
+                        {
+                            r.isOnline=true;
                         }
                     }
-                    adapter.notifyDataSetChanged();
-                    Toast.makeText(RemoteStatus.this, getString(R.string.cmagr_del) + " " + dev_name, Toast.LENGTH_SHORT).show();
                 }
+                adapter.notifyDataSetChanged();
+
             } catch (JSONException e) {
                 e.printStackTrace();
                 AssertAlert.show(RemoteStatus.this, getString(R.string.lost_json_parameter), e.getMessage());
@@ -327,7 +308,6 @@ public class RemoteStatus extends BaseActivity {
 
         @Override
         public void fail(String url, String errMsg) {
-            Toast.makeText(getApplicationContext(), getString(R.string.cmagr_del_dev_http_fail), Toast.LENGTH_SHORT).show();
         }
     };
 }
