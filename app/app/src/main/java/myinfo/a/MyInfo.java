@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
@@ -271,7 +273,14 @@ public class MyInfo extends BaseFragment {
             TimerTask task = new TimerTask() {
                 @Override
                 public void run() {
-                    webNetInfo();
+                    Handler mainHandler = new Handler(Looper.getMainLooper());
+                    mainHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            //已在主线程中，可以更新UI
+                            webNetInfo();
+                        }
+                    });
                 }
             };
             timer.schedule(task, 2000);//此处的Delay

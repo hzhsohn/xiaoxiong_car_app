@@ -1,11 +1,9 @@
-package myinfo.logged.caid.remote;
+package myinfo.logged.property.bill;
 
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -38,18 +36,17 @@ import myinfo.logged.caid.area.CAIDMagr;
 import myinfo.logic.LoginInfo;
 import myinfo.unlogged.reg.MyReg;
 
-class RemoteDevItem {
+class BillListItem {
     public String caid;
     public String title;
-    public float expected_unsetted_money;
 };
 
-class RemoteDevAdapter extends BaseAdapter {
-    private List<RemoteDevItem> items;
+class BillListAdapter extends BaseAdapter {
+    private List<BillListItem> items;
     private LayoutInflater mInflater;
     private Context mContext = null;
 
-    public RemoteDevAdapter(Context context, List<RemoteDevItem> lstData) {
+    public BillListAdapter(Context context, List<BillListItem> lstData) {
         mContext = context;
         mInflater = LayoutInflater.from(mContext);
         if (null != items) {
@@ -63,18 +60,13 @@ class RemoteDevAdapter extends BaseAdapter {
         this.notifyDataSetChanged();
     }
 
-    public void reload(List<RemoteDevItem> lstData) {
+    public void reload(List<BillListItem> lstData) {
         if (null != items) {
             if(lstData!=items)
             {items.clear();}
             items = lstData;
             this.notifyDataSetChanged();
         }
-    }
-
-    public void setShowDelete(boolean showDelete) {
-
-        this.notifyDataSetChanged();
     }
 
     public void clear() {  items.clear();   }
@@ -100,22 +92,19 @@ class RemoteDevAdapter extends BaseAdapter {
         indexText = (TextView) convertView.findViewById(R.id.tip);
         unfinishMoney= (TextView) convertView.findViewById(R.id.textView7);
 
-        RemoteDevItem it = items.get(position);
+        BillListItem it = items.get(position);
         String str1 = it.caid + " -- " + it.title;
         indexText.setText(str1);
-
-        unfinishMoney.setText(convertView.getResources().getString(R.string.expected_unsetted_money)+": "
-                                +it.expected_unsetted_money/100 +convertView.getResources().getString(R.string.moneyft));
 
         return convertView;
     }
 };
 
-public class RemoteDev extends BaseActivity {
-    RemoteDevAdapter adapter;
+public class BillList extends BaseActivity {
+    BillListAdapter adapter;
     boolean isEditing;
     WebProc web=null;
-    List<RemoteDevItem> webDataList = new ArrayList<RemoteDevItem>();
+    List<BillListItem> webDataList = new ArrayList<BillListItem>();
     Dialog loadDialog;
 
     @Override
@@ -142,7 +131,7 @@ public class RemoteDev extends BaseActivity {
         isEditing = false;
         //
         ListView listView = (ListView) findViewById(R.id.lv);
-        adapter = new RemoteDevAdapter(this, webDataList);
+        adapter = new BillListAdapter(this, webDataList);
         //设置焦点响应问题    同时要将 item 中的焦点 focusable 设置为 false
         listView.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
         listView.setOnItemClickListener(lvListern);
@@ -194,9 +183,9 @@ public class RemoteDev extends BaseActivity {
     public AdapterView.OnItemClickListener lvListern = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            RemoteDevItem item = (RemoteDevItem) adapter.getItem(position);
+            BillListItem item = (BillListItem) adapter.getItem(position);
             //跳到下一个窗体
-            Intent intent = new Intent(RemoteDev.this, RemoteStatus.class);
+            Intent intent = new Intent(getApplicationContext(), BillDetail.class);
             Bundle bundle = new Bundle();//该类用作携带数据
             bundle.putString("caid",item.caid);
             bundle.putString("title",item.title);
@@ -231,10 +220,9 @@ public class RemoteDev extends BaseActivity {
                         webDataList.clear();
                         for(int i=0;i<ary.length();i++) {
                             JSONObject p2=ary.getJSONObject(i);
-                            RemoteDevItem item = new RemoteDevItem();
+                            BillListItem item = new BillListItem();
                             item.caid = p2.getString("caid");
                             item.title = p2.getString("title");
-                            item.expected_unsetted_money = p2.getInt("expected_unsetted_money");
                             webDataList.add(item);
                         }
                         adapter.reload();
@@ -253,23 +241,23 @@ public class RemoteDev extends BaseActivity {
                     break;
                     case 2://操作数据库失败
                     {
-                        AssertAlert.show(RemoteDev.this, R.string.alert, R.string.myprofile_operat_fail);
+                        AssertAlert.show(getApplicationContext(), R.string.alert, R.string.myprofile_operat_fail);
                     }
                     break;
                     case 3://缺少参数
                     {
-                        AssertAlert.show(RemoteDev.this, R.string.alert, R.string.myprofile_lost_param);
+                        AssertAlert.show(getApplicationContext(), R.string.alert, R.string.myprofile_lost_param);
                     }
                     break;
                     case 4://key参数不正确
                     {
-                        AssertAlert.show(RemoteDev.this, R.string.alert, R.string.myprofile_key_invalid);
+                        AssertAlert.show(getApplicationContext(), R.string.alert, R.string.myprofile_key_invalid);
                     }
                     break;
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
-                AssertAlert.show(RemoteDev.this, getString(R.string.lost_json_parameter), e.getMessage());
+                AssertAlert.show(getApplicationContext(), getString(R.string.lost_json_parameter), e.getMessage());
             }
 
         }
@@ -286,15 +274,7 @@ public class RemoteDev extends BaseActivity {
             TimerTask task = new TimerTask() {
                 @Override
                 public void run() {
-
-                    Handler mainHandler = new Handler(Looper.getMainLooper());
-                    mainHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            //已在主线程中，可以更新UI
-                            GetNetData();
-                        }
-                    });
+                    GetNetData();
                 }
             };
             timer.schedule(task, 2000);//此处的Delay

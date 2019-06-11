@@ -38,6 +38,7 @@ import java.util.Vector;
 
 import ext.func.AssertAlert;
 import ext.magr.ConfigMagr;
+import ext.magr.HTTPData;
 import ext.magr.WebProc;
 import ext.magr.WebProcListener;
 import ext.sys.AppRcInfo;
@@ -157,7 +158,7 @@ public class VersionInfo {
         mainHandler.post(new Runnable() {
             @Override
             public void run() {
-              //  web.getHtml("http://home.hx-kong.com/android_ver.txt","");
+                web.getHtml(HTTPData.sUpdateUrl+"/android_ver.txt","");
             }
         });
     }

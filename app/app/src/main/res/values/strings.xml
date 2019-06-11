@@ -46,7 +46,7 @@
     <string name="title_modify_nickname">修改密码</string>
     <string name="title_activity_base">BaseActivity</string>
     <string name="title_keymagr">设备管理</string>
-    <string name="title_remotedev">远程设备</string>
+    <string name="title_remotedev">设备管理</string>
     <string name="title_feedback">帮助与反馈</string>
     <string name="title_caidmagr">区域管理</string>
     <string name="ctl_newdev">新设备</string>
@@ -150,7 +150,7 @@
     <string name="signin_no_user">账户还未被注册</string>
 
     <!--个人中心 -->
-    <string name="info_title_remote">远程设备</string>
+    <string name="info_title_remote">设备管理</string>
     <string name="info_title_area">区域管理</string>
     <string name="info_title_camera_backup">监控备份</string>
     <string name="info_title_setting">设置</string>
@@ -410,5 +410,10 @@
     <string name="status_offline">状态 : 离线</string>
     <string name="online">在线</string>
     <string name="offline">离线</string>
+
+    <string name="expected_unsetted_money">预计未结算收入</string>
+    <string name="money_magr">资产统计</string>
+    <string name="nolistdata">无数据</string>
+    <string name="moneyft">元</string>
 </resources>
 

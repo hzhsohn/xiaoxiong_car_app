@@ -41,7 +41,7 @@ public class AboutSoftWeb extends BaseActivity {
         //
         //WEBView浏览器
         webView = (WebView) findViewById(R.id.webView);
-        String urlstr ="http://home.hx-kong.com/about_software";
+        String urlstr =HTTPData.sAboutSoftUrl;
         webView.loadUrl(urlstr);
         //覆盖WebView默认使用第三方或系统默认浏览器打开网页的行为，使网页用WebView打开
         webView.setWebViewClient(new WebViewClient() {

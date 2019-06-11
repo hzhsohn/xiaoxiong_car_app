@@ -3,6 +3,8 @@ package myinfo.logged.caid.remote;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -202,7 +204,6 @@ public class RemoteStatus extends BaseActivity {
             bundle.putString("product_id",item.product_id);
             bundle.putString("uuid",item.device_uuid);
             bundle.putString("mark",item.mark);
-            bundle.putBoolean("isonline",item.isOnline);
             intent.putExtras(bundle);//附带上额外的数据
             //带返回结果
             startActivityForResult(intent, 201);
@@ -245,6 +246,16 @@ public class RemoteStatus extends BaseActivity {
                     }
                     adapter.notifyDataSetChanged();
 
+                    //是否显示无数据的提示
+                    if(0==webDataList.size())
+                    {
+                        findViewById(R.id.no_data).setVisibility(View.VISIBLE);
+                    }
+                    else
+                    {
+                        findViewById(R.id.no_data).setVisibility(View.GONE);
+                    }
+
                     //获取设备在线状态
                     web2.getHtml(HTTPData.sIotDevUrl_get_online_by_caid,  "caid="+caid);
                 }
@@ -266,7 +277,14 @@ public class RemoteStatus extends BaseActivity {
             TimerTask task = new TimerTask() {
                 @Override
                 public void run() {
-                    GetNetData();
+                    Handler mainHandler = new Handler(Looper.getMainLooper());
+                    mainHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            //已在主线程中，可以更新UI
+                            GetNetData();
+                        }
+                    });
                 }
             };
             timer.schedule(task, 1000);//此处的Delay

@@ -78,8 +78,6 @@ public class MyIotInfo extends BaseActivity {
         ImageView icon = (ImageView) findViewById(R.id.icon);
         TextView nick = (TextView) findViewById(R.id.nickname);
         TextView userid = (TextView) findViewById(R.id.userid);
-        ImageView level = (ImageView) findViewById(R.id.level);
-        TextView sorce = (TextView) findViewById(R.id.sorce);
         //
         String iknick = LoginInfo.infokey.get("nickname");
         if (iknick != null) {
@@ -89,34 +87,6 @@ public class MyIotInfo extends BaseActivity {
         String uid = LoginInfo.infokey.get("userid");
         if (uid != null) {
             userid.setText(uid);
-        }
-        String credit = LoginInfo.infokey.get("credit");
-        if (credit != null) {
-            sorce.setText(credit);
-        }
-        String vip_level = LoginInfo.infokey.get("vip_level");
-        if(null!=vip_level) {
-            int tlev = Integer.parseInt(vip_level);
-            switch (tlev) {
-                case 0:
-                    level.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.vip0));
-                    break;
-                case 1:
-                    level.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.vip1));
-                    break;
-                case 2:
-                    level.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.vip2));
-                    break;
-                case 3:
-                    level.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.vip3));
-                    break;
-                case 4:
-                    level.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.vip4));
-                    break;
-                case 5:
-                    level.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.vip5));
-                    break;
-            }
         }
 
         //获取图像
@@ -154,8 +124,6 @@ public class MyIotInfo extends BaseActivity {
                     {
                         JSONObject person2 = person.getJSONObject("info");
                         LoginInfo.infokey.put("activeTime", person2.getString("activeTime"));
-                        LoginInfo.infokey.put("vip_level", person2.getString("vip_level"));
-                        LoginInfo.infokey.put("credit", person2.getString("credit"));
 
                         showInfo();
                 }
