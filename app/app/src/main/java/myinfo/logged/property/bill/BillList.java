@@ -4,6 +4,8 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -106,11 +108,14 @@ public class BillList extends BaseActivity {
     WebProc web=null;
     List<BillListItem> webDataList = new ArrayList<BillListItem>();
     Dialog loadDialog;
+    Context cxt=null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.acty_remote_dev);
+        setContentView(R.layout.acty_billlist);
+        //
+        cxt=getApplicationContext();
         //
         web = new WebProc();
         web.addListener(wls);
@@ -121,11 +126,11 @@ public class BillList extends BaseActivity {
                 null,
                 R.drawable.nav_back,
                 onBackClick,
-                R.menu.menu_caid,
-                onMenuItemClick);
+                0,
+                null);
         //
         TextView tvInfo = (TextView) findViewById(R.id.toolbar_title);
-        tvInfo.setText(getString(R.string.title_remotedev));
+        tvInfo.setText(getString(R.string.money_magr));
 
         //
         isEditing = false;
@@ -146,6 +151,12 @@ public class BillList extends BaseActivity {
         GetNetData();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        cxt=null;
+    }
+
     void GetNetData()
     {
         if (loadDialog==null||!loadDialog.isShowing())
@@ -159,23 +170,6 @@ public class BillList extends BaseActivity {
         public void onClick(View v) {
             finish();
             overridePendingTransition(R.anim.back_0, R.anim.back_1);
-        }
-    };
-
-    private Toolbar.OnMenuItemClickListener onMenuItemClick = new Toolbar.OnMenuItemClickListener() {
-        @Override
-        public boolean onMenuItemClick(MenuItem menuItem) {
-            switch (menuItem.getItemId()) {
-                case R.id.action_0: {
-                    Intent intent = new Intent(getApplicationContext(), CAIDMagr.class);
-                    Bundle bundle = new Bundle();//该类用作携带数据
-                    intent.putExtras(bundle);//附带上额外的数据
-                    startActivity(intent);
-                    overridePendingTransition(R.anim.in_0, R.anim.in_1);
-                }
-                break;
-            }
-            return true;
         }
     };
 
@@ -267,17 +261,27 @@ public class BillList extends BaseActivity {
             //
             if (loadDialog!=null&&loadDialog.isShowing())
                 loadDialog.cancel();
-            //
-            Toast.makeText(getApplicationContext(), getString(R.string.httpfaild), Toast.LENGTH_SHORT).show();
-            //3秒后重新获取
-            Timer timer = new Timer();
-            TimerTask task = new TimerTask() {
-                @Override
-                public void run() {
-                    GetNetData();
-                }
-            };
-            timer.schedule(task, 2000);//此处的Delay
+
+            if(null!=cxt) {
+                //
+                Toast.makeText(getApplicationContext(), getString(R.string.httpfaild), Toast.LENGTH_SHORT).show();
+                //3秒后重新获取
+                Timer timer = new Timer();
+                TimerTask task = new TimerTask() {
+                    @Override
+                    public void run() {
+                        Handler mainHandler = new Handler(Looper.getMainLooper());
+                        mainHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                //已在主线程中，可以更新UI
+                                GetNetData();
+                            }
+                        });
+                    }
+                };
+                timer.schedule(task, 3000);//此处的Delay
+            }
         }
     };
 

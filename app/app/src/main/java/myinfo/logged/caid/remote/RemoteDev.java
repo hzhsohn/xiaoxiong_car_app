@@ -117,11 +117,14 @@ public class RemoteDev extends BaseActivity {
     WebProc web=null;
     List<RemoteDevItem> webDataList = new ArrayList<RemoteDevItem>();
     Dialog loadDialog;
+    Context cxt=null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.acty_remote_dev);
+        //
+        cxt=getApplicationContext();
         //
         web = new WebProc();
         web.addListener(wls);
@@ -155,6 +158,12 @@ public class RemoteDev extends BaseActivity {
         super.onResume();
         //获取CAID列表
         GetNetData();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        cxt=null;
     }
 
     void GetNetData()
@@ -279,25 +288,27 @@ public class RemoteDev extends BaseActivity {
             //
             if (loadDialog!=null&&loadDialog.isShowing())
                 loadDialog.cancel();
-            //
-            Toast.makeText(getApplicationContext(), getString(R.string.httpfaild), Toast.LENGTH_SHORT).show();
-            //3秒后重新获取
-            Timer timer = new Timer();
-            TimerTask task = new TimerTask() {
-                @Override
-                public void run() {
+            if(null!=cxt) {
+                //
+                Toast.makeText(getApplicationContext(), getString(R.string.httpfaild), Toast.LENGTH_SHORT).show();
+                //3秒后重新获取
+                Timer timer = new Timer();
+                TimerTask task = new TimerTask() {
+                    @Override
+                    public void run() {
 
-                    Handler mainHandler = new Handler(Looper.getMainLooper());
-                    mainHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            //已在主线程中，可以更新UI
-                            GetNetData();
-                        }
-                    });
-                }
-            };
-            timer.schedule(task, 2000);//此处的Delay
+                        Handler mainHandler = new Handler(Looper.getMainLooper());
+                        mainHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                //已在主线程中，可以更新UI
+                                GetNetData();
+                            }
+                        });
+                    }
+                };
+                timer.schedule(task, 3000);//此处的Delay
+            }
         }
     };
 

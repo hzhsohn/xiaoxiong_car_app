@@ -37,6 +37,8 @@ import ext.magr.WebProcListener;
 import myinfo.logged.caid.area.CAIDMagr;
 import myinfo.logged.caid.remote.RemoteDev;
 import myinfo.logged.iotinfo.MyIotInfo;
+import myinfo.logged.property.bill.BillList;
+import myinfo.logged.property.wealth.Balance;
 import myinfo.logic.LoginInfo;
 import myinfo.logged.setting.MySetting;
 
@@ -85,6 +87,10 @@ public class MyInfo extends BaseFragment {
         row1.setOnClickListener(row1_click);
         View row2 = contextView.findViewById(R.id.row2);
         row2.setOnClickListener(row2_click);
+        View row3 = contextView.findViewById(R.id.row3);
+        row3.setOnClickListener(row3_click);
+        View row4 = contextView.findViewById(R.id.row4);
+        row4.setOnClickListener(row4_click);
         View row5 = contextView.findViewById(R.id.row5);
         row5.setOnClickListener(row5_click);
         //
@@ -267,23 +273,25 @@ public class MyInfo extends BaseFragment {
 
         @Override
         public void fail(String url, String errMsg) {
-            //Toast.makeText(getActivity(), getString(R.string.http_retry), Toast.LENGTH_SHORT).show();
-            //2秒后重新获取
-            Timer timer = new Timer();
-            TimerTask task = new TimerTask() {
-                @Override
-                public void run() {
-                    Handler mainHandler = new Handler(Looper.getMainLooper());
-                    mainHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            //已在主线程中，可以更新UI
-                            webNetInfo();
-                        }
-                    });
-                }
-            };
-            timer.schedule(task, 2000);//此处的Delay
+            if(null!=context) {
+                //Toast.makeText(getActivity(), getString(R.string.http_retry), Toast.LENGTH_SHORT).show();
+                //2秒后重新获取
+                Timer timer = new Timer();
+                TimerTask task = new TimerTask() {
+                    @Override
+                    public void run() {
+                        Handler mainHandler = new Handler(Looper.getMainLooper());
+                        mainHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                //已在主线程中，可以更新UI
+                                webNetInfo();
+                            }
+                        });
+                    }
+                };
+                timer.schedule(task, 3000);//此处的Delay
+            }
         }
     };
     public View.OnClickListener row1_click = new View.OnClickListener() {
@@ -301,6 +309,24 @@ public class MyInfo extends BaseFragment {
             Bundle bundle = new Bundle();//该类用作携带数据
             intent.putExtras(bundle);//附带上额外的数据
             startActivityFromFragment(intent, (byte) 0, (byte) 2);
+            getActivity().overridePendingTransition(R.anim.in_0, R.anim.in_1);
+        }
+    };
+    public View.OnClickListener row3_click = new View.OnClickListener() {
+        public void onClick(View v) {
+            Intent intent = new Intent(getActivity(), BillList.class);
+            Bundle bundle = new Bundle();//该类用作携带数据
+            intent.putExtras(bundle);//附带上额外的数据
+            startActivityFromFragment(intent, (byte) 0, (byte) 3);
+            getActivity().overridePendingTransition(R.anim.in_0, R.anim.in_1);
+        }
+    };
+    public View.OnClickListener row4_click = new View.OnClickListener() {
+        public void onClick(View v) {
+            Intent intent = new Intent(getActivity(), Balance.class);
+            Bundle bundle = new Bundle();//该类用作携带数据
+            intent.putExtras(bundle);//附带上额外的数据
+            startActivityFromFragment(intent, (byte) 0, (byte) 3);
             getActivity().overridePendingTransition(R.anim.in_0, R.anim.in_1);
         }
     };

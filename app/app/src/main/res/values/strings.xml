@@ -412,7 +412,8 @@
     <string name="offline">离线</string>
 
     <string name="expected_unsetted_money">预计未结算收入</string>
-    <string name="money_magr">资产统计</string>
+    <string name="money_magr">账单统计</string>
+    <string name="wealth_magr">资金余额</string>
     <string name="nolistdata">无数据</string>
     <string name="moneyft">元</string>
 </resources>

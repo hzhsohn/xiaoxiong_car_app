@@ -271,7 +271,7 @@ public class CAIDMagr extends BaseActivity {
                     });
                 }
             };
-            timer.schedule(task, 2000);//此处的Delay
+            timer.schedule(task, 3000);//此处的Delay
         }
     };
 

@@ -1,4 +1,4 @@
-package myinfo.logged.property.bill;
+package myinfo.logged.property.wealth;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -38,14 +38,17 @@ import myinfo.logged.caid.area.CAIDMagr;
 import myinfo.logic.LoginInfo;
 import myinfo.unlogged.reg.MyReg;
 
-public class BillDetail extends BaseActivity {
+public class Balance extends BaseActivity {
     WebProc web=null;
     Dialog loadDialog;
+    Context cxt=null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.acty_bill_detail);
+        setContentView(R.layout.acty_balance);
+        //
+        cxt=getApplicationContext();
         //
         web = new WebProc();
         web.addListener(wls);
@@ -65,6 +68,12 @@ public class BillDetail extends BaseActivity {
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        cxt=null;
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         //获取CAID列表
@@ -73,10 +82,11 @@ public class BillDetail extends BaseActivity {
 
     void GetNetData()
     {
-        if (loadDialog==null||!loadDialog.isShowing())
-            loadDialog = DialogUIUtils.showLoading(this,getString(R.string.Loading),true,false,false,true).show();
 
-        web.getHtml(HTTPData.sMoneyUrl + "/caid_money.i.php", "k=" + LoginInfo.verifyKey);
+        if (loadDialog==null||!loadDialog.isShowing())
+            loadDialog = DialogUIUtils.showLoading(getApplicationContext(),getString(R.string.Loading),true,false,false,true).show();
+
+        web.getHtml(HTTPData.sMoneyUrl + "/balance.i.php", "k=" + LoginInfo.verifyKey);
     }
 
     private View.OnClickListener onBackClick = new View.OnClickListener() {
@@ -106,12 +116,11 @@ public class BillDetail extends BaseActivity {
                 switch (nRet) {
                     case 1:
                     {
-                       /* JSONArray ary=person.getJSONArray("detail");
+                        JSONArray ary=person.getJSONArray("info");
                         for(int i=0;i<ary.length();i++) {
                             JSONObject p2=ary.getJSONObject(i);
-                            BillListItem item = new BillListItem();
-                            item.caid = p2.getString("caid");
-                        }*/
+                            //p2.getString("caid");
+                        }
                     }
                     break;
                     case 2://操作数据库失败
@@ -142,24 +151,27 @@ public class BillDetail extends BaseActivity {
             //
             if (loadDialog!=null&&loadDialog.isShowing())
                 loadDialog.cancel();
-            //
-            Toast.makeText(getApplicationContext(), getString(R.string.httpfaild), Toast.LENGTH_SHORT).show();
-            //3秒后重新获取
-            Timer timer = new Timer();
-            TimerTask task = new TimerTask() {
-                @Override
-                public void run() {
-                    Handler mainHandler = new Handler(Looper.getMainLooper());
-                    mainHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            //已在主线程中，可以更新UI
-                            GetNetData();
-                        }
-                    });
-                }
-            };
-            timer.schedule(task, 3000);//此处的Delay
+
+            if(null!=cxt) {
+                //
+                Toast.makeText(getApplicationContext(), getString(R.string.httpfaild), Toast.LENGTH_SHORT).show();
+                //3秒后重新获取
+                Timer timer = new Timer();
+                TimerTask task = new TimerTask() {
+                    @Override
+                    public void run() {
+                        Handler mainHandler = new Handler(Looper.getMainLooper());
+                        mainHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                //已在主线程中，可以更新UI
+                                GetNetData();
+                            }
+                        });
+                    }
+                };
+                timer.schedule(task, 3000);//此处的Delay
+            }
         }
     };
 

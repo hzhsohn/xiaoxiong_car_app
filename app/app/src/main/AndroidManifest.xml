@@ -109,9 +109,10 @@
         <activity android:name="myinfo.logged.setting.about_softw.AboutSoftware" />
         <activity android:name="myinfo.logged.setting.about_softw.AboutSoftWeb" />
         <activity android:name="myinfo.qrscan.result.QRAddCtrlDevice" />
-        <activity android:name="myinfo.logged.caid.remote.RemoveDevBind" />
-        <activity android:name="myinfo.logged.caid.remote.DeviceDetail" />
         <activity android:name="myinfo.logged.caid.remote.RemoteDeviceDetail" />
+        <activity android:name="myinfo.logged.property.bill.BillList" />
+        <activity android:name="myinfo.logged.property.bill.BillDetail" />
+        <activity android:name="myinfo.logged.property.wealth.Balance" />
     </application>
 
 </manifest>

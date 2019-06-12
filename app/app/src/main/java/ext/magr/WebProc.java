@@ -28,6 +28,10 @@ public class WebProc {
         eventListener.add(listener);
     }
 
+    public void removeListener(Object listener) {
+        eventListener.remove(listener);
+    }
+
     public void getHtml(final String str_url, final String parameter) {
         sUrl=str_url;
         //访问网络，把html源文件下载下来
