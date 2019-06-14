@@ -38,6 +38,7 @@ import myinfo.logged.caid.area.CAIDMagr;
 import myinfo.logged.caid.remote.RemoteDev;
 import myinfo.logged.iotinfo.MyIotInfo;
 import myinfo.logged.property.bill.BillList;
+import myinfo.logged.property.product_order.POrderList;
 import myinfo.logged.property.wealth.Balance;
 import myinfo.logic.LoginInfo;
 import myinfo.logged.setting.MySetting;
@@ -314,7 +315,7 @@ public class MyInfo extends BaseFragment {
     };
     public View.OnClickListener row3_click = new View.OnClickListener() {
         public void onClick(View v) {
-            Intent intent = new Intent(getActivity(), BillList.class);
+            Intent intent = new Intent(getActivity(), POrderList.class);
             Bundle bundle = new Bundle();//该类用作携带数据
             intent.putExtras(bundle);//附带上额外的数据
             startActivityFromFragment(intent, (byte) 0, (byte) 3);
@@ -326,7 +327,7 @@ public class MyInfo extends BaseFragment {
             Intent intent = new Intent(getActivity(), Balance.class);
             Bundle bundle = new Bundle();//该类用作携带数据
             intent.putExtras(bundle);//附带上额外的数据
-            startActivityFromFragment(intent, (byte) 0, (byte) 3);
+            startActivityFromFragment(intent, (byte) 0, (byte) 4);
             getActivity().overridePendingTransition(R.anim.in_0, R.anim.in_1);
         }
     };

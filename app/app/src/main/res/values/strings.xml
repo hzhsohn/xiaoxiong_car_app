@@ -412,9 +412,41 @@
     <string name="offline">离线</string>
 
     <string name="expected_unsetted_money">预计未结算收入</string>
-    <string name="money_magr">账单统计</string>
+    <string name="money_magr">账单历史</string>
     <string name="wealth_magr">资金余额</string>
     <string name="nolistdata">无数据</string>
     <string name="moneyft">元</string>
+    <string name="draw_money">提款</string>
+    <string name="income_year">今年收入</string>
+    <string name="expend_year">今年支出</string>
+    <string name="balance_money">可用余额</string>
+    <string name="operat_money_income">收入</string>
+    <string name="operat_money_expend">支出</string>
+    <string name="operat_money_in">收入</string>
+    <string name="operat_money_out">退款</string>
+    <string name="last_balance_money">可用余额</string>
+    <string name="submit">提交</string>
+    <string name="pleaseinputmoney">请输入提取金额</string>
+    <string name="prorder_history">订单记录</string>
+    <string name="timestr">时间</string>
+
+    <string name="order_caid">区域CAID</string>
+    <string name="order_id">订单编号</string>
+    <string name="device_contrl">设备执行</string>
+    <string name="is_bill_operat">结算状态</string>
+    <string name="order_status">订单状态</string>
+
+    <string name="device_contrl_no">未响应</string>
+    <string name="device_contrl_yes">已操作</string>
+
+    <string name="order_operat_no">未结算</string>
+    <string name="order_operat_yes">已处理</string>
+
+    <string name="order_paystatus_s1">未支付</string>
+    <string name="order_paystatus_1">支付成功</string>
+    <string name="order_paystatus_2">支付失败</string>
+    <string name="order_paystatus_3">退款成功</string>
+    <string name="order_paystatus_4">退款失败</string>
+
 </resources>
 

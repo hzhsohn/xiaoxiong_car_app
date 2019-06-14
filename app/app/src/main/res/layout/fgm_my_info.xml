@@ -193,7 +193,7 @@
                 android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:paddingLeft="5dp"
-                android:text="@string/money_magr"
+                android:text="@string/prorder_history"
                 android:textColor="#333"
                 android:textSize="18sp" />
 

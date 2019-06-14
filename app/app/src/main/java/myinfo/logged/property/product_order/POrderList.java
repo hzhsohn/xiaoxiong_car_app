@@ -1,4 +1,4 @@
-package myinfo.logged.property.bill;
+package myinfo.logged.property.product_order;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -40,19 +40,24 @@ import myinfo.logged.caid.area.CAIDMagr;
 import myinfo.logic.LoginInfo;
 import myinfo.unlogged.reg.MyReg;
 
-class BillListItem {
-    public double operat_money;
-    public double balance_money;
-    public String stat_time;
-    public String remark;
+class POrderListItem {
+    public String product_id;
+    public String order_num;
+    public int order_status; //支付状态-1未支付1支付成功2支付失败3退款成功4退款失败
+    public String order_time;
+    public int device_contrl;
+    public String caid;
+    public double price;
+    public int is_bill_operat;
+    public String title;
 };
 
-class BillListAdapter extends BaseAdapter {
-    private List<BillListItem> items;
+class POrderListAdapter extends BaseAdapter {
+    private List<POrderListItem> items;
     private LayoutInflater mInflater;
     private Context mContext = null;
 
-    public BillListAdapter(Context context, List<BillListItem> lstData) {
+    public POrderListAdapter(Context context, List<POrderListItem> lstData) {
         mContext = context;
         mInflater = LayoutInflater.from(mContext);
         if (null != items) {
@@ -66,7 +71,7 @@ class BillListAdapter extends BaseAdapter {
         this.notifyDataSetChanged();
     }
 
-    public void reload(List<BillListItem> lstData) {
+    public void reload(List<POrderListItem> lstData) {
         if (null != items) {
             if(lstData!=items)
             {items.clear();}
@@ -87,53 +92,102 @@ class BillListAdapter extends BaseAdapter {
         return items.size();
     }
 
+    String getOrderType(View convertView,int t)
+    {
+        //支付状态 -1未支付1支付成功2支付失败3退款成功4退款失败
+        switch (t)
+        {
+            case -1:
+                return convertView.getResources().getString(R.string.order_paystatus_s1);
+            case 1:
+                return convertView.getResources().getString(R.string.order_paystatus_1);
+            case 2:
+                return convertView.getResources().getString(R.string.order_paystatus_2);
+            case 3:
+                return convertView.getResources().getString(R.string.order_paystatus_3);
+            case 4:
+                return convertView.getResources().getString(R.string.order_paystatus_4);
+        }
+        return "";
+    }
+
+    String getDevDo(View convertView,int t)
+    {
+        switch (t)
+        {
+            case 0:
+                return convertView.getResources().getString(R.string.device_contrl_no);
+            case 1:
+                return convertView.getResources().getString(R.string.device_contrl_yes);
+        }
+        return "";
+    }
+
+    String getBillDo(View convertView,int t)
+    {
+        switch (t)
+        {
+            case 0:
+                return convertView.getResources().getString(R.string.order_operat_no);
+            case 1:
+                return convertView.getResources().getString(R.string.order_operat_yes);
+        }
+        return "";
+    }
+
     public View getView(int position, View convertView,
                         android.view.ViewGroup parent) {
         final TextView indexText;
-        final TextView txt2,txt4;
-        final TextView txt3;
+        final TextView txt2,txt3,txt4,txt5,txt6,txt7,txt8,txt9,txt10;
         if (convertView == null) {
             // 和item_custom.xml脚本关联
-            convertView = mInflater.inflate(R.layout.list_item_bill_list, null);
+            convertView = mInflater.inflate(R.layout.list_item_porderlist, null);
         }
         indexText = (TextView) convertView.findViewById(R.id.txt1);
         txt2= (TextView) convertView.findViewById(R.id.txt2);
         txt4= (TextView) convertView.findViewById(R.id.txt4);
-        txt3= (TextView) convertView.findViewById(R.id.txt3);
+        txt5= (TextView) convertView.findViewById(R.id.txt5);
+        txt6= (TextView) convertView.findViewById(R.id.txt6);
+        txt7= (TextView) convertView.findViewById(R.id.txt7);
+        txt8= (TextView) convertView.findViewById(R.id.txt8);
+        txt10= (TextView) convertView.findViewById(R.id.txt10);
 
         String str1="";
-        BillListItem it = items.get(position);
-        indexText.setText(it.stat_time);
-        if(it.operat_money>=0)
+        POrderListItem it = items.get(position);
+        indexText.setText(convertView.getResources().getString(R.string.order_id)+": " +it.order_num);
+        txt2.setText(convertView.getResources().getString(R.string.qr_product_id)+": " +it.product_id);
+        if(it.price>=0)
         {
-            txt2.setTextColor(Color.argb(0xff,0xff,0,0));
-            str1= convertView.getResources().getString(R.string.operat_money_income)+": " +it.operat_money/100 + convertView.getResources().getString(R.string.moneyft);
+            txt4.setTextColor(Color.argb(0xff,0xff,0,0));
+            str1= convertView.getResources().getString(R.string.operat_money_in)+": " +it.price/100 + convertView.getResources().getString(R.string.moneyft);
         }
         else
         {
-            txt2.setTextColor(Color.argb(0xff,0x5f,0xb3,0));
-            str1=convertView.getResources().getString(R.string.operat_money_expend)+": " +it.operat_money/100 + convertView.getResources().getString(R.string.moneyft);
+            txt4.setTextColor(Color.argb(0xff,0x5f,0xb3,0));
+            str1=convertView.getResources().getString(R.string.operat_money_out)+": " +it.price/100 + convertView.getResources().getString(R.string.moneyft);
         }
-        txt2.setText(str1);
-        txt4.setText(convertView.getResources().getString(R.string.last_balance_money)+": " +it.balance_money/100 + convertView.getResources().getString(R.string.moneyft));
-        txt3.setText(it.remark);
-
+        txt4.setText(str1);
+        txt5.setText(convertView.getResources().getString(R.string.order_status)+": " +getOrderType(convertView,it.order_status));
+        txt6.setText(convertView.getResources().getString(R.string.device_contrl)+": " +getDevDo(convertView,it.device_contrl));
+        txt7.setText(convertView.getResources().getString(R.string.is_bill_operat)+": " +getBillDo(convertView,it.is_bill_operat));
+        txt8.setText(convertView.getResources().getString(R.string.order_caid)+": " +it.title +" ("+it.caid+")");
+        txt10.setText(it.order_time);
         return convertView;
     }
 };
 
-public class BillList extends BaseActivity {
-    BillListAdapter adapter;
+public class POrderList extends BaseActivity {
+    POrderListAdapter adapter;
     boolean isEditing;
     WebProc web=null;
-    List<BillListItem> webDataList = new ArrayList<BillListItem>();
+    List<POrderListItem> webDataList = new ArrayList<POrderListItem>();
     Dialog loadDialog;
     Context cxt=null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.acty_billlist);
+        setContentView(R.layout.acty_porderlst);
         //
         cxt=getApplicationContext();
         //
@@ -156,12 +210,13 @@ public class BillList extends BaseActivity {
         isEditing = false;
         //
         ListView listView = (ListView) findViewById(R.id.lv);
-        adapter = new BillListAdapter(this, webDataList);
+        adapter = new POrderListAdapter(this, webDataList);
         //设置焦点响应问题    同时要将 item 中的焦点 focusable 设置为 false
         listView.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
         listView.setOnItemClickListener(lvListern);
         listView.setAdapter(adapter);
 
+        //
         if (loadDialog==null||!loadDialog.isShowing())
             loadDialog = DialogUIUtils.showLoading(this,getString(R.string.Loading),true,false,false,true).show();
 
@@ -182,7 +237,7 @@ public class BillList extends BaseActivity {
 
     void GetNetData()
     {
-        web.getHtml(HTTPData.sMoneyUrl + "/bill_list.i.php", "k=" + LoginInfo.verifyKey);
+        web.getHtml(HTTPData.sMoneyUrl + "/order_list.i.php", "k=" + LoginInfo.verifyKey);
     }
 
     private View.OnClickListener onBackClick = new View.OnClickListener() {
@@ -197,14 +252,10 @@ public class BillList extends BaseActivity {
     public AdapterView.OnItemClickListener lvListern = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            BillListItem item = (BillListItem) adapter.getItem(position);
-            /*//跳到下一个窗体
+            /*POrderListItem item = (POrderListItem) adapter.getItem(position);
+            //跳到下一个窗体
             Intent intent = new Intent(getApplicationContext(), xxx.class);
             Bundle bundle = new Bundle();//该类用作携带数据
-            bundle.putDouble("operat_money",item.operat_money);
-            bundle.putDouble("balance_money",item.balance_money);
-            bundle.putString("stat_time",item.stat_time);
-            bundle.putString("remark",item.remark);
             intent.putExtras(bundle);//附带上额外的数据
             //带返回结果
             startActivityForResult(intent, 200);
@@ -236,11 +287,16 @@ public class BillList extends BaseActivity {
                         webDataList.clear();
                         for(int i=0;i<ary.length();i++) {
                             JSONObject p2=ary.getJSONObject(i);
-                            BillListItem item = new BillListItem();
-                            item.operat_money = p2.getDouble("operat_money");
-                            item.balance_money = p2.getDouble("balance_money");
-                            item.stat_time = p2.getString("stat_time");
-                            item.remark = p2.getString("remark");
+                            POrderListItem item = new POrderListItem();
+                            item.product_id = p2.getString("product_id");
+                            item.order_num = p2.getString("order_num");
+                            item.order_status = p2.getInt("order_status");
+                            item.order_time = p2.getString("order_time");
+                            item.device_contrl = p2.getInt("device_contrl");
+                            item.caid = p2.getString("caid");
+                            item.price = p2.getDouble("price");
+                            item.is_bill_operat = p2.getInt("is_bill_operat");
+                            item.title = p2.getString("title");
                             webDataList.add(item);
                         }
                         adapter.reload();
@@ -285,7 +341,7 @@ public class BillList extends BaseActivity {
             //
             if (loadDialog!=null&&loadDialog.isShowing())
                 loadDialog.cancel();
-
+            //
             if(null!=cxt) {
                 //
                 Toast.makeText(getApplicationContext(), getString(R.string.httpfaild), Toast.LENGTH_SHORT).show();

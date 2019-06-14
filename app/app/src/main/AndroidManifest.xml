@@ -111,8 +111,9 @@
         <activity android:name="myinfo.qrscan.result.QRAddCtrlDevice" />
         <activity android:name="myinfo.logged.caid.remote.RemoteDeviceDetail" />
         <activity android:name="myinfo.logged.property.bill.BillList" />
-        <activity android:name="myinfo.logged.property.bill.BillDetail" />
         <activity android:name="myinfo.logged.property.wealth.Balance" />
+        <activity android:name="myinfo.logged.property.wealth.DrawMoney" />
+        <activity android:name="myinfo.logged.property.product_order.POrderList" />
     </application>
 
 </manifest>

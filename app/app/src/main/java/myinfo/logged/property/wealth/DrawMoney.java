@@ -1,4 +1,4 @@
-package myinfo.logged.property.bill;
+package myinfo.logged.property.wealth;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,14 +39,20 @@ import myinfo.logged.caid.area.CAIDMagr;
 import myinfo.logic.LoginInfo;
 import myinfo.unlogged.reg.MyReg;
 
-public class BillDetail extends BaseActivity {
+public class DrawMoney extends BaseActivity {
     WebProc web=null;
     Dialog loadDialog;
+    Context cxt=null;
+    TextView txtBalance;
+    double balance_money;
+    Button submitbtn;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.acty_bill_detail);
+        setContentView(R.layout.acty_draw_money);
+        //
+        cxt=DrawMoney.this;
         //
         web = new WebProc();
         web.addListener(wls);
@@ -60,8 +67,23 @@ public class BillDetail extends BaseActivity {
                 null);
         //
         TextView tvInfo = (TextView) findViewById(R.id.toolbar_title);
-        tvInfo.setText("账单详情");
+        tvInfo.setText(getString(R.string.draw_money));
 
+        //
+        Bundle bundle = this.getIntent().getExtras();
+        balance_money = bundle.getDouble("balance_money");
+        txtBalance=(TextView)findViewById(R.id.balance_money);
+        //
+        txtBalance.setText(getString(R.string.balance_money)+": "+(balance_money/100)+ getString(R.string.moneyft));
+        //
+        submitbtn=(Button)findViewById(R.id.button2);
+        submitbtn.setOnClickListener(submit_click);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        cxt=null;
     }
 
     @Override
@@ -73,10 +95,11 @@ public class BillDetail extends BaseActivity {
 
     void GetNetData()
     {
-        if (loadDialog==null||!loadDialog.isShowing())
-            loadDialog = DialogUIUtils.showLoading(this,getString(R.string.Loading),true,false,false,true).show();
 
-        web.getHtml(HTTPData.sMoneyUrl + "/caid_money.i.php", "k=" + LoginInfo.verifyKey);
+        if (loadDialog==null||!loadDialog.isShowing())
+            loadDialog = DialogUIUtils.showLoading(DrawMoney.this,getString(R.string.Loading),true,false,false,true).show();
+
+        web.getHtml(HTTPData.sMoneyUrl + "/balance.i.php", "k=" + LoginInfo.verifyKey);
     }
 
     private View.OnClickListener onBackClick = new View.OnClickListener() {
@@ -84,6 +107,11 @@ public class BillDetail extends BaseActivity {
         public void onClick(View v) {
             finish();
             overridePendingTransition(R.anim.back_0, R.anim.back_1);
+        }
+    };
+
+    public View.OnClickListener submit_click = new View.OnClickListener() {
+        public void onClick(View v) {
         }
     };
 
@@ -106,33 +134,28 @@ public class BillDetail extends BaseActivity {
                 switch (nRet) {
                     case 1:
                     {
-                       /* JSONArray ary=person.getJSONArray("detail");
-                        for(int i=0;i<ary.length();i++) {
-                            JSONObject p2=ary.getJSONObject(i);
-                            BillListItem item = new BillListItem();
-                            item.caid = p2.getString("caid");
-                        }*/
+
                     }
                     break;
                     case 2://操作数据库失败
                     {
-                        AssertAlert.show(getApplicationContext(), R.string.alert, R.string.myprofile_operat_fail);
+                        AssertAlert.show(DrawMoney.this, R.string.alert, R.string.myprofile_operat_fail);
                     }
                     break;
                     case 3://缺少参数
                     {
-                        AssertAlert.show(getApplicationContext(), R.string.alert, R.string.myprofile_lost_param);
+                        AssertAlert.show(DrawMoney.this, R.string.alert, R.string.myprofile_lost_param);
                     }
                     break;
                     case 4://key参数不正确
                     {
-                        AssertAlert.show(getApplicationContext(), R.string.alert, R.string.myprofile_key_invalid);
+                        AssertAlert.show(DrawMoney.this, R.string.alert, R.string.myprofile_key_invalid);
                     }
                     break;
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
-                AssertAlert.show(getApplicationContext(), getString(R.string.lost_json_parameter), e.getMessage());
+                AssertAlert.show(DrawMoney.this, getString(R.string.lost_json_parameter), e.getMessage());
             }
 
         }
@@ -142,24 +165,6 @@ public class BillDetail extends BaseActivity {
             //
             if (loadDialog!=null&&loadDialog.isShowing())
                 loadDialog.cancel();
-            //
-            Toast.makeText(getApplicationContext(), getString(R.string.httpfaild), Toast.LENGTH_SHORT).show();
-            //3秒后重新获取
-            Timer timer = new Timer();
-            TimerTask task = new TimerTask() {
-                @Override
-                public void run() {
-                    Handler mainHandler = new Handler(Looper.getMainLooper());
-                    mainHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            //已在主线程中，可以更新UI
-                            GetNetData();
-                        }
-                    });
-                }
-            };
-            timer.schedule(task, 3000);//此处的Delay
         }
     };
 
