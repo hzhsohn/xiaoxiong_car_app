@@ -94,8 +94,62 @@
                 android:layout_weight="1"
                 android:gravity="right|center_vertical"
                 android:paddingRight="20dp"
-                android:textColor="#888"
+                android:textColor="#333"
                 android:textSize="24sp" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/row2_1"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@android:color/white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:text="@string/available_balance"
+                android:textColor="#888"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/balance_money2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="right|center_vertical"
+                android:paddingRight="20dp"
+                android:textColor="#888"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/row2_2"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@android:color/white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:text="@string/freezing_balance"
+                android:textColor="#888"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/balance_money3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="right|center_vertical"
+                android:paddingRight="20dp"
+                android:textColor="#888"
+                android:textSize="14sp" />
 
         </LinearLayout>
         <LinearLayout

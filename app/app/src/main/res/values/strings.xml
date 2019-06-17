@@ -419,7 +419,9 @@
     <string name="draw_money">提款</string>
     <string name="income_year">今年收入</string>
     <string name="expend_year">今年支出</string>
-    <string name="balance_money">可用余额</string>
+    <string name="balance_money">余额</string>
+    <string name="available_balance">可用余额</string>
+    <string name="freezing_balance">冻结余额</string>
     <string name="operat_money_income">收入</string>
     <string name="operat_money_expend">支出</string>
     <string name="operat_money_in">收入</string>
@@ -448,5 +450,9 @@
     <string name="order_paystatus_3">退款成功</string>
     <string name="order_paystatus_4">退款失败</string>
 
+    <string name="input_require_money">请输入提款金额</string>
+    <string name="input_require_money_not0">金额必须大于0</string>
+    <string name="input_require_money_notenough">余额不足</string>
+    <string name="input_require_money_ok">提款申请已提交</string>
 </resources>
 

@@ -46,7 +46,11 @@ public class Balance extends BaseActivity {
     TextView txtIncome;
     TextView txtExpend;
     TextView txtBalance;
+    TextView txtAvailableBalance;
+    TextView txtFreezingBalance;
     double balance_money;
+    double available_balance;
+    double freezing_balance;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -73,6 +77,8 @@ public class Balance extends BaseActivity {
         txtIncome=(TextView)findViewById(R.id.income_year);
         txtExpend=(TextView)findViewById(R.id.expend_year);
         txtBalance=(TextView)findViewById(R.id.balance_money);
+        txtAvailableBalance=(TextView)findViewById(R.id.balance_money2);
+        txtFreezingBalance=(TextView)findViewById(R.id.balance_money3);
         //
         View rowBtn1 = findViewById(R.id.rowBtn1);
         rowBtn1.setOnClickListener(rowBtn1_click);
@@ -126,7 +132,7 @@ public class Balance extends BaseActivity {
         public void onClick(View v) {
             Intent intent = new Intent(Balance.this, DrawMoney.class);
             Bundle bundle = new Bundle();//该类用作携带数据
-            bundle.putDouble("balance_money",balance_money);
+            bundle.putDouble("available_balance",available_balance);
             intent.putExtras(bundle);//附带上额外的数据
             startActivity(intent);
             overridePendingTransition(R.anim.in_0, R.anim.in_1);
@@ -156,10 +162,14 @@ public class Balance extends BaseActivity {
                         String userid=person.getString("userid");
                         double income_year=person.getDouble("income_year"); //今年内收入
                         double expend_year=person.getDouble("expend_year"); //今年内支出
-                        balance_money=person.getDouble("balance_money"); //可取余额
+                        balance_money=person.getDouble("balance_money"); //剩余余额
+                        available_balance=person.getDouble("available_balance"); //可以余额
+                        freezing_balance=balance_money-available_balance;//冻结金额
                         txtIncome.setText(getString(R.string.income_year)+": "+ income_year/100.0f + getString(R.string.moneyft));
                         txtExpend.setText(getString(R.string.expend_year)+": "+ expend_year/100.0f + getString(R.string.moneyft));
                         txtBalance.setText(balance_money/100.0f + getString(R.string.moneyft));
+                        txtAvailableBalance.setText(available_balance/100.0f + getString(R.string.moneyft));
+                        txtFreezingBalance.setText(freezing_balance/100.0f + getString(R.string.moneyft));
                     }
                     break;
                     case 2://操作数据库失败

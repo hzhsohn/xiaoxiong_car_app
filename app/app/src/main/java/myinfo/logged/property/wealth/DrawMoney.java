@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,8 +45,10 @@ public class DrawMoney extends BaseActivity {
     Dialog loadDialog;
     Context cxt=null;
     TextView txtBalance;
-    double balance_money;
+    double available_balance;
     Button submitbtn;
+    EditText txtRequire_money;
+    int oooGetMoney;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -68,13 +71,14 @@ public class DrawMoney extends BaseActivity {
         //
         TextView tvInfo = (TextView) findViewById(R.id.toolbar_title);
         tvInfo.setText(getString(R.string.draw_money));
-
         //
         Bundle bundle = this.getIntent().getExtras();
-        balance_money = bundle.getDouble("balance_money");
+        available_balance = bundle.getDouble("available_balance");
         txtBalance=(TextView)findViewById(R.id.balance_money);
+        txtRequire_money=(EditText) findViewById(R.id.editText);
+
         //
-        txtBalance.setText(getString(R.string.balance_money)+": "+(balance_money/100)+ getString(R.string.moneyft));
+        showMoney();
         //
         submitbtn=(Button)findViewById(R.id.button2);
         submitbtn.setOnClickListener(submit_click);
@@ -86,20 +90,19 @@ public class DrawMoney extends BaseActivity {
         cxt=null;
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        //获取CAID列表
-        GetNetData();
+    void showMoney()
+    {
+        //
+        txtBalance.setText(getString(R.string.available_balance)+": "+(available_balance/100)+ getString(R.string.moneyft));
     }
 
-    void GetNetData()
+    void GetNetData(int money)
     {
-
         if (loadDialog==null||!loadDialog.isShowing())
             loadDialog = DialogUIUtils.showLoading(DrawMoney.this,getString(R.string.Loading),true,false,false,true).show();
 
-        web.getHtml(HTTPData.sMoneyUrl + "/balance.i.php", "k=" + LoginInfo.verifyKey);
+        oooGetMoney=money;
+        web.getHtml(HTTPData.sMoneyUrl + "/drawmoney.i.php", "k=" + LoginInfo.verifyKey+"&money="+money+"&label=安卓APP提款");
     }
 
     private View.OnClickListener onBackClick = new View.OnClickListener() {
@@ -112,6 +115,31 @@ public class DrawMoney extends BaseActivity {
 
     public View.OnClickListener submit_click = new View.OnClickListener() {
         public void onClick(View v) {
+            String str1= txtRequire_money.getText().toString();
+            if(str1.equals(""))
+            {
+                AssertAlert.show(DrawMoney.this, R.string.alert, R.string.input_require_money);
+            }
+            else
+            {
+                double rmoney = Double.parseDouble(str1);
+                if(rmoney>0) {
+                    rmoney *= 100;
+                    rmoney = (int) rmoney;
+                    if(rmoney<=available_balance) {
+                            //提款申请
+                            GetNetData((int) rmoney);
+                    }
+                    else
+                    {
+                        AssertAlert.show(DrawMoney.this, R.string.alert, R.string.input_require_money_notenough);
+                    }
+                }
+                else
+                {
+                    AssertAlert.show(DrawMoney.this, R.string.alert, R.string.input_require_money_not0);
+                }
+            }
         }
     };
 
@@ -134,7 +162,11 @@ public class DrawMoney extends BaseActivity {
                 switch (nRet) {
                     case 1:
                     {
-
+                        AssertAlert.show(DrawMoney.this, R.string.alert, R.string.input_require_money_ok);
+                        available_balance-=oooGetMoney;
+                        //
+                        showMoney();
+                        txtRequire_money.setText("");
                     }
                     break;
                     case 2://操作数据库失败
@@ -150,6 +182,16 @@ public class DrawMoney extends BaseActivity {
                     case 4://key参数不正确
                     {
                         AssertAlert.show(DrawMoney.this, R.string.alert, R.string.myprofile_key_invalid);
+                    }
+                    break;
+                    case 5://金额必须大于0
+                    {
+                        AssertAlert.show(DrawMoney.this, R.string.alert, R.string.input_require_money_not0);
+                    }
+                    break;
+                    case 6://余额不足
+                    {
+                        AssertAlert.show(DrawMoney.this, R.string.alert, R.string.input_require_money_notenough);
                     }
                     break;
                 }

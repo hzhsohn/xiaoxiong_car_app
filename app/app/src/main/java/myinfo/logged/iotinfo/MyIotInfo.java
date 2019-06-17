@@ -59,7 +59,6 @@ public class MyIotInfo extends BaseActivity {
         {
             finish();
         }
-        showInfo();
     }
 
     @Override
