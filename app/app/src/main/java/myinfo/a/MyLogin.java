@@ -34,6 +34,7 @@ import ext.magr.WebProcListener;
 import myinfo.unlogged.forgot.MyForgot;
 import myinfo.logic.LoginInfo;
 import myinfo.unlogged.reg.MyReg;
+import myinfo.unlogged.reg.MyRegByEmail;
 
 public class MyLogin extends BaseFragment {
     Context context = null;

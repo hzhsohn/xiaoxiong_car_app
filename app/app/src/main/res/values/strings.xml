@@ -62,7 +62,9 @@
     <string name="msg_not_same_passwd">两次密码不一样</string>
     <string name="msg_not_null_passwd">密码不能为空</string>
     <string name="msg_not_null_email">邮箱不能为空</string>
+    <string name="msg_not_null_phone">电话号码不能为空</string>
     <string name="msg_not_null_nickname">呢称不能为空</string>
+    <string name="msg_not_null_checkcode">验证码不能为空</string>
     <string name="lost_json_parameter">缺少JSON参数</string>
     <string name="btn_mod">确定修改</string>
     <string name="yunline">云在线</string>
@@ -131,6 +133,8 @@
     <!--注册 -->
     <string name="signup_email_err">邮箱格式错误</string>
     <string name="signup_email_not_null">邮箱不能为空</string>
+    <string name="signup_phone_err">邮箱格式错误</string>
+    <string name="signup_phone_not_null">邮箱不能为空</string>
     <string name="signup_nick_not_null">呢称不能为空</string>
     <string name="passwd_cannot_be_empty">密码不能为空</string>
     <string name="signup_operat_fail">请求失败</string>
@@ -454,5 +458,12 @@
     <string name="input_require_money_not0">金额必须大于0</string>
     <string name="input_require_money_notenough">余额不足</string>
     <string name="input_require_money_ok">提款申请已提交</string>
+    <string name="email">邮箱</string>
+    <string name="nickname">呢称</string>
+    <string name="next_step" >下一步</string>
+    <string name="email_sign">邮箱注册</string>
+    <string name="phone_sign">手机注册</string>
+    <string name="sign_unkown_user">小伙伴</string>
+    <string name="json_error">JSON数据异常,请联系管理员</string>
 </resources>
 

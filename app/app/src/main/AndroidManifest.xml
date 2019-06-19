@@ -46,7 +46,7 @@
             android:name="myinfo.unlogged.reg.MyReg"
             android:screenOrientation="portrait" />
         <activity
-            android:name="myinfo.unlogged.reg.MyReg2"
+            android:name="myinfo.unlogged.reg.MyRegByEmail"
             android:screenOrientation="portrait" />
         <activity
             android:name="myinfo.unlogged.forgot.MyForgot"
@@ -114,6 +114,9 @@
         <activity android:name="myinfo.logged.property.wealth.Balance" />
         <activity android:name="myinfo.logged.property.wealth.DrawMoney" />
         <activity android:name="myinfo.logged.property.product_order.POrderList" />
+        <activity android:name="myinfo.unlogged.reg.MyRegByEmail2" />
+        <activity android:name="myinfo.unlogged.reg.MyRegByPhone" />
+        <activity android:name="myinfo.unlogged.reg.MyRegByPhone2" />
     </application>
 
 </manifest>

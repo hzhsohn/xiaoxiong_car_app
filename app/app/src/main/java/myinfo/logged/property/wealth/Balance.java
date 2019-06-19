@@ -37,7 +37,6 @@ import ext.magr.WebProcListener;
 import myinfo.logged.caid.area.CAIDMagr;
 import myinfo.logged.property.bill.BillList;
 import myinfo.logic.LoginInfo;
-import myinfo.unlogged.reg.MyReg;
 
 public class Balance extends BaseActivity {
     WebProc web=null;

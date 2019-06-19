@@ -18,7 +18,7 @@ import org.json.JSONObject;
 import ext.magr.HTTPData;
 import ext.func.AssertAlert;
 
-public class MyReg2 extends BaseActivity {
+public class MyRegByEmail2 extends BaseActivity {
 
     Context context = null;
     String email=null;
@@ -27,7 +27,7 @@ public class MyReg2 extends BaseActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.acty_my_reg2);
+        setContentView(R.layout.acty_my_reg_by_email2);
         context = this;
         //
         initToolbar(0,
@@ -67,7 +67,7 @@ public class MyReg2 extends BaseActivity {
 
             if (txt1.getText().toString().equals(""))
             {
-                AssertAlert.show(MyReg2.this,R.string.msg_alert,R.string.msg_not_null_passwd);
+                AssertAlert.show(MyRegByEmail2.this,R.string.msg_alert,R.string.msg_not_null_passwd);
                 return ;
             }
 
@@ -76,7 +76,7 @@ public class MyReg2 extends BaseActivity {
                 HTTPData.getHttpData(handler,HTTPData.sUserUrl+"/reg_by_email.i.php","p="+txt1.getText()+"&nick="+nickname+"&em="+email);
 
             } else {
-                AssertAlert.show(MyReg2.this,R.string.msg_alert,R.string.msg_not_same_passwd);
+                AssertAlert.show(MyRegByEmail2.this,R.string.msg_alert,R.string.msg_not_same_passwd);
             }
         }
     };

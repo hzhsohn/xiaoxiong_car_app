@@ -38,7 +38,6 @@ import ext.magr.WebProc;
 import ext.magr.WebProcListener;
 import myinfo.logged.caid.area.CAIDMagr;
 import myinfo.logic.LoginInfo;
-import myinfo.unlogged.reg.MyReg;
 
 class POrderListItem {
     public String product_id;
