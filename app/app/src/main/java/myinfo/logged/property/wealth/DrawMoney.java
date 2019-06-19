@@ -193,6 +193,13 @@ public class DrawMoney extends BaseActivity {
                         AssertAlert.show(DrawMoney.this, R.string.alert, R.string.input_require_money_notenough);
                     }
                     break;
+                    case 7://取款额度太小不能操作
+                    {
+                        double less_money = person.getInt("less_money");
+                        AssertAlert.show(DrawMoney.this, getString(R.string.alert),
+                                getString(R.string.input_require_money_too_less)+(less_money/100)+getString(R.string.moneyft));
+                    }
+                    break;
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

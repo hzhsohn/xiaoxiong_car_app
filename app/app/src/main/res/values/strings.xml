@@ -458,6 +458,7 @@
     <string name="input_require_money_not0">金额必须大于0</string>
     <string name="input_require_money_notenough">余额不足</string>
     <string name="input_require_money_ok">提款申请已提交</string>
+    <string name="input_require_money_too_less">取款额度太小,最少取款</string>
     <string name="email">邮箱</string>
     <string name="nickname">呢称</string>
     <string name="next_step" >下一步</string>
