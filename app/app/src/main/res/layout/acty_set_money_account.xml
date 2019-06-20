@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/wealth_magr"
+            android:text="@string/draw_money_account"
             android:textColor="#FFF"
             android:textSize="20sp" />
     </android.support.v7.widget.Toolbar>
@@ -32,21 +32,37 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:layout_below="@+id/toolbarId"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
         android:background="#eee"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:orientation="horizontal"/>
+            android:layout_height="90dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="bottom"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageView8"
+                android:layout_width="100dp"
+                android:layout_height="90dp"
+                app:srcCompat="@drawable/nopayaccount" />
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/selectpaytool" />
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/row2"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="100dp"
             android:background="@android:color/white"
             android:orientation="vertical"
             android:paddingTop="20dp">
@@ -55,7 +71,7 @@
                 android:id="@+id/txt1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/pleaseinputmoney" />
+                android:text="@string/payaccount" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -71,14 +87,6 @@
                     android:inputType="textPersonName"
                     android:paddingLeft="20dp" />
 
-                <TextView
-                    android:id="@+id/textView13"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/moneyft"
-                    android:textSize="24sp" />
-
             </LinearLayout>
 
             <TextView
@@ -92,10 +100,12 @@
                 android:textSize="12sp" />
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:orientation="horizontal"/>
+            android:orientation="horizontal" />
+
         <LinearLayout
             android:id="@+id/rowBtn1"
             android:layout_width="match_parent"

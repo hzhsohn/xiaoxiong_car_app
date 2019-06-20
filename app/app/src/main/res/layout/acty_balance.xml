@@ -238,6 +238,46 @@
                     app:srcCompat="@drawable/rightk" />
             </LinearLayout>
         </LinearLayout>
+        <LinearLayout
+            android:id="@+id/rowBtn3"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@android:color/white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:text="@string/draw_money_account"
+                android:textColor="#333"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:gravity="right|center_vertical"
+                android:textColor="#999"
+                android:textSize="18sp" />
+
+            <LinearLayout
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_vertical"
+                    app:srcCompat="@drawable/rightk" />
+            </LinearLayout>
+        </LinearLayout>
+
 
     </LinearLayout>
 </RelativeLayout>

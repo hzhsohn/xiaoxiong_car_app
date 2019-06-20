@@ -117,6 +117,7 @@
         <activity android:name="myinfo.unlogged.reg.MyRegByEmail2" />
         <activity android:name="myinfo.unlogged.reg.MyRegByPhone" />
         <activity android:name="myinfo.unlogged.reg.MyRegByPhone2" />
+        <activity android:name="myinfo.logged.property.wealth.SetMoneyAccount" />
     </application>
 
 </manifest>

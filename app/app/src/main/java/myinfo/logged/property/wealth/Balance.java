@@ -85,6 +85,9 @@ public class Balance extends BaseActivity {
         View rowBtn2 = findViewById(R.id.rowBtn2);
         rowBtn2.setOnClickListener(rowBtn2_click);
         //
+        View rowBtn3 = findViewById(R.id.rowBtn3);
+        rowBtn3.setOnClickListener(rowBtn3_click);
+        //
         if (loadDialog==null||!loadDialog.isShowing())
             loadDialog = DialogUIUtils.showLoading(Balance.this,getString(R.string.Loading),true,false,false,true).show();
 
@@ -138,6 +141,15 @@ public class Balance extends BaseActivity {
         }
     };
 
+    public View.OnClickListener rowBtn3_click = new View.OnClickListener() {
+        public void onClick(View v) {
+            Intent intent = new Intent(Balance.this, SetMoneyAccount.class);
+            Bundle bundle = new Bundle();//该类用作携带数据
+            intent.putExtras(bundle);//附带上额外的数据
+            startActivity(intent);
+            overridePendingTransition(R.anim.in_0, R.anim.in_1);
+        }
+    };
 
     public WebProcListener wls = new WebProcListener() {
         @Override
