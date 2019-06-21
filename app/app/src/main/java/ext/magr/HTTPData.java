@@ -21,13 +21,13 @@ public class HTTPData {
     static public final String sIconUrl="http://user.hx-kong.com/u_icon";//文件名是<userid>.jpg
     static public final String sSMSUrl= "http://user.hx-kong.com/_sms";
 
-    static public final String sUpdateUrl= "http://www.hx-kong.com/qcline_hx-kong_com/update";
-    static public final String sAppindexUrl= "http://www.hx-kong.com/qcline_hx-kong_com/appindex";
-    static public final String sFeedbackUrl= "http://www.hx-kong.com/qcline_hx-kong_com/feedback";
-    static public final String sAboutSoftUrl= "http://www.hx-kong.com/qcline_hx-kong_com/about_software";
-    static public final String sMoneyUrl="http://www.hx-kong.com/qcline_hx-kong_com/_j3";
-    static public final String sInfoUrl="http://www.hx-kong.com/qcline_hx-kong_com/_j2";
-    static public final String sIotBindDevUrl="http://www.hx-kong.com/qcline_hx-kong_com/_j1/";
+    static public final String sUpdateUrl= "http://qcline.hx-kong.com/update";
+    static public final String sAppindexUrl= "http://qcline.hx-kong.com/appindex";
+    static public final String sFeedbackUrl= "http://qcline.hx-kong.com/feedback";
+    static public final String sAboutSoftUrl= "http://qcline.hx-kong.com/about_software";
+    static public final String sMoneyUrl="http://qcline.hx-kong.com/_j3";
+    static public final String sInfoUrl="http://qcline.hx-kong.com/_j2";
+    static public final String sIotBindDevUrl="http://qcline.hx-kong.com/_j1/";
 
     static public final String sIotDevUrl="http://iot.d.hx-kong.com:8088";
     static public final String sIotDevUrl_get_dev_by_caid = HTTPData.sIotDevUrl + "/get-dev.php";
