@@ -421,7 +421,7 @@
     <string name="nolistdata">无数据</string>
     <string name="moneyft">元</string>
     <string name="draw_money">提款</string>
-    <string name="draw_money_account">设置提款账号</string>
+    <string name="draw_money_account">设置收款账号</string>
     <string name="income_year">今年收入</string>
     <string name="expend_year">今年支出</string>
     <string name="balance_money">余额</string>
@@ -473,8 +473,10 @@
     <string name="selectpaytool">选择支付类型</string>
     <string name="input_paytool">请选择支付类型</string>
     <string name="input_payaccount">请输入账户信息</string>
+    <string name="payaccount_notset">未设置收款信息</string>
 
     <string name="alipay">支付宝</string>
+    <string name="recvmoneyaccount">收款账号</string>
 
 </resources>
 

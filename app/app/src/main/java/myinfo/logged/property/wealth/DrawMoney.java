@@ -2,52 +2,43 @@ package myinfo.logged.property.wealth;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
+import android.content.DialogInterface;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
-import android.view.MenuItem;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.zh.home.BaseActivity;
 
 import com.dou361.dialogui.DialogUIUtils;
 import com.hx_kong.freesha.R;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import ext.func.AssertAlert;
 import ext.magr.HTTPData;
 import ext.magr.WebProc;
 import ext.magr.WebProcListener;
-import myinfo.logged.caid.area.CAIDMagr;
 import myinfo.logic.LoginInfo;
 
 public class DrawMoney extends BaseActivity {
-    WebProc web=null;
+    WebProc web,web_get;
     Dialog loadDialog;
     Context cxt=null;
     TextView txtBalance;
+    TextView txtRecvMoneyAccount;
     double available_balance;
     Button submitbtn;
     EditText txtRequire_money;
     int oooGetMoney;
+    boolean isGetAccountInfo=false;
+    String payTool;
+    String payAccount;
+    String payinfoJson;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -58,6 +49,9 @@ public class DrawMoney extends BaseActivity {
         //
         web = new WebProc();
         web.addListener(wls);
+        //
+        web_get = new WebProc();
+        web_get.addListener(wls_get);
         //
         initToolbar(0,
                 R.id.toolbarId,
@@ -75,12 +69,15 @@ public class DrawMoney extends BaseActivity {
         available_balance = bundle.getDouble("available_balance");
         txtBalance=(TextView)findViewById(R.id.balance_money);
         txtRequire_money=(EditText) findViewById(R.id.editText);
+        txtRecvMoneyAccount=(TextView)findViewById(R.id.textView10);
 
-        //
-        showMoney();
         //
         submitbtn=(Button)findViewById(R.id.button2);
         submitbtn.setOnClickListener(submit_click);
+        //获取账户信息
+        isGetAccountInfo=false;
+        web_get.getHtml(HTTPData.sMoneyUrl + "/payinfo_get.i.php", "k=" + LoginInfo.verifyKey);
+        txtRequire_money.setEnabled(false);
     }
 
     @Override
@@ -101,7 +98,7 @@ public class DrawMoney extends BaseActivity {
             loadDialog = DialogUIUtils.showLoading(DrawMoney.this,getString(R.string.Loading),true,false,false,true).show();
 
         oooGetMoney=money;
-        web.getHtml(HTTPData.sMoneyUrl + "/drawmoney.i.php", "k=" + LoginInfo.verifyKey+"&money="+money+"&label=安卓APP提款");
+        web.getHtml(HTTPData.sMoneyUrl + "/drawmoney.i.php", "k=" + LoginInfo.verifyKey+"&money="+money+"&payinfo="+payinfoJson+"&label=安卓APP提款");
     }
 
     private View.OnClickListener onBackClick = new View.OnClickListener() {
@@ -114,33 +111,119 @@ public class DrawMoney extends BaseActivity {
 
     public View.OnClickListener submit_click = new View.OnClickListener() {
         public void onClick(View v) {
-            String str1= txtRequire_money.getText().toString();
-            if(str1.equals(""))
-            {
-                AssertAlert.show(DrawMoney.this, R.string.alert, R.string.input_require_money);
-            }
-            else
-            {
-                double rmoney = Double.parseDouble(str1);
-                if(rmoney>0) {
-                    rmoney *= 100;
-                    rmoney = (int) rmoney;
-                    if(rmoney<=available_balance) {
-                            //提款申请
-                            GetNetData((int) rmoney);
-                    }
-                    else
-                    {
-                        AssertAlert.show(DrawMoney.this, R.string.alert, R.string.input_require_money_notenough);
-                    }
-                }
-                else
-                {
-                    AssertAlert.show(DrawMoney.this, R.string.alert, R.string.input_require_money_not0);
-                }
+            if(isGetAccountInfo) {
+                        String str1 = txtRequire_money.getText().toString();
+                        if (str1.equals("")) {
+                            AssertAlert.show(DrawMoney.this, R.string.alert, R.string.input_require_money);
+                        } else {
+                            double rmoney = Double.parseDouble(str1);
+                            if (rmoney > 0) {
+                                rmoney *= 100;
+                                rmoney = (int) rmoney;
+                                if (rmoney <= available_balance) {
+                                    //提款申请
+                                    GetNetData((int) rmoney);
+                                } else {
+                                    AssertAlert.show(DrawMoney.this, R.string.alert, R.string.input_require_money_notenough);
+                                }
+                            } else {
+                                AssertAlert.show(DrawMoney.this, R.string.alert, R.string.input_require_money_not0);
+                            }
+                        }
             }
         }
     };
+
+    void selectAccountType(String pt,String pa)
+    {
+        if(pt.equals("alipay"))
+        {
+            txtRecvMoneyAccount.setText(getString(R.string.recvmoneyaccount)+ ":  "+getString(R.string.alipay)
+                    +" --- "+pa);
+        }
+    }
+
+    public WebProcListener wls_get = new WebProcListener() {
+        @Override
+        public void cookies(String url, String cookie) {
+
+        }
+
+        @Override
+        public void success_html(String url, String html) {
+            //
+            if (loadDialog!=null&&loadDialog.isShowing())
+                loadDialog.cancel();
+            //
+            int nRet = 0;
+            try {
+                JSONObject person = new JSONObject(html);
+                nRet = person.getInt("nRet");
+                switch (nRet) {
+                    case 1:
+                    {
+                        //
+                        isGetAccountInfo=true;
+                        txtRequire_money.setEnabled(true);
+                        //
+                        showMoney();
+                        //
+                        payinfoJson = person.getString("payinfo");
+                        if(null != payinfoJson && !payinfoJson.equals("")) {
+                            JSONObject person2 = new JSONObject(payinfoJson);
+                            if (null != person2) {
+                                payTool = person2.getString("pay_tool");
+                                payAccount = person2.getString("pay_account");
+                                selectAccountType(payTool,payAccount);
+                            }
+                        }
+                        else
+                        {
+                            // 提示框
+                            AlertDialog alert = new AlertDialog.Builder(cxt).create();
+                            alert.setTitle(getString(R.string.alert));
+                            alert.setMessage(getString(R.string.payaccount_notset));
+                            DialogInterface.OnClickListener cl = new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    finish();
+                                    overridePendingTransition(R.anim.back_0, R.anim.back_1);
+                                }
+                            };
+                            alert.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.ok), cl);
+                            alert.show();
+
+                        }
+                    }
+                    break;
+                    case 2://操作数据库失败
+                    {
+                        AssertAlert.show(DrawMoney.this, R.string.alert, R.string.myprofile_operat_fail);
+                    }
+                    break;
+                    case 3://缺少参数
+                    {
+                        AssertAlert.show(DrawMoney.this, R.string.alert, R.string.myprofile_lost_param);
+                    }
+                    break;
+                    case 4://key参数不正确
+                    {
+                        AssertAlert.show(DrawMoney.this, R.string.alert, R.string.myprofile_key_invalid);
+                    }
+                    break;
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+                AssertAlert.show(DrawMoney.this, getString(R.string.lost_json_parameter), e.getMessage());
+            }
+
+        }
+
+        @Override
+        public void fail(String url, String errMsg) {
+        }
+    };
+
 
     public WebProcListener wls = new WebProcListener() {
         @Override

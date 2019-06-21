@@ -60,7 +60,7 @@ public class Balance extends BaseActivity {
         //
         web = new WebProc();
         web.addListener(wls);
-        //
+        //s
         initToolbar(0,
                 R.id.toolbarId,
                 null,
