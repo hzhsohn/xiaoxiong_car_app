@@ -230,6 +230,7 @@
     <string name="cmagr_del">成功移除离线设备</string>
     <string name="cmagr_try_reset_caid">正在尝试解除设备绑定...</string>
     <string name="cmagr_reset_caid">成功解除绑定</string>
+    <string name="cmagr_reset_caid_fail">解除绑定失败</string>
 
     <!-- caid share -->
     <string name="cshare_code">分享码:</string>

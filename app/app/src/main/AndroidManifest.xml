@@ -105,19 +105,32 @@
         <activity
             android:name="myinfo.qrscan.result.QRText"
             android:screenOrientation="portrait" />
-        <activity android:name="p3th.easylink.EasyLinkConfigActivity" />
-        <activity android:name="myinfo.logged.setting.about_softw.AboutSoftware" />
-        <activity android:name="myinfo.logged.setting.about_softw.AboutSoftWeb" />
-        <activity android:name="myinfo.qrscan.result.QRAddCtrlDevice" />
-        <activity android:name="myinfo.logged.caid.remote.RemoteDeviceDetail" />
-        <activity android:name="myinfo.logged.property.bill.BillList" />
-        <activity android:name="myinfo.logged.property.wealth.Balance" />
-        <activity android:name="myinfo.logged.property.wealth.DrawMoney" />
-        <activity android:name="myinfo.logged.property.product_order.POrderList" />
-        <activity android:name="myinfo.unlogged.reg.MyRegByEmail2" />
-        <activity android:name="myinfo.unlogged.reg.MyRegByPhone" />
-        <activity android:name="myinfo.unlogged.reg.MyRegByPhone2" />
-        <activity android:name="myinfo.logged.property.wealth.SetMoneyAccount" />
+        <activity android:name="p3th.easylink.EasyLinkConfigActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name="myinfo.logged.setting.about_softw.AboutSoftware"
+            android:screenOrientation="portrait" />
+        <activity android:name="myinfo.logged.setting.about_softw.AboutSoftWeb"
+            android:screenOrientation="portrait" />
+        <activity android:name="myinfo.qrscan.result.QRAddCtrlDevice"
+            android:screenOrientation="portrait" />
+        <activity android:name="myinfo.logged.caid.remote.RemoteDeviceDetail"
+            android:screenOrientation="portrait" />
+        <activity android:name="myinfo.logged.property.bill.BillList"
+            android:screenOrientation="portrait" />
+        <activity android:name="myinfo.logged.property.wealth.Balance"
+            android:screenOrientation="portrait" />
+        <activity android:name="myinfo.logged.property.wealth.DrawMoney"
+            android:screenOrientation="portrait" />
+        <activity android:name="myinfo.logged.property.product_order.POrderList"
+            android:screenOrientation="portrait" />
+        <activity android:name="myinfo.unlogged.reg.MyRegByEmail2"
+            android:screenOrientation="portrait" />
+        <activity android:name="myinfo.unlogged.reg.MyRegByPhone"
+            android:screenOrientation="portrait" />
+        <activity android:name="myinfo.unlogged.reg.MyRegByPhone2"
+            android:screenOrientation="portrait" />
+        <activity android:name="myinfo.logged.property.wealth.SetMoneyAccount"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

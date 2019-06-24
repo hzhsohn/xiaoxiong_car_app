@@ -3,6 +3,7 @@ package myinfo.logged.caid.remote;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -57,9 +58,6 @@ public class RemoteDeviceDetail extends BaseActivity {
     TextView txtIsOnline;
     TextView txtResult;
     Button btnRmoveBind;
-    //
-    Timer tim;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,10 +102,6 @@ public class RemoteDeviceDetail extends BaseActivity {
         txtCAID.setText(caid);
         txtResult.setText("");
         txtIsOnline.setText("...");
-
-        //
-        // 添加一个Timer，可以让程序运行起来了
-        tim = new Timer();
         //
         web.getHtml(HTTPData.sIotDevUrl_get_online_by_uuid,  "uuid=" + uuid);
     }
@@ -169,9 +163,51 @@ public class RemoteDeviceDetail extends BaseActivity {
 
         @Override
         public void success_html(String url, String html) {
-            txtResult.setText(getString(R.string.cmagr_try_reset_caid));
-            //检测是否成功
-            tim.schedule(task, 500, 2000); // 延时500ms后执行，2000ms执行一次
+            int nRet = 0;
+            try {
+                JSONObject person = new JSONObject(html);
+                nRet = person.getInt("ret");
+                switch (nRet) {
+                    case 1://解除设备成功
+                    {
+                        txtResult.setText(getString(R.string.cmagr_try_reset_caid));
+                        //检测是否成功
+                        new Handler().postDelayed(new Runnable()
+                        {
+                            public void run()
+                            {
+                                web4.getHtml(HTTPData.sIotBindDevUrl + "/caid_reset_check.php", "device_uuid="+uuid);
+                            }
+                        }, 1000);
+                    }
+                    break;
+                    case 2://CAID已经被绑定
+                    {
+                    }
+                    break;
+                    case 3://未知产品设备
+                    {
+                        AssertAlert.show(RemoteDeviceDetail.this, R.string.alert, R.string.qr_unknow_devuuid);
+                        txtResult.setText(getString(R.string.qr_unknow_devuuid));
+                    }
+                    break;
+                    case 4://数据库操作失败
+                    {
+                        AssertAlert.show(RemoteDeviceDetail.this, R.string.alert, R.string.myprofile_operat_fail);
+                        txtResult.setText(getString(R.string.myprofile_operat_fail));
+                    }
+                    break;
+                    case 5://缺少参数
+                    {
+                        AssertAlert.show(RemoteDeviceDetail.this, R.string.alert, R.string.myprofile_lost_param);
+                        txtResult.setText(getString(R.string.myprofile_lost_param));
+                    }
+                    break;
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+                AssertAlert.show(RemoteDeviceDetail.this, getString(R.string.lost_json_parameter), e.getMessage());
+            }
         }
 
         @Override
@@ -197,37 +233,37 @@ public class RemoteDeviceDetail extends BaseActivity {
                 switch (nRet) {
                     case 1://CAID已经为空
                     {
-                        tim.cancel();
                         txtResult.setText(getString(R.string.cmagr_reset_caid));
                         btnRmoveBind.setVisibility(View.GONE);
                     }
                     break;
-                    case 2://CAID还被绑定中
+                    case 2://CAID已经被绑定
                     {
+                        txtResult.setText(getString(R.string.cmagr_reset_caid_fail));
                     }
+                    break;
                     case 3://未知产品设备
                     {
-                        tim.cancel();
-                        AssertAlert.show(getBaseContext(), R.string.alert, R.string.qr_unknow_devuuid);
+                        AssertAlert.show(RemoteDeviceDetail.this, R.string.alert, R.string.qr_unknow_devuuid);
+                        txtResult.setText(getString(R.string.qr_unknow_devuuid));
                     }
                     break;
                     case 4://数据库操作失败
                     {
-                        tim.cancel();
-                        AssertAlert.show(getBaseContext(), R.string.alert, R.string.myprofile_operat_fail);
+                        AssertAlert.show(RemoteDeviceDetail.this, R.string.alert, R.string.myprofile_operat_fail);
+                        txtResult.setText(getString(R.string.myprofile_operat_fail));
                     }
                     break;
                     case 5://缺少参数
                     {
-                        tim.cancel();
-                        AssertAlert.show(getBaseContext(), R.string.alert, R.string.myprofile_lost_param);
+                        AssertAlert.show(RemoteDeviceDetail.this, R.string.alert, R.string.myprofile_lost_param);
+                        txtResult.setText(getString(R.string.myprofile_lost_param));
                     }
                     break;
                 }
             } catch (JSONException e) {
-                tim.cancel();
                 e.printStackTrace();
-                AssertAlert.show(getBaseContext(), getString(R.string.lost_json_parameter), e.getMessage());
+                AssertAlert.show(RemoteDeviceDetail.this, getString(R.string.lost_json_parameter), e.getMessage());
             }
 
         }
@@ -238,12 +274,4 @@ public class RemoteDeviceDetail extends BaseActivity {
         }
     };
 
-    //////////////////////////////////////////////////
-    private TimerTask task = new TimerTask() {
-
-        public void run() {
-            web4.getHtml(HTTPData.sIotBindDevUrl + "/caid_reset_check.php", "device_uuid="+uuid);
-            System.gc();//这一句最好加上.垃圾回收机制生效.防止某些版本系统关闭不了定时器
-        }
-    };
 }
