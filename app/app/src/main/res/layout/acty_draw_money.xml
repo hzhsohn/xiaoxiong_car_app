@@ -78,6 +78,12 @@
                     android:text="@string/moneyft"
                     android:textSize="24sp" />
 
+                <TextView
+                    android:id="@+id/textView12"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:text="@string/gratuity" />
             </LinearLayout>
 
             <TextView

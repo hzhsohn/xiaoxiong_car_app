@@ -7,6 +7,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,6 +34,7 @@ public class DrawMoney extends BaseActivity {
     Context cxt=null;
     TextView txtBalance;
     TextView txtRecvMoneyAccount;
+    TextView txtGratuity;
     double available_balance;
     Button submitbtn;
     EditText txtRequire_money;
@@ -39,6 +43,7 @@ public class DrawMoney extends BaseActivity {
     String payTool;
     String payAccount;
     String payinfoJson;
+    double gratuity_percent=1;//手续费百分比
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -70,10 +75,24 @@ public class DrawMoney extends BaseActivity {
         txtBalance=(TextView)findViewById(R.id.balance_money);
         txtRequire_money=(EditText) findViewById(R.id.editText);
         txtRecvMoneyAccount=(TextView)findViewById(R.id.textView10);
-
+        txtGratuity=(TextView)findViewById(R.id.textView12);
         //
         submitbtn=(Button)findViewById(R.id.button2);
         submitbtn.setOnClickListener(submit_click);
+        //文字改变事件
+        txtRequire_money.addTextChangedListener(new TextWatcher() {
+            //当输入框里文本变化的时候执行该方法
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+            //当文本框里内容变化之前的时候执行该方法
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+            }
+            //当文本框里内容变化之后的时候执行该方法
+            public void afterTextChanged(Editable s) {
+                showtxtGratuity();
+            }
+        });
         //获取账户信息
         isGetAccountInfo=false;
         web_get.getHtml(HTTPData.sMoneyUrl + "/payinfo_get.i.php", "k=" + LoginInfo.verifyKey);
@@ -92,13 +111,27 @@ public class DrawMoney extends BaseActivity {
         txtBalance.setText(getString(R.string.available_balance)+": "+(available_balance/100)+ getString(R.string.moneyft));
     }
 
-    void GetNetData(int money)
+    void showtxtGratuity()
+    {
+        String str1=txtRequire_money.getText().toString();
+        if(null!=str1 && !str1.equals("")) {
+            double sfff=Double.parseDouble(str1 );
+            sfff*=gratuity_percent;
+            txtGratuity.setText(getString(R.string.gratuity)+": "+sfff+ getString(R.string.moneyft));
+        }
+        else
+        {
+            txtGratuity.setText(getString(R.string.gratuity));
+        }
+    }
+
+    void GetNetData(int money,int gratuity)
     {
         if (loadDialog==null||!loadDialog.isShowing())
             loadDialog = DialogUIUtils.showLoading(DrawMoney.this,getString(R.string.Loading),true,false,false,true).show();
 
-        oooGetMoney=money;
-        web.getHtml(HTTPData.sMoneyUrl + "/drawmoney.i.php", "k=" + LoginInfo.verifyKey+"&money="+money+"&payinfo="+payinfoJson+"&label=安卓APP提款");
+        oooGetMoney=money+gratuity;
+        web.getHtml(HTTPData.sMoneyUrl + "/drawmoney.i.php", "k=" + LoginInfo.verifyKey+"&money="+money+"&gratuity="+gratuity+"&payinfo="+payinfoJson+"&label=安卓APP提款");
     }
 
     private View.OnClickListener onBackClick = new View.OnClickListener() {
@@ -122,7 +155,7 @@ public class DrawMoney extends BaseActivity {
                                 rmoney = (int) rmoney;
                                 if (rmoney <= available_balance) {
                                     //提款申请
-                                    GetNetData((int) rmoney);
+                                    GetNetData((int) rmoney,(int)(rmoney*gratuity_percent));
                                 } else {
                                     AssertAlert.show(DrawMoney.this, R.string.alert, R.string.input_require_money_notenough);
                                 }
@@ -167,6 +200,9 @@ public class DrawMoney extends BaseActivity {
                         txtRequire_money.setEnabled(true);
                         //
                         showMoney();
+                        //手续费
+                        gratuity_percent= person.getDouble("gratuity_percent");
+                        gratuity_percent/=100;
                         //
                         payinfoJson = person.getString("payinfo");
                         if(null != payinfoJson && !payinfoJson.equals("")) {
