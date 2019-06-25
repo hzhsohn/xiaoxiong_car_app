@@ -22,6 +22,8 @@ import com.hx_kong.freesha.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
+
 import ext.func.AssertAlert;
 import ext.magr.HTTPData;
 import ext.magr.WebProc;
@@ -44,6 +46,7 @@ public class DrawMoney extends BaseActivity {
     String payAccount;
     String payinfoJson;
     double gratuity_percent=1;//手续费百分比
+    int gratuity_money;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -117,6 +120,9 @@ public class DrawMoney extends BaseActivity {
         if(null!=str1 && !str1.equals("")) {
             double sfff=Double.parseDouble(str1 );
             sfff*=gratuity_percent;
+            DecimalFormat df = new DecimalFormat("#.##");
+            sfff = Double.parseDouble(String.format("%.2f", sfff));
+            gratuity_money=(int)(sfff*100);
             txtGratuity.setText(getString(R.string.gratuity)+": "+sfff+ getString(R.string.moneyft));
         }
         else
@@ -155,7 +161,7 @@ public class DrawMoney extends BaseActivity {
                                 rmoney = (int) rmoney;
                                 if (rmoney <= available_balance) {
                                     //提款申请
-                                    GetNetData((int) rmoney,(int)(rmoney*gratuity_percent));
+                                    GetNetData((int) rmoney,gratuity_money);
                                 } else {
                                     AssertAlert.show(DrawMoney.this, R.string.alert, R.string.input_require_money_notenough);
                                 }
