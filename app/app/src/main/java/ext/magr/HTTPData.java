@@ -28,6 +28,7 @@ public class HTTPData {
     static public final String sMoneyUrl="http://qcline.hx-kong.com/_j3";
     static public final String sInfoUrl="http://qcline.hx-kong.com/_j2";
     static public final String sIotBindDevUrl="http://qcline.hx-kong.com/_j1/";
+    static public final String sIotSetParameterUrl="http://qcline.hx-kong.com/_j0/";
 
     static public final String sIotDevUrl="http://iot.d.hx-kong.com:8088";
     static public final String sIotDevUrl_get_dev_by_caid = HTTPData.sIotDevUrl + "/get-dev.php";

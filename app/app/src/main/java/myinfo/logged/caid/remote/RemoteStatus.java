@@ -204,12 +204,12 @@ public class RemoteStatus extends BaseActivity {
             bundle.putString("product_id",item.product_id);
             bundle.putString("uuid",item.device_uuid);
             bundle.putString("mark",item.mark);
+            bundle.putString("price",item.price);
+            bundle.putString("use_time",item.use_time);
             intent.putExtras(bundle);//附带上额外的数据
             //带返回结果
             startActivityForResult(intent, 201);
             overridePendingTransition(R.anim.in_0, R.anim.in_1);
-
-
         }
     };
 

@@ -131,6 +131,7 @@
             android:screenOrientation="portrait" />
         <activity android:name="myinfo.logged.property.wealth.SetMoneyAccount"
             android:screenOrientation="portrait" />
+        <activity android:name="myinfo.logged.caid.remote.DeviceSetPriceWorktime" />
     </application>
 
 </manifest>

@@ -1,44 +1,24 @@
 package myinfo.logged.caid.remote;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.zh.home.BaseActivity;
 
-import com.dou361.dialogui.DialogUIUtils;
-import com.dou361.dialogui.listener.DialogUIListener;
 import com.hx_kong.freesha.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
-
 import ext.func.AssertAlert;
 import ext.magr.HTTPData;
 import ext.magr.WebProc;
 import ext.magr.WebProcListener;
-import hxkong.password.HXPassword;
-import myinfo.logic.LoginInfo;
-import myinfo.qrscan.zxing.android.CaptureActivity;
 
 
 public class RemoteDeviceDetail extends BaseActivity {
@@ -50,6 +30,8 @@ public class RemoteDeviceDetail extends BaseActivity {
     public String product_id;
     public String uuid;
     public String mark;
+    public String price;
+    public String use_time;
 
     TextView txtCAID;
     TextView txtPRODUCTID;
@@ -57,6 +39,8 @@ public class RemoteDeviceDetail extends BaseActivity {
     TextView txtFlag;
     TextView txtIsOnline;
     TextView txtResult;
+    TextView txtPrice;
+    TextView txtWorktime;
     Button btnRmoveBind;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -87,12 +71,16 @@ public class RemoteDeviceDetail extends BaseActivity {
         product_id = bundle.getString("product_id");
         uuid = bundle.getString("uuid");
         mark = bundle.getString("mark");
+        price = bundle.getString("price");
+        use_time = bundle.getString("use_time");
         //
         txtPRODUCTID= (TextView) findViewById(R.id.txt0);
         txtUUID= (TextView) findViewById(R.id.txt1);
         txtFlag= (TextView) findViewById(R.id.txt2);
         txtCAID= (TextView) findViewById(R.id.txt3);
         txtIsOnline= (TextView) findViewById(R.id.txt4);
+        txtPrice= (TextView) findViewById(R.id.txt6);
+        txtWorktime= (TextView) findViewById(R.id.txt7);
         txtResult= (TextView) findViewById(R.id.result);
         btnRmoveBind= (Button) findViewById(R.id.button);
         //
@@ -100,10 +88,38 @@ public class RemoteDeviceDetail extends BaseActivity {
         txtUUID.setText(uuid);
         txtFlag.setText(mark);
         txtCAID.setText(caid);
+        showShowPriceWorktime();
         txtResult.setText("");
         txtIsOnline.setText("...");
-        //
         web.getHtml(HTTPData.sIotDevUrl_get_online_by_uuid,  "uuid=" + uuid);
+    }
+
+    void showShowPriceWorktime() {
+        //
+        Double dd=Double.parseDouble(price)/100;
+        txtPrice.setText(dd+getString(R.string.moneyft));
+        //转换分和秒
+        int nUserTime=Integer.parseInt(use_time);
+        String str1="";
+        if(nUserTime<60)
+        {
+            str1=nUserTime+" 秒";
+        }
+        else
+        {
+            if(0==nUserTime%60)
+            {
+                nUserTime=nUserTime/60;
+                str1=nUserTime+" 分钟";
+            }
+            else
+            {
+                int a=(nUserTime/60);
+                int b=nUserTime%60;
+                str1=a+" 分 "+b+" 秒";
+            }
+        }
+        txtWorktime.setText(str1);
     }
 
     private View.OnClickListener onBackClick = new View.OnClickListener() {
@@ -123,6 +139,20 @@ public class RemoteDeviceDetail extends BaseActivity {
         GetNetDeleteDev();
     }
 
+    //进入设置价格和工作时间
+    public void click_setprice_worktime(View v)
+    {
+        //跳到下一个窗体
+        Intent intent = new Intent(RemoteDeviceDetail.this, DeviceSetPriceWorktime.class);
+        Bundle bundle = new Bundle();//该类用作携带数据
+        bundle.putString("uuid",uuid);
+        bundle.putString("price",price);
+        bundle.putString("use_time",use_time);
+        intent.putExtras(bundle);//附带上额外的数据
+        //带返回结果
+        startActivityForResult(intent, 101);
+        overridePendingTransition(R.anim.in_0, R.anim.in_1);
+    }
 
     //设备在线列表
     public WebProcListener wls = new WebProcListener() {
@@ -274,4 +304,19 @@ public class RemoteDeviceDetail extends BaseActivity {
         }
     };
 
+    //窗体反回结果
+    @Override
+    protected void onActivityResult(int requestCode, int ResultCode, Intent data) {
+        super.onActivityResult(requestCode, ResultCode, data);
+
+        if(101==requestCode) {
+            //更新返回结果
+            Bundle bundle = data.getExtras();
+            int set_price = bundle.getInt("set_price");
+            int set_use_time = bundle.getInt("set_use_time");
+            price=set_price+"";
+            use_time=set_use_time+"";
+            showShowPriceWorktime();
+        }
+    }
 }

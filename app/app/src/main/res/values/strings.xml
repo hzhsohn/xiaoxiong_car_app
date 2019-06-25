@@ -479,6 +479,19 @@
     <string name="alipay">支付宝</string>
     <string name="recvmoneyaccount">收款账号</string>
     <string name="gratuity">手续费</string>
-
+    <string name="product_flag">产品型号</string>
+    <string name="price">价格</string>
+    <string name="worktime">工作时间</string>
+    <string name="set_price_worktime" >设置价格和工作时间</string>
+    <string name="set_price_worktime_11">半小时 / 1元</string>
+    <string name="set_price_worktime_12">半小时 / 2元</string>
+    <string name="set_price_worktime_13">半小时 / 2.5元</string>
+    <string name="set_price_worktime_21">1小时 / 1元</string>
+    <string name="set_price_worktime_22">1小时 / 2元</string>
+    <string name="set_price_worktime_23">1小时 / 2.5元</string>
+    <string name="set_price_worktime_31">2小时 / 1.5元</string>
+    <string name="set_price_worktime_32">2小时 / 2.5元</string>
+    <string name="set_price_worktime_33">2小时 / 3元</string>
+    <string name="setprice_worktime_ok">设置时间和价格成功</string>
 </resources>
 
