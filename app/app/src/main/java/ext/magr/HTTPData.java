@@ -21,7 +21,7 @@ public class HTTPData {
     static public final String sIconUrl="http://user.hx-kong.com/u_icon";//文件名是<userid>.jpg
     static public final String sSMSUrl= "http://user.hx-kong.com/_sms";
 
-    static public final String sUpdateUrl= "http://qcline.hx-kong.com/update";
+    static public final String sUpdateUrl= "http://qcline.hx-kong.com/app_update";
     static public final String sAppindexUrl= "http://qcline.hx-kong.com/appindex";
     static public final String sFeedbackUrl= "http://qcline.hx-kong.com/feedback";
     static public final String sAboutSoftUrl= "http://qcline.hx-kong.com/about_software";
