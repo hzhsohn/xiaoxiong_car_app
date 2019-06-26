@@ -309,7 +309,7 @@ public class RemoteDeviceDetail extends BaseActivity {
     protected void onActivityResult(int requestCode, int ResultCode, Intent data) {
         super.onActivityResult(requestCode, ResultCode, data);
 
-        if(101==requestCode) {
+        if(101==requestCode && 1==ResultCode) {
             //更新返回结果
             Bundle bundle = data.getExtras();
             int set_price = bundle.getInt("set_price");
