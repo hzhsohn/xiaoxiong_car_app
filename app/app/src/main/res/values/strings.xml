@@ -133,8 +133,8 @@
     <!--注册 -->
     <string name="signup_email_err">邮箱格式错误</string>
     <string name="signup_email_not_null">邮箱不能为空</string>
-    <string name="signup_phone_err">邮箱格式错误</string>
-    <string name="signup_phone_not_null">邮箱不能为空</string>
+    <string name="signup_phone_err">手机号码格式错误</string>
+    <string name="signup_phone_not_null">手机号码不能为空</string>
     <string name="signup_nick_not_null">呢称不能为空</string>
     <string name="passwd_cannot_be_empty">密码不能为空</string>
     <string name="signup_operat_fail">请求失败</string>
