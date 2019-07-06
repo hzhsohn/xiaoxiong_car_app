@@ -159,11 +159,21 @@ public class DrawMoney extends BaseActivity {
                             if (rmoney > 0) {
                                 rmoney *= 100;
                                 rmoney = (int) rmoney;
-                                if (rmoney <= available_balance) {
+                                if ((rmoney+gratuity_money) <= available_balance) {
                                     //提款申请
                                     GetNetData((int) rmoney,gratuity_money);
                                 } else {
-                                    AssertAlert.show(DrawMoney.this, R.string.alert, R.string.input_require_money_notenough);
+                                    //最高可取金额
+                                    double ddd=(available_balance/(1+gratuity_percent))/100;
+                                    //
+                                    DecimalFormat df = new DecimalFormat("#.##");
+                                    ddd = Double.parseDouble(String.format("%.2f", ddd));
+                                    txtRequire_money.setText(ddd+"");
+                                    //
+                                    AssertAlert.show(DrawMoney.this, getString(R.string.alert),
+                                            getString(R.string.input_require_money_notenough_max)
+                                                    +ddd
+                                                    +getString(R.string.moneyft));
                                 }
                             } else {
                                 AssertAlert.show(DrawMoney.this, R.string.alert, R.string.input_require_money_not0);
