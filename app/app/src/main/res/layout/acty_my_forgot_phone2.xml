@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
-    android:screenOrientation="portrait"
     android:orientation="vertical">
 
     <!-- navigationItemLeftButton -->
@@ -16,14 +15,14 @@
         android:layout_alignParentTop="true"
         android:background="@android:color/holo_blue_light"
         android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme" >
+        android:theme="?attr/actionBarTheme">
 
         <TextView
             android:id="@+id/toolbar_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/title_forgot"
+            android:text="@string/phone_forgot"
             android:textColor="#FFF"
             android:textSize="20sp" />
     </android.support.v7.widget.Toolbar>
@@ -38,6 +37,49 @@
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:orientation="horizontal">
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:gravity="bottom"
+            android:paddingLeft="30dp"
+            android:text="密码"
+            android:textColor="#333"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/txt_passwd1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:paddingLeft="30dp" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:gravity="bottom"
+            android:paddingLeft="30dp"
+            android:text="确认密码"
+            android:textColor="#333"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/txt_passwd2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:paddingLeft="30dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="50dp"
             android:gravity="right"
             android:orientation="horizontal"
@@ -53,36 +95,11 @@
             android:paddingRight="10dp">
 
             <Button
-                android:id="@+id/btnNext1"
+                android:id="@+id/btnRegNext2"
                 android:layout_width="153dp"
                 android:layout_height="match_parent"
                 android:background="@android:color/transparent"
-                android:text="@string/email_forgot"
-                android:textColor="@android:color/holo_blue_dark"
-                android:textSize="24sp" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:gravity="right"
-            android:orientation="horizontal"
-            android:paddingRight="10dp">
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingRight="10dp">
-
-            <Button
-                android:id="@+id/btnNext2"
-                android:layout_width="153dp"
-                android:layout_height="match_parent"
-                android:background="@android:color/transparent"
-                android:text="@string/phone_forgot"
+                android:text="确定"
                 android:textColor="@android:color/holo_blue_dark"
                 android:textSize="24sp" />
         </LinearLayout>

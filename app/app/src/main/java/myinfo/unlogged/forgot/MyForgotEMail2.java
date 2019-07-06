@@ -8,13 +8,13 @@ import android.widget.TextView;
 import android.zh.home.BaseActivity;
 import com.hx_kong.freesha.R;
 
-public class MyForgot2 extends BaseActivity
+public class MyForgotEMail2 extends BaseActivity
 {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.acty_my_forgot2);
+        setContentView(R.layout.acty_my_forgot_email2);
 
         //
         initToolbar(0,

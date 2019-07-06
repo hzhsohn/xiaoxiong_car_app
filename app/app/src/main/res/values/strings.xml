@@ -108,7 +108,11 @@
     <string name="alert_invalid_ssid_mesg">请输入有效的SSID</string>
     <string name="alert_invalid_key_mesg">请输入有效的16个字符</string>
     <string name="alert_no_wifi_mesg">WiFi not available.Please check your WiFi connection.</string>
-
+    <string name="email_forgot">邮箱取回密码</string>
+    <string name="phone_forgot">手机取回密码</string>
+    <string name="signup_account_not_exist">用户不存在</string>
+    <string name="checkcode_error">验证码错误</string>
+    <string name="lost_param">缺少参数</string>
 
     <string name="config_default_gateway_val">127.0.0.1</string>
     <string name="config_default_device_name">设备名称</string>

@@ -18,6 +18,7 @@ import ext.magr.ConfigMagr;
  */
 
 public class LoginInfo {
+    static public int secTimeCount=0; //短信用的计时器
     static public String verifyKey=""; //验证的钥匙KEY,从配置文档里获取
     static public long lastVerifySecTime=0; //最后一次验证的时间
     static public boolean isLogin=false;  //免钥匙登录,或者账号登录后设为true

@@ -132,6 +132,10 @@
         <activity android:name="myinfo.logged.property.wealth.SetMoneyAccount"
             android:screenOrientation="portrait" />
         <activity android:name="myinfo.logged.caid.remote.DeviceSetPriceWorktime" />
+        <activity android:name="myinfo.unlogged.forgot.MyForgotEMail" />
+        <activity android:name="myinfo.unlogged.forgot.MyForgotEMail2" />
+        <activity android:name="myinfo.unlogged.forgot.MyForgotPhone" />
+        <activity android:name="myinfo.unlogged.forgot.MyForgotPhone2" />
     </application>
 
 </manifest>
