@@ -1,0 +1,379 @@
+//------------------
+//通用
+"warning"="警告";
+"alert"="提示";
+"ok"="确定";
+"OK"="确定";
+"cancel"="取消";
+"Cancel"="取消";
+"back"="返回";
+"NO"="否";
+"YES"="是";
+"Clear"="清除";
+"Clear List"="清空列表";
+
+//-------------------
+//下拉刷新
+"Last Updated"="最后更新时间";
+"Release to refresh..."="释放刷新...";
+"Pull down to refresh..."="获取设备简要状态...";
+"Loading..."="正在加载数据...";
+
+//---------------------
+"MainItem0"="我的设备";
+"MainItem1"="视频监控";
+"MainItem2"="发现";
+"MainItem3"="个人中心";
+
+//---------------------
+"adddev_title"="配置设备";
+
+//----------------------
+"keymgr_delfail"="删除操作失败";
+
+//-----------------------------
+//w1的LED灯光协议模块
+"cussence_all_255"="纯白光不需要添加哟!";
+"cussence_all_0"="全黑为关闭灯光,不需要添加哟!";
+"cussence_setimg"="请选择一张图片";
+"cussence_net_connecting"="连接中...";
+"cussence_net_connected"="已连接";
+"cussence_net_disc"="已断开";
+
+//---------------------------
+//搜索界面
+"Identifier:%@  Addr:%@:%d"="标识:%@  地址:%@:%d";
+"enter password"="请输入密码";
+"is save empty password?"="是否保存空密码?";
+
+//---------------
+//扫一扫功能
+"zbar_scan_tip"="将二维码对准方框，即可自动扫描";
+
+//-----------------
+//UDP 测试
+"UDP Test"="UDP测试";
+
+//-----------------
+//TCP 测试
+"TCP Test"="TCP测试";
+
+//-----------------
+//WIFI一键配置界面
+"apSsidIsNULL"="SSID不能为空";
+"btnESPConfirm"="开始配置";
+"btnESPCancel"="停止配置";
+"EspWifiSSID"="WIFI名称:";
+"EspWifiPwd"="WIFI密码:";
+"Quckly Set"="一键配置";
+"Task result count"="硬件数量:";
+"SSID is Hidden"="SSID是否隐藏:";
+"not found device"="找不到设备";
+"try to web setting"="尝试一下用网页模式配置";
+"Esptouch Searching"="正在扫描设备...";
+"%@ is connected to the wifi"="设备ID:%@连接到wifi";
+"Esptouch Success"="\n一键配置成功\nBSSID=%@\nIP地址:%@";
+
+//-----------------
+//part控制界面
+"kg %d channel"="%d路开关";
+"channel %d"="通道 %d";
+"no device status"="未获取设备状态";
+"permission error"="操作权限失效,请重新登录";
+"modify password success"="修改密码成功";
+"password fail. please remove key on device manage"="密码错误,请在\"设备管理\"移除硬件信息再新增设备";
+"kg all off"="已关闭所有开关";
+"kg all on"="已打开所有开关";
+"devname not allow empty"="设备名称不能为空";
+"devname:"="设备名称:";
+"devname modify ok"="设备名称修改成功";
+"account:"="联网账号:";
+"irCode:"="遥控匹配:";
+"account modify ok"="账号修改成功";
+"send command err"="操作失败!!";
+"set ir433 ok"="设置无线地址码成功!";
+"reset password ok"="设置密码成功!";
+"please input password"="要输入硬件的控制密码哟~";
+"enter password"="请输入密码";
+"\n\nSENCE: %d"="\n\n场景: %d";
+"New Password:"="新密码:";
+"Confirm Password:"="确认密码:";
+"not same password!!"="两次密码不一样";
+"password change success"="密码修改成功";
+"No more than 24 characters!!"="不能超过24个字符";
+"permission reset,please login again!!"="密码已修改,访问权限被重置,请重新登录!!";
+"is save empty password?"="是否保存空密码?";
+"Password have no chnage"="密码没有改变";
+"Ctrl Area ID:"="区域CAID:";
+"Set ctrl area ID sucess!!"="设置集控ID成功!!!";
+"set CAID ok."="设置CAID成功.";
+"set CAID fail."="设置CAID失败.";
+
+"set devname ok."="设置设备名称成功.";
+"set devname fail."="设置设备名失败!";
+
+"Unknow Device"="未知设备";
+//-------------------------------------------------
+//myprofile部分
+/* golbal msg*/
+"json_data_fail"="json格式错误.";
+"not found web page."="找不到WEB页面";
+"parameter is null."="参数为空";
+"send action email fail."="发送验证邮箱失败.";
+"connect network fail."="访问网络失败.";
+"account was disable"="账户被禁用";
+
+"is delete CAID ?"="是否删除CAID ?";
+"CAID title can't empty"="CAID标题不能为空";
+"CAID already exist"="CAID已经存在";
+
+"Mark:"="头像:";
+"Nickname:"="呢称:";
+"UserID:"="用户ID:";
+"Level:"="等级:";
+"Credit:"="积分:";
+"E-mail:"="邮箱:";
+"Phone:"="手机:";
+"CreateTime:"="创建时间:";
+"ActionTime:"="激活时间:";
+
+//
+"Title"="标题";
+"CAID: "="CAID: ";
+"Title: "="标题: ";
+"ShareKey: "="分享码: ";
+
+/* sign up form*/
+"signup_userid_not_null" ="用户ID不能为空";
+"signup_email_not_null" ="邮箱不能为空";
+"signup_nick_not_null" ="呢称不能为空";
+"Password cannot be empty" ="密码不能为空";
+"signup_operat_fail" ="操作失败";
+"signup_password_different" ="两次密码不相同";
+
+"signup_userid_repeat" ="用户ID已经被注册";
+"signup_account_repeat" ="用户已被注册";
+"account occupation" ="账号已经被占用";
+"signup_operat_fail" ="操作失败";
+"signup_email_err"="邮箱地址格式错误";
+
+"Old Passwd:"="旧密码:";
+"New Passwd:"="新密码:";
+"Confirm:"="再输一次:";
+"The two password is different"="两次密码不一样";
+"The old password is incorrect"="旧密码不正确";
+
+/* sign in form */
+"signin_empty_account"="请填写登录邮箱账号";
+"signin_empty_password"="请填写密码";
+"signin_reactive"="重新激活";
+"signin_login_fail"="密码错误";
+"signin_user_disable"="账户已被禁用";
+"signin_no_user"="账户还未被注册";
+
+/* used account form */
+"useda_empty_key"="钥匙为空";
+"useda_inaction"="账户未激活";
+"useda_invalid_key"="无效钥匙";
+"The key has expired"="钥匙已经过期失效";
+"useda_no_user"="不存在此账户";
+"useda_connect_fail"="连接服务器失败.请稍后再试";
+"useda_connecting"="加载中...";
+"account has been disabled"="账号已被禁用";
+
+/* forgot form */
+"forgot_mail_format_err"="邮箱格式错误";
+"forgot_no_user"="不存在此账户";
+"forgot_send_fail"="发送邮件失败";
+"forgot_empty_email"="邮箱地址不能为空";
+
+/* my profile */
+"myprofile_no_user"="不存在此用户";
+"myprofile_operat_fail"="操作失败";
+"myprofile_lost_param"="缺少参数";
+"myprofile_key_invalid"="无效钥匙";
+
+/*ReactiveEmail*/
+"reactem_email_format_err"="邮箱格式错误.";
+"action email send done."="激活邮件已经发送,请查收";
+"reactem_no_user"="不存在此用户";
+"reactem_em_sendfail"="邮件发送失败";
+"reactem_lost_param"="缺少参数";
+
+"verify vode error or invalid"="验证码错误或已失效";
+"sms err"="SMS错误";
+"sms send fail."="短信发送失败.";
+"mobile number illegal"="电话号码有误";
+"business limit control"="业务触发被限制";
+"sms interface error"="SMS接口格式错误";
+"SMS send ok."="短信发送成功";
+"Get SMS"="获取短信";
+"%d sec"="%d秒";
+"Mobile:"="手机号码:";
+"SMS Code:"="短信验证码:";
+"phone number can't null"="手机号码不能为空";
+"verify code can't null"="验证码不能为空";
+
+//myprofile end------------------------------------------------------
+"Devname:"="设备名称:";
+"SSID not allow null"="SSID不能为空";
+"CAID can't null"="CAID不能为空";
+"CAID set fail."="CAID设置失败.";
+"set ssid fail."="设置SSID失败.";
+"connected fail"="连接失败";
+"connected success"="连接成功";
+"get wifimod status fail."="获取WIFI模块状态失败.";
+"get rand CAID fail."="获取CAID分配失败.";
+"no login"="账号未登录";
+"Is save empty CAID?"="是否空置CAID?";
+
+"ADD CAID"="添加CAID";
+"Share Key: "="分享码: ";
+"Share Node"="分享节点";
+"Cancel Share"="取消分享";
+"Add My New CAID"="添加我的CAID";
+"Add Share CAID"="添加分享CAID";
+"share key can't empty"="分享码不能为空";
+"Share key fail"="无效分享码";
+"CAID List"="CAID列表";
+"SSID List"="SSID列表";
+
+"connect iot fail."="连接物联服务器失败.";
+
+////////////////////////////////////////////
+
+// about、
+"version" = "当前版本号：";
+"about" = "关于软件";
+"Function is introduced" = "功能介绍";
+"Detect new version" = "检查新版本";
+"New" = "版本已经是最新的";
+////
+
+"camera info backup success."="监控信息备份成功.";
+"camera info restore success."="监控信息还原成功.";
+"%@ records"="%@ 条数据";
+
+////////////////////////
+//device list
+"dev_dahua_dvr"="大华数字录像机";
+"dev_hikvision_nvr"="海康数字录像机";
+"dev_hikvision_ipcam"="海康网络摄像机";
+"dev_canon_c50fsi"="佳能VB-C50FSI";
+"dev_mobotix"="Mobotix网络摄像机";
+"dev_mjpeg"="Mjpeg数据接口";
+
+///////////////////////
+//sqlite alert
+"sqlite_create_db_fail"="数据库创建失败!!";
+"sqlite_create_table_fail"="数据库表格创建失败!!";
+"sqlite_open_db_fail"="数据库打开失败!!";
+"sqlite_delete_db_fail"="删除数据库失败,程序将关闭!!";
+"sqlite_cant_operated"="数据库无法操作,程序将关闭!";
+"sqlite_read_fail"="数据库读取失败,程序将关闭!";
+"sqlite_insert_fail"="数据库写入失败!";
+"sqlite_update_fail"="更新数据库失败!";
+"sqlite_clear_cur_flows"="是否清空当前流量使用记录?";
+
+///////////////////////
+//add form
+"addfrm_not_null"="请完整输入的数据!";
+"addfrm_port_err"="请输入正确的端口!";
+"addfrm_devid_err"="请选择设备类型!";
+"addfrm_txtAddr_err"="请不要输入http://或https://等前辍";
+
+////////////////////////////////////////
+//大华窗体
+"dahua_noaccount"="没有账户";
+"dahua_passwd_err"="密码错误";
+"dahua_lockAccount"="账户已锁";
+"dahua_connectok"="监视器连接成功";
+"dahua_exit"="退出";
+"dahua_disconnect"="与监控器断开,并重新连接";
+"dahua_timeout"="连接超时,正在尝试重新连接";
+"dahua_connecting"="连接中..";
+"dahua_lbStatusTxt"="状态:";
+"dahua_cellTxt"="通道%d";
+"dahua_tbHeader"="摄像头 共%d频道";
+"dahua_tbFooter"="";
+"dahua_recv_str"="通道%d,接收:%0.1fKB/S";
+"dahua_connect_camera"="正连接%d号镜头,辅助码流";
+"dahua_ipad_ptz"="云台控制";
+"dahua_ipad_screenshot"="屏幕截图";
+"screenshot"="截图";
+
+///////////////////////////////////////
+//c50fsi
+"c50fsi_lbStatus"="状态";
+"c50fsi_lbStatusText2"="获取数据长度:%0.1fKB/S";
+"c50fsi_lbStatusText2_ph"="数据状态";
+"c50fsi_connecting"="连接中...";
+"c50fsi_connectFail"="连接失败!";
+"c50fsi_connectOK"="成功连接服务器!";
+"c50fsi_disconnect"="已经断开,%d秒后重新连接";
+"c50fsi_verify_err"="验证失败！账户或密码错误";
+
+///////////////////////////////////////
+//mobotix
+"mobotix_lbStatus"="状态";
+"mobotix_lbStatusText2"="获取数据长度:%0.1fKB/S";
+"mobotix_lbStatusText2_ph"="数据状态";
+"mobotix_connecting"="连接中...";
+"mobotix_connectFail"="连接失败!";
+"mobotix_connectOK"="成功连接服务器!";
+"mobotix_disconnect"="已经断开,%d秒后重新连接";
+"mobotix_verify_err"="验证失败！账户或密码错误";
+
+///////////////////////////////////////
+//mjpeg-streamer
+"mjpeg_lbStatus"="状态";
+"mjpeg_lbStatusText2"="获取数据长度:%0.1fKB/S";
+"mjpeg_lbStatusText2_ph"="数据状态";
+"mjpeg_connecting"="连接中...";
+"mjpeg_connectFail"="连接失败!";
+"mjpeg_connectOK"="成功连接服务器!";
+"mjpeg_disconnect"="已经断开,%d秒后重新连接";
+"mjpeg_verify_err"="验证失败！账户或密码错误";
+
+"online device can't remove"="在线的设备不允许移除";
+"remove device fail. please retry"="移除设备失败.";
+
+"online"="设备在线";
+"offline"="设备离线";
+"yunline"="云在线";
+
+"NODE%d"="位置%d";
+
+"upload begin"="正在上传中...";
+"upload ok"="上传成功";
+"upload fail"="上传失败";
+
+"devname too long"="设备名称太长";
+"email occupation"="邮箱已经被占用";
+
+"input_passwd_tip"="请输入密码";
+"frist_use_dev"="第一次使用请填写设备控制密码";
+"ctrl key fail."="密码错误";
+
+"device_magr"="设备管理";
+"<NULL>"="无";
+
+"No camera permission"="没有摄像头的权限";
+"Access to picture library errors"="访问图片库错误";
+"Open URL"="打开链接";
+"Tel"="拔打电话";
+"Add Contacts"="添加联系人";
+
+"no qrcode"="未发现二维码";
+
+"rdoorlock_disable"="禁止使用门锁";
+"rdoorlock_modpwd"="更改门锁密码";
+"show CAID"="查看CAID";
+"device name"="设备名称";
+"modify password"="修改密码";
+
+"camera_count_zero_nobackup"="你当前不存在监控设备,无需备份!";
+"cambackup_btn1"="我要备份";
+"cambackup_btn2"="下载数据";
+
+"back"="返回";

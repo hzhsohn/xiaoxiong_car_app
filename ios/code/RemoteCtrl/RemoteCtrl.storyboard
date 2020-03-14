@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="xo4-I7-EG4">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--远程控制-->
+        <scene sceneID="ixS-TA-NVF">
+            <objects>
+                <navigationController id="xo4-I7-EG4" userLabel="远程控制" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="R85-rW-qVT"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="HcN-Ai-1wm">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" red="0.0" green="0.64705882349999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="OIY-J6-aaf" kind="relationship" relationship="rootViewController" id="odL-Tq-5Mf"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="z8O-Nh-7Cx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2074" y="500"/>
+        </scene>
+        <!--远程控制-->
+        <scene sceneID="8RB-a5-whu">
+            <objects>
+                <viewController restorationIdentifier="RemoteCtrl" storyboardIdentifier="RemoteCtrl" title="远程控制" id="OIY-J6-aaf" customClass="RemoteCtrl" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="CfA-VY-mEo"/>
+                        <viewControllerLayoutGuide type="bottom" id="KG5-RR-udI"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="enq-8d-PzS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2AI-lI-H5r">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" red="0.8948881662" green="0.8948881662" blue="0.8948881662" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="LZO-l8-BNG">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="未登录" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hEb-KO-k1E">
+                                            <rect key="frame" x="0.0" y="12" width="375" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.65782383555304214" green="0.65143719637291542" blue="0.66421047473316874" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstItem="hEb-KO-k1E" firstAttribute="centerY" secondItem="LZO-l8-BNG" secondAttribute="centerY" id="9xc-yi-SCm"/>
+                                        <constraint firstAttribute="trailing" secondItem="hEb-KO-k1E" secondAttribute="trailing" id="c5h-ah-XRn"/>
+                                        <constraint firstItem="hEb-KO-k1E" firstAttribute="leading" secondItem="LZO-l8-BNG" secondAttribute="leading" id="cnL-Kr-gVB"/>
+                                    </constraints>
+                                </view>
+                                <connections>
+                                    <outlet property="dataSource" destination="OIY-J6-aaf" id="OPF-3F-EWC"/>
+                                    <outlet property="delegate" destination="OIY-J6-aaf" id="9Rd-0j-p1u"/>
+                                </connections>
+                            </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="fwz-PX-9w7">
+                                <rect key="frame" x="123" y="269" width="130" height="130"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="130" id="WIm-qC-AjW"/>
+                                    <constraint firstAttribute="width" constant="130" id="bgG-ty-Vnc"/>
+                                </constraints>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.1671278571" green="0.1677592416" blue="0.16965339530000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="2AI-lI-H5r" firstAttribute="top" secondItem="enq-8d-PzS" secondAttribute="top" id="8GM-Z9-tp7"/>
+                            <constraint firstItem="2AI-lI-H5r" firstAttribute="leading" secondItem="enq-8d-PzS" secondAttribute="leading" id="L9F-o6-0rU"/>
+                            <constraint firstAttribute="centerY" secondItem="fwz-PX-9w7" secondAttribute="centerY" id="TAC-2a-XbY"/>
+                            <constraint firstItem="2AI-lI-H5r" firstAttribute="centerX" secondItem="fwz-PX-9w7" secondAttribute="centerX" id="cvx-KI-pU1"/>
+                            <constraint firstAttribute="centerX" secondItem="fwz-PX-9w7" secondAttribute="centerX" id="lBm-MG-r0O"/>
+                            <constraint firstItem="2AI-lI-H5r" firstAttribute="centerY" secondItem="fwz-PX-9w7" secondAttribute="centerY" id="ozS-ZZ-5LI"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item 2" id="uIc-dL-7ay"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="远程设备" id="OjE-gX-Lw9"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="ind" destination="fwz-PX-9w7" id="Htk-YI-MqM"/>
+                        <outlet property="lbNoLogin" destination="hEb-KO-k1E" id="yJJ-SO-QJZ"/>
+                        <outlet property="tbView" destination="2AI-lI-H5r" id="gx0-zH-7up"/>
+                        <outlet property="viNoLogin" destination="LZO-l8-BNG" id="YKi-Rh-CYf"/>
+                        <segue destination="mFH-bv-2kU" kind="push" identifier="segRDL" id="SWW-d9-QEw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9iZ-g7-K88" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1282" y="500"/>
+        </scene>
+        <!--远程控制-->
+        <scene sceneID="NO6-4O-4rP">
+            <objects>
+                <viewController restorationIdentifier="RemoteDev" storyboardIdentifier="RemoteDev" title="远程控制" id="mFH-bv-2kU" customClass="RemoteDev" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="6KE-3f-Syy"/>
+                        <viewControllerLayoutGuide type="bottom" id="9nm-Fu-dmq"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="g5t-vz-Zhg">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7Rw-ae-dUe">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="mFH-bv-2kU" id="G7O-0Q-d5R"/>
+                                    <outlet property="delegate" destination="mFH-bv-2kU" id="xhf-O8-xqb"/>
+                                </connections>
+                            </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="uQK-gj-8zi">
+                                <rect key="frame" x="123" y="269" width="130" height="130"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="130" id="BWI-nP-evQ"/>
+                                    <constraint firstAttribute="height" constant="130" id="xIh-yN-uc8"/>
+                                </constraints>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.1671278571" green="0.1677592416" blue="0.16965339530000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="7Rw-ae-dUe" firstAttribute="top" secondItem="g5t-vz-Zhg" secondAttribute="top" id="1So-ZJ-Hy3"/>
+                            <constraint firstAttribute="centerY" secondItem="uQK-gj-8zi" secondAttribute="centerY" id="5zg-KK-XZC"/>
+                            <constraint firstItem="7Rw-ae-dUe" firstAttribute="centerY" secondItem="uQK-gj-8zi" secondAttribute="centerY" id="Fb5-an-U4Q"/>
+                            <constraint firstItem="7Rw-ae-dUe" firstAttribute="leading" secondItem="g5t-vz-Zhg" secondAttribute="leading" id="IrP-Ps-d5n"/>
+                            <constraint firstAttribute="centerX" secondItem="uQK-gj-8zi" secondAttribute="centerX" id="LjS-cz-Mrl"/>
+                            <constraint firstItem="7Rw-ae-dUe" firstAttribute="centerX" secondItem="uQK-gj-8zi" secondAttribute="centerX" id="P4G-yn-UNu"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item 2" id="lnw-e3-WrG"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="远程设备" id="fTm-gR-i3f">
+                        <barButtonItem key="rightBarButtonItem" title="编辑" id="Zas-9c-pTU">
+                            <connections>
+                                <action selector="btnEdit_click:" destination="mFH-bv-2kU" id="0f1-va-iP0"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="ind" destination="uQK-gj-8zi" id="5FE-iK-iLo"/>
+                        <outlet property="tbView" destination="7Rw-ae-dUe" id="BtX-G4-z3e"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VUL-iG-ZE6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-465" y="500"/>
+        </scene>
+    </scenes>
+</document>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="CAIDCell_ID" selectionStyle="none" indentationWidth="10" reuseIdentifier="SearchCell_ID" rowHeight="75" id="KGk-i7-Jjw" userLabel="CAIDCell_ID" customClass="CAIDCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="76"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="75.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="设备名称" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="VmV-aI-Myv">
+                        <rect key="frame" x="19" y="34" width="200" height="23"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="23" id="2d1-r7-Kig"/>
+                            <constraint firstAttribute="width" constant="200" id="PkQ-qw-3YX"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.64785870592001127" green="0.64785870592001127" blue="0.64785870592001127" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0000" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Ue-es-bCz">
+                        <rect key="frame" x="73" y="6" width="236" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="236" id="aDy-ZM-aav"/>
+                            <constraint firstAttribute="height" constant="25" id="vSD-jE-cQ2"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                        <color key="textColor" red="0.37202569800000002" green="0.34677322230000002" blue="0.3712840758" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CAID:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NKA-dc-pgB">
+                        <rect key="frame" x="19" y="6" width="52" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="52" id="llS-ah-Oxn"/>
+                            <constraint firstAttribute="height" constant="25" id="qkp-Fu-M8N"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                        <color key="textColor" red="0.03180423779860253" green="0.7261980357278992" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nOG-e4-izF">
+                        <rect key="frame" x="177" y="6" width="42" height="42"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="42" id="PaT-tY-bg1"/>
+                            <constraint firstAttribute="width" constant="42" id="d2e-Uf-pbH"/>
+                        </constraints>
+                        <state key="normal" image="caid_edit"/>
+                        <connections>
+                            <action selector="btnEdit:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="1bH-Rm-8Nd"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RAk-QD-Pqe">
+                        <rect key="frame" x="250" y="6" width="42" height="42"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="42" id="Oe1-7R-sK1"/>
+                            <constraint firstAttribute="width" constant="42" id="W1o-a2-Zdl"/>
+                        </constraints>
+                        <state key="normal" image="caid_share"/>
+                        <state key="selected" image="caid_share_1"/>
+                        <connections>
+                            <action selector="btnShare:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="xxR-Cl-8fz"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="NKA-dc-pgB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="6" id="Aeg-2W-50i"/>
+                    <constraint firstItem="nOG-e4-izF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="6" id="TSe-nN-5Qv"/>
+                    <constraint firstItem="RAk-QD-Pqe" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="6" id="XSV-y3-SiB"/>
+                    <constraint firstItem="6Ue-es-bCz" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="6" id="ay5-P0-Pcu"/>
+                    <constraint firstItem="6Ue-es-bCz" firstAttribute="leading" secondItem="NKA-dc-pgB" secondAttribute="trailing" constant="2" id="fvt-TP-XR5"/>
+                    <constraint firstItem="NKA-dc-pgB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="19" id="fzg-bG-JtR"/>
+                    <constraint firstAttribute="trailing" secondItem="RAk-QD-Pqe" secondAttribute="trailing" constant="28" id="g10-Gl-n9O"/>
+                    <constraint firstItem="RAk-QD-Pqe" firstAttribute="leading" secondItem="nOG-e4-izF" secondAttribute="trailing" constant="31" id="lpP-SI-LpV"/>
+                    <constraint firstItem="VmV-aI-Myv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="19" id="mZp-UX-8rX"/>
+                    <constraint firstItem="VmV-aI-Myv" firstAttribute="top" secondItem="NKA-dc-pgB" secondAttribute="bottom" constant="3" id="v0y-cR-PuD"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" red="0.98183273845036678" green="0.98562295860544524" blue="0.99699361907068063" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <connections>
+                <outlet property="btnShare" destination="RAk-QD-Pqe" id="qnY-kg-Qdx"/>
+                <outlet property="lbCAID" destination="6Ue-es-bCz" id="yF9-RZ-RzT"/>
+                <outlet property="lbTitle" destination="VmV-aI-Myv" id="gwg-W7-Jqs"/>
+            </connections>
+            <point key="canvasLocation" x="218" y="216.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="caid_edit" width="180" height="180"/>
+        <image name="caid_share" width="180" height="180"/>
+        <image name="caid_share_1" width="180" height="180"/>
+    </resources>
+</document>
