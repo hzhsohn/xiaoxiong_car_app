@@ -4,12 +4,10 @@
         android:id="@+id/item_found"
         android:icon="@drawable/item_found"
         android:title="@string/item_found" />
-
     <item
         android:id="@+id/item_vip"
         android:icon="@drawable/item_vip"
         android:title="@string/item_vip" />
-
     <item
         android:id="@+id/item_my"
         android:icon="@drawable/item_user"

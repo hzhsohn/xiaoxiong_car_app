@@ -20,11 +20,9 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import ext.func.AssertAlert;
-import ext.magr.HTTPData;
 import found.a.FoundList;
-import myinfo.a.MyInfo;
-import myinfo.logic.LoginInfo;
-import vip.a.MyVipList;
+import myinfo.a.MyMain;
+import vip.a.VipList;
 
 import com.xiaoxiongcar.R;
 
@@ -57,9 +55,11 @@ public class MainActivity extends AppCompatActivity {
                             case R.id.item_found:
                                 viewPager.setCurrentItem(0);
                                 break;
+
                             case R.id.item_vip:
                                 viewPager.setCurrentItem(1);
                                 break;
+
                             case R.id.item_my:
                                 viewPager.setCurrentItem(2);
                                 break;
@@ -119,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
             });
         }
     }
+
 
     /*
     * return 1权限重新请求通过
@@ -181,8 +182,8 @@ public class MainActivity extends AppCompatActivity {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
         adapter.addFragment(FoundList.newInstance("@Found"));
-        adapter.addFragment(MyVipList.newInstance("@Vip"));
-        adapter.addFragment(MyInfo.newInstance("@My"));
+        adapter.addFragment(VipList.newInstance("@Vip"));
+        adapter.addFragment(MyMain.newInstance("@My"));
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(adapter.getCount());
     }

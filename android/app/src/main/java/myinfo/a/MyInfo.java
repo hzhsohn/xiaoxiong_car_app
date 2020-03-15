@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,9 +15,8 @@ import android.view.ViewGroup;
 
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.zh.home.BaseFragment;
-import android.zh.home.unlogged.LoginActivity;
-
 import com.xiaoxiongcar.R;
 
 import org.json.JSONException;
@@ -89,7 +89,14 @@ public class MyInfo extends BaseFragment {
         row4.setOnClickListener(row4_click);
         View row5 = contextView.findViewById(R.id.row5);
         row5.setOnClickListener(row5_click);
-
+        //
+        if(!LoginInfo.verifyKey.equals("")) {
+            webNetInfo();
+        }
+        else
+        {
+            exitLogin();
+        }
     }
 
     @Override
@@ -153,13 +160,11 @@ public class MyInfo extends BaseFragment {
     }
 
     void exitLogin() {
-
-        Intent intent = new Intent(getActivity(), LoginActivity.class);
-        Bundle bundle = new Bundle();//该类用作携带数据
-        intent.putExtras(bundle);//附带上额外的数据
-        startActivityFromFragment(intent, (byte) 0, (byte) 1);
-        getActivity().overridePendingTransition( R.anim.in_1,R.anim.in_0);
-
+        //退出登录
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.setCustomAnimations(R.anim.in_0, R.anim.in_1); //自定义动画
+        transaction.addToBackStack(null)  //将当前fragment加入到返回栈中
+                .replace(R.id.container3, new MyLogin()).commit();
     }
 
     DownloadPicListener dpl = new DownloadPicListener() {

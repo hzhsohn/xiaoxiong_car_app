@@ -63,7 +63,6 @@ public class MySetting extends BaseActivity {
     private View.OnClickListener freeback_click = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            //跳到下一个窗体
         }
     };
     private View.OnClickListener loginout_click = new View.OnClickListener() {

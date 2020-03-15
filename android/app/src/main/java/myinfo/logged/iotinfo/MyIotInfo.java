@@ -68,7 +68,7 @@ public class MyIotInfo extends BaseActivity {
     }
 
     void webNetIotInfo() {
-        web.getHtml(HTTPData.sUserUrl + "/iot_info.i.php", "k=" + LoginInfo.verifyKey);
+        web.getHtml(HTTPData.sWebPhoneUrl + "/iot_info.i.php", "k=" + LoginInfo.verifyKey);
     }
 
     //显示在界面上

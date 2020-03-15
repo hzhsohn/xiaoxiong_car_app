@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 #import  <libHxkNet/McuNet.h>
-#import "DevKeyMagr.h"
 #import "McuGlobalParameter.h"
 
 //Part用到的全局参数

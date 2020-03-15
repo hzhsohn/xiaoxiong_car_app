@@ -56,29 +56,23 @@ CLLocationCoordinate2D g_GoogleLocation;
     
     /////////////////////////////////////////
     UIStoryboard *frm=NULL;
-    UINavigationController *nv0=NULL,*nv1=NULL,*nv2=NULL,*nv3=NULL;
+    UINavigationController *nv1=NULL,*nv2=NULL,*nv3=NULL;
     
-    frm = [UIStoryboard storyboardWithName:@"LocalDev" bundle:nil];
-    nv0=(UINavigationController*)[frm instantiateViewControllerWithIdentifier:@"LocalDev"];
-    
-    frm = [UIStoryboard storyboardWithName:@"Camera" bundle:nil];
+    frm = [UIStoryboard storyboardWithName:@"IndexController" bundle:nil];
     nv1=(UINavigationController*)frm.instantiateInitialViewController;
     
-    frm = [UIStoryboard storyboardWithName:@"Found" bundle:nil];
+    frm = [UIStoryboard storyboardWithName:@"VipController" bundle:nil];
     nv2=(UINavigationController*)frm.instantiateInitialViewController;
     
     frm = [UIStoryboard storyboardWithName:@"MyProfile" bundle:nil];
     nv3=(UINavigationController*)frm.instantiateInitialViewController;
     
     NSMutableArray *tabc = [[NSMutableArray alloc] init];//[self viewControllers]
-    [tabc addObject:nv0];
     [tabc addObject:nv1];
     [tabc addObject:nv2];
     [tabc addObject:nv3];
     [self setViewControllers:tabc animated:YES];
     
-    UIImage* img0=[[UIImage imageNamed:@"mainItmIcon0"]
-                   imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     UIImage* img1=[[UIImage imageNamed:@"mainItmIcon1"]
                    imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     UIImage* img2=[[UIImage imageNamed:@"mainItmIcon2"]
@@ -86,14 +80,12 @@ CLLocationCoordinate2D g_GoogleLocation;
     UIImage* img3=[[UIImage imageNamed:@"mainItmIcon3"]
                    imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     
-    [(UITabBarItem *)[self.tabBar.items objectAtIndex:0] setTitle:NSLocalizedString(@"MainItem0", nil)];
-    [(UITabBarItem *)[self.tabBar.items objectAtIndex:0] setImage:img0];
-    [(UITabBarItem *)[self.tabBar.items objectAtIndex:1] setTitle:NSLocalizedString(@"MainItem1", nil)];
-    [(UITabBarItem *)[self.tabBar.items objectAtIndex:1] setImage:img1];
-    [(UITabBarItem *)[self.tabBar.items objectAtIndex:2] setTitle:NSLocalizedString(@"MainItem2", nil)];
-    [(UITabBarItem *)[self.tabBar.items objectAtIndex:2] setImage:img2];
-    [(UITabBarItem *)[self.tabBar.items objectAtIndex:3] setTitle:NSLocalizedString(@"MainItem3", nil)];
-    [(UITabBarItem *)[self.tabBar.items objectAtIndex:3] setImage:img3];
+    [(UITabBarItem *)[self.tabBar.items objectAtIndex:0] setTitle:NSLocalizedString(@"MainItem1", nil)];
+    [(UITabBarItem *)[self.tabBar.items objectAtIndex:0] setImage:img1];
+    [(UITabBarItem *)[self.tabBar.items objectAtIndex:1] setTitle:NSLocalizedString(@"MainItem2", nil)];
+    [(UITabBarItem *)[self.tabBar.items objectAtIndex:1] setImage:img2];
+    [(UITabBarItem *)[self.tabBar.items objectAtIndex:2] setTitle:NSLocalizedString(@"MainItem3", nil)];
+    [(UITabBarItem *)[self.tabBar.items objectAtIndex:2] setImage:img3];
     
     for(int i=0;i<[self.tabBar.items count];i++)
     {

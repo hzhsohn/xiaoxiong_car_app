@@ -20,6 +20,7 @@ public class HTTPData {
     static public final String sUserUrl="http://user.hx-kong.com/_j0";
     static public final String sIconUrl="http://user.hx-kong.com/u_icon";//文件名是<userid>.jpg
     static public final String sSMSUrl= "http://user.hx-kong.com/_sms";
+    static public final String sWebPhoneUrl="http://47.115.187.147/webphone/index.html";
     static public final String sWebPhoneUrl_Reg="http://47.115.187.147/webphone/index.html?reg";
     static public final String sWebPhoneUrl_Index="http://47.115.187.147/webphone/index.html";
     static public final String sWebPhoneUrl_JiZhao="http://47.115.187.147/webphone/index.html?JiZhao";

@@ -28,7 +28,7 @@
     <string name="no_strong_permission_do_myself">请手动设置允许访问储存器的权限</string>
     <string name="no_strong_permission_tips">请通过访问储存器的权限,否则不能正常使用此软件</string>
     <string name="item_found">首页</string>
-    <string name="item_vip">急聘</string>
+    <string name="item_vip">急招</string>
     <string name="item_my">个人中心</string>
     <string name="title_my_device">我的设备</string>
     <string name="title_my_user">个人中心</string>

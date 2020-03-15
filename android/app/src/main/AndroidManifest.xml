@@ -68,7 +68,24 @@
         <activity
             android:name="myinfo.logged.iotinfo.ModifyIcon"
             android:screenOrientation="portrait" />
-
+        <activity
+            android:name="myinfo.logged.caid.area.CAIDMagr"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="myinfo.logged.caid.remote.RemoteDev"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="myinfo.logged.caid.remote.RemoteStatus"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="myinfo.logged.caid.area.CAIDEditTitle"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="myinfo.logged.caid.area.CAIDEdit"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="myinfo.logged.caid.area.CAIDAdd"
+            android:screenOrientation="portrait" />
         <activity
             android:name="myinfo.qrscan.zxing.android.CaptureActivity"
             android:screenOrientation="portrait" />
@@ -78,11 +95,16 @@
         <activity
             android:name="myinfo.qrscan.result.QRText"
             android:screenOrientation="portrait" />
+        <activity android:name="p3th.easylink.EasyLinkConfigActivity"
+            android:screenOrientation="portrait" />
         <activity android:name="myinfo.logged.setting.about_softw.AboutSoftware"
             android:screenOrientation="portrait" />
         <activity android:name="myinfo.logged.setting.about_softw.AboutSoftWeb"
             android:screenOrientation="portrait" />
-
+        <activity android:name="myinfo.qrscan.result.QRAddCtrlDevice"
+            android:screenOrientation="portrait" />
+        <activity android:name="myinfo.logged.caid.remote.RemoteDeviceDetail"
+            android:screenOrientation="portrait" />
         <activity android:name="myinfo.logged.property.bill.BillList"
             android:screenOrientation="portrait" />
         <activity android:name="myinfo.logged.property.wealth.Balance"
@@ -91,15 +113,15 @@
             android:screenOrientation="portrait" />
         <activity android:name="myinfo.logged.property.product_order.POrderList"
             android:screenOrientation="portrait" />
-        <activity android:name="android.zh.home.unlogged.reg.MyRegByPhone"
+        <activity android:name="myinfo.unlogged.reg.MyRegByPhone"
             android:screenOrientation="portrait" />
-        <activity android:name="android.zh.home.unlogged.reg.MyRegByPhone2"
+        <activity android:name="myinfo.unlogged.reg.MyRegByPhone2"
             android:screenOrientation="portrait" />
         <activity android:name="myinfo.logged.property.wealth.SetMoneyAccount"
             android:screenOrientation="portrait" />
-        <activity android:name="android.zh.home.unlogged.forgot.MyForgotPhone" />
-        <activity android:name="android.zh.home.unlogged.forgot.MyForgotPhone2" />
-        <activity android:name="android.zh.home.unlogged.LoginActivity" />
+        <activity android:name="myinfo.logged.caid.remote.DeviceSetPriceWorktime" />
+        <activity android:name="myinfo.unlogged.forgot.MyForgotPhone" />
+        <activity android:name="myinfo.unlogged.forgot.MyForgotPhone2" />
     </application>
 
 </manifest>

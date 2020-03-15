@@ -20,7 +20,8 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageButton;
-
+import android.widget.ImageView;
+import android.widget.Toast;
 import com.xiaoxiongcar.R;
 
 import com.google.zxing.BarcodeFormat;
@@ -37,7 +38,6 @@ import myinfo.qrscan.result.QRText;
 import myinfo.qrscan.result.QRUrl;
 import myinfo.qrscan.zxing.camera.CameraManager;
 import myinfo.qrscan.zxing.view.ViewfinderView;
-
 
 /**
  * 这个activity打开相机，在后台线程做常规的扫描；它绘制了一个结果view来帮助正确地显示条形码，在扫描的时候显示反馈信息，
