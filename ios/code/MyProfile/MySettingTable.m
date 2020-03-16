@@ -46,28 +46,7 @@
             
         }
             break;
-        case 1://///////////////////////////////////////////
-        {
-//            UIStoryboard *sb = [UIStoryboard storyboardWithName:@"MyProfile" bundle:nil];
-//            UIViewController *frm=[sb instantiateViewControllerWithIdentifier:@"AboutTable"];
-//            [self.navigationController pushViewController:frm animated:YES];
-            
-        }
-            break;
-        case 2://///////////////////////////////////////////
-        {
-            NSString* tmpstr=[NSString stringWithFormat:FEEDBACK_URL@"?platefrom=ios-app&nickname=%@&userid=%@",
-                              [[LoginInfo get:@"nickname"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-                              [[LoginInfo get:@"userid"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-            
-            UIStoryboard *sb = [UIStoryboard storyboardWithName:@"MyProfile" bundle:nil];
-            WebBrower *frm=(WebBrower *)[sb instantiateViewControllerWithIdentifier:@"HTML5"];
-            frm.main_url=tmpstr;
-            [self.navigationController pushViewController:frm animated:YES];
-
-        }
-            break;
-        case 3:// 退出
+        case 2:// 退出
         {
             //退出登录
             [GlobalParameter clearLoginCfg];

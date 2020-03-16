@@ -130,45 +130,8 @@
             
         }
             break;
-        case 1://///////////////////////////////////////////
-        {
-            switch (indexPath.row) {
-                case 0:
-                {
-                    UIStoryboard *frm = [UIStoryboard storyboardWithName:@"RemoteCtrl" bundle:nil];
-                    [self.navigationController pushViewController:[frm instantiateViewControllerWithIdentifier:@"RemoteCtrl"]
-                                                         animated:YES];
-                }
-                break;
-                case 1:
-                {
-                    UIStoryboard *frm = [UIStoryboard storyboardWithName:@"CAID" bundle:nil];
-                    [self.navigationController pushViewController:[frm instantiateViewControllerWithIdentifier:@"CAIDInfo"]
-                                                         animated:YES];
-                }
-                    break;
-                case 1000:
-                {
-                    //暂未做这个小钱包功能
-                    UIStoryboard *frm = [UIStoryboard storyboardWithName:@"Money" bundle:nil];
-                    [self.navigationController pushViewController:frm.instantiateInitialViewController
-                                                         animated:YES];
-
-                }
-                    break;
-            }
-
-        }
-        break;
-        case 2:
-        {
-            UIStoryboard *frm = [UIStoryboard storyboardWithName:@"CameraBackup" bundle:nil];
-            [self.navigationController pushViewController:
-             [frm instantiateViewControllerWithIdentifier:@"CameraBackup"]
-                                                 animated:YES];
-        }
-            break;
-        case 3://///////////////////////////////////////////设置
+        
+        case 1://///////////////////////////////////////////设置
         {
             [self performSegueWithIdentifier:@"segSetting" sender:nil];
         }
@@ -316,13 +279,6 @@
                 
                 [self setInfo];
                 
-                //判断CAID文件是否存在
-                if(access([[GlobalParameter documentPath:@"CAID.cfg"] UTF8String], 0))
-                {
-                    //获取CAID信息
-                    NSString* str=[NSString stringWithFormat:@"k=%@",[GlobalParameter getLoginKey]];
-                    [_web sendData:[GlobalParameter getIOTAddrByCAID:@"getcaid.i.php"] parameter:str];
-                }
                 
             }
                 break;

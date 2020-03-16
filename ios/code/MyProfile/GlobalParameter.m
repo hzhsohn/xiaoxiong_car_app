@@ -86,14 +86,4 @@ TckUserlist g_accountInfo={0};
     return [NSString stringWithFormat:@"%@/_j1/%@",IOT_URL_INFO,page];
 }
 
-+(NSString*) getIOTAddrByCAID:(NSString*)page
-{
-    return [NSString stringWithFormat:@"%@/_j2/%@",IOT_URL_INFO,page];
-}
-
-+(NSString*) getIOTAddrByCamera:(NSString*)page
-{
-    return [NSString stringWithFormat:@"%@/_j3/%@",IOT_URL_INFO,page];
-}
-
 @end

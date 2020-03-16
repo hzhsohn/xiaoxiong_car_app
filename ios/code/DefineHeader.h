@@ -10,13 +10,12 @@
 
 #import <UIKit/UIKit.h>
 
-#define IOT_DPID                        @"iothxkongcom"
+#define ACCOUNT_URL                     @"http://47.115.187.147/user"
+#define IOT_URL_INFO                    @"http://47.115.187.147"
+#define WEB_INDEX_URL                   @"http://47.115.187.147/webphone?index"
+#define WEB_INDEX2_URL                  @"http://47.115.187.147/webphone?jizhao"
 
-#define ACCOUNT_URL                     @"http://user.hx-kong.com"
-#define IOT_URL_INFO                    @"http://iot.hx-kong.com"
-#define IOT_URL_DEV                     @"http://iot.d.hx-kong.com:8088"
-#define WEBSOTRE_URL                    @"http://home.hx-kong.com/store"
-#define FEEDBACK_URL                    @"http://home.hx-kong.com/feedback"
-
+#define WEB_SIGNUP_URL                   @"http://47.115.187.147/webphone?signup"
+#define WEB_FORGOT_URL                   @"http://47.115.187.147/webphone?forgot"
 
 #endif /* DefineHeader_h */

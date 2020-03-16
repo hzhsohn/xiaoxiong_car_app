@@ -21,9 +21,6 @@
     __weak IBOutlet UILabel *txtUserid;
     __weak IBOutlet UILabel *txtNickname;
     __weak IBOutlet UIImageView *imgIcon;
-    __weak IBOutlet UILabel *txtRating;
-    __weak IBOutlet UIImageView *imgLevel;
-    __weak IBOutlet UILabel *txtCredit;
     
     __weak IBOutlet UILabel *txtNickNameVal;
     __weak IBOutlet UILabel *txtUserIDVal;
@@ -59,8 +56,8 @@
     ind.alpha=0;
     
     //获取我的详细信息
-    NSString* str=[NSString stringWithFormat:@"k=%@",[GlobalParameter getLoginKey]];
-    [_web sendData:[GlobalParameter getIOTAddrByInfo:@"iot_info.i.php"] parameter:str];
+   // NSString* str=[NSString stringWithFormat:@"k=%@",[GlobalParameter getLoginKey]];
+    //[_web sendData:[GlobalParameter getIOTAddrByInfo:@"iot_info.i.php"] parameter:str];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -99,8 +96,6 @@
     NSString* szUserid;
     NSString* szActiveTime;
     NSString* nCredit;
-    NSString* vip_level;
-    int nVipLevel=-1;
     
     userid=[LoginInfo get:@"userid"];
     szUserid=[LoginInfo get:@"szUserid"];
@@ -109,41 +104,15 @@
     email=[LoginInfo get:@"email"];
     phone=[LoginInfo get:@"phone"];
     szActiveTime=[LoginInfo get:@"szActiveTime"];
-    vip_level=[LoginInfo get:@"vip_level"];
-    nCredit=[LoginInfo get:@"nCredit"];
     
     ///////////////////////////////////////////////
     //调整初始化的值
     
-    if(vip_level)
-    { nVipLevel=[vip_level intValue]; }
     nickname=nickname?nickname:@"";
     userid=userid?userid:@"";
-    nCredit=nCredit?nCredit:@"";
+    
     
     ///////////////////////////////////////////////
-    if(nVipLevel>=0)
-    {
-        NSArray* viplevelName=[NSArray arrayWithObjects:
-                               @"VIP0",//@"无牌会员",
-                               @"VIP1",//@"铜牌会员",
-                               @"VIP2",//@"白银会员",
-                               @"VIP3",//@"黄金会员",
-                               @"VIP4",//@"铂金会员",
-                               @"VIP5",//@"钻石会员"
-                               nil];
-        if(nVipLevel>=[viplevelName count])
-        {
-            nVipLevel=(int)[viplevelName count]-1;
-        }
-        imgLevel.image=[UIImage imageNamed:[viplevelName objectAtIndex:nVipLevel]];
-    }
-    ///////////////////////////////////////////////
-    
-    [txtRating setText:[NSString stringWithFormat:@"%@ ",NSLocalizedString(@"Level:", nil)]];
-    [txtCredit setText:[NSString stringWithFormat:@"%@  %@",NSLocalizedString(@"Credit:", nil),
-                        nCredit]];
-    
     txtNickNameVal.text=nickname;
     txtUserIDVal.text=userid;
     

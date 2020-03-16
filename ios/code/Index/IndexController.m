@@ -70,11 +70,11 @@
     NSString* urlstr;
     if(key)
     {
-        urlstr=[NSString stringWithFormat:@"%@?key=%@",WEBSOTRE_URL,key];
+        urlstr=[NSString stringWithFormat:@"%@?key=%@",WEB_INDEX_URL,key];
     }
     else
     {
-        urlstr=WEBSOTRE_URL;
+        urlstr=WEB_INDEX_URL;
     }
     [self loadWeb:urlstr];//主页
     

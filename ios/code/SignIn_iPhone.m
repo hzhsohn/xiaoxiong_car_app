@@ -13,6 +13,7 @@
 #import "GlobalParameter.h"
 #import "TempCfg.h"
 #import "DefineHeader.h"
+#import "WebBrower.h"
 
 @interface SignIn_iPhone ()
 {
@@ -24,6 +25,7 @@
 }
 - (IBAction)txtOnExit:(id)sender;
 - (IBAction)btnLogin_click:(id)sender;
+- (IBAction)btnForgot_click:(id)sender;
 
 @end
 
@@ -164,12 +166,24 @@
         alert_ok(self, 0, @"alert", @"signin_empty_password");
         return;
     }
-    
+
     //登录
     NSString* str=[NSString stringWithFormat:@"a=%@&p=%@",_txtUser.text,_txtPassword.text];
     [_web sendData:[GlobalParameter getAccountAddrByMob:@"sign_in.i.php"] parameter:str];
     //
     [TempCfg set:_txtUser.text :@"account"];
+}
+
+- (IBAction)btnForgot_click:(id)sender
+{
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"MyProfile" bundle:nil];
+    WebBrower *frm=(WebBrower *)[sb instantiateViewControllerWithIdentifier:@"HTML5"];
+    frm.main_url=WEB_FORGOT_URL;
+    [self.navigationController pushViewController:frm animated:YES];
+    
+    
+    //进入APP界面
+    //[self performSegueWithIdentifier:@"forgot" sender:nil];
 }
 
 //////////////////////////////////
@@ -243,7 +257,7 @@
                 break;
             case 6://不存在的账号
             {
-                alert_ok(self, 0, @"alert", @"signin_no_user");
+                alert_ok(self, 78, @"alert", @"signin_no_user");
             }
                 break;
             default:
@@ -270,9 +284,9 @@ _nnc:
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
     NSLog(@"AlertView.tag%ld ,buttonIndex=%ld",alertView.tag,buttonIndex);
-    /*
+    
     switch (alertView.tag) {
-        case 102:
+        /*case 102:
         {
             switch (buttonIndex) {
                 case 0:
@@ -283,9 +297,20 @@ _nnc:
                     break;
             }
         }
+            break;*/
+        case 78://跳到去注册
+        {
+            UIStoryboard *sb = [UIStoryboard storyboardWithName:@"MyProfile" bundle:nil];
+            WebBrower *frm=(WebBrower *)[sb instantiateViewControllerWithIdentifier:@"HTML5"];
+            frm.main_url=WEB_SIGNUP_URL;
+            [self.navigationController pushViewController:frm animated:YES];
+            
+            //跳到去APP注册
+            //[self performSegueWithIdentifier:@"signup" sender:nil];
+        }
             break;
     }
-     */
+    
 }
 
 

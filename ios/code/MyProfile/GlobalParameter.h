@@ -29,6 +29,4 @@ typedef struct _TckUserlist
 +(NSString*) getAccountAddrByMob:(NSString*)page;
 +(NSString*) getAccountAddrBySMS:(NSString*)page;
 +(NSString*) getIOTAddrByInfo:(NSString*)page;
-+(NSString*) getIOTAddrByCAID:(NSString*)page;
-+(NSString*) getIOTAddrByCamera:(NSString*)page;
 @end

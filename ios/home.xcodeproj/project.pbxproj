@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		114C413F21118CF8004FED8B /* AboutTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 114C413E21118CF8004FED8B /* AboutTable.m */; };
 		3804AB6A1BA2E89B000F636A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3804AB691BA2E89B000F636A /* SystemConfiguration.framework */; };
 		380678C71BB2F159004F79A1 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 380678C41BB2F134004F79A1 /* libzbar.a */; };
 		380678D51BB2F4E0004F79A1 /* libiconv.2.4.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 380678D41BB2F4E0004F79A1 /* libiconv.2.4.0.tbd */; };
@@ -229,8 +228,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		114C413D21118CF8004FED8B /* AboutTable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AboutTable.h; sourceTree = "<group>"; };
-		114C413E21118CF8004FED8B /* AboutTable.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AboutTable.m; sourceTree = "<group>"; };
 		3804AB691BA2E89B000F636A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		380678BC1BB2F134004F79A1 /* zbar.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = zbar.xcodeproj; path = "zbar-code/iphone/zbar.xcodeproj"; sourceTree = "<group>"; };
 		380678D41BB2F4E0004F79A1 /* libiconv.2.4.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.2.4.0.tbd; path = usr/lib/libiconv.2.4.0.tbd; sourceTree = SDKROOT; };
@@ -296,24 +293,24 @@
 		385E63F31EA745D60058460D /* MyProfile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = MyProfile.storyboard; path = MyProfile/MyProfile.storyboard; sourceTree = "<group>"; };
 		385E63F41EA745D60058460D /* MyProfileTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyProfileTable.h; path = MyProfile/MyProfileTable.h; sourceTree = "<group>"; };
 		385E63F51EA745D60058460D /* MyProfileTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyProfileTable.m; path = MyProfile/MyProfileTable.m; sourceTree = "<group>"; };
-		385E63F81EA745D60058460D /* Forgot_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Forgot_iPhone.h; path = MyProfile/Forgot_iPhone.h; sourceTree = "<group>"; };
-		385E63F91EA745D60058460D /* Forgot_iPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Forgot_iPhone.m; path = MyProfile/Forgot_iPhone.m; sourceTree = "<group>"; };
-		385E63FA1EA745D60058460D /* ForgotDone_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ForgotDone_iPhone.h; path = MyProfile/ForgotDone_iPhone.h; sourceTree = "<group>"; };
-		385E63FB1EA745D60058460D /* ForgotDone_iPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ForgotDone_iPhone.m; path = MyProfile/ForgotDone_iPhone.m; sourceTree = "<group>"; };
-		385E63FC1EA745D60058460D /* ForgotFail_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ForgotFail_iPhone.h; path = MyProfile/ForgotFail_iPhone.h; sourceTree = "<group>"; };
-		385E63FD1EA745D60058460D /* ForgotFail_iPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ForgotFail_iPhone.m; path = MyProfile/ForgotFail_iPhone.m; sourceTree = "<group>"; };
+		385E63F81EA745D60058460D /* Forgot_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Forgot_iPhone.h; sourceTree = "<group>"; };
+		385E63F91EA745D60058460D /* Forgot_iPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Forgot_iPhone.m; sourceTree = "<group>"; };
+		385E63FA1EA745D60058460D /* ForgotDone_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgotDone_iPhone.h; sourceTree = "<group>"; };
+		385E63FB1EA745D60058460D /* ForgotDone_iPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotDone_iPhone.m; sourceTree = "<group>"; };
+		385E63FC1EA745D60058460D /* ForgotFail_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgotFail_iPhone.h; sourceTree = "<group>"; };
+		385E63FD1EA745D60058460D /* ForgotFail_iPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotFail_iPhone.m; sourceTree = "<group>"; };
 		385E64001EA745D60058460D /* MyProfile_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyProfile_iPhone.h; path = MyProfile/MyProfile_iPhone.h; sourceTree = "<group>"; };
 		385E64011EA745D60058460D /* MyProfile_iPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyProfile_iPhone.m; path = MyProfile/MyProfile_iPhone.m; sourceTree = "<group>"; };
-		385E64041EA745D60058460D /* SignIn_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SignIn_iPhone.h; path = MyProfile/SignIn_iPhone.h; sourceTree = "<group>"; };
-		385E64051EA745D60058460D /* SignIn_iPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SignIn_iPhone.m; path = MyProfile/SignIn_iPhone.m; sourceTree = "<group>"; };
-		385E64061EA745D60058460D /* SignUp_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SignUp_iPhone.h; path = MyProfile/SignUp_iPhone.h; sourceTree = "<group>"; };
-		385E64071EA745D60058460D /* SignUp_iPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SignUp_iPhone.m; path = MyProfile/SignUp_iPhone.m; sourceTree = "<group>"; };
-		385E64081EA745D60058460D /* SignUp2_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SignUp2_iPhone.h; path = MyProfile/SignUp2_iPhone.h; sourceTree = "<group>"; };
-		385E64091EA745D60058460D /* SignUp2_iPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SignUp2_iPhone.m; path = MyProfile/SignUp2_iPhone.m; sourceTree = "<group>"; };
-		385E640A1EA745D60058460D /* SignUpDone_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SignUpDone_iPhone.h; path = MyProfile/SignUpDone_iPhone.h; sourceTree = "<group>"; };
-		385E640B1EA745D60058460D /* SignUpDone_iPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SignUpDone_iPhone.m; path = MyProfile/SignUpDone_iPhone.m; sourceTree = "<group>"; };
-		385E640C1EA745D60058460D /* SignUpFail_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SignUpFail_iPhone.h; path = MyProfile/SignUpFail_iPhone.h; sourceTree = "<group>"; };
-		385E640D1EA745D60058460D /* SignUpFail_iPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SignUpFail_iPhone.m; path = MyProfile/SignUpFail_iPhone.m; sourceTree = "<group>"; };
+		385E64041EA745D60058460D /* SignIn_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignIn_iPhone.h; sourceTree = "<group>"; };
+		385E64051EA745D60058460D /* SignIn_iPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignIn_iPhone.m; sourceTree = "<group>"; };
+		385E64061EA745D60058460D /* SignUp_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUp_iPhone.h; sourceTree = "<group>"; };
+		385E64071EA745D60058460D /* SignUp_iPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUp_iPhone.m; sourceTree = "<group>"; };
+		385E64081EA745D60058460D /* SignUp2_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUp2_iPhone.h; sourceTree = "<group>"; };
+		385E64091EA745D60058460D /* SignUp2_iPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUp2_iPhone.m; sourceTree = "<group>"; };
+		385E640A1EA745D60058460D /* SignUpDone_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpDone_iPhone.h; sourceTree = "<group>"; };
+		385E640B1EA745D60058460D /* SignUpDone_iPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpDone_iPhone.m; sourceTree = "<group>"; };
+		385E640C1EA745D60058460D /* SignUpFail_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpFail_iPhone.h; sourceTree = "<group>"; };
+		385E640D1EA745D60058460D /* SignUpFail_iPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpFail_iPhone.m; sourceTree = "<group>"; };
 		385E640E1EA745D60058460D /* UsedAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UsedAccount.h; path = MyProfile/UsedAccount.h; sourceTree = "<group>"; };
 		385E640F1EA745D60058460D /* UsedAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UsedAccount.m; path = MyProfile/UsedAccount.m; sourceTree = "<group>"; };
 		385E642A1EA74BF50058460D /* GlobalParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GlobalParameter.h; path = MyProfile/GlobalParameter.h; sourceTree = "<group>"; };
@@ -495,6 +492,27 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		380D8069241FA14100E39D78 /* forgot_signup */ = {
+			isa = PBXGroup;
+			children = (
+				385E63F81EA745D60058460D /* Forgot_iPhone.h */,
+				385E63F91EA745D60058460D /* Forgot_iPhone.m */,
+				385E63FA1EA745D60058460D /* ForgotDone_iPhone.h */,
+				385E63FB1EA745D60058460D /* ForgotDone_iPhone.m */,
+				385E63FC1EA745D60058460D /* ForgotFail_iPhone.h */,
+				385E63FD1EA745D60058460D /* ForgotFail_iPhone.m */,
+				385E64061EA745D60058460D /* SignUp_iPhone.h */,
+				385E64071EA745D60058460D /* SignUp_iPhone.m */,
+				385E64081EA745D60058460D /* SignUp2_iPhone.h */,
+				385E64091EA745D60058460D /* SignUp2_iPhone.m */,
+				385E640A1EA745D60058460D /* SignUpDone_iPhone.h */,
+				385E640B1EA745D60058460D /* SignUpDone_iPhone.m */,
+				385E640C1EA745D60058460D /* SignUpFail_iPhone.h */,
+				385E640D1EA745D60058460D /* SignUpFail_iPhone.m */,
+			);
+			path = forgot_signup;
+			sourceTree = "<group>";
+		};
 		38177B3823B44D4B00FF06D3 /* Masonry */ = {
 			isa = PBXGroup;
 			children = (
@@ -577,6 +595,7 @@
 		3857232A1EA6279900F5EABF /* MyProfile */ = {
 			isa = PBXGroup;
 			children = (
+				380D8069241FA14100E39D78 /* forgot_signup */,
 				383521451E673E6300FAA97A /* QRCode */,
 				388CD4471F19857200DBBC5A /* AccountSafe */,
 				385E64221EA7475A0058460D /* assist */,
@@ -586,34 +605,18 @@
 				385E63F51EA745D60058460D /* MyProfileTable.m */,
 				385E64001EA745D60058460D /* MyProfile_iPhone.h */,
 				385E64011EA745D60058460D /* MyProfile_iPhone.m */,
+				385E64041EA745D60058460D /* SignIn_iPhone.h */,
+				385E64051EA745D60058460D /* SignIn_iPhone.m */,
 				388CD44E1F1989E600DBBC5A /* ModifyNickame.h */,
 				388CD44F1F1989E600DBBC5A /* ModifyNickame.m */,
 				388CD4561F19B3F400DBBC5A /* ModifyUserICON.h */,
 				388CD4571F19B3F400DBBC5A /* ModifyUserICON.m */,
-				385E63F81EA745D60058460D /* Forgot_iPhone.h */,
-				385E63F91EA745D60058460D /* Forgot_iPhone.m */,
-				385E63FA1EA745D60058460D /* ForgotDone_iPhone.h */,
-				385E63FB1EA745D60058460D /* ForgotDone_iPhone.m */,
-				385E63FC1EA745D60058460D /* ForgotFail_iPhone.h */,
-				385E63FD1EA745D60058460D /* ForgotFail_iPhone.m */,
-				385E64041EA745D60058460D /* SignIn_iPhone.h */,
-				385E64051EA745D60058460D /* SignIn_iPhone.m */,
-				385E64061EA745D60058460D /* SignUp_iPhone.h */,
-				385E64071EA745D60058460D /* SignUp_iPhone.m */,
-				385E64081EA745D60058460D /* SignUp2_iPhone.h */,
-				385E64091EA745D60058460D /* SignUp2_iPhone.m */,
-				385E640A1EA745D60058460D /* SignUpDone_iPhone.h */,
-				385E640B1EA745D60058460D /* SignUpDone_iPhone.m */,
-				385E640C1EA745D60058460D /* SignUpFail_iPhone.h */,
-				385E640D1EA745D60058460D /* SignUpFail_iPhone.m */,
 				385E640E1EA745D60058460D /* UsedAccount.h */,
 				385E640F1EA745D60058460D /* UsedAccount.m */,
 				385723311EA63CCC00F5EABF /* WebBrower.h */,
 				385723321EA63CCC00F5EABF /* WebBrower.m */,
 				388CD4391F19787100DBBC5A /* MySettingTable.h */,
 				388CD43A1F19787100DBBC5A /* MySettingTable.m */,
-				114C413D21118CF8004FED8B /* AboutTable.h */,
-				114C413E21118CF8004FED8B /* AboutTable.m */,
 			);
 			name = MyProfile;
 			sourceTree = "<group>";
@@ -1153,7 +1156,6 @@
 				38E6513B1F0E478E00301D8E /* UIView+LayerProperty.m in Sources */,
 				38177B6323B44D4B00FF06D3 /* MASConstraint.m in Sources */,
 				385723331EA63CCC00F5EABF /* WebBrower.m in Sources */,
-				114C413F21118CF8004FED8B /* AboutTable.m in Sources */,
 				388CD4531F19949200DBBC5A /* ModifyPassword.m in Sources */,
 				3878AD9D1EFA6BE6004A9DC3 /* ioapi.c in Sources */,
 				3878ADA91EFA6BE6004A9DC3 /* deflate.c in Sources */,
