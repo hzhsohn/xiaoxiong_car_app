@@ -10,12 +10,15 @@
 #import <QuartzCore/QuartzCore.h>
 #import "DefineHeader.h"
 #import "ProjectAccountCfg.h"
+#import "WebController.h"
 
 @interface IndexController ()<UIWebViewDelegate>
 {
     __weak IBOutlet UIWebView *web;
     __weak IBOutlet UIActivityIndicatorView *indLoading;
     __weak IBOutlet UIView *viConnectFail;
+    //首页的URL
+    NSString* default_urlstr;
 }
 
 -(void) loadWeb:(NSString*)url_str;
@@ -67,16 +70,15 @@
     [web setScalesPageToFit:YES];//自动缩放以适应屏幕
     
     NSString*key=[ProjectAccountCfg getKey];
-    NSString* urlstr;
     if(key)
     {
-        urlstr=[NSString stringWithFormat:@"%@?key=%@",WEB_INDEX_URL,key];
+        default_urlstr=[NSString stringWithFormat:@"%@/?key=%@",WEB_INDEX_URL,key];
     }
     else
     {
-        urlstr=WEB_INDEX_URL;
+        default_urlstr=WEB_INDEX_URL;
     }
-    [self loadWeb:urlstr];//主页
+    [self loadWeb:default_urlstr];//主页
     
     viConnectFail.alpha=0;
     viConnectFail.hidden=YES;
@@ -100,8 +102,24 @@
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     NSString*s=[[request URL] absoluteString];
-    NSLog(@"%@",s);
-    return TRUE;
+    NSLog(@"shouldStartLoadWithRequest = %@",s);
+    char *purl=(char*)[s UTF8String];
+    if(0==memcmp(purl,"nf-",3))
+    {
+        //打开新界面
+        UIStoryboard *frm=NULL;
+        
+        frm = [UIStoryboard storyboardWithName:@"WebController" bundle:nil];
+        WebController*wb=(WebController*)frm.instantiateInitialViewController;
+        wb.default_url=[NSString stringWithUTF8String:purl+3];
+        NSLog(@"wb.default_url = %@",wb.default_url);
+        [self.navigationController pushViewController:wb animated:YES];
+        return FALSE;
+    }
+    else
+    {
+        return TRUE;
+    }
 }
 
 //开始加载数据

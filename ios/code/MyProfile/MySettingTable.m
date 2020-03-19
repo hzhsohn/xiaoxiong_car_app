@@ -46,7 +46,7 @@
             
         }
             break;
-        case 2:// 退出
+        case 1:// 退出
         {
             //退出登录
             [GlobalParameter clearLoginCfg];

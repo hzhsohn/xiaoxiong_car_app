@@ -6,24 +6,23 @@
 //  Copyright (c) 2015年 Han.zhihong. All rights reserved.
 //
 
-#import "VipController.h"
+#import "WebController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "DefineHeader.h"
-#import "ProjectAccountCfg.h"
-#import "WebController.h"
 
-@interface VipController ()<UIWebViewDelegate>
+@interface WebController ()<UIWebViewDelegate>
 {
     __weak IBOutlet UIWebView *web;
     __weak IBOutlet UIActivityIndicatorView *indLoading;
     __weak IBOutlet UIView *viConnectFail;
+ 
 }
 
 -(void) loadWeb:(NSString*)url_str;
 
 @end
 
-@implementation VipController
+@implementation WebController
 
 -(void)awakeFromNib
 {
@@ -67,17 +66,7 @@
     [web setOpaque:NO];//opaque是不透明的意思
     [web setScalesPageToFit:YES];//自动缩放以适应屏幕
     
-    NSString*key=[ProjectAccountCfg getKey];
-    NSString* urlstr;
-    if(key)
-    {
-        urlstr=[NSString stringWithFormat:@"%@?key=%@",WEB_INDEX2_URL,key];
-    }
-    else
-    {
-        urlstr=WEB_INDEX2_URL;
-    }
-    [self loadWeb:urlstr];//主页
+    [self loadWeb:self.default_url];//主页
     
     viConnectFail.alpha=0;
     viConnectFail.hidden=YES;
@@ -101,24 +90,8 @@
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     NSString*s=[[request URL] absoluteString];
-    NSLog(@"shouldStartLoadWithRequest = %@",s);
-    char *purl=(char*)[s UTF8String];
-    if(0==memcmp(purl,"nf-",3))
-    {
-        //打开新界面
-        UIStoryboard *frm=NULL;
-        
-        frm = [UIStoryboard storyboardWithName:@"WebController" bundle:nil];
-        WebController*wb=(WebController*)frm.instantiateInitialViewController;
-        wb.default_url=[NSString stringWithUTF8String:purl+3];
-        NSLog(@"wb.default_url = %@",wb.default_url);
-        [self.navigationController pushViewController:wb animated:YES];
-        return FALSE;
-    }
-    else
-    {
-        return TRUE;
-    }
+    NSLog(@"WebController shouldStartLoadWithRequest = %@",s);
+    return TRUE;
 }
 
 //开始加载数据
@@ -136,6 +109,8 @@
     NSLog(@"web finish load");
     [indLoading stopAnimating];
     [indLoading setHidden:YES];
+    
+    self.title=[webView stringByEvaluatingJavaScriptFromString:@"document.title"];
 }
 
 //加载失败

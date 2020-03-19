@@ -109,6 +109,8 @@
 		388CD4501F1989E600DBBC5A /* ModifyNickame.m in Sources */ = {isa = PBXBuildFile; fileRef = 388CD44F1F1989E600DBBC5A /* ModifyNickame.m */; };
 		388CD4531F19949200DBBC5A /* ModifyPassword.m in Sources */ = {isa = PBXBuildFile; fileRef = 388CD4521F19949200DBBC5A /* ModifyPassword.m */; };
 		388CD4581F19B3F400DBBC5A /* ModifyUserICON.m in Sources */ = {isa = PBXBuildFile; fileRef = 388CD4571F19B3F400DBBC5A /* ModifyUserICON.m */; };
+		388FE08524237C1B00816625 /* WebController.m in Sources */ = {isa = PBXBuildFile; fileRef = 388FE07824237C1B00816625 /* WebController.m */; };
+		388FE08624237C1B00816625 /* WebController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 388FE08424237C1B00816625 /* WebController.storyboard */; };
 		389920792125AF11009AD5AA /* libHxkNet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3899206E2125AF11009AD5AA /* libHxkNet.framework */; };
 		38A76024236008780007714D /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38A76017236008620007714D /* AFNetworking.framework */; };
 		38A76025236008780007714D /* AFNetworking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 38A76017236008620007714D /* AFNetworking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -415,6 +417,9 @@
 		388CD4521F19949200DBBC5A /* ModifyPassword.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModifyPassword.m; sourceTree = "<group>"; };
 		388CD4561F19B3F400DBBC5A /* ModifyUserICON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ModifyUserICON.h; path = MyProfile/ModifyUserICON.h; sourceTree = "<group>"; };
 		388CD4571F19B3F400DBBC5A /* ModifyUserICON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ModifyUserICON.m; path = MyProfile/ModifyUserICON.m; sourceTree = "<group>"; };
+		388FE07824237C1B00816625 /* WebController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebController.m; sourceTree = "<group>"; };
+		388FE08324237C1B00816625 /* WebController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebController.h; sourceTree = "<group>"; };
+		388FE08424237C1B00816625 /* WebController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = WebController.storyboard; sourceTree = "<group>"; };
 		3899206E2125AF11009AD5AA /* libHxkNet.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = libHxkNet.framework; sourceTree = "<group>"; };
 		38A7600C236008620007714D /* AFNetworking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AFNetworking.xcodeproj; path = "AFNetworking-master/AFNetworking.xcodeproj"; sourceTree = "<group>"; };
 		38AA149D1F2564950059784B /* ModifyPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModifyPhone.h; sourceTree = "<group>"; };
@@ -905,6 +910,9 @@
 				383521241E65EEF300FAA97A /* MainTabController.h */,
 				383521251E65EEF300FAA97A /* MainTabController.m */,
 				383521441E672FC500FAA97A /* DefineHeader.h */,
+				388FE08324237C1B00816625 /* WebController.h */,
+				388FE07824237C1B00816625 /* WebController.m */,
+				388FE08424237C1B00816625 /* WebController.storyboard */,
 				38EE72FB1EA64F0F00465632 /* Main.storyboard */,
 				38E8F4281A86318400561E07 /* LaunchScreen.xib */,
 				386537D91BBFC20C00278D97 /* Images.xcassets */,
@@ -1108,6 +1116,7 @@
 				3857233B1EA63D8800F5EABF /* VipController.storyboard in Resources */,
 				385E64101EA745D60058460D /* MyProfile.storyboard in Resources */,
 				386B1EDF1BAA7CEC00AA4CB2 /* checkerboard.png in Resources */,
+				388FE08624237C1B00816625 /* WebController.storyboard in Resources */,
 				3878AC3E1EFA627E004A9DC3 /* MyProfile.xcassets in Resources */,
 				386537DA1BBFC20C00278D97 /* Images.xcassets in Resources */,
 				386B1EEB1BAA7CEC00AA4CB2 /* pickerColorWheel.png in Resources */,
@@ -1188,6 +1197,7 @@
 				385E64171EA745D60058460D /* MyProfile_iPhone.m in Sources */,
 				3835214C1E673E6300FAA97A /* ScanResult.m in Sources */,
 				386B1EE81BAA7CEC00AA4CB2 /* KZColorPickerHSWheel.m in Sources */,
+				388FE08524237C1B00816625 /* WebController.m in Sources */,
 				38E6514A1F0E520600301D8E /* MBProgressHUD.m in Sources */,
 				386B1EE71BAA7CEC00AA4CB2 /* KZColorPickerBrightnessSlider.m in Sources */,
 				385E64111EA745D60058460D /* MyProfileTable.m in Sources */,
