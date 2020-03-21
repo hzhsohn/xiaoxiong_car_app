@@ -10,8 +10,8 @@
 
 #import <UIKit/UIKit.h>
 
-#define WEB_INDEX_URL @"http://xt-sys.com/aaa.php" //@"http://47.115.187.147/webphone?index"
-#define WEB_INDEX2_URL @"http://xt-sys.com/bbb.php" //@"http://47.115.187.147/webphone?jizhao"
+#define WEB_INDEX_URL @"http://47.115.187.147/webphone/index.html#/common/index"
+#define WEB_INDEX2_URL @"http://47.115.187.147/webphone/index.html#/common/recommend"
 
 #define ACCOUNT_URL                     @"http://47.115.187.147/user"
 #define IOT_URL_INFO                    @"http://47.115.187.147"

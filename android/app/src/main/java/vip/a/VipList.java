@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.webkit.WebResourceRequest;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
@@ -64,6 +65,9 @@ public class VipList extends BaseFragment {
         String key = LoginInfo.cfgVerifyKey(context);
         //WEBView浏览器
         webView = (WebView) view.findViewById(R.id.webView);
+        WebSettings webSettings = webView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+
         if(key.equals("")) {
             urlstr = HTTPData.sWebPhoneUrl_JiZhao;
         }

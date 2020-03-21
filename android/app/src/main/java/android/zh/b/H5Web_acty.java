@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebResourceRequest;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
@@ -19,7 +20,6 @@ public class H5Web_acty extends BaseActivity {
     Context context = null;
     WebView webView = null;
     Dialog loadDialog;
-    String my_title;
     String my_url;
 
     @Override
@@ -39,14 +39,13 @@ public class H5Web_acty extends BaseActivity {
         //
         //
         Bundle bundle = this.getIntent().getExtras();
-        my_title = bundle.getString("title");
         my_url = bundle.getString("url");
-        //
-        TextView tvInfo = (TextView)findViewById(R.id.toolbar_title);
-        tvInfo.setText(my_title);
         //
         //WEBView浏览器
         webView = (WebView) findViewById(R.id.webView);
+        WebSettings webSettings = webView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+
         webView.loadUrl(my_url);
         //覆盖WebView默认使用第三方或系统默认浏览器打开网页的行为，使网页用WebView打开
         webView.setWebViewClient(new WebViewClient() {
@@ -69,6 +68,10 @@ public class H5Web_acty extends BaseActivity {
                 super.onPageFinished(view, url);
                 if (loadDialog!=null&&loadDialog.isShowing())
                     loadDialog.cancel();
+
+                //设置标题
+                TextView tvInfo = (TextView)findViewById(R.id.toolbar_title);
+                tvInfo.setText(view.getTitle());
 
             }
         });

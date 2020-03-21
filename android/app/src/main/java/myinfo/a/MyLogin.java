@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.zh.b.H5Web_acty;
 import android.zh.home.BaseFragment;
 
 import com.dou361.dialogui.DialogUIUtils;
@@ -187,8 +188,15 @@ public class MyLogin extends BaseFragment {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
 
-                                Intent intent = new Intent(getActivity(), MyRegByPhone.class);
+                                /*Intent intent = new Intent(getActivity(), MyRegByPhone.class);
                                 Bundle bundle = new Bundle();//该类用作携带数据
+                                intent.putExtras(bundle);//附带上额外的数据
+                                startActivityFromFragment(intent, (byte) 0, (byte) 111);
+                                getActivity().overridePendingTransition(R.anim.in_0, R.anim.in_1);*/
+                                //
+                                Intent intent = new Intent(getActivity(), H5Web_acty.class);
+                                Bundle bundle = new Bundle();//该类用作携带数据
+                                bundle.putString("url",HTTPData.sWebPhoneUrl_Reg);
                                 intent.putExtras(bundle);//附带上额外的数据
                                 startActivityFromFragment(intent, (byte) 0, (byte) 111);
                                 getActivity().overridePendingTransition(R.anim.in_0, R.anim.in_1);

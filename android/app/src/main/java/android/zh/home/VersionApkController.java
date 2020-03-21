@@ -67,7 +67,7 @@ public class VersionApkController {
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
                     intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
                 } else {//Android7.0之后获取uri要用contentProvider
-                    Uri uri = FileProvider.getUriForFile(context, "version1.freesha.fileprovider", file);
+                    Uri uri = FileProvider.getUriForFile(context, "version1.xiaoxiongcar.fileprovider", file);
                     intent.setDataAndType(uri, "application/vnd.android.package-archive");
                     intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                 }

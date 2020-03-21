@@ -131,7 +131,6 @@
     <string name="http_retry">正在重新尝试提交数据...</string>
     <string name="forgot_mail_format_err">邮箱格式错误</string>
     <string name="forgot_no_user">不存在邮箱用户</string>
-    <string name="forgot_send_fail">请求失败</string>
     <string name="forgot_empty_email">缺少邮箱参数</string>
     <string name="email_send_ok">邮件成功发送,请查收!!</string>
 
@@ -151,7 +150,7 @@
     <string name="account_has_been_disabled">账号已被禁用</string>
     <string name="useda_inaction">账号未激活</string>
     <string name="useda_empty_key">钥匙为空</string>
-    <string name="signin_empty_account">请填写登录邮箱账号</string>
+    <string name="signin_empty_account">请填写手机号码</string>
     <string name="signin_empty_password">请填写密码</string>
     <string name="signin_reactive">重新激活</string>
     <string name="signin_login_fail">密码错误</string>
