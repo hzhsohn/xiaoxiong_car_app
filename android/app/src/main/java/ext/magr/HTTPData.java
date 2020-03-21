@@ -24,7 +24,7 @@ public class HTTPData {
     static public final String sWebPhoneUrl_Reg="http://47.115.187.147/webphone/index.html?reg";
     static public final String sWebPhoneUrl_Index="http://47.115.187.147/webphone/index.html";
     static public final String sWebPhoneUrl_JiZhao="http://47.115.187.147/webphone/index.html?JiZhao";
-    static public final String sUpdateUrl= "http://qcline.hx-kong.com/app_update";
+    static public final String sUpdateUrl= "http://47.115.187.147/app_update";
     
     /* 例子
     private Handler handler = new Handler(Looper.getMainLooper()){

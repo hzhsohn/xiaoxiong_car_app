@@ -27,13 +27,13 @@
     <string name="alert">提示</string>
     <string name="no_strong_permission_do_myself">请手动设置允许访问储存器的权限</string>
     <string name="no_strong_permission_tips">请通过访问储存器的权限,否则不能正常使用此软件</string>
-    <string name="item_found">首页</string>
-    <string name="item_vip">急招</string>
-    <string name="item_my">个人中心</string>
+    <string name="item_found">线路</string>
+    <string name="item_vip">推荐线路</string>
+    <string name="item_my">我的</string>
     <string name="title_my_device">我的设备</string>
     <string name="title_my_user">个人中心</string>
     <string name="tiile_monitor">视频监控</string>
-    <string name="tiile_found">首页</string>
+    <string name="tiile_found">线路</string>
     <string name="title_control_setting">设置</string>
     <string name="title_register">注册</string>
     <string name="title_forgot">忘记密码</string>
