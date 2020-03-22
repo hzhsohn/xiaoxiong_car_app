@@ -21,7 +21,7 @@ public class HTTPData {
     static public final String sIconUrl="http://47.115.187.147/user/u_icon";//文件名是<userid>.jpg
     static public final String sSMSUrl= "http://47.115.187.147/user/_sms";
     static public final String sWebPhoneUrl="http://47.115.187.147/webphone/index.html";
-    static public final String sWebPhoneUrl_Reg="http://47.115.187.147/webphone/#/client/register";
+    static public final String sWebPhoneUrl_Reg="http://47.115.187.147/webphone/#/common/register";
     static public final String sWebPhoneUrl_Index="http://47.115.187.147/webphone/index.html#/common/index";
     static public final String sWebPhoneUrl_JiZhao="http://47.115.187.147/webphone/index.html#/common/recommend";
     static public final String sUpdateUrl= "http://47.115.187.147/app_update";

@@ -2,6 +2,7 @@ package vip.a;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
+import android.zh.b.H5Web_acty;
 import android.zh.home.BaseFragment;
 
 import com.dou361.dialogui.DialogUIUtils;
@@ -26,6 +28,7 @@ public class VipList extends BaseFragment {
     Context context = null;
     WebView webView = null;
     Dialog loadDialog;
+    View g_view=null;
 
     public static VipList newInstance(String param1) {
         VipList fragment = new VipList();
@@ -59,7 +62,7 @@ public class VipList extends BaseFragment {
         //
         TextView tvInfo = (TextView) view.findViewById(R.id.toolbar_title);
         tvInfo.setText(getString(R.string.tiile_found));
-
+        g_view=view;
         //
         String urlstr;
         String key = LoginInfo.cfgVerifyKey(context);
@@ -80,9 +83,28 @@ public class VipList extends BaseFragment {
         webView.setWebViewClient(new WebViewClient() {
 
             @Override
-            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                return super.shouldOverrideUrlLoading(view, request);
+            public boolean shouldOverrideUrlLoading(WebView view, String urls) {
+
+                if (urls.startsWith("newtab:")) {
+                    //在这里拦截加了newtab:前缀的URL，来进行你要做的操作
+                    //利用replace（）方法去掉前缀
+                    String newurl=urls.replace("newtab:","");
+
+                    Intent intent = new Intent(getActivity(), H5Web_acty.class);
+                    Bundle bundle = new Bundle();//该类用作携带数据
+                    bundle.putString("url",newurl);
+                    intent.putExtras(bundle);//附带上额外的数据
+                    startActivityFromFragment(intent, (byte) 0, (byte) 111);
+                    getActivity().overridePendingTransition(R.anim.in_0, R.anim.in_1);
+
+                }
+                else {
+                    view.loadUrl(urls); //如果是没有加那个前缀的就正常
+                }
+                return true;
+
             }
+
 
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
@@ -97,6 +119,14 @@ public class VipList extends BaseFragment {
                 super.onPageFinished(view, url);
                 if (loadDialog!=null&&loadDialog.isShowing())
                     loadDialog.cancel();
+
+                //设置标题
+                TextView tvInfo = (TextView)g_view.findViewById(R.id.toolbar_title);
+                tvInfo.setText(view.getTitle());
+
+                //页面加载完成后加载下面的javascript，修改页面中所有用target="_blank"标记的url（在url前加标记为“newtab”）
+                //这里要注意一下那个js的注入方法，不要在最后面放那个替换的方法，不然会出错
+                view.loadUrl("javascript: var allLinks = document.getElementsByTagName('a'); if (allLinks) {var i;for (i=0; i<allLinks.length; i++) {var link = allLinks[i];var target = link.getAttribute('target'); if (target && target == '_blank') {link.href = 'newtab:'+link.href;link.setAttribute('target','_self');}}}");
 
             }
         });

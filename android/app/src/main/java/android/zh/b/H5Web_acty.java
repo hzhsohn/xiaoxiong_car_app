@@ -2,8 +2,10 @@ package android.zh.b;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
@@ -51,9 +53,27 @@ public class H5Web_acty extends BaseActivity {
         webView.setWebViewClient(new WebViewClient() {
 
             @Override
-            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                return super.shouldOverrideUrlLoading(view, request);
+            public boolean shouldOverrideUrlLoading(WebView view, String urls) {
+
+                if (urls.startsWith("newtab:")) {
+                    //在这里拦截加了newtab:前缀的URL，来进行你要做的操作
+                    //利用replace（）方法去掉前缀
+                    String newurl=urls.replace("newtab:","");
+
+                    Intent intent = new Intent(context, H5Web_acty.class);
+                    Bundle bundle = new Bundle();//该类用作携带数据
+                    bundle.putString("url",newurl);
+                    intent.putExtras(bundle);//附带上额外的数据
+                    startActivityForResult(intent,  0);
+                    overridePendingTransition(R.anim.in_0, R.anim.in_1);
+
+                }
+                else {
+                    view.loadUrl(urls); //如果是没有加那个前缀的就正常
+                }
+                return true;
             }
+
 
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
@@ -72,6 +92,11 @@ public class H5Web_acty extends BaseActivity {
                 //设置标题
                 TextView tvInfo = (TextView)findViewById(R.id.toolbar_title);
                 tvInfo.setText(view.getTitle());
+
+                //页面加载完成后加载下面的javascript，修改页面中所有用target="_blank"标记的url（在url前加标记为“newtab”）
+                //这里要注意一下那个js的注入方法，不要在最后面放那个替换的方法，不然会出错
+                view.loadUrl("javascript: var allLinks = document.getElementsByTagName('a'); if (allLinks) {var i;for (i=0; i<allLinks.length; i++) {var link = allLinks[i];var target = link.getAttribute('target'); if (target && target == '_blank') {link.href = 'newtab:'+link.href;link.setAttribute('target','_self');}}}");
+
 
             }
         });

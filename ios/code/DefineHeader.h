@@ -16,7 +16,7 @@
 #define ACCOUNT_URL                     @"http://47.115.187.147/user"
 #define IOT_URL_INFO                    @"http://47.115.187.147"
 
-#define WEB_SIGNUP_URL                   @"http://47.115.187.147/webphone?signup"
+#define WEB_SIGNUP_URL                   @"http://47.115.187.147/webphone/#/common/register"
 #define WEB_FORGOT_URL                   @"http://47.115.187.147/webphone?forgot"
 
 #endif /* DefineHeader_h */

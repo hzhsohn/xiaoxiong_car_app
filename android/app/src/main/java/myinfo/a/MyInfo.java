@@ -81,12 +81,6 @@ public class MyInfo extends BaseFragment {
         //添加事件
         View row1 = contextView.findViewById(R.id.row1);
         row1.setOnClickListener(row1_click);
-        View row2 = contextView.findViewById(R.id.row2);
-        row2.setOnClickListener(row2_click);
-        View row3 = contextView.findViewById(R.id.row3);
-        row3.setOnClickListener(row3_click);
-        View row4 = contextView.findViewById(R.id.row4);
-        row4.setOnClickListener(row4_click);
         View row5 = contextView.findViewById(R.id.row5);
         row5.setOnClickListener(row5_click);
         //

@@ -46,8 +46,6 @@
     <string name="title_modify_passwd">修改密码</string>
     <string name="title_modify_nickname">修改密码</string>
     <string name="title_activity_base">BaseActivity</string>
-    <string name="title_keymagr">设备管理</string>
-    <string name="title_remotedev">设备管理</string>
     <string name="title_feedback">帮助与反馈</string>
     <string name="title_caidmagr">区域管理</string>
     <string name="ctl_newdev">新设备</string>
@@ -73,9 +71,6 @@
     <string name="input_passwd_tip">请输入硬件密码</string>
     <string name="income">进入</string>
 
-    <!-- todo: ctrl dev -->
-    <string name="ctldev_set1">添加设备</string>
-    <string name="ctldev_set2">设备管理</string>
 
     <!-- TODO: esaylink string -->
     <string name="title_activity_sub_dev_set_info">dev_set_info</string>
