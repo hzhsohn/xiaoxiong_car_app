@@ -70,6 +70,8 @@ public class VipList extends BaseFragment {
         webView = (WebView) view.findViewById(R.id.webView);
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
+        //设置缓存模式
+        webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
 
         if(key.equals("")) {
             urlstr = HTTPData.sWebPhoneUrl_JiZhao;
@@ -79,6 +81,7 @@ public class VipList extends BaseFragment {
             urlstr=HTTPData.sWebPhoneUrl_JiZhao+"/?key=" + key;
         }
         webView.loadUrl(urlstr);
+
         //覆盖WebView默认使用第三方或系统默认浏览器打开网页的行为，使网页用WebView打开
         webView.setWebViewClient(new WebViewClient() {
 

@@ -69,15 +69,8 @@
     [web setOpaque:NO];//opaque是不透明的意思
     [web setScalesPageToFit:YES];//自动缩放以适应屏幕
     
-    NSString*key=[ProjectAccountCfg getKey];
-    if(key)
-    {
-        default_urlstr=[NSString stringWithFormat:@"%@/?key=%@",WEB_INDEX_URL,key];
-    }
-    else
-    {
-        default_urlstr=WEB_INDEX_URL;
-    }
+    default_urlstr=WEB_INDEX_URL;
+    default_urlstr=@"http://xt-sys.com/aaa.php";
     [self loadWeb:default_urlstr];//主页
     
     viConnectFail.alpha=0;
@@ -104,14 +97,14 @@
     NSString*s=[[request URL] absoluteString];
     NSLog(@"shouldStartLoadWithRequest = %@",s);
     char *purl=(char*)[s UTF8String];
-    if(0==memcmp(purl,"nf-",3))
+    if(0==memcmp(purl,"newtab:",7))
     {
         //打开新界面
         UIStoryboard *frm=NULL;
         
         frm = [UIStoryboard storyboardWithName:@"WebController" bundle:nil];
         WebController*wb=(WebController*)frm.instantiateInitialViewController;
-        wb.default_url=[NSString stringWithUTF8String:purl+3];
+        wb.default_url=[NSString stringWithUTF8String:purl+7];
         NSLog(@"wb.default_url = %@",wb.default_url);
         [self.navigationController pushViewController:wb animated:YES];
         return FALSE;
@@ -137,6 +130,14 @@
     NSLog(@"web finish load");
     [indLoading stopAnimating];
     [indLoading setHidden:YES];
+    
+    //页面加载完成后加载下面的javascript，修改页面中所有用target="_blank"标记的url（在url前加标记为“newtab”）
+    //这里要注意一下那个js的注入方法，不要在最后面放那个替换的方法，不然会出错
+    [web stringByEvaluatingJavaScriptFromString:@"javascript: var allLinks = document.getElementsByTagName('a'); if (allLinks) {var i;for (i=0; i<allLinks.length; i++) {var link = allLinks[i];var target = link.getAttribute('target'); if (target && target == '_blank') {link.href = 'newtab:'+link.href;link.setAttribute('target','_self');}}}"];
+    
+    NSString*key=[ProjectAccountCfg getKey];
+    [web stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"javascript: function userkey(){return '%@';}",key]];
+
 }
 
 //加载失败

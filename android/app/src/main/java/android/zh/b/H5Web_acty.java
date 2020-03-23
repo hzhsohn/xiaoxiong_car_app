@@ -47,6 +47,8 @@ public class H5Web_acty extends BaseActivity {
         webView = (WebView) findViewById(R.id.webView);
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
+        //设置缓存模式
+        webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
 
         webView.loadUrl(my_url);
         //覆盖WebView默认使用第三方或系统默认浏览器打开网页的行为，使网页用WebView打开

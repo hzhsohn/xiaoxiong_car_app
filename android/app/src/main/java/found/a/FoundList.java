@@ -73,6 +73,9 @@ public class FoundList extends BaseFragment {
         webView = (WebView) view.findViewById(R.id.webView);
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
+        //设置缓存模式
+        webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
+
         if(key.equals("")) {
             urlstr = HTTPData.sWebPhoneUrl_Index;
         }
@@ -80,7 +83,6 @@ public class FoundList extends BaseFragment {
         {
             urlstr=HTTPData.sWebPhoneUrl_Index+"/?key=" + key;
         }
-        urlstr="http://xt-sys.com/aaa.php";
 
         webView.loadUrl(urlstr);
         //覆盖WebView默认使用第三方或系统默认浏览器打开网页的行为，使网页用WebView打开
