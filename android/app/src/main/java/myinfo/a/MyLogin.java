@@ -92,6 +92,17 @@ public class MyLogin extends BaseFragment {
                 txtAccount.setText(tstr);
             }
         }
+
+        /*
+        上传文件测试
+        Intent intent = new Intent(getActivity(), H5Web_acty.class);
+        Bundle bundle = new Bundle();//该类用作携带数据
+        bundle.putString("url","http://xt-sys.com/up/up.html");
+        //bundle.putString("url", HTTPData.sWebPhoneUrl_Reg);
+        intent.putExtras(bundle);//附带上额外的数据
+        startActivityFromFragment(intent, (byte) 0, (byte) 111);
+        getActivity().overridePendingTransition(R.anim.in_0, R.anim.in_1);
+        */
     }
 
     void showBox(int rid) {
