@@ -166,10 +166,17 @@ public class MyLogin extends BaseFragment {
                         LoginInfo.saveKeyAliveNow();
 
                         //登录成功进入我的资料界面
+                        /*
                         FragmentTransaction transaction = getFragmentManager().beginTransaction();
                         transaction.setCustomAnimations(R.anim.in_0, R.anim.in_1); //自定义动画
                         transaction.addToBackStack(null)  //将当前fragment加入到返回栈中
                                 .replace(R.id.container3, new MyInfo()).commit();
+                        */
+
+                        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                        transaction.setCustomAnimations(R.anim.in_0, R.anim.in_1); //自定义动画
+                        transaction.addToBackStack(null)  //将当前fragment加入到返回栈中
+                                .replace(R.id.container3, new MyinfoH5_Web()).commit();
 
                     }
                     break;

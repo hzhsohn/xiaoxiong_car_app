@@ -1,14 +1,17 @@
-package vip.a;
+package myinfo.a;
 
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Message;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -24,14 +27,14 @@ import ext.magr.HTTPData;
 import myinfo.logic.LoginInfo;
 
 
-public class VipList extends BaseFragment {
+public class MyinfoH5_Web extends BaseFragment {
     Context context = null;
     WebView webView = null;
     Dialog loadDialog;
     View g_view=null;
 
-    public static VipList newInstance(String param1) {
-        VipList fragment = new VipList();
+    public static MyinfoH5_Web newInstance(String param1) {
+        MyinfoH5_Web fragment = new MyinfoH5_Web();
         Bundle args = new Bundle();
         args.putString("info", param1);
         fragment.setArguments(args);
@@ -61,7 +64,7 @@ public class VipList extends BaseFragment {
         context = view.getContext();
         //
         TextView tvInfo = (TextView) view.findViewById(R.id.toolbar_title);
-        tvInfo.setText(getString(R.string.tiile_found));
+        tvInfo.setText("");
         g_view=view;
         //
         String urlstr;
@@ -74,14 +77,14 @@ public class VipList extends BaseFragment {
         webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
 
         if(key.equals("")) {
-            urlstr = HTTPData.sWebPhoneUrl_JiZhao;
+            urlstr = HTTPData.sWebPhoneUrl_Center;
         }
         else
         {
-            urlstr=HTTPData.sWebPhoneUrl_JiZhao+"/?key=" + key;
+            urlstr=HTTPData.sWebPhoneUrl_Center+"/?key=" + key;
         }
-        webView.loadUrl(urlstr);
 
+        webView.loadUrl(urlstr);
         //覆盖WebView默认使用第三方或系统默认浏览器打开网页的行为，使网页用WebView打开
         webView.setWebViewClient(new WebViewClient() {
 
@@ -108,7 +111,6 @@ public class VipList extends BaseFragment {
 
             }
 
-
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
@@ -122,6 +124,7 @@ public class VipList extends BaseFragment {
                 super.onPageFinished(view, url);
                 if (loadDialog!=null&&loadDialog.isShowing())
                     loadDialog.cancel();
+
 
                 //设置标题
                 TextView tvInfo = (TextView)g_view.findViewById(R.id.toolbar_title);

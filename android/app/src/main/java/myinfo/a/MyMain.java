@@ -171,8 +171,7 @@ public class MyMain extends BaseFragment {
                 {
                     transaction.setCustomAnimations(R.anim.in_0, R.anim.in_1); //自定义动画
                 }
-                transaction.addToBackStack(null)  //将当前fragment加入到返回栈中
-                        .replace(R.id.container3, new MyLogin()).commit();
+                transaction.replace(R.id.container3, new MyLogin()).commit();
             }
         });
     }
@@ -187,8 +186,7 @@ public class MyMain extends BaseFragment {
                 if(true==ani){
                     transaction.setCustomAnimations(R.anim.in_0, R.anim.in_1); //自定义动画
                 }
-                transaction.addToBackStack(null)  //将当前fragment加入到返回栈中
-                        .replace(R.id.container3, new MyInfo()).commit();
+                transaction.replace(R.id.container3, new MyinfoH5_Web()).commit();
             }
         });
 

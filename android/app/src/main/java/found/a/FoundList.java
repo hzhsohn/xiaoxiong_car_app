@@ -133,6 +133,9 @@ public class FoundList extends BaseFragment {
                 //页面加载完成后加载下面的javascript，修改页面中所有用target="_blank"标记的url（在url前加标记为“newtab”）
                 //这里要注意一下那个js的注入方法，不要在最后面放那个替换的方法，不然会出错
                 view.loadUrl("javascript: var allLinks = document.getElementsByTagName('a'); if (allLinks) {var i;for (i=0; i<allLinks.length; i++) {var link = allLinks[i];var target = link.getAttribute('target'); if (target && target == '_blank') {link.href = 'newtab:'+link.href;link.setAttribute('target','_self');}}}");
+                //
+                String key = LoginInfo.cfgVerifyKey(context);
+                view.loadUrl( "javascript: function userkey(){return '"+key+"';}");
             }
         });
     }

@@ -24,6 +24,8 @@ import com.xiaoxiongcar.R;
 
 import com.dou361.dialogui.DialogUIUtils;
 
+import myinfo.logic.LoginInfo;
+
 
 public class H5Web_acty extends BaseActivity {
 
@@ -111,7 +113,9 @@ public class H5Web_acty extends BaseActivity {
                 //这里要注意一下那个js的注入方法，不要在最后面放那个替换的方法，不然会出错
                 view.loadUrl("javascript: var allLinks = document.getElementsByTagName('a'); if (allLinks) {var i;for (i=0; i<allLinks.length; i++) {var link = allLinks[i];var target = link.getAttribute('target'); if (target && target == '_blank') {link.href = 'newtab:'+link.href;link.setAttribute('target','_self');}}}");
 
-
+                //
+                String key = LoginInfo.cfgVerifyKey(context);
+                view.loadUrl( "javascript: function userkey(){return '"+key+"';}");
             }
 
         });
