@@ -2,9 +2,11 @@ package android.zh.b;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ClipData;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -12,6 +14,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.webkit.JsResult;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
@@ -148,6 +151,41 @@ public class H5Web_acty extends BaseActivity {
                 return true;
             }
 
+            /**
+             * 处理alert弹出框
+             */
+            @Override
+            public boolean onJsAlert(WebView view, String url,
+                                     String message, JsResult result) {
+
+                if (message.startsWith("cmd:")) {
+                    //在这里拦截加了newtab:前缀的URL，来进行你要做的操作
+                    //利用replace（）方法去掉前缀
+                    String newmsg=message.replace("cmd:","");
+
+                    if(newmsg.equals("closefrm"))
+                    {
+                        finish();
+                        overridePendingTransition(R.anim.back_0, R.anim.back_1);
+                    }
+
+                }
+                else {
+                    Log.d("", "onJsAlert:" + message);
+                    //对alert的简单封装
+                    new AlertDialog.Builder(H5Web_acty.this).
+                            setTitle("Alert").setMessage(message).setPositiveButton("OK",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface arg0, int arg1) {
+                                    //TODO
+                                }
+                            }).create().show();
+                    result.confirm();
+                }
+                return true;
+            }
+
         });
     }
 
@@ -206,4 +244,5 @@ public class H5Web_acty extends BaseActivity {
         uploadMessageAboveL.onReceiveValue(results);
         uploadMessageAboveL = null;
     }
+
 }

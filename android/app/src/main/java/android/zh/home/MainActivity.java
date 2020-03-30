@@ -18,8 +18,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
+import android.zh.b.H5Web_acty;
 
 import ext.func.AssertAlert;
+import ext.magr.HTTPData;
 import found.a.FoundList;
 import myinfo.a.MyMain;
 import vip.a.VipList;
@@ -42,6 +44,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+/////   /////////////////
+
+        Intent intent = new Intent(this, H5Web_acty.class);
+        Bundle bundle = new Bundle();//该类用作携带数据
+        bundle.putString("url", "http://xt-sys.com/aaa.php");
+        intent.putExtras(bundle);//附带上额外的数据
+        startActivity(intent);
+        overridePendingTransition(R.anim.in_0, R.anim.in_1);
+
+        /////////////////
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
