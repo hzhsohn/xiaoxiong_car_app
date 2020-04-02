@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Message;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,6 +61,7 @@ public class FoundList extends BaseFragment {
                 null,
                 0,
                 null);
+        ((Toolbar)view.findViewById(R.id.toolbarId)).setVisibility(View.GONE);
         //
         context = view.getContext();
         //

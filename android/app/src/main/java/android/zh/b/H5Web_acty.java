@@ -12,6 +12,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.webkit.JsResult;
@@ -55,6 +56,7 @@ public class H5Web_acty extends BaseActivity {
                 onBackClick,
                 0,
                 null);
+        ((Toolbar)findViewById(R.id.toolbarId)).setVisibility(View.GONE);
         //
         //
         Bundle bundle = this.getIntent().getExtras();
@@ -168,7 +170,10 @@ public class H5Web_acty extends BaseActivity {
                         finish();
                         overridePendingTransition(R.anim.back_0, R.anim.back_1);
                     }
-
+                    else if(newmsg.equals("loginout"))
+                    {
+                        LoginInfo.clearLoginCfg(context);
+                    }
                 }
                 else {
                     Log.d("", "onJsAlert:" + message);
