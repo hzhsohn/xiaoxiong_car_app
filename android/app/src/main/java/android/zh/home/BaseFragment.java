@@ -255,4 +255,20 @@ public class ControlMain extends BaseFragment {
             }
         */
     }
+
+    public void startActivityFromFragment(Intent intent) {
+        super.startActivity(intent);
+         /*
+            用于Activity界面关闭并返回结果的事件
+            public void btnBack_click(View v)
+            {
+                // 关闭并反回结果
+                Intent data = new Intent();
+                data.putExtra("name", "hah");
+                this.setResult(222, data);
+                this.finish();  //finish当前activity
+                this.overridePendingTransition(R.anim.back_0,R.anim.back_1);
+            }
+        */
+    }
 }

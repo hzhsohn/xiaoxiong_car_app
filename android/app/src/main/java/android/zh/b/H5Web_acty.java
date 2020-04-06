@@ -12,6 +12,8 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -28,6 +30,9 @@ import com.xiaoxiongcar.R;
 
 import com.dou361.dialogui.DialogUIUtils;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import myinfo.logic.LoginInfo;
 
 
@@ -37,10 +42,28 @@ public class H5Web_acty extends BaseActivity {
     WebView webView = null;
     Dialog loadDialog;
     String my_url;
+    Timer timer=null;
 
     private ValueCallback<Uri> uploadMessage;
     private ValueCallback<Uri[]> uploadMessageAboveL;
     private final static int FILE_CHOOSER_RESULT_CODE = 10000;
+
+    private TimerTask taskReloadPage = new TimerTask() {
+        public void run() {
+
+            //重新加载一次页面
+            Handler mainHandler = new Handler(Looper.getMainLooper());
+            mainHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    //已在主线程中，可以更新UI
+                    webView.loadUrl(my_url);
+                }
+            });
+
+            System.gc();
+        }
+    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -67,9 +90,11 @@ public class H5Web_acty extends BaseActivity {
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         //设置缓存模式
-        webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
+        //webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
+        //
+        timer = new Timer();
+        timer.schedule(taskReloadPage, 0,5000);
 
-        webView.loadUrl(my_url);
         //覆盖WebView默认使用第三方或系统默认浏览器打开网页的行为，使网页用WebView打开
         webView.setWebViewClient(new WebViewClient() {
 
@@ -85,7 +110,7 @@ public class H5Web_acty extends BaseActivity {
                     Bundle bundle = new Bundle();//该类用作携带数据
                     bundle.putString("url",newurl);
                     intent.putExtras(bundle);//附带上额外的数据
-                    startActivityForResult(intent,  0);
+                    startActivity(intent);
                     overridePendingTransition(R.anim.in_0, R.anim.in_1);
 
                 }
@@ -121,6 +146,9 @@ public class H5Web_acty extends BaseActivity {
                 //
                 String key = LoginInfo.cfgVerifyKey(context);
                 view.loadUrl( "javascript: function userkey(){return '"+key+"';}");
+
+                timer.cancel(); //退出计时器
+                timer=null;
             }
 
         });
@@ -179,17 +207,21 @@ public class H5Web_acty extends BaseActivity {
                     Log.d("", "onJsAlert:" + message);
                     //对alert的简单封装
                     new AlertDialog.Builder(H5Web_acty.this).
-                            setTitle("Alert").setMessage(message).setPositiveButton("OK",
+                            setTitle("提示").setMessage(message).setPositiveButton("确定",
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface arg0, int arg1) {
                                     //TODO
                                 }
                             }).create().show();
-                    result.confirm();
+
                 }
+
+                result.confirm();
+                result.cancel();
                 return true;
             }
+
 
         });
     }

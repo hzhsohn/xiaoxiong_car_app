@@ -1,15 +1,20 @@
 package vip.a;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.webkit.JsResult;
+import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -73,7 +78,7 @@ public class VipList extends BaseFragment {
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         //设置缓存模式
-        webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
+        //webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
 
         if(key.equals("")) {
             urlstr = HTTPData.sWebPhoneUrl_JiZhao;
@@ -99,7 +104,7 @@ public class VipList extends BaseFragment {
                     Bundle bundle = new Bundle();//该类用作携带数据
                     bundle.putString("url",newurl);
                     intent.putExtras(bundle);//附带上额外的数据
-                    startActivityFromFragment(intent, (byte) 0, (byte) 111);
+                    startActivityFromFragment(intent);
                     getActivity().overridePendingTransition(R.anim.in_0, R.anim.in_1);
 
                 }
@@ -136,6 +141,48 @@ public class VipList extends BaseFragment {
                 String key = LoginInfo.cfgVerifyKey(context);
                 view.loadUrl( "javascript: function userkey(){return '"+key+"';}");
             }
+        });
+
+
+        webView.setWebChromeClient(new WebChromeClient() {
+
+            /**
+             * 处理alert弹出框
+             */
+            @Override
+            public boolean onJsAlert(WebView view, String url,
+                                     String message, JsResult result) {
+
+                if (message.startsWith("cmd:")) {
+                    //在这里拦截加了newtab:前缀的URL，来进行你要做的操作
+                    //利用replace（）方法去掉前缀
+                    String newmsg=message.replace("cmd:","");
+
+                    if(newmsg.equals("loginout"))
+                    {
+                        LoginInfo.clearLoginCfg(context);
+                    }
+                }
+                else {
+                    Log.d("", "onJsAlert:" + message);
+                    //对alert的简单封装
+                    new AlertDialog.Builder(context).
+                            setTitle("提示").setMessage(message).setPositiveButton("确定",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface arg0, int arg1) {
+                                    //TODO
+                                }
+                            }).create().show();
+
+                }
+
+                result.confirm();
+                result.cancel();
+                return true;
+            }
+
+
         });
     }
 
