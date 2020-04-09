@@ -240,9 +240,10 @@ public class VersionInfo {
     private void showUpdateDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(_cxt);
         builder.setTitle(R.string.versionUpdate);
-        builder.setMessage(_cxt.getString(R.string.downloadVersionCode)+" "+web_apk_veriosn+
-                "\r\n"+
-                _cxt.getString(R.string.curVersionCode)+" "+AppRcInfo.getAppVersionName(_cxt)
+        builder.setMessage(
+                _cxt.getString(R.string.curVersionCode)+" "+AppRcInfo.getAppVersionName(_cxt)+
+                        "\r\n"+
+                _cxt.getString(R.string.downloadVersionCode)+" "+web_apk_veriosn
         );
         builder.setCancelable(false);
         builder.setPositiveButton(R.string.download, new DialogInterface.OnClickListener() {

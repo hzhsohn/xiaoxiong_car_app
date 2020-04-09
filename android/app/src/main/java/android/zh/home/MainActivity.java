@@ -4,11 +4,13 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.ColorStateList;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityCompat;
@@ -59,6 +61,8 @@ web h5测试:
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setItemIconTintList(null);
+
         //默认 >3 的选中效果会影响ViewPager的滑动切换时的效果，故利用反射去掉
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(
@@ -68,14 +72,39 @@ web h5测试:
                         switch (item.getItemId()) {
                             case R.id.item_found:
                                 viewPager.setCurrentItem(0);
+                                bottomNavigationView.getMenu().findItem(R.id.item_found)
+                                        .setIcon(R.drawable.a11) ;
+
+                                bottomNavigationView.getMenu().findItem(R.id.item_vip)
+                                        .setIcon(R.drawable.a2) ;
+
+                                bottomNavigationView.getMenu().findItem(R.id.item_my)
+                                        .setIcon(R.drawable.a3) ;
+
                                 break;
 
                             case R.id.item_vip:
                                 viewPager.setCurrentItem(1);
+                                bottomNavigationView.getMenu().findItem(R.id.item_found)
+                                        .setIcon(R.drawable.a1) ;
+
+                                bottomNavigationView.getMenu().findItem(R.id.item_vip)
+                                        .setIcon(R.drawable.a22) ;
+
+                                bottomNavigationView.getMenu().findItem(R.id.item_my)
+                                        .setIcon(R.drawable.a3) ;
                                 break;
 
                             case R.id.item_my:
                                 viewPager.setCurrentItem(2);
+                                bottomNavigationView.getMenu().findItem(R.id.item_found)
+                                        .setIcon(R.drawable.a1) ;
+
+                                bottomNavigationView.getMenu().findItem(R.id.item_vip)
+                                        .setIcon(R.drawable.a2) ;
+
+                                bottomNavigationView.getMenu().findItem(R.id.item_my)
+                                        .setIcon(R.drawable.a33) ;
                                 break;
                         }
                         return false;
@@ -133,7 +162,6 @@ web h5测试:
             });
         }
     }
-
 
     /*
     * return 1权限重新请求通过

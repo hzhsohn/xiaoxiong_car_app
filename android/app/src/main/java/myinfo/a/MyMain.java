@@ -171,7 +171,8 @@ public class MyMain extends BaseFragment {
                 {
                     transaction.setCustomAnimations(R.anim.in_0, R.anim.in_1); //自定义动画
                 }
-                transaction.replace(R.id.container3, new MyLogin()).commit();
+                //transaction.replace(R.id.container3, new MyLogin()).commit();
+                transaction.replace(R.id.container3, new MyinfoH5_Web()).commit();
             }
         });
     }
