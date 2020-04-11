@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
 /////   /////////////////
 /*
-web h5测试:
+//web h5测试:
         Intent intent = new Intent(this, H5Web_acty.class);
         Bundle bundle = new Bundle();//该类用作携带数据
         bundle.putString("url", "http://xt-sys.com/aaa.php");

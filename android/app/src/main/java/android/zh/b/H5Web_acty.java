@@ -203,6 +203,18 @@ public class H5Web_acty extends BaseActivity {
                         LoginInfo.clearLoginCfg(context);
                     }
                 }
+                else if(message.startsWith("url:"))
+                {
+                    String newurl=message.replace("url:","");
+
+                    Intent intent = new Intent(context, H5Web_acty.class);
+                    Bundle bundle = new Bundle();//该类用作携带数据
+                    bundle.putString("url",newurl);
+                    intent.putExtras(bundle);//附带上额外的数据
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.in_0, R.anim.in_1);
+
+                }
                 else {
                     Log.d("", "onJsAlert:" + message);
                     //对alert的简单封装
