@@ -174,7 +174,6 @@ public class FoundList extends BaseFragment {
                     intent.putExtras(bundle);//附带上额外的数据
                     startActivityFromFragment(intent, (byte) 0, (byte) 111);
                     getActivity().overridePendingTransition(R.anim.in_0, R.anim.in_1);
-
                 }
                 else {
                     Log.d("", "onJsAlert:" + message);
