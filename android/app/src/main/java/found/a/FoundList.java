@@ -79,7 +79,7 @@ public class FoundList extends BaseFragment {
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         //设置缓存模式
-        //webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
+        webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
 
         if(key.equals("")) {
             urlstr = HTTPData.sWebPhoneUrl_Index;
@@ -162,6 +162,12 @@ public class FoundList extends BaseFragment {
                     if(newmsg.equals("loginout"))
                     {
                         LoginInfo.clearLoginCfg(context);
+                    }
+                    else if (newmsg.equals("token:"))
+                    {
+                        String szKey=newmsg.replace("token:","");
+                        LoginInfo.saveVerifyKey(context,szKey);
+                        LoginInfo.saveKeyAliveNow();
                     }
                 }
                 else if(message.startsWith("url:"))

@@ -90,7 +90,7 @@ public class H5Web_acty extends BaseActivity {
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         //设置缓存模式
-        //webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
+        webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
         //
         timer = new Timer();
         timer.schedule(taskReloadPage, 0,5000);
