@@ -90,7 +90,15 @@ public class H5Web_acty extends BaseActivity {
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         //设置缓存模式
-        webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
+        //webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
+        //
+        webSettings.setDomStorageEnabled(true);  // 开启 DOM storage 功能
+        webSettings.setAppCacheMaxSize(1024*1024*8);
+        String appCachePath = context.getApplicationContext().getCacheDir().getAbsolutePath();
+        webSettings.setAppCachePath(appCachePath);
+        webSettings.setAllowFileAccess(true);    // 可以读取文件缓存
+        webSettings.setAppCacheEnabled(true);    //开启H5(APPCache)缓存功能
+
         //
         timer = new Timer();
         timer.schedule(taskReloadPage, 0,5000);

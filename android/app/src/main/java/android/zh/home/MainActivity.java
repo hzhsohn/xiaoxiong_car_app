@@ -48,11 +48,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
 /////   /////////////////
-/*
+
 //web h5测试:
-        Intent intent = new Intent(this, H5Web_acty.class);
+/*        Intent intent = new Intent(this, H5Web_acty.class);
         Bundle bundle = new Bundle();//该类用作携带数据
-        bundle.putString("url", "http://xt-sys.com/aaa.php");
+        //bundle.putString("url", "http://xt-sys.com/aaa.php");
+        bundle.putString("url", "http://47.115.187.147/webphone/#/common/index");
         intent.putExtras(bundle);//附带上额外的数据
         startActivity(intent);
         overridePendingTransition(R.anim.in_0, R.anim.in_1);
