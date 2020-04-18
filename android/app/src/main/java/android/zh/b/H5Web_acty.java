@@ -65,6 +65,14 @@ public class H5Web_acty extends BaseActivity {
         }
     };
 
+    public void to_url(String url)
+    {
+        my_url=url;
+        //
+        timer = new Timer();
+        timer.schedule(taskReloadPage, 0,5000);
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,10 +89,6 @@ public class H5Web_acty extends BaseActivity {
                 null);
         ((Toolbar)findViewById(R.id.toolbarId)).setVisibility(View.GONE);
         //
-        //
-        Bundle bundle = this.getIntent().getExtras();
-        my_url = bundle.getString("url");
-        //
         //WEBView浏览器
         webView = (WebView) findViewById(R.id.webView);
         WebSettings webSettings = webView.getSettings();
@@ -98,10 +102,9 @@ public class H5Web_acty extends BaseActivity {
         webSettings.setAppCachePath(appCachePath);
         webSettings.setAllowFileAccess(true);    // 可以读取文件缓存
         webSettings.setAppCacheEnabled(true);    //开启H5(APPCache)缓存功能
-
         //
-        timer = new Timer();
-        timer.schedule(taskReloadPage, 0,5000);
+        Bundle bundle = this.getIntent().getExtras();
+        to_url(bundle.getString("url"));
 
         //覆盖WebView默认使用第三方或系统默认浏览器打开网页的行为，使网页用WebView打开
         webView.setWebViewClient(new WebViewClient() {
@@ -151,12 +154,14 @@ public class H5Web_acty extends BaseActivity {
                 //这里要注意一下那个js的注入方法，不要在最后面放那个替换的方法，不然会出错
                 view.loadUrl("javascript: var allLinks = document.getElementsByTagName('a'); if (allLinks) {var i;for (i=0; i<allLinks.length; i++) {var link = allLinks[i];var target = link.getAttribute('target'); if (target && target == '_blank') {link.href = 'newtab:'+link.href;link.setAttribute('target','_self');}}}");
 
-                //
+
                 String key = LoginInfo.cfgVerifyKey(context);
                 view.loadUrl( "javascript: function userkey(){return '"+key+"';}");
 
-                timer.cancel(); //退出计时器
-                timer=null;
+                if(null!=timer) {
+                    timer.cancel(); //退出计时器
+                    timer = null;
+                }
             }
 
         });
