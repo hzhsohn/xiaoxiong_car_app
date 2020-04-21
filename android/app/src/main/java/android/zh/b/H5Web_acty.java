@@ -14,6 +14,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -25,6 +26,8 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
 import android.zh.home.BaseActivity;
+import android.zh.home.MainActivity;
+
 import com.xiaoxiongcar.R;
 
 import com.dou361.dialogui.DialogUIUtils;
@@ -312,7 +315,7 @@ public class H5Web_acty extends BaseActivity {
             // alert("cmd:closefrm");
             LoginInfo.clearLoginCfg(context);
         }
-        else if(command.startsWith("share"))
+        else if(command.startsWith("share|"))
         {
             String newmsg=command.replace("share|","");
             // alert("cmd:share|分享|标题|我是分享的内容http://www.hanzhihong.cn");
@@ -329,6 +332,41 @@ public class H5Web_acty extends BaseActivity {
                             }
                         }).create().show();
             }
+        }
+        else if(command.startsWith("setitem|"))
+        {
+            String newmsg=command.replace("setitem|","");
+            // alert("cmd:setitem|0|撸啊撸");
+            String[] strArr = newmsg.split("\\|",-1);
+            if(strArr.length>=2) {
+                if(strArr[0].equals("0"))
+                {
+                    MainActivity.bottomNavigationView.getMenu().findItem(R.id.item_found)
+                            .setTitle(strArr[1]) ;
+                }
+                else if(strArr[0].equals("1"))
+                {
+                    MainActivity.bottomNavigationView.getMenu().findItem(R.id.item_vip)
+                            .setTitle(strArr[1]) ;
+                }
+                else if(strArr[0].equals("2"))
+                {
+                    MainActivity.bottomNavigationView.getMenu().findItem(R.id.item_my)
+                            .setTitle(strArr[1]) ;
+                }
+            }else{
+                new AlertDialog.Builder(H5Web_acty.this).
+                        setTitle("提示").setMessage("setitem 需要两个参数 cmd:setitem|0|撸啊撸").setPositiveButton("确定",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface arg0, int arg1) {
+                                //TODO
+                            }
+                        }).create().show();
+            }
+
+
+
         }
     }
 

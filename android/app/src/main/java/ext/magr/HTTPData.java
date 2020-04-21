@@ -17,15 +17,18 @@ import java.util.List;
  */
 
 public class HTTPData {
-    static public final String sUserUrl="http://47.115.187.147/user/_j0";
-    static public final String sIconUrl="http://47.115.187.147/user/u_icon";//文件名是<userid>.jpg
-    static public final String sSMSUrl= "http://47.115.187.147/user/_sms";
-    static public final String sWebPhoneUrl="http://47.115.187.147/webphone/index.html";
-    static public final String sWebPhoneUrl_Reg="http://47.115.187.147/webphone/#/common/register";
-    static public final String sWebPhoneUrl_Index="http://47.115.187.147/webphone_index/#/common/index";
-    static public final String sWebPhoneUrl_JiZhao="http://47.115.187.147/webphone_vip/#/common/recommend";
-    static public final String sWebPhoneUrl_Center="http://47.115.187.147/webphone/#/client/center";
-    static public final String sUpdateUrl= "http://47.115.187.147/app_update";
+
+    static public final boolean isTestApp=true;
+    static public final String sWeb="http://47.115.187.147";  //测试服务器
+    static public final String sWebTestPage=sWeb+"/testAAA.php";  //测试服务器
+
+    //static public final String sWeb="http://8.129.208.43";      //正式服务器
+
+
+    static public final String sWebPhoneUrl_Index=sWeb+"/webphone_index/#/common/index";
+    static public final String sWebPhoneUrl_JiZhao=sWeb+"/webphone_vip/#/common/recommend";
+    static public final String sWebPhoneUrl_Center=sWeb+"/webphone/#/client/center";
+    static public final String sUpdateUrl=sWeb+ "/app_update";
     
     /* 例子
     private Handler handler = new Handler(Looper.getMainLooper()){

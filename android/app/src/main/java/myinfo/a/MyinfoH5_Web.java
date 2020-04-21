@@ -25,6 +25,7 @@ import android.webkit.WebViewClient;
 import android.widget.TextView;
 import android.zh.b.H5Web_acty;
 import android.zh.home.BaseFragment;
+import android.zh.home.MainActivity;
 
 import com.dou361.dialogui.DialogUIUtils;
 import com.xiaoxiongcar.R;
@@ -177,6 +178,38 @@ public class MyinfoH5_Web extends BaseFragment {
                         String szKey=newmsg.replace("token:","");
                         LoginInfo.saveVerifyKey(context,szKey);
                         LoginInfo.saveKeyAliveNow();
+                    }
+                    else if(newmsg.startsWith("setitem|"))
+                    {
+                        String newmsg2=newmsg.replace("setitem|","");
+                        // alert("cmd:setitem|0|撸啊撸");
+                        String[] strArr = newmsg2.split("\\|",-1);
+                        if(strArr.length>=2) {
+                            if(strArr[0].equals("0"))
+                            {
+                                MainActivity.bottomNavigationView.getMenu().findItem(R.id.item_found)
+                                        .setTitle(strArr[1]) ;
+                            }
+                            else if(strArr[0].equals("1"))
+                            {
+                                MainActivity.bottomNavigationView.getMenu().findItem(R.id.item_vip)
+                                        .setTitle(strArr[1]) ;
+                            }
+                            else if(strArr[0].equals("2"))
+                            {
+                                MainActivity.bottomNavigationView.getMenu().findItem(R.id.item_my)
+                                        .setTitle(strArr[1]) ;
+                            }
+                        }else{
+                            new AlertDialog.Builder(context).
+                                    setTitle("提示").setMessage("setitem 需要两个参数 cmd:setitem|0|撸啊撸").setPositiveButton("确定",
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface arg0, int arg1) {
+                                            //TODO
+                                        }
+                                    }).create().show();
+                        }
                     }
                 }
                 else if(message.startsWith("url:"))

@@ -21,6 +21,7 @@ import android.widget.Toast;
 import android.zh.b.H5Web_acty;
 
 import ext.func.AssertAlert;
+import ext.magr.HTTPData;
 import found.a.FoundList;
 import myinfo.a.MyinfoH5_Web;
 import vip.a.VipList;
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private final int PERMISSION_ID=666;
     private ViewPager viewPager;
     private MenuItem menuItem;
-    private BottomNavigationView bottomNavigationView;
+    static public BottomNavigationView bottomNavigationView;
 
     VersionInfo ver;
 
@@ -47,18 +48,21 @@ public class MainActivity extends AppCompatActivity {
 /////   /////////////////
 
 //web h5测试:
-        Intent intent = new Intent(this, H5Web_acty.class);
-        Bundle bundle = new Bundle();//该类用作携带数据
-        bundle.putString("url", "http://xt-sys.com/aaa.php");
-        intent.putExtras(bundle);//附带上额外的数据
-        startActivity(intent);
-        overridePendingTransition(R.anim.in_0, R.anim.in_1);
+        if(HTTPData.isTestApp) {
+            Intent intent = new Intent(this, H5Web_acty.class);
+            Bundle bundle = new Bundle();//该类用作携带数据
+            bundle.putString("url", HTTPData.sWebTestPage);
+            intent.putExtras(bundle);//附带上额外的数据
+            startActivity(intent);
+            overridePendingTransition(R.anim.in_0, R.anim.in_1);
+        }
 
         /////////////////
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         bottomNavigationView.setItemIconTintList(null);
+
 
         //默认 >3 的选中效果会影响ViewPager的滑动切换时的效果，故利用反射去掉
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
