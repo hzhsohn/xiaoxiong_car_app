@@ -36,6 +36,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import myinfo.logic.LoginInfo;
+import android.zh.home.NoScrollViewPager;
 
 
 public class H5Web_acty extends BaseActivity {
@@ -333,28 +334,22 @@ public class H5Web_acty extends BaseActivity {
                         }).create().show();
             }
         }
-        else if(command.startsWith("setitem|"))
-        {
-            String newmsg=command.replace("setitem|","");
+        else if(command.startsWith("setitem|")) {
+            String newmsg = command.replace("setitem|", "");
             // alert("cmd:setitem|0|撸啊撸");
-            String[] strArr = newmsg.split("\\|",-1);
-            if(strArr.length>=2) {
-                if(strArr[0].equals("0"))
-                {
+            String[] strArr = newmsg.split("\\|", -1);
+            if (strArr.length >= 2) {
+                if (strArr[0].equals("0")) {
                     MainActivity.bottomNavigationView.getMenu().findItem(R.id.item_found)
-                            .setTitle(strArr[1]) ;
-                }
-                else if(strArr[0].equals("1"))
-                {
+                            .setTitle(strArr[1]);
+                } else if (strArr[0].equals("1")) {
                     MainActivity.bottomNavigationView.getMenu().findItem(R.id.item_vip)
-                            .setTitle(strArr[1]) ;
-                }
-                else if(strArr[0].equals("2"))
-                {
+                            .setTitle(strArr[1]);
+                } else if (strArr[0].equals("2")) {
                     MainActivity.bottomNavigationView.getMenu().findItem(R.id.item_my)
-                            .setTitle(strArr[1]) ;
+                            .setTitle(strArr[1]);
                 }
-            }else{
+            } else {
                 new AlertDialog.Builder(H5Web_acty.this).
                         setTitle("提示").setMessage("setitem 需要两个参数 cmd:setitem|0|撸啊撸").setPositiveButton("确定",
                         new DialogInterface.OnClickListener() {
@@ -364,9 +359,14 @@ public class H5Web_acty extends BaseActivity {
                             }
                         }).create().show();
             }
-
-
-
+        }
+        else if(command.startsWith("noscroll"))
+        {
+            MainActivity.viewPager.setNoScroll(true);
+        }
+        else if(command.startsWith("scroll"))
+        {
+            MainActivity.viewPager.setNoScroll(false);
         }
     }
 

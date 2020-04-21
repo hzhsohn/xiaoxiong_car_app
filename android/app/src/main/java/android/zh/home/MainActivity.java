@@ -1,6 +1,7 @@
 package android.zh.home;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -15,8 +16,10 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.widget.Toast;
 import android.zh.b.H5Web_acty;
 
@@ -25,16 +28,13 @@ import ext.magr.HTTPData;
 import found.a.FoundList;
 import myinfo.a.MyinfoH5_Web;
 import vip.a.VipList;
-
 import com.xiaoxiongcar.R;
-
-import static com.dou361.dialogui.DialogUIUtils.showToast;
 
 
 public class MainActivity extends AppCompatActivity {
 
     private final int PERMISSION_ID=666;
-    private ViewPager viewPager;
+    static public  NoScrollViewPager viewPager;
     private MenuItem menuItem;
     static public BottomNavigationView bottomNavigationView;
 
@@ -59,10 +59,11 @@ public class MainActivity extends AppCompatActivity {
 
         /////////////////
 
-        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        viewPager = (NoScrollViewPager) findViewById(R.id.viewpager);
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         bottomNavigationView.setItemIconTintList(null);
-
+        //禁用滑动
+        viewPager.setNoScroll(true);
 
         //默认 >3 的选中效果会影响ViewPager的滑动切换时的效果，故利用反射去掉
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
@@ -94,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
                                 bottomNavigationView.getMenu().findItem(R.id.item_my)
                                         .setIcon(R.drawable.a3) ;
+
                                 break;
 
                             case R.id.item_my:
@@ -106,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
 
                                 bottomNavigationView.getMenu().findItem(R.id.item_my)
                                         .setIcon(R.drawable.a33) ;
+
                                 break;
                         }
                         return false;
@@ -127,10 +130,54 @@ public class MainActivity extends AppCompatActivity {
                 }
                 menuItem = bottomNavigationView.getMenu().getItem(position);
                 menuItem.setChecked(true);
+
+
+                switch (position) {
+                    case 0:
+                        viewPager.setCurrentItem(0);
+                        bottomNavigationView.getMenu().findItem(R.id.item_found)
+                                .setIcon(R.drawable.a11) ;
+
+                        bottomNavigationView.getMenu().findItem(R.id.item_vip)
+                                .setIcon(R.drawable.a2) ;
+
+                        bottomNavigationView.getMenu().findItem(R.id.item_my)
+                                .setIcon(R.drawable.a3) ;
+
+                        break;
+
+                    case 1:
+                        viewPager.setCurrentItem(1);
+                        bottomNavigationView.getMenu().findItem(R.id.item_found)
+                                .setIcon(R.drawable.a1) ;
+
+                        bottomNavigationView.getMenu().findItem(R.id.item_vip)
+                                .setIcon(R.drawable.a22) ;
+
+                        bottomNavigationView.getMenu().findItem(R.id.item_my)
+                                .setIcon(R.drawable.a3) ;
+
+                        break;
+
+                    case 2:
+                        viewPager.setCurrentItem(2);
+                        bottomNavigationView.getMenu().findItem(R.id.item_found)
+                                .setIcon(R.drawable.a1) ;
+
+                        bottomNavigationView.getMenu().findItem(R.id.item_vip)
+                                .setIcon(R.drawable.a2) ;
+
+                        bottomNavigationView.getMenu().findItem(R.id.item_my)
+                                .setIcon(R.drawable.a33) ;
+
+                        break;
+                }
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
+
+
             }
         });
 

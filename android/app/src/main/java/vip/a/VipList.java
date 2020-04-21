@@ -209,6 +209,14 @@ public class VipList extends BaseFragment {
                                     }).create().show();
                         }
                     }
+                    else if(newmsg.startsWith("noscroll"))
+                    {
+                        MainActivity.viewPager.setNoScroll(true);
+                    }
+                    else if(newmsg.startsWith("scroll"))
+                    {
+                        MainActivity.viewPager.setNoScroll(false);
+                    }
                 }
                 else if(message.startsWith("url:"))
                 {
