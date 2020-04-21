@@ -4,13 +4,11 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.res.ColorStateList;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityCompat;
@@ -23,9 +21,8 @@ import android.widget.Toast;
 import android.zh.b.H5Web_acty;
 
 import ext.func.AssertAlert;
-import ext.magr.HTTPData;
 import found.a.FoundList;
-import myinfo.a.MyMain;
+import myinfo.a.MyinfoH5_Web;
 import vip.a.VipList;
 
 import com.xiaoxiongcar.R;
@@ -48,16 +45,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
 /////   /////////////////
-/*
+
 //web h5测试:
         Intent intent = new Intent(this, H5Web_acty.class);
         Bundle bundle = new Bundle();//该类用作携带数据
-        //bundle.putString("url", "http://xt-sys.com/aaa.php");
-        bundle.putString("url", "http://47.115.187.147/test.php");
+        bundle.putString("url", "http://xt-sys.com/aaa.php");
         intent.putExtras(bundle);//附带上额外的数据
         startActivity(intent);
         overridePendingTransition(R.anim.in_0, R.anim.in_1);
-*/
+
         /////////////////
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
@@ -224,9 +220,9 @@ public class MainActivity extends AppCompatActivity {
         //加载界面
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
-        adapter.addFragment(FoundList.newInstance("@Found"));
+        adapter.addFragment(FoundList.newInstance("@Index"));
         adapter.addFragment(VipList.newInstance("@Vip"));
-        adapter.addFragment(MyMain.newInstance("@My"));
+        adapter.addFragment(MyinfoH5_Web.newInstance("@My"));
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(adapter.getCount());
     }

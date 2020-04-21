@@ -66,13 +66,13 @@
             android:name="myinfo.logged.iotinfo.ModifyIcon"
             android:screenOrientation="portrait" />
         <activity
-            android:name="myinfo.qrscan.zxing.android.CaptureActivity"
+            android:name="ext.qrscan.zxing.android.CaptureActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="myinfo.qrscan.result.QRUrl"
+            android:name="ext.qrscan.result.QRUrl"
             android:screenOrientation="portrait" />
         <activity
-            android:name="myinfo.qrscan.result.QRText"
+            android:name="ext.qrscan.result.QRText"
             android:screenOrientation="portrait" />
         <activity android:name="p3th.easylink.EasyLinkConfigActivity"
             android:screenOrientation="portrait" />

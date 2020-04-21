@@ -20,7 +20,6 @@ import android.view.View;
 import android.webkit.JsResult;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
-import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -205,16 +204,9 @@ public class H5Web_acty extends BaseActivity {
                     //在这里拦截加了newtab:前缀的URL，来进行你要做的操作
                     //利用replace（）方法去掉前缀
                     String newmsg=message.replace("cmd:","");
+                    //执行指令
+                    cmd_do(newmsg);
 
-                    if(newmsg.equals("closefrm"))
-                    {
-                        finish();
-                        overridePendingTransition(R.anim.back_0, R.anim.back_1);
-                    }
-                    else if(newmsg.equals("loginout"))
-                    {
-                        LoginInfo.clearLoginCfg(context);
-                    }
                 }
                 else if(message.startsWith("url:"))
                 {
@@ -305,4 +297,56 @@ public class H5Web_acty extends BaseActivity {
         uploadMessageAboveL = null;
     }
 
+
+    //JS指令
+    private void cmd_do(String command)
+    {
+        if(command.startsWith("closefrm"))
+        {
+            // alert("cmd:closefrm");
+            finish();
+            overridePendingTransition(R.anim.back_0, R.anim.back_1);
+        }
+        else if(command.startsWith("loginout"))
+        {
+            // alert("cmd:closefrm");
+            LoginInfo.clearLoginCfg(context);
+        }
+        else if(command.startsWith("share"))
+        {
+            String newmsg=command.replace("share|","");
+            // alert("cmd:share|分享|标题|我是分享的内容http://www.hanzhihong.cn");
+            String[] strArr = newmsg.split("\\|",-1);
+            if(strArr.length>=3) {
+                Share(strArr[0], strArr[1], strArr[2]);
+            }else{
+                new AlertDialog.Builder(H5Web_acty.this).
+                        setTitle("提示").setMessage("share 需要三个参数 cmd:share|分享|标题|我是分享的内容").setPositiveButton("确定",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface arg0, int arg1) {
+                                //TODO
+                            }
+                        }).create().show();
+            }
+        }
+    }
+
+
+//////////////////////////////////////////////////////
+    //第三方功能
+    /**
+     * Android原生分享功能
+     * 默认选取手机所有可以分享的APP
+     */
+    public void Share(String digName,String title,String content){
+        Intent share_intent = new Intent();
+        share_intent.setAction(Intent.ACTION_SEND);//设置分享行为
+        share_intent.setType("text/plain");//设置分享内容的类型
+        share_intent.putExtra(Intent.EXTRA_SUBJECT, title);//添加分享内容标题
+        share_intent.putExtra(Intent.EXTRA_TEXT, content);//添加分享内容
+        //创建分享的Dialog
+        share_intent = Intent.createChooser(share_intent, digName);
+        startActivity(share_intent);
+    }
 }

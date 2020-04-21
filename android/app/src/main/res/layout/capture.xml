@@ -10,7 +10,7 @@
         android:layout_height="fill_parent" />
 
     <!-- 扫描取景框 -->
-    <myinfo.qrscan.zxing.view.ViewfinderView
+    <ext.qrscan.zxing.view.ViewfinderView
         android:id="@+id/viewfinder_view"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" />
