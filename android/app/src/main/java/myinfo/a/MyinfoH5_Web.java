@@ -31,12 +31,14 @@ import com.dou361.dialogui.DialogUIUtils;
 import com.xiaoxiongcar.R;
 
 import ext.magr.HTTPData;
+import found.a.FoundList;
 import myinfo.logic.LoginInfo;
+import vip.a.VipList;
 
 
 public class MyinfoH5_Web extends BaseFragment {
     Context context = null;
-    WebView webView = null;
+    static public WebView webView = null;
     Dialog loadDialog;
     View g_view=null;
 
@@ -218,6 +220,22 @@ public class MyinfoH5_Web extends BaseFragment {
                     else if(newmsg.startsWith("scroll"))
                     {
                         MainActivity.viewPager.setNoScroll(false);
+                    }
+                    else if (newmsg.startsWith("reload|"))
+                    {
+                        String page=newmsg.replace("reload|","");
+                        if(page.equals("0"))
+                        {
+                            FoundList.webView.reload();
+                        }
+                        else if(page.equals("1"))
+                        {
+                            VipList.webView.reload();
+                        }
+                        else if(page.equals("2"))
+                        {
+                            MyinfoH5_Web.webView.reload();
+                        }
                     }
                 }
                 else if(message.startsWith("url:"))

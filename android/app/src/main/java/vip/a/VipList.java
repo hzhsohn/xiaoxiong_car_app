@@ -28,12 +28,14 @@ import com.dou361.dialogui.DialogUIUtils;
 import com.xiaoxiongcar.R;
 
 import ext.magr.HTTPData;
+import found.a.FoundList;
+import myinfo.a.MyinfoH5_Web;
 import myinfo.logic.LoginInfo;
 
 
 public class VipList extends BaseFragment {
     Context context = null;
-    WebView webView = null;
+    static public WebView webView = null;
     Dialog loadDialog;
     View g_view=null;
 
@@ -171,9 +173,9 @@ public class VipList extends BaseFragment {
                     {
                         LoginInfo.clearLoginCfg(context);
                     }
-                    else if (newmsg.equals("token:"))
+                    else if (newmsg.equals("token|"))
                     {
-                        String szKey=newmsg.replace("token:","");
+                        String szKey=newmsg.replace("token|","");
                         LoginInfo.saveVerifyKey(context,szKey);
                         LoginInfo.saveKeyAliveNow();
                     }
@@ -216,6 +218,22 @@ public class VipList extends BaseFragment {
                     else if(newmsg.startsWith("scroll"))
                     {
                         MainActivity.viewPager.setNoScroll(false);
+                    }
+                    else if (newmsg.startsWith("reload|"))
+                    {
+                        String page=newmsg.replace("reload|","");
+                        if(page.equals("0"))
+                        {
+                            FoundList.webView.reload();
+                        }
+                        else if(page.equals("1"))
+                        {
+                            VipList.webView.reload();
+                        }
+                        else if(page.equals("2"))
+                        {
+                            MyinfoH5_Web.webView.reload();
+                        }
                     }
                 }
                 else if(message.startsWith("url:"))

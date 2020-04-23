@@ -35,7 +35,11 @@ import com.dou361.dialogui.DialogUIUtils;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import found.a.FoundList;
+import myinfo.a.MyinfoH5_Web;
 import myinfo.logic.LoginInfo;
+import vip.a.VipList;
+
 import android.zh.home.NoScrollViewPager;
 
 
@@ -367,6 +371,22 @@ public class H5Web_acty extends BaseActivity {
         else if(command.startsWith("scroll"))
         {
             MainActivity.viewPager.setNoScroll(false);
+        }
+        else if (command.equals("reload|"))
+        {
+            String page=command.replace("reload|","");
+            if(page.equals("0"))
+            {
+                FoundList.webView.reload();
+            }
+            else if(page.equals("1"))
+            {
+                VipList.webView.reload();
+            }
+            else if(page.equals("2"))
+            {
+                MyinfoH5_Web.webView.reload();
+            }
         }
     }
 
