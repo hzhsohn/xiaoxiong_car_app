@@ -372,7 +372,7 @@ public class H5Web_acty extends BaseActivity {
         {
             MainActivity.viewPager.setNoScroll(false);
         }
-        else if (command.equals("reload|"))
+        else if (command.startsWith("reload|"))
         {
             String page=command.replace("reload|","");
             if(page.equals("0"))
