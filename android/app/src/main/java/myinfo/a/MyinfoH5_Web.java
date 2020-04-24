@@ -142,7 +142,6 @@ public class MyinfoH5_Web extends BaseFragment {
                 if (loadDialog!=null&&loadDialog.isShowing())
                     loadDialog.cancel();
 
-
                 //设置标题
                 TextView tvInfo = (TextView)g_view.findViewById(R.id.toolbar_title);
                 tvInfo.setText(view.getTitle());

@@ -46,12 +46,40 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
 /////   /////////////////
+        if(HTTPData.isTestApp)
+        {
+            HTTPData.sWeb=HTTPData.sWebTest;
+
+
+        }
+        else
+        {
+            HTTPData.sWeb=HTTPData.sWebOK;
+
+        }
+
+        //-------------------------
+        HTTPData.sWebTestPage=HTTPData.sWeb+"/testAAA.php";  //测试服务器
+        HTTPData.sWebStartPage=HTTPData.sWeb+"/startpage";  //测试服务器
+        HTTPData.sWebPhoneUrl_Index=HTTPData.sWeb+"/webphone_index/#/common/index";
+        HTTPData.sWebPhoneUrl_JiZhao=HTTPData.sWeb+"/webphone_vip/#/common/recommend";
+        HTTPData.sWebPhoneUrl_Center=HTTPData.sWeb+"/webphone/#/client/center";
+        HTTPData.sUpdateUrl=HTTPData.sWeb+ "/app_update";
+
 
 //web h5测试:
         if(HTTPData.isTestApp) {
             Intent intent = new Intent(this, H5Web_acty.class);
             Bundle bundle = new Bundle();//该类用作携带数据
             bundle.putString("url", HTTPData.sWebTestPage);
+            intent.putExtras(bundle);//附带上额外的数据
+            startActivity(intent);
+            overridePendingTransition(R.anim.in_0, R.anim.in_1);
+        }
+        else{
+            Intent intent = new Intent(this, H5Web_acty.class);
+            Bundle bundle = new Bundle();//该类用作携带数据
+            bundle.putString("url", HTTPData.sWebStartPage);
             intent.putExtras(bundle);//附带上额外的数据
             startActivity(intent);
             overridePendingTransition(R.anim.in_0, R.anim.in_1);

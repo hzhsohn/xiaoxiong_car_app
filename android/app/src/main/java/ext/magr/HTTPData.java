@@ -18,18 +18,23 @@ import java.util.List;
 
 public class HTTPData {
 
-    static public final boolean isTestApp=true;
-    static public final String sWeb="http://47.115.187.147";  //测试服务器
-    static public final String sWebTestPage=sWeb+"/testAAA.php";  //测试服务器
+    static public final boolean isTestApp=false;
 
-    //static public final String sWeb="http://8.129.208.43";      //正式服务器
+    //-------------------------
+    static public final String sWebTest="http://47.115.187.147";  //测试服务器
+    static public final String sWebOK="http://8.129.208.43";      //正式服务器
 
+    //-------------------------
+    static public  String sWeb;
+    static public  String sWebTestPage;  //测试服务器
+    static public  String sWebStartPage;  //测试服务器
 
-    static public final String sWebPhoneUrl_Index=sWeb+"/webphone_index/#/common/index";
-    static public final String sWebPhoneUrl_JiZhao=sWeb+"/webphone_vip/#/common/recommend";
-    static public final String sWebPhoneUrl_Center=sWeb+"/webphone/#/client/center";
-    static public final String sUpdateUrl=sWeb+ "/app_update";
-    
+    //-------------------------
+    static public  String sWebPhoneUrl_Index;
+    static public  String sWebPhoneUrl_JiZhao;
+    static public  String sWebPhoneUrl_Center;
+    static public  String sUpdateUrl;
+
     /* 例子
     private Handler handler = new Handler(Looper.getMainLooper()){
         public void handleMessage(android.os.Message msg) {
@@ -57,6 +62,7 @@ public class HTTPData {
         };
     };
     */
+
     static public void getHttpData(final Handler handler, final String str_url, final String parameter) {
         //访问网络，把html源文件下载下来
         new Thread() {
