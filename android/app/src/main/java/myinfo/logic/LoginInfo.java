@@ -96,4 +96,27 @@ public class LoginInfo {
         String fn=dir+filename+".jpg";
         return fn;
     }
+
+    static public void saveStartPageDone(Context cxt,String key) {
+        verifyKey=key;
+        //写
+        Properties prop = new Properties();
+        prop.put("key", key);
+        ConfigMagr.saveConfig(cxt,"hx-kong", "startpage-done", prop);
+    }
+
+    static public boolean readStartPageDone(Context cxt) {
+        boolean b = false;
+        //读
+        Properties prop = ConfigMagr.loadConfig(cxt,"hx-kong", "startpage-done");
+        if (prop != null) {
+            String key = (String) prop.get("key");
+            if(key!=null) {
+                if (!key.equals("")) {
+                    b = true;
+                }
+            }
+        }
+        return b;
+    }
 }

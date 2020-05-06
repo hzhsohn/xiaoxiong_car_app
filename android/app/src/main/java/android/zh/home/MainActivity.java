@@ -27,6 +27,7 @@ import ext.func.AssertAlert;
 import ext.magr.HTTPData;
 import found.a.FoundList;
 import myinfo.a.MyinfoH5_Web;
+import myinfo.logic.LoginInfo;
 import vip.a.VipList;
 import com.xiaoxiongcar.R;
 
@@ -54,8 +55,7 @@ public class MainActivity extends AppCompatActivity {
         }
         else
         {
-            HTTPData.sWeb=HTTPData.sWebOK;
-
+            HTTPData.sWeb = HTTPData.sWebOK;
         }
 
         //-------------------------
@@ -65,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
         HTTPData.sWebPhoneUrl_JiZhao=HTTPData.sWeb+"/webphone_vip/#/common/recommend";
         HTTPData.sWebPhoneUrl_Center=HTTPData.sWeb+"/webphone/#/client/center";
         HTTPData.sUpdateUrl=HTTPData.sWeb+ "/app_update";
-
 
 //web h5测试:
         if(HTTPData.isTestApp) {
@@ -77,12 +76,15 @@ public class MainActivity extends AppCompatActivity {
             overridePendingTransition(R.anim.in_0, R.anim.in_1);
         }
         else{
-            Intent intent = new Intent(this, H5Web_acty.class);
-            Bundle bundle = new Bundle();//该类用作携带数据
-            bundle.putString("url", HTTPData.sWebStartPage);
-            intent.putExtras(bundle);//附带上额外的数据
-            startActivity(intent);
-            overridePendingTransition(R.anim.in_0, R.anim.in_1);
+            //是否再次显示开始页
+            if(!LoginInfo.readStartPageDone(this)) {
+                Intent intent = new Intent(this, H5Web_acty.class);
+                Bundle bundle = new Bundle();//该类用作携带数据
+                bundle.putString("url", HTTPData.sWebStartPage);
+                intent.putExtras(bundle);//附带上额外的数据
+                startActivity(intent);
+                overridePendingTransition(R.anim.in_0, R.anim.in_1);
+            }
         }
 
         /////////////////

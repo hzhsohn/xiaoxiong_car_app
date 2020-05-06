@@ -315,6 +315,14 @@ public class H5Web_acty extends BaseActivity {
             finish();
             overridePendingTransition(R.anim.back_0, R.anim.back_1);
         }
+        else if(command.startsWith("startpage_clear"))
+        {
+            LoginInfo.saveStartPageDone(context,"");
+        }
+        else if(command.startsWith("startpage_done"))
+        {
+            LoginInfo.saveStartPageDone(context,"ok");
+        }
         else if(command.startsWith("loginout"))
         {
             // alert("cmd:closefrm");
