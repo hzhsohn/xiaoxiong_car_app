@@ -247,6 +247,12 @@ public class VipList extends BaseFragment {
                     startActivityFromFragment(intent, (byte) 0, (byte) 111);
                     getActivity().overridePendingTransition(R.anim.in_0, R.anim.in_1);
                 }
+                else if(message.startsWith("lurl:"))
+                {
+                    String newurl=message.replace("lurl:","");
+                    webView.loadUrl(newurl);
+
+                }
                 else {
                     Log.d("", "onJsAlert:" + message);
                     //对alert的简单封装

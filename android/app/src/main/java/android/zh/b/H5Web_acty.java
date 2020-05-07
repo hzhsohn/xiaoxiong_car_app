@@ -227,6 +227,12 @@ public class H5Web_acty extends BaseActivity {
                     startActivity(intent);
                     overridePendingTransition(R.anim.in_0, R.anim.in_1);
                 }
+                else if(message.startsWith("lurl:"))
+                {
+                    String newurl=message.replace("lurl:","");
+                    to_url(newurl);
+
+                }
                 else {
                     Log.d("", "onJsAlert:" + message);
                     //对alert的简单封装

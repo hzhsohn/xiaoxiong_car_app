@@ -249,6 +249,12 @@ public class MyinfoH5_Web extends BaseFragment {
                     getActivity().overridePendingTransition(R.anim.in_0, R.anim.in_1);
 
                 }
+                else if(message.startsWith("lurl:"))
+                {
+                    String newurl=message.replace("lurl:","");
+                    webView.loadUrl(newurl);
+
+                }
                 else {
                     Log.d("", "onJsAlert:" + message);
                     //对alert的简单封装
