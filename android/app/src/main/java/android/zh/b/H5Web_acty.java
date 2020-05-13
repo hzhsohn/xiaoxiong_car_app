@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -50,6 +51,7 @@ public class H5Web_acty extends BaseActivity {
     Dialog loadDialog;
     String my_url;
     Timer timer=null;
+    SwipeRefreshLayout mSwipe=null;
 
     private ValueCallback<Uri> uploadMessage;
     private ValueCallback<Uri[]> uploadMessageAboveL;
@@ -96,8 +98,26 @@ public class H5Web_acty extends BaseActivity {
                 null);
         ((Toolbar)findViewById(R.id.toolbarId)).setVisibility(View.GONE);
         //
+
+        mSwipe=findViewById(R.id.sf_layout);
+
         //WEBView浏览器
         webView = (WebView) findViewById(R.id.webView);
+
+        /*
+         * 设置下拉刷新的监听
+         */
+        mSwipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                //刷新需执行的操作
+                //刷新完成
+                webView.reload();
+                mSwipe.setRefreshing(false);
+            }
+        });
+
+        //设置WEB参数
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         //设置缓存模式
@@ -321,6 +341,14 @@ public class H5Web_acty extends BaseActivity {
             finish();
             overridePendingTransition(R.anim.back_0, R.anim.back_1);
         }
+        else if(command.startsWith("start_refresh"))
+        {
+            mSwipe.setEnabled(true);
+        }
+        else if(command.startsWith("stop_refresh"))
+        {
+            mSwipe.setEnabled(false);
+        }
         else if(command.startsWith("startpage_clear"))
         {
             LoginInfo.saveStartPageDone(context,"");
@@ -402,6 +430,8 @@ public class H5Web_acty extends BaseActivity {
                 MyinfoH5_Web.webView.reload();
             }
         }
+
+
     }
 
 

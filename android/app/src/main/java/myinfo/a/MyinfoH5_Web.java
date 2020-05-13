@@ -8,7 +8,10 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -30,6 +33,9 @@ import android.zh.home.MainActivity;
 import com.dou361.dialogui.DialogUIUtils;
 import com.xiaoxiongcar.R;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import ext.magr.HTTPData;
 import found.a.FoundList;
 import myinfo.logic.LoginInfo;
@@ -41,6 +47,37 @@ public class MyinfoH5_Web extends BaseFragment {
     static public WebView webView = null;
     Dialog loadDialog;
     View g_view=null;
+    SwipeRefreshLayout mSwipe=null;
+
+    String my_url;
+    Timer timer=null;
+
+    private TimerTask taskReloadPage = new TimerTask() {
+        public void run() {
+
+            //重新加载一次页面
+            Handler mainHandler = new Handler(Looper.getMainLooper());
+            mainHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    //已在主线程中，可以更新UI
+                    webView.loadUrl(my_url);
+                }
+            });
+
+            System.gc();
+        }
+    };
+
+
+    public void to_url(String url)
+    {
+        my_url=url;
+        //
+        timer = new Timer();
+        timer.schedule(taskReloadPage, 0,5000);
+    }
+
 
     public static MyinfoH5_Web newInstance(String param1) {
         MyinfoH5_Web fragment = new MyinfoH5_Web();
@@ -76,6 +113,7 @@ public class MyinfoH5_Web extends BaseFragment {
         TextView tvInfo = (TextView) view.findViewById(R.id.toolbar_title);
         tvInfo.setText("");
         g_view=view;
+        mSwipe=view.findViewById(R.id.sf_layout);
         //
         String urlstr;
         String key = LoginInfo.cfgVerifyKey(context);
@@ -101,7 +139,8 @@ public class MyinfoH5_Web extends BaseFragment {
             urlstr=HTTPData.sWebPhoneUrl_Center+"/?key=" + key;
         }
 
-        webView.loadUrl(urlstr);
+        to_url(urlstr);
+
         //覆盖WebView默认使用第三方或系统默认浏览器打开网页的行为，使网页用WebView打开
         webView.setWebViewClient(new WebViewClient() {
 
@@ -131,16 +170,16 @@ public class MyinfoH5_Web extends BaseFragment {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
-                if (loadDialog==null||!loadDialog.isShowing())
-                    loadDialog = DialogUIUtils.showLoading(context,getString(R.string.Loading),true,false,false,true).show();
+             //   if (loadDialog==null||!loadDialog.isShowing())
+             //       loadDialog = DialogUIUtils.showLoading(context,getString(R.string.Loading),true,false,false,true).show();
 
             }
 
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-                if (loadDialog!=null&&loadDialog.isShowing())
-                    loadDialog.cancel();
+             //   if (loadDialog!=null&&loadDialog.isShowing())
+             //       loadDialog.cancel();
 
                 //设置标题
                 TextView tvInfo = (TextView)g_view.findViewById(R.id.toolbar_title);
@@ -152,6 +191,13 @@ public class MyinfoH5_Web extends BaseFragment {
                 //
                 String key = LoginInfo.cfgVerifyKey(context);
                 view.loadUrl( "javascript: function userkey(){return '"+key+"';}");
+
+
+                if(null!=timer) {
+                    timer.cancel(); //退出计时器
+                    timer = null;
+                }
+
             }
         });
 
@@ -276,6 +322,19 @@ public class MyinfoH5_Web extends BaseFragment {
 
 
         });
+        /*
+         * 设置下拉刷新的监听
+         */
+        mSwipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                //刷新需执行的操作
+                //刷新完成
+                webView.reload();
+                mSwipe.setRefreshing(false);
+            }
+        });
     }
+
 
 }
