@@ -84,6 +84,23 @@
     web.delegate=nil;
 }
 
+#pragma mark - 下拉刷新
+- (void)headerRefresh{
+    [web reload];
+}
+
+#pragma mark - 上拉加载
+- (void)footerRefresh{
+}
+
+#pragma mark - 结束下拉刷新和上拉加载
+- (void)endRefresh{
+
+    //当请求数据成功或失败后，如果你导入的MJRefresh库是最新的库，就用下面的方法结束下拉刷新和上拉加载事件
+    [web.scrollView.mj_header endRefreshing];
+    [web.scrollView.mj_footer endRefreshing];
+
+}
 -(void) loadWeb:(NSString*)url_str
 {
     if (0==strncmp([url_str UTF8String], "http", 4))
@@ -137,30 +154,15 @@
     //页面加载完成后加载下面的javascript，修改页面中所有用target="_blank"标记的url（在url前加标记为“newtab”）
     //这里要注意一下那个js的注入方法，不要在最后面放那个替换的方法，不然会出错
     [web stringByEvaluatingJavaScriptFromString:@"javascript: var allLinks = document.getElementsByTagName('a'); if (allLinks) {var i;for (i=0; i<allLinks.length; i++) {var link = allLinks[i];var target = link.getAttribute('target'); if (target && target == '_blank') {link.href = 'newtab:'+link.href;link.setAttribute('target','_self');}}}"];
-
+    
+    [self endRefresh];
 }
 
-#pragma mark - 下拉刷新
-- (void)headerRefresh{
-    [web reload];
-}
-
-#pragma mark - 上拉加载
-- (void)footerRefresh{
-}
-
-#pragma mark - 结束下拉刷新和上拉加载
-- (void)endRefresh{
-
-    //当请求数据成功或失败后，如果你导入的MJRefresh库是最新的库，就用下面的方法结束下拉刷新和上拉加载事件
-    [web.scrollView.mj_header endRefreshing];
-    [web.scrollView.mj_footer endRefreshing];
-
-}
 
 //加载失败
 -(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
+    [self endRefresh];
     //出现刷新按钮
     viConnectFail.alpha=1;
     viConnectFail.hidden=NO;
