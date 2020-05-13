@@ -1,6 +1,4 @@
 //
-//  CloudManage.m
-//  discolor-led
 //
 //  Created by Han.zh on 15/2/7.
 //  Copyright (c) 2015年 Han.zhihong. All rights reserved.
@@ -66,7 +64,7 @@
     [indLoading setHidden:YES];
     
     [web setOpaque:NO];//opaque是不透明的意思
-    [web setScalesPageToFit:YES];//自动缩放以适应屏幕
+    [web setScalesPageToFit:NO];//自动缩放以适应屏幕
     
     [self loadWeb:self.default_url];//主页
     
