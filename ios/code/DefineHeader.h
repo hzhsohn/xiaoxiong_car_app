@@ -10,13 +10,8 @@
 
 #import <UIKit/UIKit.h>
 
-#define WEB_INDEX_URL @"http://47.115.187.147/webphone/index.html#/common/index"
-#define WEB_INDEX2_URL @"http://47.115.187.147/webphone/index.html#/common/recommend"
-
-#define ACCOUNT_URL                     @"http://47.115.187.147/user"
-#define IOT_URL_INFO                    @"http://47.115.187.147"
-
-#define WEB_SIGNUP_URL                   @"http://47.115.187.147/webphone/#/common/register"
-#define WEB_FORGOT_URL                   @"http://47.115.187.147/webphone?forgot"
+#define WEB_INDEX_URL @"http://daichepin.com/webphone_index/#/common/index"
+#define WEB_INDEX2_URL @"http://daichepin.com/webphone_vip/#/common/recommend"
+#define WEB_INDEX3_URL @"http://daichepin.com/webphone/#/client/center"
 
 #endif /* DefineHeader_h */

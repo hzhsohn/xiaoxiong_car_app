@@ -7,7 +7,6 @@
 //
 
 #import "MainTabController.h"
-#import "WebBrower.h"
 #import "DefineHeader.h"
 #import <MapKit/MapKit.h>
 
@@ -19,8 +18,6 @@ CLLocationCoordinate2D g_GoogleLocation;
     //坐标信息
     CLLocationManager *m_locationManager;
     MKMapView *m_map;
-    //
-    int nOOChangePos;
 }
 @end
 
@@ -30,7 +27,6 @@ CLLocationCoordinate2D g_GoogleLocation;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.delegate = self;
-    nOOChangePos=0;
 }
 
 -(void) viewWillAppear:(BOOL)animated
@@ -64,7 +60,7 @@ CLLocationCoordinate2D g_GoogleLocation;
     frm = [UIStoryboard storyboardWithName:@"VipController" bundle:nil];
     nv2=(UINavigationController*)frm.instantiateInitialViewController;
     
-    frm = [UIStoryboard storyboardWithName:@"MyProfile" bundle:nil];
+    frm = [UIStoryboard storyboardWithName:@"MyPController" bundle:nil];
     nv3=(UINavigationController*)frm.instantiateInitialViewController;
     
     NSMutableArray *tabc = [[NSMutableArray alloc] init];//[self viewControllers]
@@ -98,28 +94,12 @@ CLLocationCoordinate2D g_GoogleLocation;
 
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
 {
-    //个人中心界面,限制只返回到界面1的位置
-    if(3==nOOChangePos && 3==tabBarController.selectedIndex)
-    {
-            UINavigationController*nav=tabBarController.selectedViewController;
-            if(nav.viewControllers.count>1)
-            {
-                [nav popToViewController:nav.viewControllers[1] animated:YES];
-                return NO;
-            }
-    }
+  
     return YES;
 }
 
 -(void) tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
 {
-    for(int i=0;i<tabBar.items.count;i++)
-    {
-        if(tabBar.items[i]==item)
-        {
-            nOOChangePos=i;
-        }
-    }
 }
 
 - (void)didReceiveMemoryWarning {

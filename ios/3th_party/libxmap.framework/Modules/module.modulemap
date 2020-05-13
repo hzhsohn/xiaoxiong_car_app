@@ -1,6 +1,0 @@
-framework module libxmap {
-  umbrella header "libxmap.h"
-
-  export *
-  module * { export * }
-}

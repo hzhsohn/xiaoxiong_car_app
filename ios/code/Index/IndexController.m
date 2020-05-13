@@ -9,8 +9,8 @@
 #import "IndexController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "DefineHeader.h"
-#import "ProjectAccountCfg.h"
 #import "WebController.h"
+#import <MJRefresh/MJRefresh.h>
 
 @interface IndexController ()<UIWebViewDelegate>
 {
@@ -19,6 +19,7 @@
     __weak IBOutlet UIView *viConnectFail;
     //首页的URL
     NSString* default_urlstr;
+    
 }
 
 -(void) loadWeb:(NSString*)url_str;
@@ -52,12 +53,13 @@
     [super viewDidLoad];
     
     //设置标题
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
+    /*NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
                           [UIColor whiteColor],NSForegroundColorAttributeName,
                           [UIFont systemFontOfSize:17],NSFontAttributeName,
                           nil];
     self.navigationController.navigationBar.titleTextAttributes=dict;
-    
+    */
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
     //初始化
     [indLoading setBounds:CGRectMake(0, 0, 130, 130)];
     [indLoading setBackgroundColor:[UIColor grayColor]];
@@ -70,12 +72,36 @@
     [web setScalesPageToFit:YES];//自动缩放以适应屏幕
     
     default_urlstr=WEB_INDEX_URL;
-    default_urlstr=@"http://xt-sys.com/aaa.php";
     [self loadWeb:default_urlstr];//主页
     
     viConnectFail.alpha=0;
     viConnectFail.hidden=YES;
+    
+    //如果你导入的MJRefresh库是最新的库，就用下面的方法创建下拉刷新和上拉加载事件
+    web.scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
+    //web.scrollView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self //refreshingAction:@selector(footerRefresh)];
+    
 }
+
+
+#pragma mark - 下拉刷新
+- (void)headerRefresh{
+    [web reload];
+}
+
+#pragma mark - 上拉加载
+- (void)footerRefresh{
+}
+
+#pragma mark - 结束下拉刷新和上拉加载
+- (void)endRefresh{
+
+    //当请求数据成功或失败后，如果你导入的MJRefresh库是最新的库，就用下面的方法结束下拉刷新和上拉加载事件
+    [web.scrollView.mj_header endRefreshing];
+    [web.scrollView.mj_footer endRefreshing];
+
+}
+
 
 -(void)dealloc
 {
@@ -121,8 +147,9 @@
     NSLog(@"web start load");
     viConnectFail.alpha=0;
     viConnectFail.hidden=YES;
-    [indLoading startAnimating];
-    [indLoading setHidden:NO];
+    //[indLoading startAnimating];
+    //[indLoading setHidden:NO];
+    [self endRefresh];
 }
 //数据加载完
 - (void)webViewDidFinishLoad:(UIWebView *)webView
@@ -135,8 +162,6 @@
     //这里要注意一下那个js的注入方法，不要在最后面放那个替换的方法，不然会出错
     [web stringByEvaluatingJavaScriptFromString:@"javascript: var allLinks = document.getElementsByTagName('a'); if (allLinks) {var i;for (i=0; i<allLinks.length; i++) {var link = allLinks[i];var target = link.getAttribute('target'); if (target && target == '_blank') {link.href = 'newtab:'+link.href;link.setAttribute('target','_self');}}}"];
     
-    NSString*key=[ProjectAccountCfg getKey];
-    [web stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"javascript: function userkey(){return '%@';}",key]];
 
 }
 

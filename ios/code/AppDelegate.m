@@ -7,11 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import  <libHxkNet/McuNet.h>
-#import "McuGlobalParameter.h"
-
-//Part用到的全局参数
-McuGlobalParameter *mcuParameter;
 
 
 @interface AppDelegate ()
@@ -23,8 +18,6 @@ McuGlobalParameter *mcuParameter;
 {
     // Override point for customization after application launch.
     
-    //初始参数服务
-    mcuParameter=[[McuGlobalParameter alloc] init];
     return YES;
 }
 
@@ -46,7 +39,6 @@ McuGlobalParameter *mcuParameter;
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     
-    NSLog(@"applicationWillResignActive");
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

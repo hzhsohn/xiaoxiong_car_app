@@ -15,7 +15,7 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" id="vb0-At-yPf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" systemColor="tertiarySystemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jjX-a2-KJ1" userLabel="First Responder" sceneMemberID="firstResponder"/>

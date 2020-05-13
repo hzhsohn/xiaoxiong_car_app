@@ -78,8 +78,8 @@
             filePath = "code/Index/IndexController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "89"
-            endingLineNumber = "89"
+            startingLineNumber = "116"
+            endingLineNumber = "116"
             landmarkName = "-loadWeb:"
             landmarkType = "7">
          </BreakpointContent>
@@ -94,8 +94,8 @@
             filePath = "code/Index/IndexController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "97"
-            endingLineNumber = "97"
+            startingLineNumber = "124"
+            endingLineNumber = "124"
             landmarkName = "-webView:shouldStartLoadWithRequest:navigationType:"
             landmarkType = "7">
          </BreakpointContent>
@@ -113,6 +113,22 @@
             startingLineNumber = "50"
             endingLineNumber = "50"
             landmarkName = "-viewDidLoad"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4AC5F47C-44AD-4CA6-BAC4-9291AAB836FD"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "code/Index/IndexController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
+            landmarkName = "-footerRefresh"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
