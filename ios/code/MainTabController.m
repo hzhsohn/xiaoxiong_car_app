@@ -54,13 +54,13 @@ CLLocationCoordinate2D g_GoogleLocation;
     UIStoryboard *frm=NULL;
     UINavigationController *nv1=NULL,*nv2=NULL,*nv3=NULL;
     
-    frm = [UIStoryboard storyboardWithName:@"IndexController" bundle:nil];
+    frm = [UIStoryboard storyboardWithName:@"webwk" bundle:nil];
     nv1=(UINavigationController*)frm.instantiateInitialViewController;
     
-    frm = [UIStoryboard storyboardWithName:@"VipController" bundle:nil];
+    frm = [UIStoryboard storyboardWithName:@"webwk2" bundle:nil];
     nv2=(UINavigationController*)frm.instantiateInitialViewController;
     
-    frm = [UIStoryboard storyboardWithName:@"MyPController" bundle:nil];
+    frm = [UIStoryboard storyboardWithName:@"webwk3" bundle:nil];
     nv3=(UINavigationController*)frm.instantiateInitialViewController;
     
     NSMutableArray *tabc = [[NSMutableArray alloc] init];//[self viewControllers]

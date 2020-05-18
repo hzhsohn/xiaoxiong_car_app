@@ -1,4 +1,6 @@
 //
+//  CloudManage.m
+//  discolor-led
 //
 //  Created by Han.zh on 15/2/7.
 //  Copyright (c) 2015年 Han.zhihong. All rights reserved.
@@ -7,14 +9,18 @@
 #import "WebController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "DefineHeader.h"
+#import "WebController.h"
 #import <MJRefresh/MJRefresh.h>
+#import <Foundation/Foundation.h>
+//! 导入WebKit框架头文件
+#import <WebKit/WebKit.h>
 
-@interface WebController ()<UIWebViewDelegate>
+@interface WebController ()<UIWebViewDelegate,WKNavigationDelegate,WKUIDelegate>
 {
-    __weak IBOutlet UIWebView *web;
-    __weak IBOutlet UIActivityIndicatorView *indLoading;
-    __weak IBOutlet UIView *viConnectFail;
- 
+    WKWebView *wkweb;
+    //首页的URL
+    NSString* default_urlstr;
+    
 }
 
 -(void) loadWeb:(NSString*)url_str;
@@ -52,41 +58,46 @@
                           [UIColor whiteColor],NSForegroundColorAttributeName,
                           [UIFont systemFontOfSize:17],NSFontAttributeName,
                           nil];
-    self.navigationController.navigationBar.titleTextAttributes=dict;*/
+    self.navigationController.navigationBar.titleTextAttributes=dict;
+    */
     [self.navigationController setNavigationBarHidden:YES animated:NO];
+   
+    //
+    WKWebViewConfiguration *config = [WKWebViewConfiguration new];
+    config.preferences = [WKPreferences new];
+    config.preferences.javaScriptEnabled = YES;
+    config.preferences.javaScriptCanOpenWindowsAutomatically = YES;
+    NSString *jScript = @"var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);";
+    WKUserScript *wkUScript = [[WKUserScript alloc] initWithSource:jScript injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
+    WKUserContentController *wkUController = [[WKUserContentController alloc] init];
+    [wkUController addUserScript:wkUScript];
     
-    //初始化
-    [indLoading setBounds:CGRectMake(0, 0, 130, 130)];
-    [indLoading setBackgroundColor:[UIColor grayColor]];
-    indLoading.alpha=0.75f;
-    indLoading.layer.cornerRadius = 10;//设置那个圆角的有多圆
-    indLoading.layer.borderWidth = 0;//设置边框的宽度
-    [indLoading setHidden:YES];
-    
-    [web setOpaque:NO];//opaque是不透明的意思
-    [web setScalesPageToFit:NO];//自动缩放以适应屏幕
-    
-    [self loadWeb:self.default_url];//主页
-    
-    viConnectFail.alpha=0;
-    viConnectFail.hidden=YES;
+    //scalesPageToFit
+    config.userContentController = wkUController;
+            
+    CGRect f=self.view.bounds;
+    f.origin.y+=20;
+    wkweb = [[WKWebView alloc]initWithFrame:f configuration:config];
+    wkweb.navigationDelegate = self;
+    wkweb.UIDelegate = self;
+    [wkweb setOpaque:NO];//opaque是不透明的意思
+    [self.view addSubview: wkweb];
     
     //如果你导入的MJRefresh库是最新的库，就用下面的方法创建下拉刷新和上拉加载事件
-    web.scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
+    wkweb.scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
     //web.scrollView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self //refreshingAction:@selector(footerRefresh)];
     
-}
-
--(void)dealloc
-{
-    //[super dealloc];
-    [web stopLoading];
-    web.delegate=nil;
+    //滚动栏处理
+    wkweb.scrollView.showsVerticalScrollIndicator = NO;
+    //
+    default_urlstr=WEB_INDEX3_URL;
+    [self loadWeb:default_urlstr];//主页
+    
 }
 
 #pragma mark - 下拉刷新
 - (void)headerRefresh{
-    [web reload];
+    [wkweb reload];
 }
 
 #pragma mark - 上拉加载
@@ -97,77 +108,115 @@
 - (void)endRefresh{
 
     //当请求数据成功或失败后，如果你导入的MJRefresh库是最新的库，就用下面的方法结束下拉刷新和上拉加载事件
-    [web.scrollView.mj_header endRefreshing];
-    [web.scrollView.mj_footer endRefreshing];
+    [wkweb.scrollView.mj_header endRefreshing];
+    [wkweb.scrollView.mj_footer endRefreshing];
 
 }
+
+-(void)dealloc
+{
+    //[super dealloc];
+    [wkweb stopLoading];
+    wkweb=nil;
+}
+
 -(void) loadWeb:(NSString*)url_str
 {
-    if (0==strncmp([url_str UTF8String], "http", 4))
-    { [web loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url_str]]]; }
-    else
-    { [web loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:url_str]]]; }
+    //
+    NSURL *url = [NSURL URLWithString:default_urlstr];
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
+    [wkweb loadRequest:request];
 }
 
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
-     NSString*s=[[request URL] absoluteString];
-       NSLog(@"shouldStartLoadWithRequest = %@",s);
-       char *purl=(char*)[s UTF8String];
-       if(0==memcmp(purl,"newtab:",7))
-       {
-           //打开新界面
-           UIStoryboard *frm=NULL;
-           
-           frm = [UIStoryboard storyboardWithName:@"WebController" bundle:nil];
-           WebController*wb=(WebController*)frm.instantiateInitialViewController;
-           wb.default_url=[NSString stringWithUTF8String:purl+7];
-           NSLog(@"wb.default_url = %@",wb.default_url);
-           [self.navigationController pushViewController:wb animated:YES];
-           return FALSE;
-       }
-       else
-       {
-           return TRUE;
-       }
+    NSString*s=[[request URL] absoluteString];
+    NSLog(@"shouldStartLoadWithRequest = %@",s);
+    char *purl=(char*)[s UTF8String];
+    if(0==memcmp(purl,"newtab:",7))
+    {
+        //打开新界面
+        UIStoryboard *frm=NULL;
+        
+        frm = [UIStoryboard storyboardWithName:@"WebController" bundle:nil];
+        WebController*wb=(WebController*)frm.instantiateInitialViewController;
+        wb.default_url=[NSString stringWithUTF8String:purl+7];
+        NSLog(@"wb.default_url = %@",wb.default_url);
+        [self.navigationController pushViewController:wb animated:YES];
+        return FALSE;
+    }
+    else
+    {
+        return TRUE;
+    }
 }
 
-//开始加载数据
-- (void)webViewDidStartLoad:(UIWebView *)webView
+
+#pragma mark - WKUIDelegate
+
+//html加载失败
+- (void)webView:(WKWebView *)webView didFailNavigation:(WKNavigation *)navigation withError:(NSError *)error
 {
-    NSLog(@"web start load");
-    viConnectFail.alpha=0;
-    viConnectFail.hidden=YES;
-    [indLoading startAnimating];
-    [indLoading setHidden:NO];
+    NSLog(@"error message:%@",error);
 }
-//数据加载完
-- (void)webViewDidFinishLoad:(UIWebView *)webView
+
+//html开始加载
+- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation
 {
-    NSLog(@"web finish load");
-    [indLoading stopAnimating];
-    [indLoading setHidden:YES];
-    
-    self.title=[webView stringByEvaluatingJavaScriptFromString:@"document.title"];
-    
-    
-    //页面加载完成后加载下面的javascript，修改页面中所有用target="_blank"标记的url（在url前加标记为“newtab”）
-    //这里要注意一下那个js的注入方法，不要在最后面放那个替换的方法，不然会出错
-    [web stringByEvaluatingJavaScriptFromString:@"javascript: var allLinks = document.getElementsByTagName('a'); if (allLinks) {var i;for (i=0; i<allLinks.length; i++) {var link = allLinks[i];var target = link.getAttribute('target'); if (target && target == '_blank') {link.href = 'newtab:'+link.href;link.setAttribute('target','_self');}}}"];
+    NSLog(@"begin load html");
+}
+
+//html加载完成
+- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
+{
+    NSLog(@"finish load");
+    [webView evaluateJavaScript:@"javascript: var allLinks = document.getElementsByTagName('a'); if (allLinks) {var i;for (i=0; i<allLinks.length; i++) {var link = allLinks[i];var target = link.getAttribute('target'); if (target && target == '_blank') {link.href = 'newtab:'+link.href;link.setAttribute('target','_self');}}}"  completionHandler:^(id _Nullable response, NSError * _Nullable error) {
+        
+        NSLog(@"response: %@ error: %@", response, error);
+    }];
     
     [self endRefresh];
 }
 
-
-//加载失败
--(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
-{
-    [self endRefresh];
-    //出现刷新按钮
-    viConnectFail.alpha=1;
-    viConnectFail.hidden=NO;
-    [indLoading stopAnimating];
-    [indLoading setHidden:YES];
+//! alert(message)
+- (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler {
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Alert" message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        completionHandler();
+    }];
+    [alertController addAction:cancelAction];
+    [self presentViewController:alertController animated:YES completion:nil];
 }
+
+//! confirm(message)
+- (void)webView:(WKWebView *)webView runJavaScriptConfirmPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(BOOL))completionHandler {
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Confirm" message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        completionHandler(NO);
+    }];
+    UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        completionHandler(YES);
+    }];
+    [alertController addAction:cancelAction];
+    [alertController addAction:confirmAction];
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
+//! prompt(prompt, defaultText)
+- (void)webView:(WKWebView *)webView runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(NSString *)defaultText initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(NSString *))completionHandler {
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:prompt message:nil preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.placeholder = defaultText;
+    }];
+    UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        completionHandler(alertController.textFields[0].text);
+    }];
+    [alertController addAction:confirmAction];
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
 
 @end

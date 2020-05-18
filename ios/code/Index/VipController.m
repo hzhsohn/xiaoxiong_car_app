@@ -6,7 +6,7 @@
 //  Copyright (c) 2015年 Han.zhihong. All rights reserved.
 //
 
-#import "IndexController.h"
+#import "VipController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "DefineHeader.h"
 #import "WebController.h"
@@ -15,7 +15,7 @@
 //! 导入WebKit框架头文件
 #import <WebKit/WebKit.h>
 
-@interface IndexController ()<UIWebViewDelegate,WKNavigationDelegate,WKUIDelegate>
+@interface VipController ()<WKNavigationDelegate,WKUIDelegate>
 {
     WKWebView *wkweb;
     //首页的URL
@@ -27,7 +27,7 @@
 
 @end
 
-@implementation IndexController
+@implementation VipController
 
 -(void)awakeFromNib
 {
@@ -90,7 +90,7 @@
     //滚动栏处理
     wkweb.scrollView.showsVerticalScrollIndicator = NO;
     //
-    default_urlstr=WEB_INDEX_URL;
+    default_urlstr=WEB_INDEX2_URL;
     [self loadWeb:default_urlstr];//主页
     
 }

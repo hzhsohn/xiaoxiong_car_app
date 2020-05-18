@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="xo4-I7-EG4">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--商店导航-->
+        <scene sceneID="ixS-TA-NVF">
+            <objects>
+                <navigationController id="xo4-I7-EG4" userLabel="商店导航" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="R85-rW-qVT"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="HcN-Ai-1wm">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" red="0.0" green="0.64705882349999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="OIY-J6-aaf" kind="relationship" relationship="rootViewController" id="odL-Tq-5Mf"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="z8O-Nh-7Cx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2074" y="500"/>
+        </scene>
+        <!--商店-->
+        <scene sceneID="8RB-a5-whu">
+            <objects>
+                <viewController restorationIdentifier="Store" storyboardIdentifier="Store" title="商店" id="OIY-J6-aaf" customClass="VipController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="CfA-VY-mEo"/>
+                        <viewControllerLayoutGuide type="bottom" id="KG5-RR-udI"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="enq-8d-PzS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item 2" id="uIc-dL-7ay"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="OjE-gX-Lw9"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9iZ-g7-K88" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1250.4000000000001" y="499.70014992503752"/>
+        </scene>
+    </scenes>
+</document>

@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-
 ////////////////////////////////////////
 
 /* 测试例子
@@ -41,14 +40,14 @@ static BOOL diagStat = NO;
     if (0==strncmp([message UTF8String], "cmd:", 4))
     {
         //添加控制命令
-        [self.delegate webView:sender CommandDelegate:[NSString stringWithUTF8String:[message UTF8String]+4]];
+      //  [self.delegate webView:sender CommandDelegate:[NSString stringWithUTF8String:[message UTF8String]+4]];
     }
     else
     {
         
         UIAlertView* customAlert = [[UIAlertView alloc] initWithTitle:@"" message:message delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
         [customAlert show];
-        [customAlert release];
+       // [customAlert release];
         customAlert=nil;
     }
 }
@@ -69,7 +68,7 @@ static BOOL diagStat = NO;
         [[NSRunLoop mainRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.01f]];
     
     
-    [confirmDiag release];
+    //[confirmDiag release];
     confirmDiag=nil;
     
     return diagStat;
@@ -91,14 +90,14 @@ static BOOL diagStat = NO;
     nameField.backgroundColor = [UIColor whiteColor];
     [nameField setText:mes];
     [promptDiag addSubview:nameField];
-    [nameField release];
+   // [nameField release];
     
     [promptDiag show];
     
     while (promptDiag.hidden == NO && promptDiag.superview != nil)
         [[NSRunLoop mainRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.01f]];
     
-    [promptDiag release];
+    //[promptDiag release];
     
     if(diagStat)
         
