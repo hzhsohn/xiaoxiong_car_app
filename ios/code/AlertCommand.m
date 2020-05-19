@@ -16,7 +16,7 @@
 #import "IndexController.h"
 #import "VipController.h"
 #import "MyPController.h"
-
+#import "WXApi.h"
 
 @implementation AlertCommand
 
@@ -69,7 +69,7 @@
             NSArray *strArr = [lsdata componentsSeparatedByString:@"|"];
             
             if([strArr count]>=3) {
-               
+                [self shareWeChatLink:strArr[0] :strArr[1] :strArr[2]];
             }
         }
         /*else if(command.startsWith("setitem|")) {
@@ -119,6 +119,39 @@
     }
     
     return false;
+}
+
+
+/** 分享链接*/
+- (void)shareWeChatLink:(NSString*)url :(NSString*)title :(NSString*)mark
+{
+    SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
+    WXMediaMessage *message = [WXMediaMessage message];
+    WXWebpageObject *ext = [WXWebpageObject object];
+    //需要分享的链接
+    ext.webpageUrl = url;
+    //多媒体数据对象
+    message.mediaObject = ext;
+    //分享的链接介绍文本
+    message.description = mark;
+    //分享的链接标题
+    message.title = title;
+    //给分享链接设置小图标
+    [message setThumbImage:[UIImage imageNamed:@"shareTest"]];
+    //标记不是分享文本
+    req.bText = NO;
+    //设置message对象
+    req.message = message;
+    // 分享目标场景
+    // 发送到聊天界面  WXSceneSession
+    // 发送到朋友圈    WXSceneTimeline
+    // 发送到微信收藏  WXSceneFavorite
+    req.scene = WXSceneSession;
+    //发起微信分享
+    BOOL isInstalled = [WXApi sendReq:req];
+    if (isInstalled == NO) {
+        //调用微信分享失败 如：没有安装微信
+    }
 }
 
 

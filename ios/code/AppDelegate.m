@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "WXApi.h"
 
 
 @interface AppDelegate ()
@@ -17,10 +18,39 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    
+    [WXApi registerApp:@"在微信开放平台申请的appid" withDescription:@"ShareDemo"];
     return YES;
 }
 
+-(BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options{
+    return  [WXApi handleOpenURL:url delegate:self];
+}
+
+// onReq是微信终端向第三方程序发起请求，要求第三方程序响应。第三方程序响应完后必须调用sendRsp返回。在调用sendRsp返回时，会切回到微信终端程序界面
+- (void)onReq:(BaseReq *)req
+{
+   
+}
+
+// 如果第三方程序向微信发送了sendReq的请求，那么onResp会被回调。sendReq请求调用后，会切到微信终端程序界面
+- (void)onResp:(BaseResp *)resp
+{
+    NSLog(@"回调处理");
+    // 处理 分享请求 回调
+    if ([resp isKindOfClass:[SendMessageToWXResp class]]) {
+        switch (resp.errCode) {
+            case WXSuccess:
+                //分享成功
+                break;
+            case WXErrCodeUserCancel:
+                //用户取消分享
+                break;
+            default:
+                //分享失败
+                break;
+        }
+    }
+}
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.

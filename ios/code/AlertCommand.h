@@ -14,5 +14,6 @@
 -(id) init;
 -(void)dealloc;
 -(bool) command:(NSString*)str :(UIViewController*)sel :(WKWebView*)wkv;
-
+//
+- (void)shareWeChatLink:(NSString*)url :(NSString*)title :(NSString*)mark;
 @end
