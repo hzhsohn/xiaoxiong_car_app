@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 #import <WebKit/WebKit.h>
 
-@interface IndexController : UIViewController
+@interface AlertCommand : NSObject
 
-+(WKWebView *)getWeb;
+-(id) init;
+-(void)dealloc;
+-(bool) command:(NSString*)str :(UIViewController*)sel :(WKWebView*)wkv;
 
 @end

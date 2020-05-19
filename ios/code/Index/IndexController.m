@@ -14,10 +14,12 @@
 #import <Foundation/Foundation.h>
 //! 导入WebKit框架头文件
 #import <WebKit/WebKit.h>
+#import "AlertCommand.h"
+
+WKWebView *g_wkweb1;
 
 @interface IndexController ()<UIWebViewDelegate,WKNavigationDelegate,WKUIDelegate>
 {
-    WKWebView *wkweb;
     //首页的URL
     NSString* default_urlstr;
     
@@ -77,27 +79,32 @@
             
     CGRect f=self.view.bounds;
     f.origin.y+=20;
-    wkweb = [[WKWebView alloc]initWithFrame:f configuration:config];
-    wkweb.navigationDelegate = self;
-    wkweb.UIDelegate = self;
-    [wkweb setOpaque:NO];//opaque是不透明的意思
-    [self.view addSubview: wkweb];
+    g_wkweb1 = [[WKWebView alloc]initWithFrame:f configuration:config];
+    g_wkweb1.navigationDelegate = self;
+    g_wkweb1.UIDelegate = self;
+    [g_wkweb1 setOpaque:NO];//opaque是不透明的意思
+    [self.view addSubview: g_wkweb1];
     
     //如果你导入的MJRefresh库是最新的库，就用下面的方法创建下拉刷新和上拉加载事件
-    wkweb.scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
+    g_wkweb1.scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
     //web.scrollView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self //refreshingAction:@selector(footerRefresh)];
     
     //滚动栏处理
-    wkweb.scrollView.showsVerticalScrollIndicator = NO;
+    g_wkweb1.scrollView.showsVerticalScrollIndicator = NO;
     //
     default_urlstr=WEB_INDEX_URL;
     [self loadWeb:default_urlstr];//主页
-    
+
+}
+
++(WKWebView *)getWeb
+{
+    return g_wkweb1;
 }
 
 #pragma mark - 下拉刷新
 - (void)headerRefresh{
-    [wkweb reload];
+    [g_wkweb1 reload];
 }
 
 #pragma mark - 上拉加载
@@ -108,16 +115,16 @@
 - (void)endRefresh{
 
     //当请求数据成功或失败后，如果你导入的MJRefresh库是最新的库，就用下面的方法结束下拉刷新和上拉加载事件
-    [wkweb.scrollView.mj_header endRefreshing];
-    [wkweb.scrollView.mj_footer endRefreshing];
+    [g_wkweb1.scrollView.mj_header endRefreshing];
+    [g_wkweb1.scrollView.mj_footer endRefreshing];
 
 }
 
 -(void)dealloc
 {
     //[super dealloc];
-    [wkweb stopLoading];
-    wkweb=nil;
+    [g_wkweb1 stopLoading];
+    g_wkweb1=nil;
 }
 
 -(void) loadWeb:(NSString*)url_str
@@ -125,7 +132,7 @@
     //
     NSURL *url = [NSURL URLWithString:default_urlstr];
     NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
-    [wkweb loadRequest:request];
+    [g_wkweb1 loadRequest:request];
 }
 
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
@@ -181,12 +188,21 @@
 //! alert(message)
 - (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler {
     
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Alert" message:message preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    AlertCommand* acmd=[[AlertCommand alloc] init];
+    if(false==[acmd command:message :self :g_wkweb1])
+    {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Alert" message:message preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            completionHandler();
+        }];
+        [alertController addAction:cancelAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }
+    else
+    {
         completionHandler();
-    }];
-    [alertController addAction:cancelAction];
-    [self presentViewController:alertController animated:YES completion:nil];
+    }
+    acmd=nil;
 }
 
 //! confirm(message)

@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <WebKit/WebKit.h>
 
 @interface MyPController : UIViewController
+
++(WKWebView *)getWeb;
 
 @end

@@ -14,12 +14,11 @@
 #import <Foundation/Foundation.h>
 //! 导入WebKit框架头文件
 #import <WebKit/WebKit.h>
+#import "AlertCommand.h"
 
 @interface WebController ()<UIWebViewDelegate,WKNavigationDelegate,WKUIDelegate>
 {
     WKWebView *wkweb;
-    //首页的URL
-    NSString* default_urlstr;
     
 }
 
@@ -89,11 +88,11 @@
     
     //滚动栏处理
     wkweb.scrollView.showsVerticalScrollIndicator = NO;
-    //
-    default_urlstr=WEB_INDEX3_URL;
-    [self loadWeb:default_urlstr];//主页
     
+    //访问页面
+    [self loadWeb:self.default_url];//主页
 }
+
 
 #pragma mark - 下拉刷新
 - (void)headerRefresh{
@@ -123,7 +122,7 @@
 -(void) loadWeb:(NSString*)url_str
 {
     //
-    NSURL *url = [NSURL URLWithString:default_urlstr];
+    NSURL *url = [NSURL URLWithString:url_str];
     NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
     [wkweb loadRequest:request];
 }
@@ -181,12 +180,22 @@
 //! alert(message)
 - (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler {
     
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Alert" message:message preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    AlertCommand* acmd=[[AlertCommand alloc] init];
+    if(false==[acmd command:message :self :wkweb])
+    {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Alert" message:message preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            completionHandler();
+        }];
+        [alertController addAction:cancelAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }
+    else
+    {
         completionHandler();
-    }];
-    [alertController addAction:cancelAction];
-    [self presentViewController:alertController animated:YES completion:nil];
+    }
+    acmd=nil;
+    
 }
 
 //! confirm(message)

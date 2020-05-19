@@ -84,6 +84,7 @@
 		38A76025236008780007714D /* AFNetworking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 38A76017236008620007714D /* AFNetworking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		38C98D5E24726E5F00A499E5 /* webwk2.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38C98D5024726E5F00A499E5 /* webwk2.storyboard */; };
 		38C98D6024726E6500A499E5 /* webwk3.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38C98D5F24726E6500A499E5 /* webwk3.storyboard */; };
+		38C98D732473E22100A499E5 /* AlertCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C98D722473E22100A499E5 /* AlertCommand.m */; };
 		38D3C7CB1FAF599800CB8C8F /* McuGlobalParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D3C7CA1FAF599800CB8C8F /* McuGlobalParameter.m */; };
 		38E651361F0E478E00301D8E /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E6512B1F0E478E00301D8E /* SVIndefiniteAnimatedView.m */; };
 		38E651371F0E478E00301D8E /* SVProgressAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E6512D1F0E478E00301D8E /* SVProgressAnimatedView.m */; };
@@ -353,6 +354,8 @@
 		38A7600C236008620007714D /* AFNetworking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AFNetworking.xcodeproj; path = "AFNetworking-master/AFNetworking.xcodeproj"; sourceTree = "<group>"; };
 		38C98D5024726E5F00A499E5 /* webwk2.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = webwk2.storyboard; sourceTree = "<group>"; };
 		38C98D5F24726E6500A499E5 /* webwk3.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = webwk3.storyboard; sourceTree = "<group>"; };
+		38C98D642473E22100A499E5 /* AlertCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertCommand.h; sourceTree = "<group>"; };
+		38C98D722473E22100A499E5 /* AlertCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertCommand.m; sourceTree = "<group>"; };
 		38D3C7C91FAF599800CB8C8F /* McuGlobalParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = McuGlobalParameter.h; sourceTree = "<group>"; };
 		38D3C7CA1FAF599800CB8C8F /* McuGlobalParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = McuGlobalParameter.m; sourceTree = "<group>"; };
 		38E6512A1F0E478E00301D8E /* SVIndefiniteAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVIndefiniteAnimatedView.h; sourceTree = "<group>"; };
@@ -788,6 +791,8 @@
 				383521241E65EEF300FAA97A /* MainTabController.h */,
 				383521251E65EEF300FAA97A /* MainTabController.m */,
 				383521441E672FC500FAA97A /* DefineHeader.h */,
+				38C98D642473E22100A499E5 /* AlertCommand.h */,
+				38C98D722473E22100A499E5 /* AlertCommand.m */,
 				388FE08324237C1B00816625 /* WebController.h */,
 				388FE07824237C1B00816625 /* WebController.m */,
 				388FE08424237C1B00816625 /* WebController.storyboard */,
@@ -1071,6 +1076,7 @@
 				3878ADA31EFA6BE6004A9DC3 /* ZipFile.m in Sources */,
 				385E64331EA74C6C0058460D /* WebProc.m in Sources */,
 				3835214C1E673E6300FAA97A /* ScanResult.m in Sources */,
+				38C98D732473E22100A499E5 /* AlertCommand.m in Sources */,
 				388FE08524237C1B00816625 /* WebController.m in Sources */,
 				38E6514A1F0E520600301D8E /* MBProgressHUD.m in Sources */,
 				3878AC4B1EFA69D0004A9DC3 /* Objc_AudioPlay.m in Sources */,

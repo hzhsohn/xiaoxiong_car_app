@@ -341,14 +341,6 @@ public class H5Web_acty extends BaseActivity {
             finish();
             overridePendingTransition(R.anim.back_0, R.anim.back_1);
         }
-        else if(command.startsWith("start_refresh"))
-        {
-            mSwipe.setEnabled(true);
-        }
-        else if(command.startsWith("stop_refresh"))
-        {
-            mSwipe.setEnabled(false);
-        }
         else if(command.startsWith("startpage_clear"))
         {
             LoginInfo.saveStartPageDone(context,"");
