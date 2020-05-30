@@ -127,13 +127,7 @@ public class FoundList extends BaseFragment {
         webSettings.setAllowFileAccess(true);    // 可以读取文件缓存
         webSettings.setAppCacheEnabled(true);    //开启H5(APPCache)缓存功能
 
-        if(key.equals("")) {
-            urlstr = HTTPData.sWebPhoneUrl_Index;
-        }
-        else
-        {
-            urlstr=HTTPData.sWebPhoneUrl_Index+"/?key=" + key;
-        }
+        urlstr = HTTPData.sWebPhoneUrl_Index;
 
         to_url(urlstr);
 
@@ -193,6 +187,12 @@ public class FoundList extends BaseFragment {
                 if(null!=timer) {
                     timer.cancel(); //退出计时器
                     timer = null;
+                }
+
+                //判断网页是否被黑
+                if (!url.startsWith("http:") && !url.startsWith("https:"))
+                {
+                    webView.loadUrl(HTTPData.sWebPhoneUrl_Index);
                 }
 
             }

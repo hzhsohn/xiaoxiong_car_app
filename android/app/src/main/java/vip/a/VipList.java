@@ -129,13 +129,7 @@ public class VipList extends BaseFragment {
         webSettings.setAppCacheEnabled(true);    //开启H5(APPCache)缓存功能
 
 
-        if(key.equals("")) {
-            urlstr = HTTPData.sWebPhoneUrl_JiZhao;
-        }
-        else
-        {
-            urlstr=HTTPData.sWebPhoneUrl_JiZhao+"/?key=" + key;
-        }
+        urlstr = HTTPData.sWebPhoneUrl_JiZhao;
 
         to_url(urlstr);
 
@@ -197,6 +191,11 @@ public class VipList extends BaseFragment {
                     timer = null;
                 }
 
+                //判断网页是否被黑
+                if (!url.startsWith("http:") && !url.startsWith("https:"))
+                {
+                    webView.loadUrl(HTTPData.sWebPhoneUrl_JiZhao);
+                }
             }
         });
 

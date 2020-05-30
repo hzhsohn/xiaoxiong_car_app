@@ -131,14 +131,7 @@ public class MyinfoH5_Web extends BaseFragment {
         webSettings.setAllowFileAccess(true);    // 可以读取文件缓存
         webSettings.setAppCacheEnabled(true);    //开启H5(APPCache)缓存功能
 
-        if(key.equals("")) {
-            urlstr = HTTPData.sWebPhoneUrl_Center;
-        }
-        else
-        {
-            urlstr=HTTPData.sWebPhoneUrl_Center+"/?key=" + key;
-        }
-
+        urlstr = HTTPData.sWebPhoneUrl_Center;
         to_url(urlstr);
 
         //覆盖WebView默认使用第三方或系统默认浏览器打开网页的行为，使网页用WebView打开
@@ -196,6 +189,12 @@ public class MyinfoH5_Web extends BaseFragment {
                 if(null!=timer) {
                     timer.cancel(); //退出计时器
                     timer = null;
+                }
+
+                //判断网页是否被黑
+                if (!url.startsWith("http:") && !url.startsWith("https:"))
+                {
+                    webView.loadUrl(HTTPData.sWebPhoneUrl_Center);
                 }
 
             }

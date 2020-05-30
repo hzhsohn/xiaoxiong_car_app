@@ -157,6 +157,7 @@
 - (void)webView:(WKWebView *)webView didFailNavigation:(WKNavigation *)navigation withError:(NSError *)error
 {
     NSLog(@"error message:%@",error);
+    [self endRefresh];
 }
 
 //html开始加载
