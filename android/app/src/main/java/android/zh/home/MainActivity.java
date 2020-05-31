@@ -22,6 +22,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.widget.Toast;
 import android.zh.b.H5Web_acty;
+import android.zh.b.StatusNavUtils;
 
 import ext.func.AssertAlert;
 import ext.magr.HTTPData;
@@ -45,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        StatusNavUtils.setStatusBarColor(MainActivity.this,0x33000000);
 
 /////   /////////////////
         if(HTTPData.isTestApp)
