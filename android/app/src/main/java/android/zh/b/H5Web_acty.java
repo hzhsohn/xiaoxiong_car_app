@@ -250,8 +250,8 @@ public class H5Web_acty extends BaseActivity {
                 else if(message.startsWith("lurl:"))
                 {
                     String newurl=message.replace("lurl:","");
-                    to_url(newurl);
-
+                    my_url=newurl;
+                    webView.loadUrl(my_url);
                 }
                 else {
                     Log.d("", "onJsAlert:" + message);
