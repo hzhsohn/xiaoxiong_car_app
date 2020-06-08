@@ -35,10 +35,10 @@ NSString * const MJRefreshHeaderRefreshingBoundsKey = @"MJRefreshHeaderRefreshin
 - (void)prepare
 {
     [super prepare];
-    
+
     // 设置key
     self.lastUpdatedTimeKey = MJRefreshHeaderLastUpdatedTimeKey;
-    
+
     // 设置高度
     self.mj_h = MJRefreshHeaderHeight;
 }
@@ -57,7 +57,7 @@ NSString * const MJRefreshHeaderRefreshingBoundsKey = @"MJRefreshHeaderRefreshin
         // 如果 iOS 10 及以下系统在刷新时, push 新的 VC, 等待刷新完成后回来, 会导致顶部 Insets.top 异常, 不能 resetInset, 检查一下这种特殊情况
         if (!self.window) { return; }
     }
-    
+
     // sectionheader停留解决
     CGFloat insetT = - self.scrollView.mj_offsetY > _scrollViewOriginalInset.top ? - self.scrollView.mj_offsetY : _scrollViewOriginalInset.top;
     insetT = insetT > self.mj_h + _scrollViewOriginalInset.top ? self.mj_h + _scrollViewOriginalInset.top : insetT;

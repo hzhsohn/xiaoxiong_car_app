@@ -75,9 +75,9 @@
             timeWidth = self.lastUpdatedTimeLabel.mj_textWidth;
         }
         CGFloat textWidth = MAX(stateWidth, timeWidth);
-        arrowCenterX -= textWidth / 2 + self.labelLeftInset;
+       // arrowCenterX -= textWidth / 2 + self.labelLeftInset;
     }
-    CGFloat arrowCenterY = self.mj_h * 0.5;
+    CGFloat arrowCenterY = self.mj_h * 0.5+10;
     CGPoint arrowCenter = CGPointMake(arrowCenterX, arrowCenterY);
     
     // 箭头

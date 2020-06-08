@@ -15,6 +15,7 @@
 //! 导入WebKit框架头文件
 #import <WebKit/WebKit.h>
 #import "AlertCommand.h"
+#import "JDDeviceUtils.h"
 
 WKWebView *g_wkweb1;
 
@@ -78,24 +79,29 @@ WKWebView *g_wkweb1;
     config.userContentController = wkUController;
             
     CGRect f=self.view.bounds;
-    f.origin.y+=20;
+    f.origin.y+=-44;
     g_wkweb1 = [[WKWebView alloc]initWithFrame:f configuration:config];
     g_wkweb1.navigationDelegate = self;
     g_wkweb1.UIDelegate = self;
     [g_wkweb1 setOpaque:NO];//opaque是不透明的意思
+    g_wkweb1.backgroundColor=[UIColor clearColor];
     [self.view addSubview: g_wkweb1];
     
     //如果你导入的MJRefresh库是最新的库，就用下面的方法创建下拉刷新和上拉加载事件
+    g_wkweb1.scrollView.mj_header.alpha=0.0f;
     g_wkweb1.scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
     //web.scrollView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self //refreshingAction:@selector(footerRefresh)];
     
+    g_wkweb1.scrollView.mj_header.backgroundColor=[UIColor colorWithRed:3.0f/255.0f green:166.0f/255.0f blue:238.0f/255.0f alpha:1];
     //滚动栏处理
     g_wkweb1.scrollView.showsVerticalScrollIndicator = NO;
     //
     default_urlstr=WEB_INDEX_URL;
     [self loadWeb:default_urlstr];//主页
+    
 
 }
+
 
 +(WKWebView *)getWeb
 {
@@ -117,7 +123,7 @@ WKWebView *g_wkweb1;
     //当请求数据成功或失败后，如果你导入的MJRefresh库是最新的库，就用下面的方法结束下拉刷新和上拉加载事件
     [g_wkweb1.scrollView.mj_header endRefreshing];
     [g_wkweb1.scrollView.mj_footer endRefreshing];
-
+    g_wkweb1.scrollView.mj_header.alpha=0.0f;
 }
 
 -(void)dealloc

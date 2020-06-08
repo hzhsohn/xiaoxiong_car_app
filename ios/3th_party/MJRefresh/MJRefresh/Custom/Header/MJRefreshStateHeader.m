@@ -62,7 +62,7 @@
     if (self.lastUpdatedTimeLabel.hidden) return;
     
     NSDate *lastUpdatedTime = [[NSUserDefaults standardUserDefaults] objectForKey:lastUpdatedTimeKey];
-    
+    /*
     // 如果有block
     if (self.lastUpdatedTimeText) {
         self.lastUpdatedTimeLabel.text = self.lastUpdatedTimeText(lastUpdatedTime);
@@ -98,7 +98,7 @@
         self.lastUpdatedTimeLabel.text = [NSString stringWithFormat:@"%@%@",
                                           [NSBundle mj_localizedStringForKey:MJRefreshHeaderLastTimeText],
                                           [NSBundle mj_localizedStringForKey:MJRefreshHeaderNoneLastDateText]];
-    }
+    }*/
 }
 
 #pragma mark - 覆盖父类的方法
@@ -110,9 +110,9 @@
     self.labelLeftInset = MJRefreshLabelLeftInset;
     
     // 初始化文字
-    [self setTitle:[NSBundle mj_localizedStringForKey:MJRefreshHeaderIdleText] forState:MJRefreshStateIdle];
+   /* [self setTitle:[NSBundle mj_localizedStringForKey:MJRefreshHeaderIdleText] forState:MJRefreshStateIdle];
     [self setTitle:[NSBundle mj_localizedStringForKey:MJRefreshHeaderPullingText] forState:MJRefreshStatePulling];
-    [self setTitle:[NSBundle mj_localizedStringForKey:MJRefreshHeaderRefreshingText] forState:MJRefreshStateRefreshing];
+    [self setTitle:[NSBundle mj_localizedStringForKey:MJRefreshHeaderRefreshingText] forState:MJRefreshStateRefreshing];*/
 }
 
 - (void)placeSubviews

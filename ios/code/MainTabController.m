@@ -27,6 +27,7 @@ CLLocationCoordinate2D g_GoogleLocation;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.delegate = self;
+    
 }
 
 -(void) viewWillAppear:(BOOL)animated

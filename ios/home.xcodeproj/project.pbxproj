@@ -102,6 +102,7 @@
 		38E8F4501A864EB700561E07 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 38E8F44F1A864EB700561E07 /* Localizable.strings */; };
 		38EE72FD1EA64F0F00465632 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38EE72FB1EA64F0F00465632 /* Main.storyboard */; };
 		38EE73081EA64FDD00465632 /* VipController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EE73071EA64FDD00465632 /* VipController.m */; };
+		38F9A439248E6BE100B6AC3A /* JDDeviceUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F9A438248E6BE100B6AC3A /* JDDeviceUtils.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -390,6 +391,8 @@
 		38EE72FC1EA64F0F00465632 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		38EE73061EA64FDD00465632 /* VipController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VipController.h; sourceTree = "<group>"; };
 		38EE73071EA64FDD00465632 /* VipController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VipController.m; sourceTree = "<group>"; };
+		38F9A437248E6BE100B6AC3A /* JDDeviceUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = JDDeviceUtils.h; path = code/JDDeviceUtils.h; sourceTree = SOURCE_ROOT; };
+		38F9A438248E6BE100B6AC3A /* JDDeviceUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = JDDeviceUtils.m; path = code/JDDeviceUtils.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -804,6 +807,8 @@
 				3878ABE01EFA5F2F004A9DC3 /* Index */,
 				38E8F41D1A86318400561E07 /* AppDelegate.h */,
 				38E8F41E1A86318400561E07 /* AppDelegate.m */,
+				38F9A437248E6BE100B6AC3A /* JDDeviceUtils.h */,
+				38F9A438248E6BE100B6AC3A /* JDDeviceUtils.m */,
 				383521241E65EEF300FAA97A /* MainTabController.h */,
 				383521251E65EEF300FAA97A /* MainTabController.m */,
 				383521441E672FC500FAA97A /* DefineHeader.h */,
@@ -1094,6 +1099,7 @@
 				3835214C1E673E6300FAA97A /* ScanResult.m in Sources */,
 				38C98D732473E22100A499E5 /* AlertCommand.m in Sources */,
 				388FE08524237C1B00816625 /* WebController.m in Sources */,
+				38F9A439248E6BE100B6AC3A /* JDDeviceUtils.m in Sources */,
 				38E6514A1F0E520600301D8E /* MBProgressHUD.m in Sources */,
 				3878AC4B1EFA69D0004A9DC3 /* Objc_AudioPlay.m in Sources */,
 				38E651361F0E478E00301D8E /* SVIndefiniteAnimatedView.m in Sources */,

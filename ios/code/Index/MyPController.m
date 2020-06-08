@@ -79,7 +79,7 @@ WKWebView *g_wkweb3;
     config.userContentController = wkUController;
 
     CGRect f=self.view.bounds;
-    f.origin.y+=20;
+    f.origin.y+=-44;
     g_wkweb3 = [[WKWebView alloc]initWithFrame:f configuration:config];
     g_wkweb3.navigationDelegate = self;
     g_wkweb3.UIDelegate = self;
@@ -87,6 +87,7 @@ WKWebView *g_wkweb3;
     [self.view addSubview: g_wkweb3];
     
     //如果你导入的MJRefresh库是最新的库，就用下面的方法创建下拉刷新和上拉加载事件
+    g_wkweb3.scrollView.mj_header.alpha=0.0f;
     g_wkweb3.scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
     //web.scrollView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self //refreshingAction:@selector(footerRefresh)];
     
@@ -117,6 +118,7 @@ WKWebView *g_wkweb3;
     //当请求数据成功或失败后，如果你导入的MJRefresh库是最新的库，就用下面的方法结束下拉刷新和上拉加载事件
     [g_wkweb3.scrollView.mj_header endRefreshing];
     [g_wkweb3.scrollView.mj_footer endRefreshing];
+    g_wkweb3.scrollView.mj_header.alpha=0.0f;
 
 }
 

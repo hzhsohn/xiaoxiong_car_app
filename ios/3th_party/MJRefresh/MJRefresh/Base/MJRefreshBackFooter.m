@@ -39,7 +39,7 @@
     CGFloat happenOffsetY = [self happenOffsetY];
     // 如果是向下滚动到看不见尾部控件，直接返回
     if (currentOffsetY <= happenOffsetY) return;
-    
+
     CGFloat pullingPercent = (currentOffsetY - happenOffsetY) / self.mj_h;
     
     // 如果已全部加载，仅设置pullingPercent，然后返回
@@ -47,7 +47,7 @@
         self.pullingPercent = pullingPercent;
         return;
     }
-    
+
     if (self.scrollView.isDragging) {
         self.pullingPercent = pullingPercent;
         // 普通 和 即将刷新 的临界点

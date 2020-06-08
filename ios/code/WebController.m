@@ -86,6 +86,7 @@
     wkweb.scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
     //web.scrollView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self //refreshingAction:@selector(footerRefresh)];
     
+    wkweb.scrollView.mj_header.alpha=0.0f;
     //滚动栏处理
     wkweb.scrollView.showsVerticalScrollIndicator = NO;
     
@@ -109,7 +110,8 @@
     //当请求数据成功或失败后，如果你导入的MJRefresh库是最新的库，就用下面的方法结束下拉刷新和上拉加载事件
     [wkweb.scrollView.mj_header endRefreshing];
     [wkweb.scrollView.mj_footer endRefreshing];
-
+    
+    wkweb.scrollView.mj_header.alpha=0.0f;
 }
 
 -(void)dealloc
