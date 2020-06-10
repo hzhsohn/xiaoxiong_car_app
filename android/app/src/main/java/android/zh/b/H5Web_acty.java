@@ -101,14 +101,14 @@ public class H5Web_acty extends BaseActivity {
         StatusNavUtils.setStatusBarColor(H5Web_acty.this,0x30000000);
 
         //
-        mSwipe=findViewById(R.id.sf_layout);
+        //mSwipe=findViewById(R.id.sf_layout);
 
         //WEBView浏览器
         webView = (WebView) findViewById(R.id.webView);
 
         /*
          * 设置下拉刷新的监听
-         */
+
         mSwipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -118,7 +118,7 @@ public class H5Web_acty extends BaseActivity {
                 mSwipe.setRefreshing(false);
             }
         });
-
+ */
         //设置WEB参数
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
@@ -164,16 +164,16 @@ public class H5Web_acty extends BaseActivity {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
-                if (loadDialog==null||!loadDialog.isShowing())
-                loadDialog = DialogUIUtils.showLoading(H5Web_acty.this,getString(R.string.Loading),true,false,false,true).show();
+              //  if (loadDialog==null||!loadDialog.isShowing())
+               // loadDialog = DialogUIUtils.showLoading(H5Web_acty.this,getString(R.string.Loading),true,false,false,true).show();
 
             }
 
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-                if (loadDialog!=null&&loadDialog.isShowing())
-                    loadDialog.cancel();
+             //   if (loadDialog!=null&&loadDialog.isShowing())
+             //       loadDialog.cancel();
 
                 //设置标题
                 TextView tvInfo = (TextView)findViewById(R.id.toolbar_title);

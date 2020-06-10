@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
@@ -32,6 +33,10 @@ import myinfo.logic.LoginInfo;
 import vip.a.VipList;
 import com.xiaoxiongcar.R;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,6 +46,77 @@ public class MainActivity extends AppCompatActivity {
     static public BottomNavigationView bottomNavigationView;
 
     VersionInfo ver;
+
+
+/*
+例子
+File sdcardDir = Environment.getExternalStorageDirectory();
+File sdcardDir = cxt.getCacheDir();
+String path= sdcardDir.getPath()+"/mosquitto";
+copyFilesFromAssets(cxt,"mosquitto",path);
+*/
+    public static void copyFilesFromAssets(Context context, String assetsPath, String savePath){
+        try {
+            String fileNames[] = context.getAssets().list(assetsPath);// 获取assets目录下的所有文件及目录名
+            if (fileNames.length > 0) {// 如果是目录
+                File file = new File(savePath);
+                file.mkdirs();// 如果文件夹不存在，则递归
+                for (String fileName : fileNames) {
+                    copyFilesFromAssets(context, assetsPath + "/" + fileName,
+                            savePath + "/" + fileName);
+                }
+            } else {// 如果是文件
+                InputStream is = context.getAssets().open(assetsPath);
+                FileOutputStream fos = new FileOutputStream(new File(savePath));
+                byte[] buffer = new byte[1024];
+                int byteCount = 0;
+                while ((byteCount = is.read(buffer)) != -1) {// 循环从输入流读取
+                    // buffer字节
+                    fos.write(buffer, 0, byteCount);// 将读取的输入流写入到输出流
+                }
+                fos.flush();// 刷新缓冲区
+                is.close();
+                fos.close();
+            }
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    public static String createDir(String dirPath){
+        //因为文件夹可能有多层，比如:  a/b/c/ff.txt  需要先创建a文件夹，然后b文件夹然后...
+        try{
+            File file=new File(dirPath);
+            if(file.getParentFile().exists()){
+                file.mkdir();
+                return file.getAbsolutePath();
+            }
+            else {
+                createDir(file.getParentFile().getAbsolutePath());
+                file.mkdir();
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return dirPath;
+    }
+    public static String createFile(File file){
+        try{
+            if(file.getParentFile().exists()){
+                file.createNewFile();
+            }
+            else {
+                //创建目录之后再创建文件
+                createDir(file.getParentFile().getAbsolutePath());
+                file.createNewFile();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return "";
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,10 +156,18 @@ public class MainActivity extends AppCompatActivity {
         }
         else{
             //是否再次显示开始页
-            if(!LoginInfo.readStartPageDone(this)) {
+            if(!LoginInfo.readStartPageDone(this))
+            {
+                File sdcardDir = getBaseContext().getCacheDir();
+                String path= sdcardDir.getPath()+"/startpage";
+                copyFilesFromAssets(getBaseContext(),"startpage",path);
+
+                //
                 Intent intent = new Intent(this, H5Web_acty.class);
                 Bundle bundle = new Bundle();//该类用作携带数据
-                bundle.putString("url", HTTPData.sWebStartPage);
+                //bundle.putString("url", HTTPData.sWebStartPage);
+                String surl="file:///"+path+"/index.html";
+                bundle.putString("url", surl);
                 intent.putExtras(bundle);//附带上额外的数据
                 startActivity(intent);
                 overridePendingTransition(R.anim.in_0, R.anim.in_1);
