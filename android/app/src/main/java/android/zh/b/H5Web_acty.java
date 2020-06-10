@@ -98,7 +98,9 @@ public class H5Web_acty extends BaseActivity {
                 null);
         ((Toolbar)findViewById(R.id.toolbarId)).setVisibility(View.GONE);
         //
+        StatusNavUtils.setStatusBarColor(H5Web_acty.this,0x30000000);
 
+        //
         mSwipe=findViewById(R.id.sf_layout);
 
         //WEBView浏览器

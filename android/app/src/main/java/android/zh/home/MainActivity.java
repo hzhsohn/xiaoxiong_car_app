@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        StatusNavUtils.setStatusBarColor(MainActivity.this,0x33000000);
+        StatusNavUtils.setStatusBarColor(MainActivity.this,0x00000000);
 
 /////   /////////////////
         if(HTTPData.isTestApp)
