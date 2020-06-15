@@ -92,14 +92,11 @@ WKWebView *g_wkweb1;
     g_wkweb1.scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
     //web.scrollView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self //refreshingAction:@selector(footerRefresh)];
     
-    g_wkweb1.scrollView.mj_header.backgroundColor=[UIColor colorWithRed:3.0f/255.0f green:166.0f/255.0f blue:238.0f/255.0f alpha:1];
     //滚动栏处理
     g_wkweb1.scrollView.showsVerticalScrollIndicator = NO;
     //
     default_urlstr=WEB_INDEX_URL;
     [self loadWeb:default_urlstr];//主页
-    
-
 }
 
 
@@ -111,6 +108,7 @@ WKWebView *g_wkweb1;
 #pragma mark - 下拉刷新
 - (void)headerRefresh{
     [g_wkweb1 reload];
+    
 }
 
 #pragma mark - 上拉加载
@@ -139,6 +137,7 @@ WKWebView *g_wkweb1;
     NSURL *url = [NSURL URLWithString:default_urlstr];
     NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
     [g_wkweb1 loadRequest:request];
+    
 }
 
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
@@ -178,6 +177,7 @@ WKWebView *g_wkweb1;
 //html开始加载
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation
 {
+    
     NSLog(@"begin load html");
 }
 
@@ -191,6 +191,9 @@ WKWebView *g_wkweb1;
     }];
     
     [self endRefresh];
+    
+    //修改头颜色
+    g_wkweb1.scrollView.mj_header.backgroundColor=[UIColor colorWithRed:3.0f/255.0f green:166.0f/255.0f blue:238.0f/255.0f alpha:1];
 }
 
 //! alert(message)

@@ -77,7 +77,7 @@
         CGFloat textWidth = MAX(stateWidth, timeWidth);
        // arrowCenterX -= textWidth / 2 + self.labelLeftInset;
     }
-    CGFloat arrowCenterY = self.mj_h * 0.5+10;
+    CGFloat arrowCenterY = self.mj_h * 0.5+28;
     CGPoint arrowCenter = CGPointMake(arrowCenterX, arrowCenterY);
     
     // 箭头
