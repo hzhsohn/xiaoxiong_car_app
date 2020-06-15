@@ -31,6 +31,7 @@ import android.zh.home.MainActivity;
 import com.dou361.dialogui.DialogUIUtils;
 import com.xiaoxiongcar.R;
 
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -43,6 +44,7 @@ import vip.a.VipList;
 public class FoundList extends BaseFragment {
     Context context = null;
     public static WebView webView = null;
+    public static long reloadLastTime=0;
     Dialog loadDialog;
     View g_view=null;
     SwipeRefreshLayout mSwipe=null;
@@ -171,6 +173,8 @@ public class FoundList extends BaseFragment {
               //  if (loadDialog!=null&&loadDialog.isShowing())
               //      loadDialog.cancel();
 
+                Date curDate = new Date(System.currentTimeMillis());
+                reloadLastTime=curDate.getTime();
 
                 //设置标题
                 TextView tvInfo = (TextView)g_view.findViewById(R.id.toolbar_title);

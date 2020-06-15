@@ -36,6 +36,7 @@ import com.xiaoxiongcar.R;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.util.Date;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -129,8 +130,6 @@ copyFilesFromAssets(cxt,"mosquitto",path);
         if(HTTPData.isTestApp)
         {
             HTTPData.sWeb=HTTPData.sWebTest;
-
-
         }
         else
         {
@@ -326,6 +325,24 @@ copyFilesFromAssets(cxt,"mosquitto",path);
 
             });
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(FoundList.webView!=null) {
+            Date endDate = new Date(System.currentTimeMillis());
+            long diff = endDate.getTime() - FoundList.reloadLastTime;
+
+            //300秒不动作就重新刷新
+            if(diff>300*1000) {
+                FoundList.webView.reload();
+                VipList.webView.reload();
+                MyinfoH5_Web.webView.reload();
+            }
+        }
+
     }
 
     /*
