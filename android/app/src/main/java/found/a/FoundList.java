@@ -130,7 +130,6 @@ public class FoundList extends BaseFragment {
         webSettings.setAppCacheEnabled(true);    //开启H5(APPCache)缓存功能
 
         urlstr = HTTPData.sWebPhoneUrl_Index;
-
         to_url(urlstr);
 
         //覆盖WebView默认使用第三方或系统默认浏览器打开网页的行为，使网页用WebView打开

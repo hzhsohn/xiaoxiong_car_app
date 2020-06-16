@@ -1,6 +1,8 @@
 package android.zh.home;
 
 import android.Manifest;
+import android.app.ActivityManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -37,6 +39,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.Date;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -327,22 +330,46 @@ copyFilesFromAssets(cxt,"mosquitto",path);
         }
     }
 
+    //需要申请GETTask权限
+    private boolean isApplicationBroughtToBackground() {
+        ActivityManager am = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningTaskInfo> tasks = am.getRunningTasks(1);
+        if (!tasks.isEmpty()) {
+            ComponentName topActivity = tasks.get(0).topActivity;
+            if (!topActivity.getPackageName().equals(getPackageName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean wasBackground= false;    //声明一个布尔变量,记录当前的活动背景
+    @Override public void onPause()
+    {
+        super.onPause();
+        if(isApplicationBroughtToBackground())
+            wasBackground= true;
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
+        if(wasBackground){//
+            Log.e("aa","从后台回到前台");
+            //超过60秒就刷新
+            if(FoundList.webView!=null) {
+                Date endDate = new Date(System.currentTimeMillis());
+                long diff = endDate.getTime() - FoundList.reloadLastTime;
 
-        if(FoundList.webView!=null) {
-            Date endDate = new Date(System.currentTimeMillis());
-            long diff = endDate.getTime() - FoundList.reloadLastTime;
-
-            //300秒不动作就重新刷新
-            if(diff>300*1000) {
-                FoundList.webView.reload();
-                VipList.webView.reload();
-                MyinfoH5_Web.webView.reload();
+                //120秒不动作就重新刷新
+                if(diff>120*1000) {
+                    Log.e("aa","刷新所有web内容");
+                    FoundList.webView.loadUrl(HTTPData.sWebPhoneUrl_Index);
+                    VipList.webView.loadUrl(HTTPData.sWebPhoneUrl_JiZhao);
+                    MyinfoH5_Web.webView.loadUrl(HTTPData.sWebPhoneUrl_Center);
+                }
             }
         }
-
+        wasBackground= false;
     }
 
     /*
