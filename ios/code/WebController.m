@@ -60,36 +60,37 @@
     self.navigationController.navigationBar.titleTextAttributes=dict;
     */
     [self.navigationController setNavigationBarHidden:YES animated:NO];
-   
-    //
-    WKWebViewConfiguration *config = [WKWebViewConfiguration new];
-    config.preferences = [WKPreferences new];
-    config.preferences.javaScriptEnabled = YES;
-    config.preferences.javaScriptCanOpenWindowsAutomatically = YES;
-    NSString *jScript = @"var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);";
-    WKUserScript *wkUScript = [[WKUserScript alloc] initWithSource:jScript injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
-    WKUserContentController *wkUController = [[WKUserContentController alloc] init];
-    [wkUController addUserScript:wkUScript];
     
-    //scalesPageToFit
-    config.userContentController = wkUController;
-            
-    CGRect f=self.view.bounds;
-    f.origin.y+=20;
-    wkweb = [[WKWebView alloc]initWithFrame:f configuration:config];
-    wkweb.navigationDelegate = self;
-    wkweb.UIDelegate = self;
-    [wkweb setOpaque:NO];//opaque是不透明的意思
-    [self.view addSubview: wkweb];
+     //
+     WKWebViewConfiguration *config = [WKWebViewConfiguration new];
+     config.preferences = [WKPreferences new];
+     config.preferences.javaScriptEnabled = YES;
+     config.preferences.javaScriptCanOpenWindowsAutomatically = YES;
+     NSString *jScript = @"var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);";
+     WKUserScript *wkUScript = [[WKUserScript alloc] initWithSource:jScript injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
+     WKUserContentController *wkUController = [[WKUserContentController alloc] init];
+     [wkUController addUserScript:wkUScript];
     
-    //如果你导入的MJRefresh库是最新的库，就用下面的方法创建下拉刷新和上拉加载事件
-    wkweb.scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
-    //web.scrollView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self //refreshingAction:@selector(footerRefresh)];
-    
-    wkweb.scrollView.mj_header.alpha=0.0f;
-    //滚动栏处理
-    wkweb.scrollView.showsVerticalScrollIndicator = NO;
-    
+     //scalesPageToFit
+     config.userContentController = wkUController;
+             
+     CGRect f=self.view.bounds;
+     f.origin.y+=-44;
+     wkweb = [[WKWebView alloc]initWithFrame:f configuration:config];
+     wkweb.navigationDelegate = self;
+     wkweb.UIDelegate = self;
+     [wkweb setOpaque:NO];//opaque是不透明的意思
+    //标题栏透明
+     wkweb.backgroundColor=[UIColor clearColor];
+     [self.view addSubview: wkweb];
+     
+     //如果你导入的MJRefresh库是最新的库，就用下面的方法创建下拉刷新和上拉加载事件
+     wkweb.scrollView.mj_header.alpha=0.0f;
+     wkweb.scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
+     //web.scrollView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self //refreshingAction:@selector(footerRefresh)];
+     
+     //滚动栏处理
+     wkweb.scrollView.showsVerticalScrollIndicator = NO;
     //访问页面
     [self loadWeb:self.default_url];//主页
 }
@@ -172,6 +173,13 @@
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
 {
     NSLog(@"finish load");
+    // 禁止放大缩小
+    NSString *injectionJSString = @"var script = document.createElement('meta');"
+    "script.name = 'viewport';"
+    "script.content=\"width=device-width, initial-scale=1.0,maximum-scale=1.0, minimum-scale=1.0, user-scalable=no\";"
+    "document.getElementsByTagName('head')[0].appendChild(script);";
+    [webView evaluateJavaScript:injectionJSString completionHandler:nil];
+    
     [webView evaluateJavaScript:@"javascript: var allLinks = document.getElementsByTagName('a'); if (allLinks) {var i;for (i=0; i<allLinks.length; i++) {var link = allLinks[i];var target = link.getAttribute('target'); if (target && target == '_blank') {link.href = 'newtab:'+link.href;link.setAttribute('target','_self');}}}"  completionHandler:^(id _Nullable response, NSError * _Nullable error) {
         
         NSLog(@"response: %@ error: %@", response, error);

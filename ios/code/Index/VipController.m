@@ -34,6 +34,7 @@ WKWebView *g_wkweb2;
 -(void)awakeFromNib
 {
     [super awakeFromNib];
+    [self viewDidLoad];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -73,6 +74,7 @@ WKWebView *g_wkweb2;
     WKUserScript *wkUScript = [[WKUserScript alloc] initWithSource:jScript injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
     WKUserContentController *wkUController = [[WKUserContentController alloc] init];
     [wkUController addUserScript:wkUScript];
+    
     
     //scalesPageToFit
     config.userContentController = wkUController;
@@ -180,6 +182,13 @@ WKWebView *g_wkweb2;
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
 {
     NSLog(@"finish load");
+    // 禁止放大缩小
+    NSString *injectionJSString = @"var script = document.createElement('meta');"
+    "script.name = 'viewport';"
+    "script.content=\"width=device-width, initial-scale=1.0,maximum-scale=1.0, minimum-scale=1.0, user-scalable=no\";"
+    "document.getElementsByTagName('head')[0].appendChild(script);";
+    [webView evaluateJavaScript:injectionJSString completionHandler:nil];
+    
     [webView evaluateJavaScript:@"javascript: var allLinks = document.getElementsByTagName('a'); if (allLinks) {var i;for (i=0; i<allLinks.length; i++) {var link = allLinks[i];var target = link.getAttribute('target'); if (target && target == '_blank') {link.href = 'newtab:'+link.href;link.setAttribute('target','_self');}}}"  completionHandler:^(id _Nullable response, NSError * _Nullable error) {
         
         NSLog(@"response: %@ error: %@", response, error);

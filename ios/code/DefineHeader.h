@@ -10,8 +10,8 @@
 
 #import <UIKit/UIKit.h>
 
-#define WEB_INDEX_URL @"http://daichepin.com/webphone_index/#/common/index"
-#define WEB_INDEX2_URL @"http://daichepin.com/webphone_vip/#/common/recommend"
-#define WEB_INDEX3_URL @"http://daichepin.com/webphone/#/client/center"
+#define WEB_INDEX_URL @"https://www.daichepin.com/webphone_index/#/common/index"
+#define WEB_INDEX2_URL @"https://www.daichepin.com/webphone_vip/#/common/recommend"
+#define WEB_INDEX3_URL @"https://www.daichepin.com/webphone/#/client/center"
 
 #endif /* DefineHeader_h */

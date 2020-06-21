@@ -61,6 +61,14 @@
         {
             [sel.navigationController popViewControllerAnimated:YES];
         }
+        else if(![doConent compare:@"tel|" options:NSCaseInsensitiveSearch range:NSMakeRange(0,4)])
+        {
+            NSString*lsdata=[doConent substringFromIndex:4];
+            
+            NSString*opentel=[NSString stringWithFormat:@"tel://%@",lsdata];
+            [[UIApplication sharedApplication]
+                    openURL:[NSURL URLWithString:opentel]];
+        }
         else if(![doConent compare:@"share|" options:NSCaseInsensitiveSearch range:NSMakeRange(0,6)])
         {
             NSString*lsdata=[doConent substringFromIndex:6];

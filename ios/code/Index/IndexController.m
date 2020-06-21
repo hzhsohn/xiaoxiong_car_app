@@ -16,6 +16,8 @@
 #import <WebKit/WebKit.h>
 #import "AlertCommand.h"
 #import "JDDeviceUtils.h"
+//
+#import "WKProcessPool.h"
 
 WKWebView *g_wkweb1;
 
@@ -70,10 +72,14 @@ WKWebView *g_wkweb1;
     config.preferences = [WKPreferences new];
     config.preferences.javaScriptEnabled = YES;
     config.preferences.javaScriptCanOpenWindowsAutomatically = YES;
+    //使用单例 解决locastorge 储存问题
+    //config.processPool = [WKProcessPool sharedProcessPool];
+    
     NSString *jScript = @"var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);";
     WKUserScript *wkUScript = [[WKUserScript alloc] initWithSource:jScript injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
     WKUserContentController *wkUController = [[WKUserContentController alloc] init];
     [wkUController addUserScript:wkUScript];
+    
     
     //scalesPageToFit
     config.userContentController = wkUController;
@@ -92,13 +98,15 @@ WKWebView *g_wkweb1;
     g_wkweb1.scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
     //web.scrollView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self //refreshingAction:@selector(footerRefresh)];
     
+
+    
+    
     //滚动栏处理
     g_wkweb1.scrollView.showsVerticalScrollIndicator = NO;
     //
     default_urlstr=WEB_INDEX_URL;
     [self loadWeb:default_urlstr];//主页
 }
-
 
 +(WKWebView *)getWeb
 {
@@ -177,7 +185,6 @@ WKWebView *g_wkweb1;
 //html开始加载
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation
 {
-    
     NSLog(@"begin load html");
 }
 
@@ -185,6 +192,14 @@ WKWebView *g_wkweb1;
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
 {
     NSLog(@"finish load");
+    
+    // 禁止放大缩小
+    NSString *injectionJSString = @"var script = document.createElement('meta');"
+    "script.name = 'viewport';"
+    "script.content=\"width=device-width, initial-scale=1.0,maximum-scale=1.0, minimum-scale=1.0, user-scalable=no\";"
+    "document.getElementsByTagName('head')[0].appendChild(script);";
+    [webView evaluateJavaScript:injectionJSString completionHandler:nil];
+    //
     [webView evaluateJavaScript:@"javascript: var allLinks = document.getElementsByTagName('a'); if (allLinks) {var i;for (i=0; i<allLinks.length; i++) {var link = allLinks[i];var target = link.getAttribute('target'); if (target && target == '_blank') {link.href = 'newtab:'+link.href;link.setAttribute('target','_self');}}}"  completionHandler:^(id _Nullable response, NSError * _Nullable error) {
         
         NSLog(@"response: %@ error: %@", response, error);

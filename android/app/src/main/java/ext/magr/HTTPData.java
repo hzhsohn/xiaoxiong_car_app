@@ -22,8 +22,8 @@ public class HTTPData {
 
     //-------------------------
     static public final String sWebTest="http://47.115.187.147";  //测试服务器
-    //static public final String sWebOK="http://8.129.208.43";      //正式服务器
-    static public final String sWebOK="http://daichepin.com";      //正式服务器
+    //static public final String sWebOK="https://8.129.208.43";      //正式服务器
+    static public final String sWebOK="https://daichepin.com";      //正式服务器
 
     //-------------------------
     static public  String sWeb;
