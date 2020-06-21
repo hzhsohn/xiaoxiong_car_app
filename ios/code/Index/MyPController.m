@@ -35,7 +35,39 @@ WKWebView *g_wkweb3;
 -(void)awakeFromNib
 {
     [super awakeFromNib];
-    [self viewDidLoad];
+
+  //
+  WKWebViewConfiguration *config = [WKWebViewConfiguration new];
+  config.preferences = [WKPreferences new];
+  config.preferences.javaScriptEnabled = YES;
+  config.preferences.javaScriptCanOpenWindowsAutomatically = YES;
+  NSString *jScript = @"var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);";
+  WKUserScript *wkUScript = [[WKUserScript alloc] initWithSource:jScript injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
+  WKUserContentController *wkUController = [[WKUserContentController alloc] init];
+  [wkUController addUserScript:wkUScript];
+  
+  //scalesPageToFit
+  config.userContentController = wkUController;
+
+  CGRect f=self.view.bounds;
+  f.origin.y+=-44;
+  g_wkweb3 = [[WKWebView alloc]initWithFrame:f configuration:config];
+  g_wkweb3.navigationDelegate = self;
+  g_wkweb3.UIDelegate = self;
+  [g_wkweb3 setOpaque:NO];//opaque是不透明的意思
+  [self.view addSubview: g_wkweb3];
+
+  
+  //如果你导入的MJRefresh库是最新的库，就用下面的方法创建下拉刷新和上拉加载事件
+  g_wkweb3.scrollView.mj_header.alpha=0.0f;
+  g_wkweb3.scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
+  //web.scrollView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self //refreshingAction:@selector(footerRefresh)];
+  
+  //滚动栏处理
+  g_wkweb3.scrollView.showsVerticalScrollIndicator = NO;
+  //
+  default_urlstr=WEB_INDEX3_URL;
+  [self loadWeb:default_urlstr];//主页
 }
 
 - (void)didReceiveMemoryWarning {
@@ -66,38 +98,6 @@ WKWebView *g_wkweb3;
     */
     [self.navigationController setNavigationBarHidden:YES animated:NO];
    
-    //
-    WKWebViewConfiguration *config = [WKWebViewConfiguration new];
-    config.preferences = [WKPreferences new];
-    config.preferences.javaScriptEnabled = YES;
-    config.preferences.javaScriptCanOpenWindowsAutomatically = YES;
-    NSString *jScript = @"var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);";
-    WKUserScript *wkUScript = [[WKUserScript alloc] initWithSource:jScript injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
-    WKUserContentController *wkUController = [[WKUserContentController alloc] init];
-    [wkUController addUserScript:wkUScript];
-    
-    //scalesPageToFit
-    config.userContentController = wkUController;
-
-    CGRect f=self.view.bounds;
-    f.origin.y+=-44;
-    g_wkweb3 = [[WKWebView alloc]initWithFrame:f configuration:config];
-    g_wkweb3.navigationDelegate = self;
-    g_wkweb3.UIDelegate = self;
-    [g_wkweb3 setOpaque:NO];//opaque是不透明的意思
-    [self.view addSubview: g_wkweb3];
-  
-    
-    //如果你导入的MJRefresh库是最新的库，就用下面的方法创建下拉刷新和上拉加载事件
-    g_wkweb3.scrollView.mj_header.alpha=0.0f;
-    g_wkweb3.scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
-    //web.scrollView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self //refreshingAction:@selector(footerRefresh)];
-    
-    //滚动栏处理
-    g_wkweb3.scrollView.showsVerticalScrollIndicator = NO;
-    //
-    default_urlstr=WEB_INDEX3_URL;
-    [self loadWeb:default_urlstr];//主页
 }
 
 +(WKWebView *)getWeb

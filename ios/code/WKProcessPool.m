@@ -11,7 +11,7 @@
 
 
 @implementation WKProcessPool
-/*
+
 +(WKProcessPool*)sharedProcessPool
 {
     static WKProcessPool* SharedProcessPool;
@@ -20,6 +20,6 @@
     SharedProcessPool = [[WKProcessPool alloc] init];
     });
     return SharedProcessPool;
-}*/
+}
 
 @end

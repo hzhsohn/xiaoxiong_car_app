@@ -52,6 +52,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+ NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"telprompt://%@",@"15999750005"];
+     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+
+    
     //设置标题
     /*NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
                           [UIColor whiteColor],NSForegroundColorAttributeName,
@@ -83,14 +87,14 @@
     //标题栏透明
      wkweb.backgroundColor=[UIColor clearColor];
      [self.view addSubview: wkweb];
-     
+     /*
      //如果你导入的MJRefresh库是最新的库，就用下面的方法创建下拉刷新和上拉加载事件
      wkweb.scrollView.mj_header.alpha=0.0f;
      wkweb.scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
      //web.scrollView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self //refreshingAction:@selector(footerRefresh)];
      
      //滚动栏处理
-     wkweb.scrollView.showsVerticalScrollIndicator = NO;
+     wkweb.scrollView.showsVerticalScrollIndicator = NO;*/
     //访问页面
     [self loadWeb:self.default_url];//主页
 }

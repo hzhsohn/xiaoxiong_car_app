@@ -15,10 +15,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-
 @interface WKProcessPool (SharedProcessPool)
 
-//+(WKProcessPool*)sharedProcessPool;
++(WKProcessPool*)sharedProcessPool;
 
 @end
 
