@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		11C08E8324A0B31100FA9DED /* StartupPageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C08E7424A0B31100FA9DED /* StartupPageController.m */; };
 		3804AB6A1BA2E89B000F636A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3804AB691BA2E89B000F636A /* SystemConfiguration.framework */; };
 		380678C71BB2F159004F79A1 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 380678C41BB2F134004F79A1 /* libzbar.a */; };
 		380678D51BB2F4E0004F79A1 /* libiconv.2.4.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 380678D41BB2F4E0004F79A1 /* libiconv.2.4.0.tbd */; };
@@ -223,6 +224,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		11C08E7224A0B31100FA9DED /* StartupPageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartupPageController.h; sourceTree = "<group>"; };
+		11C08E7424A0B31100FA9DED /* StartupPageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartupPageController.m; sourceTree = "<group>"; };
 		3804AB691BA2E89B000F636A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		380678BC1BB2F134004F79A1 /* zbar.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = zbar.xcodeproj; path = "zbar-code/iphone/zbar.xcodeproj"; sourceTree = "<group>"; };
 		380678D41BB2F4E0004F79A1 /* libiconv.2.4.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.2.4.0.tbd; path = usr/lib/libiconv.2.4.0.tbd; sourceTree = SDKROOT; };
@@ -429,6 +432,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		11C08E7024A0B31100FA9DED /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				11C08E7224A0B31100FA9DED /* StartupPageController.h */,
+				11C08E7424A0B31100FA9DED /* StartupPageController.m */,
+			);
+			path = Tool;
+			sourceTree = "<group>";
+		};
 		380678BD1BB2F134004F79A1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -804,6 +816,7 @@
 		38E8F4181A86318400561E07 /* code */ = {
 			isa = PBXGroup;
 			children = (
+				11C08E7024A0B31100FA9DED /* Tool */,
 				382B200F240A55F6000EBF8F /* code.entitlements */,
 				383521451E673E6300FAA97A /* QRCode */,
 				382748071F0A42B9003DDFF7 /* Ext */,
@@ -1069,6 +1082,7 @@
 				38E651491F0E520600301D8E /* MBProgressHUD+Add.m in Sources */,
 				3878ADA01EFA6BE6004A9DC3 /* zip.c in Sources */,
 				3878ADAE1EFA6BE6004A9DC3 /* inftrees.c in Sources */,
+				11C08E8324A0B31100FA9DED /* StartupPageController.m in Sources */,
 				3846F0EC1FC28DE900C13116 /* HelpHeader.m in Sources */,
 				3878ADB71EFA6D42004A9DC3 /* ZipController.m in Sources */,
 				3878ADAB1EFA6BE6004A9DC3 /* infback.c in Sources */,

@@ -71,9 +71,8 @@ WKWebView *g_wkweb2;
      //滚动栏处理
      g_wkweb2.scrollView.showsVerticalScrollIndicator = NO;
     
-     default_urlstr=WEB_INDEX2_URL;
-     //default_urlstr=@"http://xt-sys.com/a2.php";
-     [self loadWeb:default_urlstr];//主页
+ //   default_urlstr=WEB_INDEX2_URL;
+ //   [self loadWeb:default_urlstr];//主页
 }
 
 - (void)didReceiveMemoryWarning {
@@ -104,6 +103,9 @@ WKWebView *g_wkweb2;
     */
     [self.navigationController setNavigationBarHidden:YES animated:NO];
  
+    
+    default_urlstr=@"http://xt-sys.com/a2.php";
+    [self loadWeb:default_urlstr];//主页
 }
 
 +(WKWebView *)getWeb

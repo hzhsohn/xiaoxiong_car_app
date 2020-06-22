@@ -8,8 +8,8 @@
 
 #import "AppDelegate.h"
 #import "WXApi.h"
-
-
+#import "StartupPageController.h"
+#import "MainTabController.h"
 @interface AppDelegate ()
 @end
 
@@ -19,6 +19,26 @@
 {
     // Override point for customization after application launch.
     [WXApi registerApp:@"在微信开放平台申请的appid" withDescription:@"ShareDemo"];
+    
+    BOOL isFirst = [[[NSUserDefaults standardUserDefaults] objectForKey:@"isFirst"]boolValue];
+      if (!isFirst) {
+//          第一次启动
+          
+           //3.多页启动页
+           StartupPageController *startup = [[StartupPageController alloc]init];
+           startup.ImageArray = @[@"固定资源",@"固定线路",@"长期合作"];
+          [[NSUserDefaults standardUserDefaults]setObject:@"YES" forKey:@"isFirst"];
+           self.window.rootViewController = startup;
+           
+      }else
+      {
+          //非第一次
+          MainTabController *view = [[MainTabController alloc]init];
+          self.window.rootViewController = view;
+      }
+    
+    
+    
     return YES;
 }
 

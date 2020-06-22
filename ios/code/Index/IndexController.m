@@ -73,7 +73,7 @@ WKWebView *g_wkweb1;
     
     //
     default_urlstr=WEB_INDEX_URL;
-    // default_urlstr=@"http://xt-sys.com/a1.php";
+    // default_urlstr=@"http://xt-sys.com/a3.php";
     [self loadWeb:default_urlstr];//主页
 }
 
@@ -257,6 +257,7 @@ WKWebView *g_wkweb1;
     }];
     [alertController addAction:confirmAction];
     [self presentViewController:alertController animated:YES completion:nil];
+   
 }
 
 
