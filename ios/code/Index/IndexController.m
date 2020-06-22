@@ -44,7 +44,7 @@ WKWebView *g_wkweb1;
     config.preferences.javaScriptEnabled = YES;
     config.preferences.javaScriptCanOpenWindowsAutomatically = YES;
     //使用单例 解决locastorge 储存问题
-    //config.processPool = [WKProcessPool sharedProcessPool];
+    config.processPool = [WKProcessPool sharedProcessPool];
     
     NSString *jScript = @"var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);";
     WKUserScript *wkUScript = [[WKUserScript alloc] initWithSource:jScript injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
@@ -67,15 +67,13 @@ WKWebView *g_wkweb1;
     //如果你导入的MJRefresh库是最新的库，就用下面的方法创建下拉刷新和上拉加载事件
     g_wkweb1.scrollView.mj_header.alpha=0.0f;
     g_wkweb1.scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
-    //web.scrollView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self //refreshingAction:@selector(footerRefresh)];
-    
-
-    
     
     //滚动栏处理
     g_wkweb1.scrollView.showsVerticalScrollIndicator = NO;
+    
     //
     default_urlstr=WEB_INDEX_URL;
+    // default_urlstr=@"http://xt-sys.com/a1.php";
     [self loadWeb:default_urlstr];//主页
 }
 

@@ -16,9 +16,12 @@
 #import <WebKit/WebKit.h>
 #import "AlertCommand.h"
 
+//
+#import "WKProcessPool.h"
+
 WKWebView *g_wkweb2;
 
-@interface VipController ()<WKNavigationDelegate,WKUIDelegate>
+@interface VipController ()<UIWebViewDelegate,WKNavigationDelegate,WKUIDelegate>
 {
     //首页的URL
     NSString* default_urlstr;
@@ -34,40 +37,43 @@ WKWebView *g_wkweb2;
 -(void)awakeFromNib
 {
     [super awakeFromNib];
-    
-    //
-    WKWebViewConfiguration *config = [WKWebViewConfiguration new];
-    config.preferences = [WKPreferences new];
-    config.preferences.javaScriptEnabled = YES;
-    config.preferences.javaScriptCanOpenWindowsAutomatically = YES;
-    NSString *jScript = @"var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);";
-    WKUserScript *wkUScript = [[WKUserScript alloc] initWithSource:jScript injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
-    WKUserContentController *wkUController = [[WKUserContentController alloc] init];
-    [wkUController addUserScript:wkUScript];
-    
-    
-    //scalesPageToFit
-    config.userContentController = wkUController;
-            
-    CGRect f=self.view.bounds;
-    f.origin.y+=-44;
-    g_wkweb2 = [[WKWebView alloc]initWithFrame:f configuration:config];
-    g_wkweb2.navigationDelegate = self;
-    g_wkweb2.UIDelegate = self;
-    [g_wkweb2 setOpaque:NO];//opaque是不透明的意思
-    [self.view addSubview: g_wkweb2];
-    
-    //如果你导入的MJRefresh库是最新的库，就用下面的方法创建下拉刷新和上拉加载事件
-    g_wkweb2.scrollView.mj_header.alpha=0.0f;
-    g_wkweb2.scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
-    //g_wkweb2.scrollView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self //refreshingAction:@selector(footerRefresh)];
-    
-    //滚动栏处理
-    g_wkweb2.scrollView.showsVerticalScrollIndicator = NO;
-    //
-    default_urlstr=WEB_INDEX2_URL;
-    [self loadWeb:default_urlstr];//主页
 
+     //
+     WKWebViewConfiguration *config = [WKWebViewConfiguration new];
+     config.preferences = [WKPreferences new];
+     config.preferences.javaScriptEnabled = YES;
+     config.preferences.javaScriptCanOpenWindowsAutomatically = YES;
+     //使用单例 解决locastorge 储存问题
+     config.processPool = [WKProcessPool sharedProcessPool];
+     
+     NSString *jScript = @"var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);";
+     WKUserScript *wkUScript = [[WKUserScript alloc] initWithSource:jScript injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
+     WKUserContentController *wkUController = [[WKUserContentController alloc] init];
+     [wkUController addUserScript:wkUScript];
+     
+     
+     //scalesPageToFit
+     config.userContentController = wkUController;
+             
+     CGRect f=self.view.bounds;
+     f.origin.y+=-44;
+     g_wkweb2 = [[WKWebView alloc]initWithFrame:f configuration:config];
+     g_wkweb2.navigationDelegate = self;
+     g_wkweb2.UIDelegate = self;
+     [g_wkweb2 setOpaque:NO];//opaque是不透明的意思
+     g_wkweb2.backgroundColor=[UIColor clearColor];
+     [self.view addSubview: g_wkweb2];
+     
+     //如果你导入的MJRefresh库是最新的库，就用下面的方法创建下拉刷新和上拉加载事件
+     g_wkweb2.scrollView.mj_header.alpha=0.0f;
+     g_wkweb2.scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
+     
+     //滚动栏处理
+     g_wkweb2.scrollView.showsVerticalScrollIndicator = NO;
+    
+     default_urlstr=WEB_INDEX2_URL;
+     //default_urlstr=@"http://xt-sys.com/a2.php";
+     [self loadWeb:default_urlstr];//主页
 }
 
 - (void)didReceiveMemoryWarning {
@@ -97,7 +103,7 @@ WKWebView *g_wkweb2;
     self.navigationController.navigationBar.titleTextAttributes=dict;
     */
     [self.navigationController setNavigationBarHidden:YES animated:NO];
-   
+ 
 }
 
 +(WKWebView *)getWeb

@@ -16,6 +16,9 @@
 #import <WebKit/WebKit.h>
 #import "AlertCommand.h"
 
+//
+#import "WKProcessPool.h"
+
 @interface WebController ()<UIWebViewDelegate,WKNavigationDelegate,WKUIDelegate>
 {
     WKWebView *wkweb;
@@ -70,6 +73,11 @@
      config.preferences = [WKPreferences new];
      config.preferences.javaScriptEnabled = YES;
      config.preferences.javaScriptCanOpenWindowsAutomatically = YES;
+    
+    //使用单例 解决locastorge 储存问题
+    config.processPool = [WKProcessPool sharedProcessPool];
+    
+    
      NSString *jScript = @"var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);";
      WKUserScript *wkUScript = [[WKUserScript alloc] initWithSource:jScript injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
      WKUserContentController *wkUController = [[WKUserContentController alloc] init];

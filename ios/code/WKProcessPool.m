@@ -8,11 +8,9 @@
 
 #import "WKProcessPool.h"
 
+@implementation WKProcessPool(Share)
 
-
-@implementation WKProcessPool
-
-+(WKProcessPool*)sharedProcessPool
++(WKProcessPool*) sharedProcessPool
 {
     static WKProcessPool* SharedProcessPool;
     static dispatch_once_t onceToken;
@@ -21,5 +19,15 @@
     });
     return SharedProcessPool;
 }
+
+/*
++ (WKProcessPool *) singleWkProcessPool
+{
+    AFDISPATCH_ONCE_BLOCK(^{
+        sharedPool = [[WKProcessPool alloc] init];
+    })
+    return sharedPool;
+}
+*/
 
 @end

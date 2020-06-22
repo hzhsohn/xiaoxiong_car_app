@@ -41,7 +41,12 @@
         UIStoryboard *frm = [UIStoryboard storyboardWithName:@"WebController" bundle:nil];
         WebController* v=(WebController*)frm.instantiateInitialViewController;
         v.default_url=doConent;
+        
+        //正常使用
         [sel.navigationController pushViewController:v animated:YES];
+        //这个上级返回后会出在内容消失问题
+        //[sel.parentViewController.navigationController pushViewController:v animated:YES];
+        
         return true;
     }
     else if(![str compare:@"lurl:" options:NSCaseInsensitiveSearch range:NSMakeRange(0,5)])
@@ -68,6 +73,11 @@
             NSString*opentel=[NSString stringWithFormat:@"tel://%@",lsdata];
             [[UIApplication sharedApplication]
                     openURL:[NSURL URLWithString:opentel]];
+        }
+        else if(![doConent compare:@"pay|" options:NSCaseInsensitiveSearch range:NSMakeRange(0,4)])
+        {
+            NSString*lsdata=[doConent substringFromIndex:4];
+            
         }
         else if(![doConent compare:@"share|" options:NSCaseInsensitiveSearch range:NSMakeRange(0,6)])
         {
