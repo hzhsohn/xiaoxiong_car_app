@@ -21,7 +21,7 @@
 
 WKWebView *g_wkweb2;
 
-@interface VipController ()<UIWebViewDelegate,WKNavigationDelegate,WKUIDelegate>
+@interface VipController ()<WKNavigationDelegate,WKUIDelegate>
 {
     //首页的URL
     NSString* default_urlstr;
@@ -142,29 +142,6 @@ WKWebView *g_wkweb2;
     NSURL *url = [NSURL URLWithString:default_urlstr];
     NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
     [g_wkweb2 loadRequest:request];
-}
-
--(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
-{
-    NSString*s=[[request URL] absoluteString];
-    NSLog(@"shouldStartLoadWithRequest = %@",s);
-    char *purl=(char*)[s UTF8String];
-    if(0==memcmp(purl,"newtab:",7))
-    {
-        //打开新界面
-        UIStoryboard *frm=NULL;
-        
-        frm = [UIStoryboard storyboardWithName:@"WebController" bundle:nil];
-        WebController*wb=(WebController*)frm.instantiateInitialViewController;
-        wb.default_url=[NSString stringWithUTF8String:purl+7];
-        NSLog(@"wb.default_url = %@",wb.default_url);
-        [self.navigationController pushViewController:wb animated:YES];
-        return FALSE;
-    }
-    else
-    {
-        return TRUE;
-    }
 }
 
 

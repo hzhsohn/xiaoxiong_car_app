@@ -69,11 +69,11 @@ config.processPool = [WKProcessPool sharedProcessPool];
   g_wkweb3.scrollView.mj_header.alpha=0.0f;
   g_wkweb3.scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
   //web.scrollView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self //refreshingAction:@selector(footerRefresh)];
-  
-  //滚动栏处理
+
+//滚动栏处理
   g_wkweb3.scrollView.showsVerticalScrollIndicator = NO;
-  //
-//@"http://xt-sys.com/a4.php";//
+//
+//@"http://xt-sys.com/a4.php";
   default_urlstr=  WEB_INDEX3_URL;
   [self loadWeb:default_urlstr];//主页
 }
@@ -145,30 +145,6 @@ config.processPool = [WKProcessPool sharedProcessPool];
     NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
     [g_wkweb3 loadRequest:request];
 }
-
--(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
-{
-    NSString*s=[[request URL] absoluteString];
-    NSLog(@"shouldStartLoadWithRequest = %@",s);
-    char *purl=(char*)[s UTF8String];
-    if(0==memcmp(purl,"newtab:",7))
-    {
-        //打开新界面
-        UIStoryboard *frm=NULL;
-        
-        frm = [UIStoryboard storyboardWithName:@"WebController" bundle:nil];
-        WebController*wb=(WebController*)frm.instantiateInitialViewController;
-        wb.default_url=[NSString stringWithUTF8String:purl+7];
-        NSLog(@"wb.default_url = %@",wb.default_url);
-        [self.navigationController pushViewController:wb animated:YES];
-        return FALSE;
-    }
-    else
-    {
-        return TRUE;
-    }
-}
-
 
 #pragma mark - WKUIDelegate
 

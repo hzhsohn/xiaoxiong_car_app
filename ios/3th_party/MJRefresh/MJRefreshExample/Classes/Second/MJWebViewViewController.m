@@ -11,15 +11,13 @@
 #import "MJRefresh.h"
 #import "MJChiBaoZiHeader.h"
 
-@interface MJWebViewViewController () <UIWebViewDelegate>
-@property (weak, nonatomic) IBOutlet UIWebView *webView;
+@interface MJWebViewViewController ()
 @end
 
 @implementation MJWebViewViewController
 #pragma mark - 示例
 - (void)example31
 {
-    __weak UIWebView *webView = self.webView;
     webView.delegate = self;
     
     __weak UIScrollView *scrollView = self.webView.scrollView;
