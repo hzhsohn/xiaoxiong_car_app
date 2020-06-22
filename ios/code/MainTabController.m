@@ -183,6 +183,7 @@ CLLocationCoordinate2D g_GoogleLocation;
     // Do any additional setup after loading the view.
     self.delegate = self;
     
+    /*
     //判断文件是否存在
     NSString *startpage= [self documentPath:@"startpage"];
     NSLog(@"startpage=%@",startpage);
@@ -191,7 +192,7 @@ CLLocationCoordinate2D g_GoogleLocation;
         //文件不存在就解压
         g_iphone_uncompress_thread=false;
         [self extractBegin];
-    }
+    }*/
 }
 
 -(void) viewWillAppear:(BOOL)animated

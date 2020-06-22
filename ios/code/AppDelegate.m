@@ -18,9 +18,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    [WXApi registerApp:@"在微信开放平台申请的appid" withDescription:@"ShareDemo"];
+    [WXApi registerApp:@"wxfc9a296ef77b9b95" withDescription:@"DaiChePin Share"];
     
-    BOOL isFirst = [[[NSUserDefaults standardUserDefaults] objectForKey:@"isFirst"]boolValue];
+    BOOL isFirst =[[[NSUserDefaults standardUserDefaults] objectForKey:@"isFirst"]boolValue];
       if (!isFirst) {
 //          第一次启动
           
@@ -36,14 +36,22 @@
           MainTabController *view = [[MainTabController alloc]init];
           self.window.rootViewController = view;
       }
-    
-    
-    
     return YES;
 }
 
--(BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options{
+- (BOOL)application:(UIApplication *)app
+            openURL:(NSURL *)url
+            options:(NSDictionary<NSString *,id> *)options {
     return  [WXApi handleOpenURL:url delegate:self];
+}
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
+    return TRUE;
+}
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    return TRUE;
 }
 
 // onReq是微信终端向第三方程序发起请求，要求第三方程序响应。第三方程序响应完后必须调用sendRsp返回。在调用sendRsp返回时，会切回到微信终端程序界面

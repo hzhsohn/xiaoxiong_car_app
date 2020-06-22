@@ -385,7 +385,7 @@
 		38E651461F0E520600301D8E /* MBProgressHUD+Add.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+Add.m"; sourceTree = "<group>"; };
 		38E651471F0E520600301D8E /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		38E651481F0E520600301D8E /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
-		38E8F4161A86318400561E07 /* 小熊司机.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "小熊司机.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		38E8F4161A86318400561E07 /* 带车聘.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "带车聘.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		38E8F41A1A86318400561E07 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		38E8F41B1A86318400561E07 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		38E8F41D1A86318400561E07 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -807,7 +807,7 @@
 		38E8F4171A86318400561E07 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				38E8F4161A86318400561E07 /* 小熊司机.app */,
+				38E8F4161A86318400561E07 /* 带车聘.app */,
 				38E8F42F1A86318400561E07 /* codeTests.xctest */,
 			);
 			name = Products;
@@ -874,7 +874,7 @@
 			);
 			name = code;
 			productName = code;
-			productReference = 38E8F4161A86318400561E07 /* 小熊司机.app */;
+			productReference = 38E8F4161A86318400561E07 /* 带车聘.app */;
 			productType = "com.apple.product-type.application";
 		};
 		38E8F42E1A86318400561E07 /* codeTests */ = {
@@ -1307,7 +1307,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 82U6XT557T;
 				ENABLE_BITCODE = NO;
@@ -1331,7 +1331,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.daichepin.ios;
-				PRODUCT_NAME = "小熊司机";
+				PRODUCT_NAME = "带车聘";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "code/code-Bridging-Header.h";
@@ -1352,7 +1352,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 82U6XT557T;
 				ENABLE_BITCODE = NO;
@@ -1376,7 +1376,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.daichepin.ios;
-				PRODUCT_NAME = "小熊司机";
+				PRODUCT_NAME = "带车聘";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "code/code-Bridging-Header.h";

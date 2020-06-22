@@ -73,8 +73,8 @@ config.processPool = [WKProcessPool sharedProcessPool];
   //滚动栏处理
   g_wkweb3.scrollView.showsVerticalScrollIndicator = NO;
   //
-    
-  default_urlstr=  @"http://xt-sys.com/a4.php";//WEB_INDEX3_URL;
+//@"http://xt-sys.com/a4.php";//
+  default_urlstr=  WEB_INDEX3_URL;
   [self loadWeb:default_urlstr];//主页
 }
 
