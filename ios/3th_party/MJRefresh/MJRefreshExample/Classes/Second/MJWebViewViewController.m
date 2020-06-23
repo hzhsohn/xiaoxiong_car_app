@@ -31,11 +31,6 @@
     [scrollView.mj_header beginRefreshing];
 }
 
-#pragma mark - webViewDelegate
-- (void)webViewDidFinishLoad:(nonnull UIWebView *)webView
-{
-    [self.webView.scrollView.mj_header endRefreshing];
-}
 
 #pragma mark - 其他
 - (void)viewDidLoad {

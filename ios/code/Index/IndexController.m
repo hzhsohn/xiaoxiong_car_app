@@ -21,7 +21,7 @@
 
 WKWebView *g_wkweb1;
 
-@interface IndexController ()<UIWebViewDelegate,WKNavigationDelegate,WKUIDelegate>
+@interface IndexController ()<WKNavigationDelegate,WKUIDelegate>
 {
     //首页的URL
     NSString* default_urlstr;
@@ -146,30 +146,6 @@ WKWebView *g_wkweb1;
     [g_wkweb1 loadRequest:request];
     
 }
-
--(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
-{
-    NSString*s=[[request URL] absoluteString];
-    NSLog(@"shouldStartLoadWithRequest = %@",s);
-    char *purl=(char*)[s UTF8String];
-    if(0==memcmp(purl,"newtab:",7))
-    {
-        //打开新界面
-        UIStoryboard *frm=NULL;
-        
-        frm = [UIStoryboard storyboardWithName:@"WebController" bundle:nil];
-        WebController*wb=(WebController*)frm.instantiateInitialViewController;
-        wb.default_url=[NSString stringWithUTF8String:purl+7];
-        NSLog(@"wb.default_url = %@",wb.default_url);
-        [self.navigationController pushViewController:wb animated:YES];
-        return FALSE;
-    }
-    else
-    {
-        return TRUE;
-    }
-}
-
 
 #pragma mark - WKUIDelegate
 

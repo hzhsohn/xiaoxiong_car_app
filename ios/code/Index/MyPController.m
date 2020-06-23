@@ -21,7 +21,7 @@
 
 WKWebView *g_wkweb3;
 
-@interface MyPController ()<UIWebViewDelegate,WKNavigationDelegate,WKUIDelegate>
+@interface MyPController ()<WKNavigationDelegate,WKUIDelegate>
 {
     //首页的URL
     NSString* default_urlstr;

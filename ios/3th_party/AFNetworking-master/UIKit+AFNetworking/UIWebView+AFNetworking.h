@@ -36,6 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @discussion When using these category methods, make sure to assign `delegate` for the web view, which implements `–webView:shouldStartLoadWithRequest:navigationType:` appropriately. This allows for tapped links to be loaded through AFNetworking, and can ensure that `canGoBack` & `canGoForward` update their values correctly.
  */
+
 @interface UIWebView (AFNetworking)
 
 /**

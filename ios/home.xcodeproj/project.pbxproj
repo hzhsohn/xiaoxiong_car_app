@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		11C08E8324A0B31100FA9DED /* StartupPageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C08E7424A0B31100FA9DED /* StartupPageController.m */; };
 		3804AB6A1BA2E89B000F636A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3804AB691BA2E89B000F636A /* SystemConfiguration.framework */; };
-		380678C71BB2F159004F79A1 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 380678C41BB2F134004F79A1 /* libzbar.a */; };
 		380678D51BB2F4E0004F79A1 /* libiconv.2.4.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 380678D41BB2F4E0004F79A1 /* libiconv.2.4.0.tbd */; };
 		380678D71BB2F505004F79A1 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 380678D61BB2F505004F79A1 /* AVFoundation.framework */; };
 		380678D91BB2F510004F79A1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 380678D81BB2F510004F79A1 /* CoreGraphics.framework */; };
@@ -31,9 +30,6 @@
 		382748111F0A42B9003DDFF7 /* UIViewController+BackButtonHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 3827480D1F0A42B9003DDFF7 /* UIViewController+BackButtonHandler.m */; };
 		3831555C1ADB740E0024E504 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3831555B1ADB740E0024E504 /* QuartzCore.framework */; };
 		383521261E65EEF300FAA97A /* MainTabController.m in Sources */ = {isa = PBXBuildFile; fileRef = 383521251E65EEF300FAA97A /* MainTabController.m */; };
-		3835214B1E673E6300FAA97A /* QRCode.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 383521461E673E6300FAA97A /* QRCode.storyboard */; };
-		3835214C1E673E6300FAA97A /* ScanResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 383521481E673E6300FAA97A /* ScanResult.m */; };
-		3835214D1E673E6300FAA97A /* ZBarScan.m in Sources */ = {isa = PBXBuildFile; fileRef = 3835214A1E673E6300FAA97A /* ZBarScan.m */; };
 		383C163E24A0031D006AD387 /* WKProcessPool.m in Sources */ = {isa = PBXBuildFile; fileRef = 383C163D24A0031D006AD387 /* WKProcessPool.m */; };
 		3846F0EC1FC28DE900C13116 /* HelpHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3846F0EB1FC28DE900C13116 /* HelpHeader.m */; };
 		38503F131FDE365600B41649 /* ExtButtonStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 38503F121FDE365600B41649 /* ExtButtonStyle.m */; };
@@ -108,27 +104,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		380678C31BB2F134004F79A1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 380678BC1BB2F134004F79A1 /* zbar.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D2AAC07E0554694100DB518D;
-			remoteInfo = libzbar;
-		};
-		380678C51BB2F134004F79A1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 380678BC1BB2F134004F79A1 /* zbar.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = DC3CEF9D121633C500D7A786;
-			remoteInfo = readertest;
-		};
-		380678CA1BB2F2C7004F79A1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 380678BC1BB2F134004F79A1 /* zbar.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = D2AAC07D0554694100DB518D;
-			remoteInfo = libzbar;
-		};
 		389029B7246C256500F598B1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 389029B1246C256400F598B1 /* MJRefreshExample.xcodeproj */;
@@ -227,7 +202,6 @@
 		11C08E7224A0B31100FA9DED /* StartupPageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartupPageController.h; sourceTree = "<group>"; };
 		11C08E7424A0B31100FA9DED /* StartupPageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartupPageController.m; sourceTree = "<group>"; };
 		3804AB691BA2E89B000F636A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		380678BC1BB2F134004F79A1 /* zbar.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = zbar.xcodeproj; path = "zbar-code/iphone/zbar.xcodeproj"; sourceTree = "<group>"; };
 		380678D41BB2F4E0004F79A1 /* libiconv.2.4.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.2.4.0.tbd; path = usr/lib/libiconv.2.4.0.tbd; sourceTree = SDKROOT; };
 		380678D61BB2F505004F79A1 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		380678D81BB2F510004F79A1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -272,11 +246,6 @@
 		383521241E65EEF300FAA97A /* MainTabController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabController.h; sourceTree = "<group>"; };
 		383521251E65EEF300FAA97A /* MainTabController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabController.m; sourceTree = "<group>"; };
 		383521441E672FC500FAA97A /* DefineHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefineHeader.h; sourceTree = "<group>"; };
-		383521461E673E6300FAA97A /* QRCode.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = QRCode.storyboard; sourceTree = "<group>"; };
-		383521471E673E6300FAA97A /* ScanResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanResult.h; sourceTree = "<group>"; };
-		383521481E673E6300FAA97A /* ScanResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanResult.m; sourceTree = "<group>"; };
-		383521491E673E6300FAA97A /* ZBarScan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarScan.h; sourceTree = "<group>"; };
-		3835214A1E673E6300FAA97A /* ZBarScan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZBarScan.m; sourceTree = "<group>"; };
 		383C163C24A0031D006AD387 /* WKProcessPool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WKProcessPool.h; sourceTree = "<group>"; };
 		383C163D24A0031D006AD387 /* WKProcessPool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WKProcessPool.m; sourceTree = "<group>"; };
 		3841BA801F22D834007E04C4 /* HelpHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HelpHeader.h; sourceTree = "<group>"; };
@@ -415,7 +384,6 @@
 				380678D91BB2F510004F79A1 /* CoreGraphics.framework in Frameworks */,
 				380678D71BB2F505004F79A1 /* AVFoundation.framework in Frameworks */,
 				380678D51BB2F4E0004F79A1 /* libiconv.2.4.0.tbd in Frameworks */,
-				380678C71BB2F159004F79A1 /* libzbar.a in Frameworks */,
 				3816735F1BAD2F9C002BE356 /* libsqlite3.tbd in Frameworks */,
 				3804AB6A1BA2E89B000F636A /* SystemConfiguration.framework in Frameworks */,
 				3831555C1ADB740E0024E504 /* QuartzCore.framework in Frameworks */,
@@ -439,15 +407,6 @@
 				11C08E7424A0B31100FA9DED /* StartupPageController.m */,
 			);
 			path = Tool;
-			sourceTree = "<group>";
-		};
-		380678BD1BB2F134004F79A1 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				380678C41BB2F134004F79A1 /* libzbar.a */,
-				380678C61BB2F134004F79A1 /* readertest.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		38177B3823B44D4B00FF06D3 /* Masonry */ = {
@@ -508,18 +467,6 @@
 			path = Ext;
 			sourceTree = "<group>";
 		};
-		383521451E673E6300FAA97A /* QRCode */ = {
-			isa = PBXGroup;
-			children = (
-				383521461E673E6300FAA97A /* QRCode.storyboard */,
-				383521471E673E6300FAA97A /* ScanResult.h */,
-				383521481E673E6300FAA97A /* ScanResult.m */,
-				383521491E673E6300FAA97A /* ZBarScan.h */,
-				3835214A1E673E6300FAA97A /* ZBarScan.m */,
-			);
-			path = QRCode;
-			sourceTree = "<group>";
-		};
 		38503F261FDFB3BE00B41649 /* JsonKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -546,7 +493,6 @@
 				389028DE246C175800F598B1 /* EGOTableViewPullRefresh */,
 				38177B3823B44D4B00FF06D3 /* Masonry */,
 				38A7600C236008620007714D /* AFNetworking.xcodeproj */,
-				380678BC1BB2F134004F79A1 /* zbar.xcodeproj */,
 				38503F261FDFB3BE00B41649 /* JsonKit */,
 				3878AD701EFA6BE6004A9DC3 /* Objective-Zip */,
 				3878AC441EFA699A004A9DC3 /* Reachability */,
@@ -818,7 +764,6 @@
 			children = (
 				11C08E7024A0B31100FA9DED /* Tool */,
 				382B200F240A55F6000EBF8F /* code.entitlements */,
-				383521451E673E6300FAA97A /* QRCode */,
 				382748071F0A42B9003DDFF7 /* Ext */,
 				3878ABE01EFA5F2F004A9DC3 /* Index */,
 				38E8F41D1A86318400561E07 /* AppDelegate.h */,
@@ -870,7 +815,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				380678CB1BB2F2C7004F79A1 /* PBXTargetDependency */,
 			);
 			name = code;
 			productName = code;
@@ -937,10 +881,6 @@
 					ProductGroup = 389029B2246C256400F598B1 /* Products */;
 					ProjectRef = 389029B1246C256400F598B1 /* MJRefreshExample.xcodeproj */;
 				},
-				{
-					ProductGroup = 380678BD1BB2F134004F79A1 /* Products */;
-					ProjectRef = 380678BC1BB2F134004F79A1 /* zbar.xcodeproj */;
-				},
 			);
 			projectRoot = "";
 			targets = (
@@ -951,20 +891,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		380678C41BB2F134004F79A1 /* libzbar.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libzbar.a;
-			remoteRef = 380678C31BB2F134004F79A1 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		380678C61BB2F134004F79A1 /* readertest.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = readertest.app;
-			remoteRef = 380678C51BB2F134004F79A1 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		389029B8246C256500F598B1 /* MJRefreshExample.app */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.application;
@@ -1047,7 +973,6 @@
 				389028ED246C175800F598B1 /* blackArrow.png in Resources */,
 				389028F3246C175800F598B1 /* blueArrow.png in Resources */,
 				3880129D241D0A3A008F2A8A /* webwk.storyboard in Resources */,
-				3835214B1E673E6300FAA97A /* QRCode.storyboard in Resources */,
 				38E8F4501A864EB700561E07 /* Localizable.strings in Resources */,
 				389028F0246C175800F598B1 /* whiteArrow@2x.png in Resources */,
 				388FE08624237C1B00816625 /* WebController.storyboard in Resources */,
@@ -1113,10 +1038,8 @@
 				38177B6223B44D4B00FF06D3 /* View+MASAdditions.m in Sources */,
 				38177B6023B44D4B00FF06D3 /* MASLayoutConstraint.m in Sources */,
 				38177B5D23B44D4B00FF06D3 /* ViewController+MASAdditions.m in Sources */,
-				3835214D1E673E6300FAA97A /* ZBarScan.m in Sources */,
 				3878ADA31EFA6BE6004A9DC3 /* ZipFile.m in Sources */,
 				385E64331EA74C6C0058460D /* WebProc.m in Sources */,
-				3835214C1E673E6300FAA97A /* ScanResult.m in Sources */,
 				38C98D732473E22100A499E5 /* AlertCommand.m in Sources */,
 				388FE08524237C1B00816625 /* WebController.m in Sources */,
 				38F9A439248E6BE100B6AC3A /* JDDeviceUtils.m in Sources */,
@@ -1155,11 +1078,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		380678CB1BB2F2C7004F79A1 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = libzbar;
-			targetProxy = 380678CA1BB2F2C7004F79A1 /* PBXContainerItemProxy */;
-		};
 		38E8F4311A86318400561E07 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 38E8F4151A86318400561E07 /* code */;
@@ -1307,7 +1225,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 82U6XT557T;
 				ENABLE_BITCODE = NO;
@@ -1352,7 +1270,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 82U6XT557T;
 				ENABLE_BITCODE = NO;

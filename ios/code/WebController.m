@@ -19,7 +19,7 @@
 //
 #import "WKProcessPool.h"
 
-@interface WebController ()<UIWebViewDelegate,WKNavigationDelegate,WKUIDelegate>
+@interface WebController ()<WKNavigationDelegate,WKUIDelegate>
 {
     WKWebView *wkweb;
     
