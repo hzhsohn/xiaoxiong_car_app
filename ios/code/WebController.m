@@ -55,10 +55,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
- NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"telprompt://%@",@"15999750005"];
-     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
-
-    
     //设置标题
     /*NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
                           [UIColor whiteColor],NSForegroundColorAttributeName,

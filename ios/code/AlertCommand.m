@@ -65,10 +65,8 @@
         else if(![doConent compare:@"tel|" options:NSCaseInsensitiveSearch range:NSMakeRange(0,4)])
         {
             NSString*lsdata=[doConent substringFromIndex:4];
-            
-            NSString*opentel=[NSString stringWithFormat:@"tel://%@",lsdata];
-            [[UIApplication sharedApplication]
-                    openURL:[NSURL URLWithString:opentel]];
+            NSString* str=[NSString stringWithFormat:@"telprompt://%@",lsdata];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
         }
         else if(![doConent compare:@"pay|" options:NSCaseInsensitiveSearch range:NSMakeRange(0,4)])
                {
