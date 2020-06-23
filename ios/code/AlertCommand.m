@@ -73,6 +73,8 @@
                    NSString*lsdata=[doConent substringFromIndex:4];
                    NSLog(@"lsdata%@",lsdata);
                    
+                   [self requestPay];
+                   
                }
         else if(![doConent compare:@"share|" options:NSCaseInsensitiveSearch range:NSMakeRange(0,6)])
         {
@@ -133,6 +135,40 @@
     
     return false;
 }
+
+// 请求接口获取预支付订单和其他发起支付用的信息
+- (void)requestPay{
+    
+    [self requestInvoiceDetailData];
+
+}
+
+// app端调起微信支付
+- (void)startPay:(NSDictionary *)dict{
+    
+    NSMutableString *stamp  = [dict objectForKey:@"timestamp"];
+    
+    //调起微信支付
+    PayReq* req             = [[PayReq alloc] init];
+    req.partnerId           = [dict objectForKey:@"partnerid"];
+    req.prepayId            = [dict objectForKey:@"prepayid"];
+    req.nonceStr            = [dict objectForKey:@"noncestr"];
+    req.timeStamp           = stamp.intValue;
+    req.package             = [dict objectForKey:@"package"];
+    req.sign                = [dict objectForKey:@"sign"];
+    [WXApi sendReq:req];
+    //日志输出
+    NSLog(@"appid=%@\npartid=%@\nprepayid=%@\nnoncestr=%@\ntimestamp=%ld\npackage=%@\nsign=%@",[dict objectForKey:@"appid"],req.partnerId,req.prepayId,req.nonceStr,(long)req.timeStamp,req.package,req.sign );
+}
+
+// 获取预支付订单和支付内容的请求
+- (void)requestInvoiceDetailData{
+    //根据所需的参数传递
+    NSDictionary * params = [NSDictionary dictionaryWithObjectsAndKeys:@"123123",@"orderId",@"2",@"type",@"1",@"cost", nil];
+    __weak typeof(self) weakSelf = self;
+
+}
+
 
 
 /** 分享链接*/
