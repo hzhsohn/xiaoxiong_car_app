@@ -19,7 +19,7 @@
 {
     // Override point for customization after application launch.
 //    [WXApi registerApp:@"wxfc9a296ef77b9b95" withDescription:@"DaiChePin Share"];
-    [WXApi registerApp:@"wxfc9a296ef77b9b95" enableMTA:false];
+    [WXApi registerApp:@"wxfc9a296ef77b9b95" universalLink:@"https://www.daichepin.com"];
     BOOL isFirst =[[[NSUserDefaults standardUserDefaults] objectForKey:@"isFirst"]boolValue];
       if (!isFirst) {
 //          第一次启动

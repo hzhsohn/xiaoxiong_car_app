@@ -156,7 +156,9 @@
     req.timeStamp           = stamp.intValue;
     req.package             = [dict objectForKey:@"package"];
     req.sign                = [dict objectForKey:@"sign"];
-    [WXApi sendReq:req];
+    [WXApi sendReq:req completion:^(BOOL success) {
+        
+    }];
     //日志输出
     NSLog(@"appid=%@\npartid=%@\nprepayid=%@\nnoncestr=%@\ntimestamp=%ld\npackage=%@\nsign=%@",[dict objectForKey:@"appid"],req.partnerId,req.prepayId,req.nonceStr,(long)req.timeStamp,req.package,req.sign );
 }
@@ -197,10 +199,11 @@
     // 发送到微信收藏  WXSceneFavorite
     req.scene = WXSceneSession;
     //发起微信分享
-    BOOL isInstalled = [WXApi sendReq:req];
-    if (isInstalled == NO) {
-        //调用微信分享失败 如：没有安装微信
-    }
+    [WXApi sendReq:req completion:^(BOOL success) {
+        if (success == NO) {
+            //调用微信分享失败 如：没有安装微信
+        }
+    }];
 }
 
 
