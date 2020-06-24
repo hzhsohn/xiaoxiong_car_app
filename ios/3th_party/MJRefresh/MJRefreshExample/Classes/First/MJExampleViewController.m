@@ -19,7 +19,7 @@
 static NSString *const MJExample00 = @"UITableView + 下拉刷新";
 static NSString *const MJExample10 = @"UITableView + 上拉刷新";
 static NSString *const MJExample20 = @"UICollectionView";
-static NSString *const MJExample30 = @"UIWebView";
+static NSString *const MJExample30 = @"";
 static NSString *const MJExample40 = @"WKWebView";
 
 @interface MJExampleViewController()
