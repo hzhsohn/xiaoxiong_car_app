@@ -23,7 +23,7 @@ public class HTTPData {
     //-------------------------
     static public final String sWebTest="http://47.115.187.147/webphone_ios";  //测试服务器
     //static public final String sWebOK="https://8.129.208.43/webphone_ios";      //正式服务器
-    static public final String sWebOK="https://daichepin.com/webphone_ios";      //正式服务器
+    static public final String sWebOK="https://www.daichepin.com/webphone_ios";      //正式服务器
 
     //-------------------------
     static public  String sWeb;

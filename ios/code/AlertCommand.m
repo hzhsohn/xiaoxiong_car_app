@@ -80,7 +80,7 @@
         {
             NSString*lsdata=[doConent substringFromIndex:6];
             
-            // alert("cmd:share|分享|标题|我是分享的内容http://www.hanzhihong.cn");
+            // alert("cmd:share|分享url|标题|我是分享的内容http://www.hanzhihong.cn");
             NSArray *strArr = [lsdata componentsSeparatedByString:@"|"];
             
             if([strArr count]>=3) {

@@ -869,7 +869,7 @@
 				TargetAttributes = {
 					38E8F4151A86318400561E07 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = 74A8256VFL;
+						DevelopmentTeam = 82U6XT557T;
 						ProvisioningStyle = Automatic;
 					};
 					38E8F42E1A86318400561E07 = {
@@ -1245,9 +1245,9 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_ASSET_PATHS = "";
-				DEVELOPMENT_TEAM = 74A8256VFL;
+				DEVELOPMENT_TEAM = 82U6XT557T;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1290,9 +1290,9 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_ASSET_PATHS = "";
-				DEVELOPMENT_TEAM = 74A8256VFL;
+				DEVELOPMENT_TEAM = 82U6XT557T;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
