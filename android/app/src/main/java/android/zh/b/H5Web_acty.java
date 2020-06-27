@@ -387,13 +387,13 @@ public class H5Web_acty extends BaseActivity {
         else if(command.startsWith("share|"))
         {
             String newmsg=command.replace("share|","");
-            // alert("cmd:share|分享|标题|我是分享的内容http://www.hanzhihong.cn");
+            // alert("cmd:share|分享url|标题|我是分享的内容http://www.hanzhihong.cn");
             String[] strArr = newmsg.split("\\|",-1);
             if(strArr.length>=3) {
-                Share(strArr[0], strArr[1], strArr[2]);
+                Share("分享", strArr[1], strArr[2]);
             }else{
                 new AlertDialog.Builder(H5Web_acty.this).
-                        setTitle("提示").setMessage("share 需要三个参数 cmd:share|分享|标题|我是分享的内容").setPositiveButton("确定",
+                        setTitle("提示").setMessage("share 需要三个参数 cmd:share|分享url|标题|我是分享的内容").setPositiveButton("确定",
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface arg0, int arg1) {
