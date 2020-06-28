@@ -18,6 +18,7 @@
 #import "JDDeviceUtils.h"
 //
 #import "WKProcessPool.h"
+#import "WKDeviceUtils.h"
 
 WKWebView *g_wkweb1;
 
@@ -33,6 +34,31 @@ WKWebView *g_wkweb1;
 @end
 
 @implementation IndexController
+
+
+-(CGRect) getFrmPos
+{
+    CGRect f= [ UIScreen mainScreen ].bounds;
+    //处理浏览器高度问题,判断是否有导航栏如果有导航栏即加-44高度
+    int navh=0;
+    NSString*devIfs=[WKDeviceUtils getDeviceIdentifier];
+    //devIfs=@"iPhone 11 Pro";
+    if([devIfs isEqualToString:@"iPhone 11"] ||
+       [devIfs isEqualToString:@"iPhone 11 Pro"] ||
+       [devIfs isEqualToString:@"iPhone 11 Pro Max"] )
+    {
+        int sum=-44+navh;
+        f.origin.y+=sum;
+        f.size.height-=sum-34;
+    }
+    else{
+        int sum=-20+navh;
+        f.origin.y+=sum;
+        f.size.height-=sum;
+    }
+
+    return f;
+}
 
 -(void)awakeFromNib
 {
@@ -55,8 +81,7 @@ WKWebView *g_wkweb1;
     //scalesPageToFit
     config.userContentController = wkUController;
             
-    CGRect f=self.view.bounds;
-    f.origin.y+=-44;
+    CGRect f=[self getFrmPos];
     g_wkweb1 = [[WKWebView alloc]initWithFrame:f configuration:config];
     g_wkweb1.navigationDelegate = self;
     g_wkweb1.UIDelegate = self;

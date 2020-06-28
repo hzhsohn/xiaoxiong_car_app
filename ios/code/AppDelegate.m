@@ -10,6 +10,7 @@
 #import "WXApi.h"
 #import "StartupPageController.h"
 #import "MainTabController.h"
+
 @interface AppDelegate ()
 @end
 
@@ -17,9 +18,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
-//    [WXApi registerApp:@"wxfc9a296ef77b9b95" withDescription:@"DaiChePin Share"];
-    [WXApi registerApp:@"wxfc9a296ef77b9b95" universalLink:@"https://www.daichepin.com"];
+// Override point for customization after application launch.
+    [WXApi registerApp:@"wx1d799e692f686a0f" universalLink:@"https://www.daichepin.com/"];
     BOOL isFirst =[[[NSUserDefaults standardUserDefaults] objectForKey:@"isFirst"]boolValue];
       if (!isFirst) {
 //          第一次启动
@@ -54,6 +54,12 @@
     return TRUE;
 }
 
+
++ (void)startLogByLevel:(WXLogLevel)level logBlock:(WXLogBolock)logBlock
+{
+    
+    
+}
 // onReq是微信终端向第三方程序发起请求，要求第三方程序响应。第三方程序响应完后必须调用sendRsp返回。在调用sendRsp返回时，会切回到微信终端程序界面
 - (void)onReq:(BaseReq *)req
 {
