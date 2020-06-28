@@ -79,8 +79,7 @@
         else if(![doConent compare:@"share|" options:NSCaseInsensitiveSearch range:NSMakeRange(0,6)])
         {
             NSString*lsdata=[doConent substringFromIndex:6];
-            
-            // alert("cmd:share|分享url|标题|我是分享的内容http://www.hanzhihong.cn");
+            // alert("cmd:share|https:/www.daichepin.com/xxxx/xxx|标题|我是分享的内容https:/www.daichepin.com/xxxx/xxx");
             NSArray *strArr = [lsdata componentsSeparatedByString:@"|"];
             
             if([strArr count]>=3) {
