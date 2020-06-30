@@ -71,6 +71,7 @@
 		3880129D241D0A3A008F2A8A /* webwk.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3880129A241D0A3A008F2A8A /* webwk.storyboard */; };
 		3880129E241D0A3A008F2A8A /* IndexController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3880129B241D0A3A008F2A8A /* IndexController.m */; };
 		3889A2CB24A8516D0001F864 /* WKDeviceUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 3889A2CA24A8516D0001F864 /* WKDeviceUtils.m */; };
+		388CDB2024AB08D2005E01AA /* index_test.html in Resources */ = {isa = PBXBuildFile; fileRef = 388CDB1524AB08D2005E01AA /* index_test.html */; };
 		388FE08524237C1B00816625 /* WebController.m in Sources */ = {isa = PBXBuildFile; fileRef = 388FE07824237C1B00816625 /* WebController.m */; };
 		388FE08624237C1B00816625 /* WebController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 388FE08424237C1B00816625 /* WebController.storyboard */; };
 		389028C0246C0D4E00F598B1 /* MyPController.m in Sources */ = {isa = PBXBuildFile; fileRef = 389028BD246C0D4E00F598B1 /* MyPController.m */; };
@@ -328,6 +329,7 @@
 		388717381C3124A10032CBF9 /* code-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "code-Bridging-Header.h"; sourceTree = "<group>"; };
 		3889A2BF24A8516D0001F864 /* WKDeviceUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKDeviceUtils.h; sourceTree = "<group>"; };
 		3889A2CA24A8516D0001F864 /* WKDeviceUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKDeviceUtils.m; sourceTree = "<group>"; };
+		388CDB1524AB08D2005E01AA /* index_test.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index_test.html; sourceTree = SOURCE_ROOT; };
 		388FE07824237C1B00816625 /* WebController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebController.m; sourceTree = "<group>"; };
 		388FE08324237C1B00816625 /* WebController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebController.h; sourceTree = "<group>"; };
 		388FE08424237C1B00816625 /* WebController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = WebController.storyboard; sourceTree = "<group>"; };
@@ -783,6 +785,7 @@
 		38E8F4181A86318400561E07 /* code */ = {
 			isa = PBXGroup;
 			children = (
+				388CDB1524AB08D2005E01AA /* index_test.html */,
 				11C08E7024A0B31100FA9DED /* Tool */,
 				382B200F240A55F6000EBF8F /* code.entitlements */,
 				382748071F0A42B9003DDFF7 /* Ext */,
@@ -1002,6 +1005,7 @@
 				386537DA1BBFC20C00278D97 /* Images.xcassets in Resources */,
 				38E8F42A1A86318400561E07 /* LaunchScreen.xib in Resources */,
 				38EE72FD1EA64F0F00465632 /* Main.storyboard in Resources */,
+				388CDB2024AB08D2005E01AA /* index_test.html in Resources */,
 				38C98D5E24726E5F00A499E5 /* webwk2.storyboard in Resources */,
 				389028F1246C175800F598B1 /* whiteArrow.png in Resources */,
 				38C98D6024726E6500A499E5 /* webwk3.storyboard in Resources */,
@@ -1251,7 +1255,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 82U6XT557T;
 				ENABLE_BITCODE = NO;
@@ -1297,7 +1301,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 82U6XT557T;
 				ENABLE_BITCODE = NO;

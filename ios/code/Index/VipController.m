@@ -254,5 +254,9 @@ WKWebView *g_wkweb2;
     [self presentViewController:alertController animated:YES completion:nil];
 }
 
+- (void)webViewWebContentProcessDidTerminate:(WKWebView *)webView API_AVAILABLE(macosx(10.11), ios(9.0))
+{
+    [webView reload];
+}
 
 @end

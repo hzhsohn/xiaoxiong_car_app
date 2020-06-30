@@ -254,4 +254,8 @@ config.processPool = [WKProcessPool sharedProcessPool];
 }
 
 
+- (void)webViewWebContentProcessDidTerminate:(WKWebView *)webView API_AVAILABLE(macosx(10.11), ios(9.0))
+{
+    [webView reload];
+}
 @end
