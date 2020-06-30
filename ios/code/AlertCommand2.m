@@ -6,7 +6,7 @@
 //  Copyright (c) 2015年 Han.zhihong. All rights reserved.
 //
 
-#import "AlertCommand.h"
+#import "AlertCommand2.h"
 #import <QuartzCore/QuartzCore.h>
 #import "DefineHeader.h"
 #import <MJRefresh/MJRefresh.h>
@@ -18,7 +18,7 @@
 #import "MyPController.h"
 #import "WXApi.h"
 
-@implementation AlertCommand
+@implementation AlertCommand2
 
 -(id) init
 {
@@ -42,8 +42,8 @@
         UIStoryboard *frm = [UIStoryboard storyboardWithName:@"WebController" bundle:nil];
         WebController* v=(WebController*)frm.instantiateInitialViewController;
         v.default_url=doConent;
-        v.type=1;
-        [sel.navigationController pushViewController:v animated:YES];
+        v.type=2;
+        [sel presentViewController:v animated:YES completion:^{}];
         return true;
     }
     else if(![str compare:@"lurl:" options:NSCaseInsensitiveSearch range:NSMakeRange(0,5)])
@@ -61,7 +61,7 @@
         
         if([doConent isEqualToString:@"closefrm"])
         {
-            [sel.navigationController popViewControllerAnimated:YES];
+            [sel dismissViewControllerAnimated:YES completion:^{}];
         }
         else if(![doConent compare:@"tel|" options:NSCaseInsensitiveSearch range:NSMakeRange(0,4)])
         {

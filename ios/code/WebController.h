@@ -11,5 +11,6 @@
 @interface WebController : UIViewController
 //首页的URL
 @property (copy, nonatomic) NSString* default_url;
-
+//
+@property (nonatomic) int type;
 @end

@@ -15,12 +15,13 @@
 //! 导入WebKit框架头文件
 #import <WebKit/WebKit.h>
 #import "AlertCommand.h"
+#import "AlertCommand2.h"
 
 //
 #import "WKProcessPool.h"
 #import "WKDeviceUtils.h"
 
-@interface WebController ()<WKScriptMessageHandler,WKUIDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface WebController ()<WKScriptMessageHandler,WKUIDelegate,WKNavigationDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @property (strong ,nonatomic)   WKWebView *wkWebView;
 @property (strong ,nonatomic)   UIImagePickerController * cameraPicker ;
@@ -66,7 +67,7 @@
 
 -(void) loadWeb:(NSString*)url_str
 {
-#if 0
+#if 1
    //
     NSURL *url = [NSURL URLWithString:url_str];
     NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
@@ -119,6 +120,7 @@
     
     WKWebView *wkWebView = [[WKWebView alloc] initWithFrame:self.view.bounds configuration:config];
     wkWebView.UIDelegate = self;
+    wkWebView.navigationDelegate = self;
     
     [self.view addSubview:wkWebView];
     self.wkWebView = wkWebView;
@@ -134,13 +136,9 @@
         // 打印所传过来的参数，只支持NSNumber, NSString, NSDate, NSArray,
         // NSDictionary, and NSNull类型
         NSLog(@"%@", message.body);
-        
         NSDictionary *bodyDic = (NSDictionary *)message.body;
-        
         NSString *chooseInfoString = [bodyDic objectForKey:@"body"];
-        
         NSDictionary *chooseInfo  = [self dictionaryWithJsonString:chooseInfoString];
-        
         [self didClickRightButtonWithChooseInfo:chooseInfo];
     }
 }
@@ -243,10 +241,7 @@
 //上传图片到H5
 - (void)uploadImageWithImage:(UIImage *)image {
     
-    
     NSData *imageData =  UIImageJPEGRepresentation(image, 0.2);
-    
-    
     NSString *encodedImageStr = [imageData base64Encoding];
     
     NSString *jsString = [NSString stringWithFormat:@"changeImage('%@')",encodedImageStr];
@@ -257,14 +252,40 @@
     
 }
 
-/* 警告框，页面中有调用JS的 alert 方法就会调用该方法 */
-- (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler
-{
-    UIAlertView* customAlert = [[UIAlertView alloc] initWithTitle:nil message:message delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+//! alert(message)
+- (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler {
     
-    [customAlert show];
-    completionHandler();
+    if(1==self.type)
+    {
+        AlertCommand* acmd=[[AlertCommand alloc] init];
+        if(false==[acmd command:message :self :self.wkWebView ])
+        {
+            UIAlertView* customAlert = [[UIAlertView alloc] initWithTitle:nil message:message delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+            [customAlert show];
+            completionHandler();
+        }
+        else
+        {
+            completionHandler();
+        }
+        acmd=nil;
+    }
+    else{
+        AlertCommand2* acmd=[[AlertCommand2 alloc] init];
+        if(false==[acmd command:message :self :self.wkWebView ])
+        {
+            UIAlertView* customAlert = [[UIAlertView alloc] initWithTitle:nil message:message delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+            [customAlert show];
+            completionHandler();
+        }
+        else
+        {
+            completionHandler();
+        }
+        acmd=nil;
+    }
 }
+
 
 /*!
  * @brief 把格式化的JSON格式的字符串转换成字典
@@ -291,6 +312,19 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+//html加载完成
+- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
+{
+    NSLog(@"finish load");
+    // 禁止放大缩小
+    NSString *injectionJSString = @"var script = document.createElement('meta');"
+    "script.name = 'viewport';"
+    "script.content=\"width=device-width, initial-scale=1.0,maximum-scale=1.0, minimum-scale=1.0, user-scalable=no\";"
+    "document.getElementsByTagName('head')[0].appendChild(script);";
+    [webView evaluateJavaScript:injectionJSString completionHandler:nil];
 }
 
 @end

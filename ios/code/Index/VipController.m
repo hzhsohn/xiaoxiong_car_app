@@ -20,7 +20,8 @@
 #import "WKProcessPool.h"
 #import "WKDeviceUtils.h"
 
-WKWebView *g_wkweb2;
+
+WKWebView *g_wkwebp2;
 
 @interface VipController ()<WKNavigationDelegate,WKUIDelegate>
 {
@@ -28,12 +29,14 @@ WKWebView *g_wkweb2;
     NSString* default_urlstr;
     
 }
+@property (strong ,nonatomic) WKWebView *g_wkweb2;
 
 -(void) loadWeb:(NSString*)url_str;
 
 @end
 
 @implementation VipController
+@synthesize g_wkweb2;
 
 
 -(CGRect) getFrmPos
@@ -99,6 +102,8 @@ WKWebView *g_wkweb2;
     
     default_urlstr=WEB_INDEX2_URL;
     [self loadWeb:default_urlstr];//主页
+    
+    g_wkwebp2=g_wkweb2;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -133,7 +138,7 @@ WKWebView *g_wkweb2;
 
 +(WKWebView *)getWeb
 {
-    return g_wkweb2;
+    return g_wkwebp2;
 }
 
 #pragma mark - 下拉刷新
@@ -211,12 +216,13 @@ WKWebView *g_wkweb2;
     AlertCommand* acmd=[[AlertCommand alloc] init];
     if(false==[acmd command:message :self :g_wkweb2])
     {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Alert" message:message preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            completionHandler();
-        }];
-        [alertController addAction:cancelAction];
-        [self presentViewController:alertController animated:YES completion:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
+                                                        message:message
+                                                       delegate:self
+                                              cancelButtonTitle:nil
+                                              otherButtonTitles:NSLocalizedString(@"ok", nil), nil];
+        [alert show];
+        completionHandler();
     }
     else
     {

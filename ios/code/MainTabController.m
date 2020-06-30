@@ -163,6 +163,7 @@ CLLocationCoordinate2D g_GoogleLocation;
 
 -(void) extractEnd
 {
+    
 }
 
 -(NSString*) documentPath:(NSString*)str
@@ -183,8 +184,8 @@ CLLocationCoordinate2D g_GoogleLocation;
     // Do any additional setup after loading the view.
     self.delegate = self;
     
-    /*
-    //判断文件是否存在
+    
+    /*//判断文件是否存在
     NSString *startpage= [self documentPath:@"startpage"];
     NSLog(@"startpage=%@",startpage);
     if(access([startpage UTF8String],0))
@@ -256,6 +257,8 @@ CLLocationCoordinate2D g_GoogleLocation;
     
     [tabc removeAllObjects];
     tabc=nil;
+    
+    
 }
 
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController

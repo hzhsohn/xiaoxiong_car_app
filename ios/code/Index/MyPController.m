@@ -15,12 +15,13 @@
 //! 导入WebKit框架头文件
 #import <WebKit/WebKit.h>
 #import "AlertCommand.h"
+#import "AlertCommand2.h"
 
 //
 #import "WKProcessPool.h"
 #import "WKDeviceUtils.h"
 
-WKWebView *g_wkweb3;
+WKWebView *g_wkwebp3;
 
 @interface MyPController ()<WKNavigationDelegate,WKUIDelegate>
 {
@@ -28,12 +29,14 @@ WKWebView *g_wkweb3;
     NSString* default_urlstr;
     
 }
+@property (strong ,nonatomic) WKWebView *g_wkweb3;
 
 -(void) loadWeb:(NSString*)url_str;
 
 @end
 
 @implementation MyPController
+@synthesize g_wkweb3;
 
 -(CGRect) getFrmPos
 {
@@ -69,10 +72,10 @@ WKWebView *g_wkweb3;
   config.preferences.javaScriptEnabled = YES;
   config.preferences.javaScriptCanOpenWindowsAutomatically = YES;
 
-//使用单例 解决locastorge 储存问题
-config.processPool = [WKProcessPool sharedProcessPool];
+  //使用单例 解决locastorge 储存问题
+  config.processPool = [WKProcessPool sharedProcessPool];
 
-    
+
   NSString *jScript = @"var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);";
   WKUserScript *wkUScript = [[WKUserScript alloc] initWithSource:jScript injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
   WKUserContentController *wkUController = [[WKUserContentController alloc] init];
@@ -100,6 +103,8 @@ config.processPool = [WKProcessPool sharedProcessPool];
 //@"http://xt-sys.com/a4.php";
   default_urlstr=  WEB_INDEX3_URL;
   [self loadWeb:default_urlstr];//主页
+    
+    g_wkwebp3=g_wkweb3;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -133,7 +138,7 @@ config.processPool = [WKProcessPool sharedProcessPool];
 
 +(WKWebView *)getWeb
 {
-    return g_wkweb3;
+    return g_wkwebp3;
 }
 
 #pragma mark - 下拉刷新
@@ -207,21 +212,45 @@ config.processPool = [WKProcessPool sharedProcessPool];
 //! alert(message)
 - (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler {
     
-    AlertCommand* acmd=[[AlertCommand alloc] init];
-    if(false==[acmd command:message :self :g_wkweb3])
+    NSString*pp=@"url:https://www.daichepin.com/webphone_ios/webphone/client_register";
+    int n=(int)[pp length];
+    if([message compare:pp options:NSCaseInsensitiveSearch range:NSMakeRange(0,n)])
     {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Alert" message:message preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        AlertCommand* acmd=[[AlertCommand alloc] init];
+        if(false==[acmd command:message :self :g_wkweb3])
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
+                                                            message:message
+                                                           delegate:self
+                                                  cancelButtonTitle:nil
+                                                  otherButtonTitles:NSLocalizedString(@"ok", nil), nil];
+            [alert show];
             completionHandler();
-        }];
-        [alertController addAction:cancelAction];
-        [self presentViewController:alertController animated:YES completion:nil];
+        }
+        else
+        {
+            completionHandler();
+        }
+        acmd=nil;
     }
-    else
-    {
-        completionHandler();
+    else{
+        AlertCommand2* acmd=[[AlertCommand2 alloc] init];
+        if(false==[acmd command:message :self :g_wkweb3])
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
+                                                            message:message
+                                                           delegate:self
+                                                  cancelButtonTitle:nil
+                                                  otherButtonTitles:NSLocalizedString(@"ok", nil), nil];
+            [alert show];
+            completionHandler();
+        }
+        else
+        {
+            completionHandler();
+        }
+        acmd=nil;
     }
-    acmd=nil;
 }
 
 //! confirm(message)

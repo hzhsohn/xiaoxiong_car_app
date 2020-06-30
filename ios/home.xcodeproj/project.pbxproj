@@ -107,6 +107,7 @@
 		38EE72FD1EA64F0F00465632 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38EE72FB1EA64F0F00465632 /* Main.storyboard */; };
 		38EE73081EA64FDD00465632 /* VipController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EE73071EA64FDD00465632 /* VipController.m */; };
 		38F227D024AB793700C51B8B /* selectPhoto.html in Resources */ = {isa = PBXBuildFile; fileRef = 38F227C524AB793700C51B8B /* selectPhoto.html */; };
+		38F227DF24ABB5DB00C51B8B /* AlertCommand2.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F227DE24ABB5DB00C51B8B /* AlertCommand2.m */; };
 		38F9A439248E6BE100B6AC3A /* JDDeviceUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F9A438248E6BE100B6AC3A /* JDDeviceUtils.m */; };
 /* End PBXBuildFile section */
 
@@ -383,6 +384,8 @@
 		38EE73061EA64FDD00465632 /* VipController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VipController.h; sourceTree = "<group>"; };
 		38EE73071EA64FDD00465632 /* VipController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VipController.m; sourceTree = "<group>"; };
 		38F227C524AB793700C51B8B /* selectPhoto.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = selectPhoto.html; sourceTree = SOURCE_ROOT; };
+		38F227D324ABB5DB00C51B8B /* AlertCommand2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertCommand2.h; sourceTree = "<group>"; };
+		38F227DE24ABB5DB00C51B8B /* AlertCommand2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertCommand2.m; sourceTree = "<group>"; };
 		38F9A437248E6BE100B6AC3A /* JDDeviceUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = JDDeviceUtils.h; path = code/JDDeviceUtils.h; sourceTree = SOURCE_ROOT; };
 		38F9A438248E6BE100B6AC3A /* JDDeviceUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = JDDeviceUtils.m; path = code/JDDeviceUtils.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -806,6 +809,8 @@
 				383521441E672FC500FAA97A /* DefineHeader.h */,
 				38C98D642473E22100A499E5 /* AlertCommand.h */,
 				38C98D722473E22100A499E5 /* AlertCommand.m */,
+				38F227D324ABB5DB00C51B8B /* AlertCommand2.h */,
+				38F227DE24ABB5DB00C51B8B /* AlertCommand2.m */,
 				388FE08324237C1B00816625 /* WebController.h */,
 				388FE07824237C1B00816625 /* WebController.m */,
 				388FE08424237C1B00816625 /* WebController.storyboard */,
@@ -1055,6 +1060,7 @@
 				3878AD9D1EFA6BE6004A9DC3 /* ioapi.c in Sources */,
 				383C163E24A0031D006AD387 /* WKProcessPool.m in Sources */,
 				3878ADA91EFA6BE6004A9DC3 /* deflate.c in Sources */,
+				38F227DF24ABB5DB00C51B8B /* AlertCommand2.m in Sources */,
 				3878AD9E1EFA6BE6004A9DC3 /* mztools.c in Sources */,
 				11C08EE124A1F54500FA9DED /* WXApiManager.m in Sources */,
 				3827480F1F0A42B9003DDFF7 /* UIBarButtonItem+Global.m in Sources */,
@@ -1259,7 +1265,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 82U6XT557T;
 				ENABLE_BITCODE = NO;
@@ -1305,7 +1311,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 82U6XT557T;
 				ENABLE_BITCODE = NO;
