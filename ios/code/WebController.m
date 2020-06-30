@@ -20,21 +20,18 @@
 #import "WKProcessPool.h"
 #import "WKDeviceUtils.h"
 
-@interface WebController ()<WKNavigationDelegate,WKScriptMessageHandler,WKUIDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
-{
-    NSMutableArray* imgArray;
-    AlertCommand* acmd;
-}
+@interface WebController ()<WKScriptMessageHandler,WKUIDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
-@property (nonatomic, strong) WKWebView *wkweb;
-@property (nonatomic) BOOL didBecomeActive;
+@property (strong ,nonatomic)   WKWebView *wkWebView;
+@property (strong ,nonatomic)   UIImagePickerController * cameraPicker ;
+@property (nonatomic) AlertCommand* acmd;
 
 -(void) loadWeb:(NSString*)url_str;
 
 @end
 
 @implementation WebController
-@synthesize wkweb;
+@synthesize acmd;
 
 -(void)awakeFromNib
 {
@@ -42,20 +39,6 @@
     acmd=[[AlertCommand alloc] init];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 -(CGRect) getFrmPos
 {
@@ -81,307 +64,233 @@
     return f;
 }
 
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    _didBecomeActive=TRUE;
-
-    [wkweb.configuration.userContentController  addScriptMessageHandler:self name:@"takePhoto"];
-    [wkweb.configuration.userContentController  addScriptMessageHandler:self name:@"pickPhoto"];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    _didBecomeActive=FALSE;
-    // 这里要记得移除handlers
-    //[wkweb.configuration.userContentController removeScriptMessageHandlerForName:@"takePhoto"];
-    //[wkweb.configuration.userContentController removeScriptMessageHandlerForName:@"pickPhoto"];
-}
-////////////////////////////////////////////////////
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    self.title = @"WKWebView";
-    
-    //设置标题
-    /*NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
-                          [UIColor whiteColor],NSForegroundColorAttributeName,
-                          [UIFont systemFontOfSize:17],NSFontAttributeName,
-                          nil];
-    self.navigationController.navigationBar.titleTextAttributes=dict;
-    */
-    [self.navigationController setNavigationBarHidden:YES animated:NO];
-  
-    [self.view addSubview:self.webView];
-    //访问页面
-    [self loadWeb:self.default_url];//主页
-}
-
-#pragma mark - get方法
-- (WKWebView *)webView {
-    if (wkweb == nil) {
-            //
-            NSString *jScript = @"var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);";
-            WKUserScript *wkUScript = [[WKUserScript alloc] initWithSource:jScript injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
-            WKUserContentController *wkUController = [[WKUserContentController alloc] init];
-            [wkUController addUserScript:wkUScript];
-        
-
-            //
-            WKWebViewConfiguration *config = [WKWebViewConfiguration new];
-            config.preferences = [WKPreferences new];
-            config.preferences.javaScriptEnabled = YES;
-            config.preferences.javaScriptCanOpenWindowsAutomatically = YES;
-           //使用单例 解决locastorge 储存问题
-           config.processPool = [WKProcessPool sharedProcessPool];
-            //scalesPageToFit
-            config.userContentController = wkUController;
-                    
-            CGRect f=[self getFrmPos];
-            wkweb = [[WKWebView alloc]initWithFrame:f configuration:config];
-            wkweb.navigationDelegate = self;
-            wkweb.UIDelegate = self;
-            [wkweb setOpaque:NO];//opaque是不透明的意思
-           //标题栏透明
-            wkweb.backgroundColor=[UIColor clearColor];
-          
-            //如果你导入的MJRefresh库是最新的库，就用下面的方法创建下拉刷新和上拉加载事件
-           // wkweb.scrollView.mj_header.alpha=0.0f;
-           // wkweb.scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self //refreshingAction:@selector(headerRefresh)];
-            //web.scrollView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self //refreshingAction:@selector(footerRefresh)];
-            
-            //滚动栏处理
-           // wkweb.scrollView.showsVerticalScrollIndicator = NO;
-           
-    }
-    return wkweb;
-}
-
-
-#pragma mark - 下拉刷新
-- (void)headerRefresh{
-    [wkweb reload];
-}
-
-#pragma mark - 上拉加载
-- (void)footerRefresh{
-}
-
-#pragma mark - 结束下拉刷新和上拉加载
-- (void)endRefresh{
-
-    //当请求数据成功或失败后，如果你导入的MJRefresh库是最新的库，就用下面的方法结束下拉刷新和上拉加载事件
-    [wkweb.scrollView.mj_header endRefreshing];
-    [wkweb.scrollView.mj_footer endRefreshing];
-    
-    wkweb.scrollView.mj_header.alpha=0.0f;
-}
-
--(void)dealloc
-{
-    //[super dealloc];
-    [wkweb stopLoading];
-    wkweb=nil;
-}
-
 -(void) loadWeb:(NSString*)url_str
 {
 #if 0
    //
     NSURL *url = [NSURL URLWithString:url_str];
     NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
-    [wkweb loadRequest:request];
+    [self.wkWebView loadRequest:request];
     
 #else
+    //
+  /*  NSURL *url = [NSURL URLWithString:@"https://www.daichepin.com/webphone_ios/webphone/client_register/#/client/register?phone=445566&code=111111"];
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
+    [wkweb loadRequest:request];
+    */
     //加载调试页面
-    NSURL *url = [[NSBundle mainBundle] URLForResource:@"index_test" withExtension:@"html"];
+    //NSURL *url = [[NSBundle mainBundle] URLForResource:@"index_test" withExtension:@"html"];
+    NSURL *url = [[NSBundle mainBundle] URLForResource:@"selectPhoto" withExtension:@"html"];
+    
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
-    [wkweb loadRequest:urlRequest]; // 加载页面
+    [self.wkWebView loadRequest:urlRequest]; // 加载页面
 #endif
 }
 
-#pragma mark - WKUIDelegate
+- (void)viewDidLoad {
+    [super viewDidLoad];
 
-//html加载失败
-- (void)webView:(WKWebView *)webView didFailNavigation:(WKNavigation *)navigation withError:(NSError *)error
-{
-    NSLog(@"error message:%@",error);
-    [self endRefresh];
-}
+    //设置标题
+    /*NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
+                        [UIColor whiteColor],NSForegroundColorAttributeName,
+                        [UIFont systemFontOfSize:17],NSFontAttributeName,
+                        nil];
+    self.navigationController.navigationBar.titleTextAttributes=dict;
+    */
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
 
-//html开始加载
-- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation
-{
-    NSLog(@"begin load html");
-}
-
-//html加载完成
-- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
-{
-    NSLog(@"finish load");
-    // 禁止放大缩小
-    NSString *injectionJSString = @"var script = document.createElement('meta');"
-    "script.name = 'viewport';"
-    "script.content=\"width=device-width, initial-scale=1.0,maximum-scale=1.0, minimum-scale=1.0, user-scalable=no\";"
-    "document.getElementsByTagName('head')[0].appendChild(script);";
-    [webView evaluateJavaScript:injectionJSString completionHandler:nil];
+    //
+    WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
+    // 设置偏好设置
+    config.preferences = [[WKPreferences alloc] init];
+    // 默认为0
+    config.preferences.minimumFontSize = 10;
+    // 默认认为YES
+    config.preferences.javaScriptEnabled = YES;
+    // 在iOS上默认为NO，表示不能自动通过窗口打开
+    config.preferences.javaScriptCanOpenWindowsAutomatically = NO;
+    // web内容处理池，由于没有属性可以设置，也没有方法可以调用，不用手动创建
+    config.processPool = [[WKProcessPool alloc] init];
+    // 通过JS与webview内容交互
+    config.userContentController = [[WKUserContentController alloc] init];
+    // 注入JS对象名称AppModel，当JS通过AppModel来调用时，
+    // 我们可以在WKScriptMessageHandler代理中接收到
+    [config.userContentController addScriptMessageHandler:self name:@"AppModel"];
     
-    [webView evaluateJavaScript:@"javascript: var allLinks = document.getElementsByTagName('a'); if (allLinks) {var i;for (i=0; i<allLinks.length; i++) {var link = allLinks[i];var target = link.getAttribute('target'); if (target && target == '_blank') {link.href = 'newtab:'+link.href;link.setAttribute('target','_self');}}}"  completionHandler:^(id _Nullable response, NSError * _Nullable error) {
-        
-        NSLog(@"response: %@ error: %@", response, error);
-    }];
+    WKWebView *wkWebView = [[WKWebView alloc] initWithFrame:self.view.bounds configuration:config];
+    wkWebView.UIDelegate = self;
     
-    [self endRefresh];
-}
-
-//! alert(message)
-- (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler {
+    [self.view addSubview:wkWebView];
+    self.wkWebView = wkWebView;
     
-    if(false==[acmd command:message :self :wkweb])
-    {
-      /*  UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Alert" message:message preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        }];
-        [alertController addAction:cancelAction];
-        [self presentViewController:alertController animated:YES completion:nil];*/
-        completionHandler();
-    }
-    else
-    {
-        completionHandler();
-    }
-    
+    //访问页面
+   [self loadWeb:self.default_url];//主页
 }
-
-//! confirm(message)
-- (void)webView:(WKWebView *)webView runJavaScriptConfirmPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(BOOL))completionHandler {
-    
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Confirm" message:message preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        completionHandler(NO);
-    }];
-    UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        completionHandler(YES);
-    }];
-    [alertController addAction:cancelAction];
-    [alertController addAction:confirmAction];
-    [self presentViewController:alertController animated:YES completion:nil];
-}
-
-//! prompt(prompt, defaultText)
-- (void)webView:(WKWebView *)webView runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(NSString *)defaultText initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(NSString *))completionHandler {
-    
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:prompt message:nil preferredStyle:UIAlertControllerStyleAlert];
-    [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-        textField.placeholder = defaultText;
-    }];
-    UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        completionHandler(alertController.textFields[0].text);
-    }];
-    [alertController addAction:confirmAction];
-    [self presentViewController:alertController animated:YES completion:nil];
-}
-
-
-- (void)webViewWebContentProcessDidTerminate:(WKWebView *)webView API_AVAILABLE(macosx(10.11), ios(9.0))
-{
-    [webView reload];
-}
-
-// 监听用户导航行为
-- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
-    // 可以在这个地方处理用户导航行为
-    if (navigationAction.navigationType == WKNavigationTypeReload && _didBecomeActive) {
-        decisionHandler(WKNavigationActionPolicyCancel);
-    } else {
-        decisionHandler(WKNavigationActionPolicyAllow);
-    }
-    _didBecomeActive = NO;
-}
-
-// 判断是否白屏
-- (BOOL)isBlankView:(UIView*)view { // YES：blank
- Class wkCompositingView =NSClassFromString(@"WKCompositingView");
- if ([view isKindOfClass:[wkCompositingView class]]) {
-     return NO;
- }
- for(UIView * subView in view.subviews) {
-    if(![self isBlankView:subView]) {
-    return NO;
-    }
- }
- return YES;
-}
-
 
 #pragma mark - WKScriptMessageHandler
-- (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message {
-    NSLog(@"============方法名:%@", message.name);
-    NSLog(@"============参数:%@", message.body);
-    // 方法名
-    if([message.name isEqualToString:@"takePhoto"])
-    {
-        [self takePhoto];
-    }
-}
-
-- (void)pickPhoto{
-    NSLog(@"pickPhoto");
-}
-
-//拍照
-- (void)takePhoto{
-    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-        picker.delegate = self;
-        picker.allowsEditing = YES; //可编辑
-        //判断是否可以打开照相机
-        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
-        {
-            //摄像头
-            picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-                    //出现这个问题，基本就是UI操作放在了非主线程中操作导致。我的问题是webview的回调，有时候会进入子线程处理。所以统一加上dispatch_async(dispatch_get_main_queue...
-            dispatch_async(dispatch_get_main_queue(), ^{ //不加这句有时候点击会闪退
-                [self presentViewController:picker animated:YES completion:nil];
-            });
-        }
-        else
-        {
-            NSLog(@"没有摄像头");
-        }
-    
-}
-
-
-// 相机
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
-
-   [imgArray removeAllObjects];
-    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
-    [imgArray addObject:image];
-    
-    if (imgArray.count) {
-        //这里开始写请求上传图片接口的代码
-        //请求成功，获取返回的图片地址，如果是数组，将数组转换为字符串
-        NSString *urlStr=@"123" ;//= [[数组] componentsJoinedByString:@""];
-     
-        // 然后向js传图片地址:
-         NSString *inputValue = [NSString stringWithFormat:@"getPhotoCallback('%@')",urlStr];
-         [wkweb evaluateJavaScript:inputValue completionHandler:^(id _Nullable response, NSError * _Nullable error) {
-                NSLog(@"value图片: %@ error: %@", response, error);
-          }];
+- (void)userContentController:(WKUserContentController *)userContentController
+      didReceiveScriptMessage:(WKScriptMessage *)message {
+    if ([message.name isEqualToString:@"AppModel"]) {
+        // 打印所传过来的参数，只支持NSNumber, NSString, NSDate, NSArray,
+        // NSDictionary, and NSNull类型
+        NSLog(@"%@", message.body);
         
+        NSDictionary *bodyDic = (NSDictionary *)message.body;
+        
+        NSString *chooseInfoString = [bodyDic objectForKey:@"body"];
+        
+        NSDictionary *chooseInfo  = [self dictionaryWithJsonString:chooseInfoString];
+        
+        [self didClickRightButtonWithChooseInfo:chooseInfo];
     }
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-               [self dismissViewControllerAnimated:YES completion:nil];
-    });
 }
 
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)pickerController {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self dismissViewControllerAnimated:YES completion:nil];
-    });
+#pragma  mark - 相机调用拍照
+- (void)didClickRightButtonWithChooseInfo:(NSDictionary *)chooseInfo {
+   
+    _cameraPicker = [[UIImagePickerController alloc] init];
+    _cameraPicker.delegate = self;
+    _cameraPicker.allowsEditing = YES;
+    
+    
+    BOOL isPhotoAlbum = [chooseInfo[@"imageLibrary"] boolValue];
+    BOOL isCameraType = [chooseInfo[@"camera"] boolValue];
+    
+    if (!isPhotoAlbum) {
+        
+        _cameraPicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        [self presentViewController:_cameraPicker animated:YES completion:nil];
 
+    } else {
+        
+        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            _cameraPicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+
+            //设置相机摄像头默认为前置
+            if (!isCameraType) {
+                _cameraPicker.cameraDevice = UIImagePickerControllerCameraDeviceFront;
+            } else {
+                _cameraPicker.cameraDevice = UIImagePickerControllerCameraDeviceRear;
+            }
+            //相机的调用为照相模式
+            _cameraPicker.cameraCaptureMode = UIImagePickerControllerCameraCaptureModePhoto;
+            //设置为NO则隐藏了拍照按钮
+            _cameraPicker.showsCameraControls = NO;
+            //设置相机闪光灯开关
+            _cameraPicker.cameraFlashMode = UIImagePickerControllerCameraFlashModeAuto;
+            
+            //自定义覆盖图层-->overlayview
+            UIView *customView = [[UIView alloc] initWithFrame:CGRectMake(0,self.view.frame.size.height - 200, self.view.frame.size.width, 200)];
+            customView.backgroundColor = [UIColor greenColor];
+            
+            UIButton *startButton = [UIButton buttonWithType:UIButtonTypeCustom];
+            startButton.frame = CGRectMake(customView.frame.size.width/2-25, 100, 50, 50);
+            [startButton setTitle:@"拍照" forState:UIControlStateNormal];
+            [startButton setBackgroundColor:[UIColor orangeColor]];
+            [startButton addTarget:self action:@selector(startButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+            [customView addSubview:startButton];
+
+            UIButton *cleanButton = [UIButton buttonWithType:UIButtonTypeCustom];
+            cleanButton.frame = CGRectMake(50, 100, 50, 50);
+            [cleanButton setTitle:@"取消" forState:UIControlStateNormal];
+            [cleanButton setBackgroundColor:[UIColor redColor]];
+            [cleanButton addTarget:self action:@selector(cleanButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+            [customView addSubview:cleanButton];
+            
+            _cameraPicker.cameraOverlayView = customView;
+ 
+            [self presentViewController:_cameraPicker animated:YES completion:nil];
+
+        } else {
+            
+            UIAlertController *alertView = [UIAlertController alertControllerWithTitle:@"提示" message:@"当前设备不支持相机调用" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
+            [alertView addAction:action];
+            [self presentViewController:alertView animated:YES completion:nil];
+        }
+
+    }
+    
+}
+
+- (void)startButtonClick:(UIButton *)sender {
+    
+    [_cameraPicker takePicture];
+}
+
+- (void)cleanButtonClick:(UIButton *)sender {
+    
+    [_cameraPicker dismissViewControllerAnimated:YES completion:nil];
+ }
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+    
+    /*-------------------------------相机拍照--------------------------------------*/
+    if (picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
+        
+        UIImage * image = [info objectForKey:UIImagePickerControllerEditedImage];
+        [self uploadImageWithImage:image];
+        [self dismissViewControllerAnimated:YES completion:nil];
+        
+    } else if (picker .sourceType == UIImagePickerControllerSourceTypePhotoLibrary) {
+        
+        UIImage * image = [info objectForKey:UIImagePickerControllerEditedImage];
+        [self uploadImageWithImage:image];
+                [self dismissViewControllerAnimated:YES completion:nil];
+    }
+
+}
+
+//上传图片到H5
+- (void)uploadImageWithImage:(UIImage *)image {
+    
+    
+    NSData *imageData =  UIImageJPEGRepresentation(image, 0.2);
+    
+    
+    NSString *encodedImageStr = [imageData base64Encoding];
+    
+    NSString *jsString = [NSString stringWithFormat:@"changeImage('%@')",encodedImageStr];
+    [self.wkWebView evaluateJavaScript:jsString completionHandler:^(id _Nullable sender, NSError * _Nullable error) {
+        NSLog(@"%@",error);
+        
+    }];
+    
+}
+
+/* 警告框，页面中有调用JS的 alert 方法就会调用该方法 */
+- (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler
+{
+    UIAlertView* customAlert = [[UIAlertView alloc] initWithTitle:nil message:message delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+    
+    [customAlert show];
+    completionHandler();
+}
+
+/*!
+ * @brief 把格式化的JSON格式的字符串转换成字典
+ * @param jsonString JSON格式的字符串
+ * @return 返回字典
+ */
+- (NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString {
+    if (jsonString == nil) {
+        return nil;
+    }
+    
+    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *err;
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                        options:NSJSONReadingMutableContainers
+                                                          error:&err];
+    if(err) {
+        NSLog(@"json解析失败：%@",err);
+        return nil;
+    }
+    return dic;
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 @end

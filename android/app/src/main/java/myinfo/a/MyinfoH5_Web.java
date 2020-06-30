@@ -33,6 +33,8 @@ import android.zh.home.MainActivity;
 import com.dou361.dialogui.DialogUIUtils;
 import com.xiaoxiongcar.R;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -61,7 +63,9 @@ public class MyinfoH5_Web extends BaseFragment {
                 @Override
                 public void run() {
                     //已在主线程中，可以更新UI
-                    webView.loadUrl(my_url);
+                    Map extraHeaders = new HashMap();
+                    extraHeaders.put("Referer", HTTPData.sWebHost);
+                    webView.loadUrl(my_url, extraHeaders);
                 }
             });
 
@@ -154,8 +158,24 @@ public class MyinfoH5_Web extends BaseFragment {
 
                 }
                 else {
-                    view.loadUrl(urls); //如果是没有加那个前缀的就正常
+                    Map extraHeaders = new HashMap();
+                    extraHeaders.put("Referer", HTTPData.sWebHost);
+                    view.loadUrl(urls, extraHeaders);
                 }
+
+                // 如下方案可在非微信内部WebView的H5页面中调出微信支付
+                if (urls.startsWith("weixin://wap/pay?")) {
+                    Intent intent = new Intent();
+                    intent.setAction(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse(urls));
+                    startActivity(intent);
+                    return true;
+                } else {
+                    Map<String, String> extraHeaders = new HashMap<String, String>();
+                    extraHeaders.put("Referer", HTTPData.sWebHost);
+                    view.loadUrl(urls, extraHeaders);
+                }
+
                 return true;
 
             }
@@ -194,7 +214,9 @@ public class MyinfoH5_Web extends BaseFragment {
                 //判断网页是否被黑
                 if (!url.startsWith("http:") && !url.startsWith("https:"))
                 {
-                    webView.loadUrl(HTTPData.sWebPhoneUrl_Center);
+                    Map extraHeaders = new HashMap();
+                    extraHeaders.put("Referer", HTTPData.sWebHost);
+                    webView.loadUrl(HTTPData.sWebPhoneUrl_Center, extraHeaders);
                 }
 
             }
@@ -297,7 +319,10 @@ public class MyinfoH5_Web extends BaseFragment {
                 else if(message.startsWith("lurl:"))
                 {
                     String newurl=message.replace("lurl:","");
-                    webView.loadUrl(newurl);
+
+                    Map extraHeaders = new HashMap();
+                    extraHeaders.put("Referer", HTTPData.sWebHost);
+                    webView.loadUrl(newurl, extraHeaders);
 
                 }
                 else {

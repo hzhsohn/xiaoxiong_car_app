@@ -106,6 +106,7 @@
 		38E8F4501A864EB700561E07 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 38E8F44F1A864EB700561E07 /* Localizable.strings */; };
 		38EE72FD1EA64F0F00465632 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38EE72FB1EA64F0F00465632 /* Main.storyboard */; };
 		38EE73081EA64FDD00465632 /* VipController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EE73071EA64FDD00465632 /* VipController.m */; };
+		38F227D024AB793700C51B8B /* selectPhoto.html in Resources */ = {isa = PBXBuildFile; fileRef = 38F227C524AB793700C51B8B /* selectPhoto.html */; };
 		38F9A439248E6BE100B6AC3A /* JDDeviceUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F9A438248E6BE100B6AC3A /* JDDeviceUtils.m */; };
 /* End PBXBuildFile section */
 
@@ -381,6 +382,7 @@
 		38EE72FC1EA64F0F00465632 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		38EE73061EA64FDD00465632 /* VipController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VipController.h; sourceTree = "<group>"; };
 		38EE73071EA64FDD00465632 /* VipController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VipController.m; sourceTree = "<group>"; };
+		38F227C524AB793700C51B8B /* selectPhoto.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = selectPhoto.html; sourceTree = SOURCE_ROOT; };
 		38F9A437248E6BE100B6AC3A /* JDDeviceUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = JDDeviceUtils.h; path = code/JDDeviceUtils.h; sourceTree = SOURCE_ROOT; };
 		38F9A438248E6BE100B6AC3A /* JDDeviceUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = JDDeviceUtils.m; path = code/JDDeviceUtils.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -785,6 +787,7 @@
 		38E8F4181A86318400561E07 /* code */ = {
 			isa = PBXGroup;
 			children = (
+				38F227C524AB793700C51B8B /* selectPhoto.html */,
 				388CDB1524AB08D2005E01AA /* index_test.html */,
 				11C08E7024A0B31100FA9DED /* Tool */,
 				382B200F240A55F6000EBF8F /* code.entitlements */,
@@ -1004,6 +1007,7 @@
 				388FE08624237C1B00816625 /* WebController.storyboard in Resources */,
 				386537DA1BBFC20C00278D97 /* Images.xcassets in Resources */,
 				38E8F42A1A86318400561E07 /* LaunchScreen.xib in Resources */,
+				38F227D024AB793700C51B8B /* selectPhoto.html in Resources */,
 				38EE72FD1EA64F0F00465632 /* Main.storyboard in Resources */,
 				388CDB2024AB08D2005E01AA /* index_test.html in Resources */,
 				38C98D5E24726E5F00A499E5 /* webwk2.storyboard in Resources */,

@@ -40,9 +40,12 @@ import com.xiaoxiongcar.R;
 
 import com.dou361.dialogui.DialogUIUtils;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import ext.magr.HTTPData;
 import found.a.FoundList;
 import myinfo.a.MyinfoH5_Web;
 import myinfo.logic.LoginInfo;
@@ -55,12 +58,12 @@ public class H5Web_acty extends BaseActivity {
 
     Context context = null;
     WebView webView = null;
-    Dialog loadDialog;
     String my_url;
     Timer timer=null;
     SwipeRefreshLayout mSwipe=null;
     private static final int MY_PERMISSIONS_REQUEST_CALL_PHONE = 1;
     String telphone_number;
+
 
     private ValueCallback<Uri> uploadMessage;
     private ValueCallback<Uri[]> uploadMessageAboveL;
@@ -75,7 +78,9 @@ public class H5Web_acty extends BaseActivity {
                 @Override
                 public void run() {
                     //已在主线程中，可以更新UI
-                    webView.loadUrl(my_url);
+                    Map extraHeaders = new HashMap();
+                    extraHeaders.put("Referer", HTTPData.sWebHost);
+                    webView.loadUrl(my_url, extraHeaders);
                 }
             });
 
@@ -141,6 +146,8 @@ public class H5Web_acty extends BaseActivity {
         webSettings.setAppCachePath(appCachePath);
         webSettings.setAllowFileAccess(true);    // 可以读取文件缓存
         webSettings.setAppCacheEnabled(true);    //开启H5(APPCache)缓存功能
+
+
         //
         Bundle bundle = this.getIntent().getExtras();
         to_url(bundle.getString("url"));
@@ -165,8 +172,31 @@ public class H5Web_acty extends BaseActivity {
 
                 }
                 else {
-                    view.loadUrl(urls); //如果是没有加那个前缀的就正常
+                    Map<String, String> extraHeaders = new HashMap<String, String>();
+                    extraHeaders.put("Referer", HTTPData.sWebHost);
+                    view.loadUrl(urls, extraHeaders);
+
                 }
+
+                // 如下方案可在非微信内部WebView的H5页面中调出微信支付
+                if (urls.startsWith("weixin://wap/pay?")) {
+                    Intent intent = new Intent();
+                    intent.setAction(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse(urls));
+                    startActivity(intent);
+
+
+                    Map<String, String> extraHeaders = new HashMap<String, String>();
+                    extraHeaders.put("Referer", HTTPData.sWebHost);
+                    view.loadUrl(my_url, extraHeaders);
+
+                    return true;
+                } else {
+                    Map<String, String> extraHeaders = new HashMap<String, String>();
+                    extraHeaders.put("Referer", HTTPData.sWebHost);
+                    view.loadUrl(urls, extraHeaders);
+                }
+
                 return true;
             }
 
@@ -263,7 +293,10 @@ public class H5Web_acty extends BaseActivity {
                 {
                     String newurl=message.replace("lurl:","");
                     my_url=newurl;
-                    webView.loadUrl(my_url);
+
+                    Map<String, String> extraHeaders = new HashMap<String, String>();
+                    extraHeaders.put("Referer", HTTPData.sWebHost);
+                    webView.loadUrl(my_url, extraHeaders);
                 }
                 else {
                     Log.d("", "onJsAlert:" + message);

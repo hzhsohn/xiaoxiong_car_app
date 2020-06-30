@@ -32,6 +32,8 @@ import com.dou361.dialogui.DialogUIUtils;
 import com.xiaoxiongcar.R;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -61,7 +63,9 @@ public class FoundList extends BaseFragment {
                 @Override
                 public void run() {
                     //已在主线程中，可以更新UI
-                    webView.loadUrl(my_url);
+                    Map extraHeaders = new HashMap();
+                    extraHeaders.put("Referer", HTTPData.sWebHost);
+                    webView.loadUrl(my_url, extraHeaders);
                 }
             });
 

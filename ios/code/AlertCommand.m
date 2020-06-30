@@ -40,9 +40,10 @@
         NSString*doConent=[str substringFromIndex:4];
         
         UIStoryboard *frm = [UIStoryboard storyboardWithName:@"WebController" bundle:nil];
-        WebController* v=(WebController*)frm.instantiateInitialViewController;
-        v.default_url=doConent;
-        [sel.navigationController pushViewController:v animated:YES];
+        UINavigationController* v=(UINavigationController*)frm.instantiateInitialViewController;
+       // v.per.default_url=doConent;
+       // [sel.navigationController pushViewController:v animated:YES];
+       [sel presentModalViewController:v animated:YES];
         return true;
     }
     else if(![str compare:@"lurl:" options:NSCaseInsensitiveSearch range:NSMakeRange(0,5)])
@@ -60,7 +61,10 @@
         
         if([doConent isEqualToString:@"closefrm"])
         {
-            [sel.navigationController popViewControllerAnimated:YES];
+            //[sel.navigationController popViewControllerAnimated:YES];
+            [sel.parentViewController dismissViewControllerAnimated:(BOOL) completion:^{
+                <#code#>
+            }];
         }
         else if(![doConent compare:@"tel|" options:NSCaseInsensitiveSearch range:NSMakeRange(0,4)])
         {
