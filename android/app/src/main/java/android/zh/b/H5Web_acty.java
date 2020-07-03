@@ -101,7 +101,7 @@ public class H5Web_acty extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.acty_webview);
         context = this;
-        //电话功能
+        KeyBoardListener.getInstance(this).init();
         //
         initToolbar(0,
                 R.id.toolbarId,

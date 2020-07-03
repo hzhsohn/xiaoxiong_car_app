@@ -140,12 +140,12 @@ copyFilesFromAssets(cxt,"mosquitto",path);
         }
 
         //-------------------------
-        HTTPData.sWebTestPage=HTTPData.sWeb+"/testAAA.php";  //测试服务器
-        HTTPData.sWebStartPage=HTTPData.sWeb+"/startpage";  //测试服务器
+        HTTPData.sWebTestPage=HTTPData.sWebHost+"/testAAA.php";  //测试服务器
+        HTTPData.sWebStartPage=HTTPData.sWebHost+"/startpage";  //测试服务器
         HTTPData.sWebPhoneUrl_Index=HTTPData.sWeb+"/webphone_index/#/common/index";
         HTTPData.sWebPhoneUrl_JiZhao=HTTPData.sWeb+"/webphone_vip/#/common/recommend";
         HTTPData.sWebPhoneUrl_Center=HTTPData.sWeb+"/webphone/#/client/center";
-        HTTPData.sUpdateUrl=HTTPData.sWeb+ "/app_update";
+        HTTPData.sUpdateUrl=HTTPData.sWebHost+ "/app_update";
 
 //web h5测试:
         if(HTTPData.isTestApp) {

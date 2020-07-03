@@ -157,7 +157,8 @@ public class VersionInfo {
         mainHandler.post(new Runnable() {
             @Override
             public void run() {
-                web.getHtml(HTTPData.sUpdateUrl+"/android_ver.txt","");
+                String s=HTTPData.sUpdateUrl+"/android_ver.txt";
+                web.getHtml(s,"");
             }
         });
     }
