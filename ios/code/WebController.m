@@ -100,6 +100,21 @@
     */
     [self.navigationController setNavigationBarHidden:YES animated:NO];
 
+    
+    //注册键盘事件
+    [[NSNotificationCenter defaultCenter]
+    addObserver:self
+    selector:@selector(keyboardWillShow:)
+        name:UIKeyboardWillShowNotification
+    object:nil];
+     
+    [[NSNotificationCenter defaultCenter]
+    addObserver:self
+    selector:@selector(keyboardWillHide:)
+        name:UIKeyboardWillHideNotification
+    object:nil];
+
+    
     //
     WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
     // 设置偏好设置
@@ -118,7 +133,7 @@
     // 我们可以在WKScriptMessageHandler代理中接收到
     [config.userContentController addScriptMessageHandler:self name:@"AppModel"];
     
-    WKWebView *wkWebView = [[WKWebView alloc] initWithFrame:self.view.bounds configuration:config];
+    WKWebView *wkWebView = [[WKWebView alloc] initWithFrame:[self getFrmPos] configuration:config];
     wkWebView.UIDelegate = self;
     wkWebView.navigationDelegate = self;
     
@@ -128,6 +143,43 @@
     //访问页面
    [self loadWeb:self.default_url];//主页
 }
+
+
+- (void) keyboardWillShow:(NSNotification *)note {
+    NSLog(@"keyboard show");
+    
+    //上移输入框
+    NSDictionary* info = [note userInfo];
+    NSValue* aValue = [info objectForKey:@"UIKeyboardBoundsUserInfoKey"];
+    CGSize keyboardRect = [aValue CGRectValue].size;
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.5];
+
+    CGRect rk;
+    rk=self.view.frame;
+    rk.origin.y=-keyboardRect.height;
+    [self.view setFrame:rk];
+
+    [UIView setAnimationTransition:0 forView:self.view cache:YES];
+    [UIView commitAnimations];
+    
+}
+- (void) keyboardWillHide:(NSNotification *)note
+{
+    NSLog(@"keyboard hide");
+    //恢复输入框
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.5];
+    
+    CGRect rk;
+    rk=self.view.frame;
+    rk.origin.y=0;
+    [self.view setFrame:rk];
+    
+    [UIView setAnimationTransition:0 forView:self.view cache:YES];
+    [UIView commitAnimations];
+}
+
 
 #pragma mark - WKScriptMessageHandler
 - (void)userContentController:(WKUserContentController *)userContentController
