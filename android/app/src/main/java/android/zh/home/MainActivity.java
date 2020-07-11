@@ -360,13 +360,13 @@ copyFilesFromAssets(cxt,"mosquitto",path);
                 Date endDate = new Date(System.currentTimeMillis());
                 long diff = endDate.getTime() - FoundList.reloadLastTime;
 
-                //120秒不动作就重新刷新
-                if(diff>120*1000) {
+                //1秒不动作就重新刷新
+               // if(diff>1) {
                     Log.e("aa","刷新所有web内容");
                     FoundList.webView.loadUrl(HTTPData.sWebPhoneUrl_Index);
                     VipList.webView.loadUrl(HTTPData.sWebPhoneUrl_JiZhao);
                     MyinfoH5_Web.webView.loadUrl(HTTPData.sWebPhoneUrl_Center);
-                }
+                //}
             }
         }
         wasBackground= false;
