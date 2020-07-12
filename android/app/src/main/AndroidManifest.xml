@@ -43,28 +43,19 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <!-- 网页打开 -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:host="www.daichepin.com"
+                    android:scheme="https" />
+            </intent-filter>
+
         </activity>
-        <activity
-            android:name="myinfo.logged.setting.MySetting"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="myinfo.logged.iotinfo.MyIotInfo"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="myinfo.logged.setting.account.AccountSafe"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="myinfo.logged.setting.account.ModifyPhone"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="myinfo.logged.setting.account.ModifyPasswd"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="myinfo.logged.iotinfo.ModifyNickname"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="myinfo.logged.iotinfo.ModifyIcon"
-            android:screenOrientation="portrait" />
+
         <activity
             android:name="ext.qrscan.zxing.android.CaptureActivity"
             android:screenOrientation="portrait" />
@@ -76,12 +67,7 @@
             android:screenOrientation="portrait" />
         <activity android:name="p3th.easylink.EasyLinkConfigActivity"
             android:screenOrientation="portrait" />
-        <activity android:name="myinfo.unlogged.reg.MyRegByPhone"
-            android:screenOrientation="portrait" />
-        <activity android:name="myinfo.unlogged.reg.MyRegByPhone2"
-            android:screenOrientation="portrait" />
-        <activity android:name="myinfo.unlogged.forgot.MyForgotPhone" />
-        <activity android:name="myinfo.unlogged.forgot.MyForgotPhone2" />
+
         <activity android:name="android.zh.b.H5Web_acty" />
     </application>
 

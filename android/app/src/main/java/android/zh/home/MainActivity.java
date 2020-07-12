@@ -29,6 +29,7 @@ import android.zh.b.StatusNavUtils;
 
 import ext.func.AssertAlert;
 import ext.magr.HTTPData;
+import ext.magr.WebProc;
 import found.a.FoundList;
 import myinfo.a.MyinfoH5_Web;
 import myinfo.logic.LoginInfo;
@@ -128,6 +129,29 @@ copyFilesFromAssets(cxt,"mosquitto",path);
         setContentView(R.layout.activity_home);
 
         StatusNavUtils.setStatusBarColor(MainActivity.this,0x00000000);
+
+
+        //网页便捷控制和NFC的便捷控制
+        Uri uri = getIntent().getData();
+        if (uri != null)
+        {
+            String uriHostStr=uri.getHost().toString();
+            if(uriHostStr.equals("www.daichepin.com")) {
+                String para=uri.getQueryParameter("u");
+
+                //弹出新窗体到注册
+                Intent intent = new Intent(this, H5Web_acty.class);
+                Bundle bundle = new Bundle();//该类用作携带数据
+                //bundle.putString("url", HTTPData.sWebStartPage);
+                String surl=uri.toString();
+                bundle.putString("url", surl);
+                intent.putExtras(bundle);//附带上额外的数据
+                startActivity(intent);
+                overridePendingTransition(R.anim.in_0, R.anim.in_1);
+
+            }
+        }
+
 
 /////   /////////////////
         if(HTTPData.isTestApp)
