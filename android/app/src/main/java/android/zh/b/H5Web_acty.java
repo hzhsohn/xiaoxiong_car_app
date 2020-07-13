@@ -1,6 +1,7 @@
 package android.zh.b;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -14,9 +15,12 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
+import android.provider.MediaStore;
 import android.provider.Settings;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -40,6 +44,10 @@ import com.xiaoxiongcar.R;
 
 import com.dou361.dialogui.DialogUIUtils;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
@@ -63,7 +71,9 @@ public class H5Web_acty extends BaseActivity {
     SwipeRefreshLayout mSwipe=null;
     private static final int MY_PERMISSIONS_REQUEST_CALL_PHONE = 1;
     String telphone_number;
-
+    //相机拍完后的相片路径
+    private String mCM;
+    private final static int FCR = 1;
 
     private ValueCallback<Uri> uploadMessage;
     private ValueCallback<Uri[]> uploadMessageAboveL;
@@ -259,7 +269,7 @@ public class H5Web_acty extends BaseActivity {
             @Override
             public boolean onShowFileChooser(WebView webView, ValueCallback<Uri[]> filePathCallback, WebChromeClient.FileChooserParams fileChooserParams) {
                 uploadMessageAboveL = filePathCallback;
-                openImageChooserActivity();
+                openImageChooserActivity5();
                 return true;
             }
 
@@ -337,6 +347,51 @@ public class H5Web_acty extends BaseActivity {
         startActivityForResult(Intent.createChooser(i, "Image Chooser"), FILE_CHOOSER_RESULT_CODE);
     }
 
+    // Create an image file
+    private File createImageFile() throws IOException {
+        @SuppressLint("SimpleDateFormat") String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "img_" + timeStamp + "_";
+        File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+        return File.createTempFile(imageFileName, ".jpg", storageDir);
+    }
+
+    private void openImageChooserActivity5() {
+
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(this.getPackageManager()) != null) {
+            File photoFile = null;
+            try {
+                photoFile = createImageFile();
+                takePictureIntent.putExtra("PhotoPath", mCM);
+            } catch (IOException ex) {
+                Log.e("", "Image file creation failed", ex);
+            }
+            if (photoFile != null) {
+                mCM = "file:" + photoFile.getAbsolutePath();
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
+            } else {
+                takePictureIntent = null;
+            }
+        }
+        Intent contentSelectionIntent = new Intent(Intent.ACTION_GET_CONTENT);
+//                contentSelectionIntent.addCategory(Intent.CATEGORY_OPENABLE);
+        contentSelectionIntent.setType("image/*");
+        Intent[] intentArray;
+        if (takePictureIntent != null) {
+            intentArray = new Intent[]{takePictureIntent};
+        } else {
+            intentArray = new Intent[0];
+        }
+
+        Intent chooserIntent = new Intent(Intent.ACTION_CHOOSER);
+        chooserIntent.putExtra(Intent.EXTRA_INTENT, contentSelectionIntent);
+        chooserIntent.putExtra(Intent.EXTRA_TITLE, "Image Chooser");
+        chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, intentArray);
+        startActivityForResult(chooserIntent, FCR);
+    }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -349,6 +404,27 @@ public class H5Web_acty extends BaseActivity {
                 uploadMessage.onReceiveValue(result);
                 uploadMessage = null;
             }
+        }
+        else  if (requestCode == FCR) {
+            Uri[] results = null;
+            if(resultCode == Activity.RESULT_OK) {
+                if (null == uploadMessageAboveL) return;
+
+                if (data == null) {
+                    //Capture Photo if no image available
+                    if (mCM != null) {
+                        results = new Uri[]{Uri.parse(mCM)};
+                    }
+                } else {
+                    String dataString = data.getDataString();
+                    if (dataString != null) {
+                        results = new Uri[]{Uri.parse(dataString)};
+                    }
+                }
+            }
+            uploadMessageAboveL.onReceiveValue(results);
+            uploadMessageAboveL = null;
+            mCM = null;
         }
     }
 
@@ -372,6 +448,8 @@ public class H5Web_acty extends BaseActivity {
                     results = new Uri[]{Uri.parse(dataString)};
             }
         }
+
+
         uploadMessageAboveL.onReceiveValue(results);
         uploadMessageAboveL = null;
     }
