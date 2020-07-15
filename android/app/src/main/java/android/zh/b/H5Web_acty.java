@@ -4,6 +4,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ClipData;
@@ -49,6 +50,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -454,7 +456,14 @@ public class H5Web_acty extends BaseActivity {
         uploadMessageAboveL = null;
     }
 
-
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    private void exitAPP() {
+        ActivityManager activityManager = (ActivityManager) context.getApplicationContext().getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.AppTask> appTaskList = activityManager.getAppTasks();
+        for (ActivityManager.AppTask appTask : appTaskList) {
+            appTask.finishAndRemoveTask();
+        }
+    }
     //JS指令
     private void cmd_do(String command)
     {
@@ -463,6 +472,10 @@ public class H5Web_acty extends BaseActivity {
             // alert("cmd:closefrm");
             finish();
             overridePendingTransition(R.anim.back_0, R.anim.back_1);
+        }
+        else if(command.startsWith("closeapp"))
+        {
+            exitAPP();
         }
         else if(command.startsWith("startpage_clear"))
         {
