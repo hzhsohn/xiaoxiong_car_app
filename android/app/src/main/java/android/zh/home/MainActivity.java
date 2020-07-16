@@ -182,7 +182,8 @@ copyFilesFromAssets(cxt,"mosquitto",path);
         }
         else{
             //是否再次显示开始页
-            if(!LoginInfo.readStartPageDone(this))
+            //if(!LoginInfo.readStartPageDone(this))
+            if(true)
             {
                 File sdcardDir = getBaseContext().getCacheDir();
                 String path= sdcardDir.getPath()+"/startpage";
