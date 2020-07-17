@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,11 +20,27 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.TextPaint;
+import android.text.method.LinkMovementMethod;
+import android.text.style.AbsoluteSizeSpan;
+import android.text.style.ClickableSpan;
+import android.text.style.ForegroundColorSpan;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.Display;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.TextView;
 import android.widget.Toast;
+import android.zh.Privacy.AppUtil;
+import android.zh.Privacy.PrivacyDialog;
+import android.zh.Privacy.PrivacyPolicyActivity;
+import android.zh.Privacy.SPUtil;
+import android.zh.Privacy.TermsActivity;
 import android.zh.b.H5Web_acty;
 import android.zh.b.StatusNavUtils;
 
@@ -39,6 +56,9 @@ import com.xiaoxiongcar.R;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.Date;
 import java.util.List;
 
@@ -172,7 +192,8 @@ copyFilesFromAssets(cxt,"mosquitto",path);
         HTTPData.sUpdateUrl=HTTPData.sWebHost+ "/app_update";
 
 //web h5测试:
-        if(HTTPData.isTestApp) {
+        if(HTTPData.isTestApp)
+        {
             Intent intent = new Intent(this, H5Web_acty.class);
             Bundle bundle = new Bundle();//该类用作携带数据
             bundle.putString("url", HTTPData.sWebTestPage);
@@ -197,6 +218,35 @@ copyFilesFromAssets(cxt,"mosquitto",path);
                 intent.putExtras(bundle);//附带上额外的数据
                 startActivity(intent);
                 overridePendingTransition(R.anim.in_0, R.anim.in_1);
+            }
+            else
+            {
+                //---------------------------------
+                //存储器
+                if(0==checkPermission(PERMISSION_ID , Manifest.permission.WRITE_EXTERNAL_STORAGE))
+                {
+                    //--------------------------------
+                    //检测更新
+                    ver=new VersionInfo(MainActivity.this, new VersionListener() {
+
+                        @Override
+                        public void web_fail_cb() {
+
+                        }
+
+                        @Override
+                        public void is_need_update_cb(boolean b) {
+
+                        }
+
+                        @Override
+                        public void download_ok() {
+                            installProcess();
+                        }
+
+                    });
+                }
+
             }
         }
 
@@ -327,30 +377,65 @@ copyFilesFromAssets(cxt,"mosquitto",path);
         //---------------------------------
         //初始化界面
         setupViewPager(viewPager);
-        //---------------------------------
-        //存储器
-        if(0==checkPermission(PERMISSION_ID , Manifest.permission.WRITE_EXTERNAL_STORAGE))
-        {
-            //--------------------------------
-            //检测更新
-            ver=new VersionInfo(MainActivity.this, new VersionListener() {
 
-                @Override
-                public void web_fail_cb() {
+        //系统重签名处理
+        hookWebView();
 
+    }
+
+    //系统重签名处理
+    public void hookWebView(){
+        int sdkInt = Build.VERSION.SDK_INT;
+        try {
+            Class<?> factoryClass = Class.forName("android.webkit.WebViewFactory");
+            Field field = factoryClass.getDeclaredField("sProviderInstance");
+            field.setAccessible(true);
+            Object sProviderInstance = field.get(null);
+            if (sProviderInstance != null) {
+                Log.i("hookWebView","sProviderInstance isn't null");
+                return;
+            }
+            Method getProviderClassMethod;
+            if (sdkInt > 22) {
+                getProviderClassMethod = factoryClass.getDeclaredMethod("getProviderClass");
+            } else if (sdkInt == 22) {
+                getProviderClassMethod = factoryClass.getDeclaredMethod("getFactoryClass");
+            } else {
+                Log.i("hookWebView","Don't need to Hook WebView");
+                return;
+            }
+            getProviderClassMethod.setAccessible(true);
+            Class<?> factoryProviderClass = (Class<?>) getProviderClassMethod.invoke(factoryClass);
+            Class<?> delegateClass = Class.forName("android.webkit.WebViewDelegate");
+            Constructor<?> delegateConstructor = delegateClass.getDeclaredConstructor();
+            delegateConstructor.setAccessible(true);
+            if(sdkInt < 26){//低于Android O版本
+                Constructor<?> providerConstructor = factoryProviderClass.getConstructor(delegateClass);
+                if (providerConstructor != null) {
+                    providerConstructor.setAccessible(true);
+                    sProviderInstance = providerConstructor.newInstance(delegateConstructor.newInstance());
                 }
-
-                @Override
-                public void is_need_update_cb(boolean b) {
-
+            } else {
+                Field chromiumMethodName = factoryClass.getDeclaredField("CHROMIUM_WEBVIEW_FACTORY_METHOD");
+                chromiumMethodName.setAccessible(true);
+                String chromiumMethodNameStr = (String)chromiumMethodName.get(null);
+                if (chromiumMethodNameStr == null) {
+                    chromiumMethodNameStr = "create";
                 }
-
-                @Override
-                public void download_ok() {
-                    installProcess();
+                Method staticFactory = factoryProviderClass.getMethod(chromiumMethodNameStr, delegateClass);
+                if (staticFactory!=null){
+                    sProviderInstance = staticFactory.invoke(null, delegateConstructor.newInstance());
                 }
+            }
 
-            });
+            if (sProviderInstance != null){
+                field.set("sProviderInstance", sProviderInstance);
+                Log.i("hookWebView","Hook success!");
+            } else {
+                Log.i("hookWebView","Hook failed!");
+            }
+        } catch (Throwable e) {
+            Log.w("hookWebView",e);
         }
     }
 

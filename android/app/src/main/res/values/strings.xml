@@ -493,5 +493,19 @@
     <string name="set_price_worktime_32">2小时 / 2.5元</string>
     <string name="set_price_worktime_33">2小时 / 3元</string>
     <string name="setprice_worktime_ok">设置时间和价格成功</string>
+
+
+
+    <!-- 隐私政策 -->
+    <string name="privacy_exit">退出</string>
+    <string name="privacy_agree">同意</string>
+    <string name="users_note">使用条款</string>
+    <string name="privacy_tips_key1">用户协议</string>
+    <string name="privacy_tips_key2">隐私协议</string>
+    <string name="privacy_tips">为了保护您的隐私和使用安全，请仔细阅读我们的用户协议和隐私协议。在确认您完全理解并同意之前，请不要使用此应用程序。谢谢您！</string>
+    <string name="confirmed">已经授权使用</string>
+    <string name="opt_terms">用户协议</string>
+    <string name="opt_privacy">隐私协议</string>
+
 </resources>
 

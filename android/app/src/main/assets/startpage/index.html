@@ -1,139 +1,89 @@
 <!DOCTYPE html>
-<html lang="cn">
+<html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="viewport-fit=cover,width=device-width,height=device-height,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <title>DP-Introduction</title>
+  <meta charset="utf-8">
+  <title>带车聘-屏保</title>
+  <link rel="stylesheet" href="./css/swiper.min.css">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
+
+  <!-- Demo styles -->
   <style>
-    html {
-        font-family: sans-serif;
-        -ms-text-size-adjust: 100%;
-        -webkit-text-size-adjust: 100%;
-          font-size: 13.3333333333333vw
+    html,
+    body {
+      position: relative;
+      height: 100%;
     }
-
-    a {
-        background-color: transparent;
-        outline: none;
-    }
-
-    a:active,
-    a:hover {
-        outline: 0;
-    }
-
-
-    button,
-    input,
-    optgroup,
-    select,
-    textarea {
-        color: inherit;
-        font: inherit;
-        margin: 0;
-    }
-
-
-    * {
-        margin:0;
-        padding: 0;
-    }
+#btn {
+	height: 30%;
+	width: 100%;
+	position: absolute;
+	top: 70%;
+}
 
     body {
+      background: #eee;
+      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      color: #000;
+      margin: 0;
+      padding: 0;
+    }
+
+    .swiper-container {
       width: 100%;
-      overflow-x: hidden !important;
-      font-family: 'YT Sans', Roboto, Arial, sans-serif;
-      font-size: .3rem;
-      color: #666;
-      line-height: 1.2;
+      height: 100%;
     }
 
-    .content{
-      padding: .6rem .4rem .4rem;
-    }
-
-    .title {
-      margin-bottom: .3rem;
-      font-size: .6rem;
-      color: #333;
-    }
-    
-    .con {
-      margin-top: 1rem;
-      margin-bottom: .8rem;
-    }
-
-    .tip-title{
-      margin-bottom: .4rem;
-      font-size: .45rem;
-    }
-
-    .tip-item {
-      margin-bottom: .6rem;
-    }
-
-    .bottom {
-      margin-top: .8rem;
-    }
-
-    .btns {
-      margin-top: .8rem;
-    }
-
-    .btns a{
-      display: inline-block;
-      vertical-align: middle;
-      border-radius: 4px;
-      text-decoration: none;
+    .swiper-slide {
       text-align: center;
-      font-size: .4rem;
-      height: 1rem;
-      line-height: 1rem;
+      font-size: 18px;
+      background: #fff;
+
+      /* Center slide text vertically */
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      -webkit-align-items: center;
+      align-items: center;
     }
 
-    .left-btn{
-      width: 30%;
-      border:1px solid #eee;
-      color: #999;
-      margin-right: 5%;
-    }
-
-    .right-btn{
-      width: 62%;
-      border:1px solid #fff;
-      color: #fff;
-      background-color: #1989fa;
-    }
-
-    .link {
-      color: #1989fa;
-      text-decoration: none;
+    .swiper-slide img {
+      height: 100%;
+      width: 100%;
     }
   </style>
 </head>
 
 <body>
-  <div class="content">
-    <div class="title">欢迎使用带车聘</div>
-    <div class="con">为了给您提供更好的服务，带车聘需要您授权以下权限和服务</div>
-    <div class="tip-item">
-      <div class="tip-title">照片</div>
-      <div class="tip-con">允许带车聘访问您设备上的照片和文件</div>
+  <!-- Swiper -->
+  <div class="swiper-container">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide"><img src="./image/1.png" alt=""></div>
+      <div class="swiper-slide"><img src="./image/2.png" alt=""></div>
+      <div class="swiper-slide"><img src="./image/3.png" alt=""><div id=btn></div></div>
     </div>
-    <div class="tip-item">
-      <div class="tip-title">通知</div>
-      <div class="tip-con">为您推送合适的运输线路及运输合同等信息</div>
-    </div>
-    <div class="bottom">为保障您自身权益，在使用带车聘前，请您务必认真阅读
-      <a href="javascript:alert('url:https://www.daichepin.com/protocol.htm')" class="link">《带车聘服务协议》</a> 和<a href="javascript:alert('url:https://www.daichepin.com/protocol.htm')" class="link">《隐私政策》</a>
-      后再点击同意。点击同意即表示阅读并同意上述协议条款。</div>
-      <div class="btns">
-  <a href="javascript:;" class="left-btn" onclick='alert("cmd:closeapp");' >不同意</a><a href="javascript:;" class="right-btn" onclick='alert("cmd:closefrm");
-	alert("cmd:startpage_done");'>同意</a>
-</div>
   </div>
+
+  <!-- Swiper JS -->
+  <script src="./js/swiper.min.js"></script>
+
+  <!-- Initialize Swiper -->
+  <script>
+    var swiper = new Swiper('.swiper-container');
+	var mButton=document.getElementById("btn");
+ 	mButton.onclick = function() {
+		alert("cmd:closefrm");
+	}	
+	alert("cmd:startpage_done");
+  </script>
 </body>
 
 </html>

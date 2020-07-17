@@ -68,7 +68,12 @@
         <activity android:name="p3th.easylink.EasyLinkConfigActivity"
             android:screenOrientation="portrait" />
 
-        <activity android:name="android.zh.b.H5Web_acty" />
+        <activity android:name="android.zh.b.H5Web_acty"
+            android:screenOrientation="portrait" />
+        <activity android:name="android.zh.Privacy.PrivacyPolicyActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name="android.zh.Privacy.TermsActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
