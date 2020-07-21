@@ -51,6 +51,10 @@ import found.a.FoundList;
 import myinfo.a.MyinfoH5_Web;
 import myinfo.logic.LoginInfo;
 import vip.a.VipList;
+
+import com.fm.openinstall.OpenInstall;
+import com.fm.openinstall.listener.AppWakeUpAdapter;
+import com.fm.openinstall.model.AppData;
 import com.xiaoxiongcar.R;
 
 import java.io.File;
@@ -143,6 +147,17 @@ copyFilesFromAssets(cxt,"mosquitto",path);
         return "";
     }
 
+    public boolean isMainProcess() {
+        int pid = android.os.Process.myPid();
+        ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningAppProcessInfo appProcess : activityManager.getRunningAppProcesses()) {
+            if (appProcess.pid == pid) {
+                return getApplicationInfo().packageName.equals(appProcess.processName);
+            }
+        }
+        return false;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -150,6 +165,8 @@ copyFilesFromAssets(cxt,"mosquitto",path);
 
         StatusNavUtils.setStatusBarColor(MainActivity.this,0x00000000);
 
+        // 获取唤醒参数
+        OpenInstall.getWakeUp(getIntent(), wakeUpAdapter);
 
         //网页便捷控制和NFC的便捷控制
         Uri uri = getIntent().getData();
@@ -437,6 +454,29 @@ copyFilesFromAssets(cxt,"mosquitto",path);
         } catch (Throwable e) {
             Log.w("hookWebView",e);
         }
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        // 此处要调用，否则App在后台运行时，会无法获取
+        OpenInstall.getWakeUp(intent, wakeUpAdapter);
+    }
+    AppWakeUpAdapter wakeUpAdapter = new AppWakeUpAdapter() {
+        @Override
+        public void onWakeUp(AppData appData) {
+            // 打印数据便于调试
+            Log.d("OpenInstall", "getWakeUp : wakeupData = " + appData.toString());
+            // 获取渠道数据
+            String channelCode = appData.getChannel();
+            // 获取绑定数据
+            String bindData = appData.getData();
+        }
+    };
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        wakeUpAdapter = null;
     }
 
     //需要申请GETTask权限
