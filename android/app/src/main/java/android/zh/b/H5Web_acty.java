@@ -56,6 +56,9 @@ import android.zh.Privacy.TermsActivity;
 import android.zh.home.BaseActivity;
 import android.zh.home.MainActivity;
 
+import com.fm.openinstall.OpenInstall;
+import com.fm.openinstall.listener.AppInstallAdapter;
+import com.fm.openinstall.model.AppData;
 import com.xiaoxiongcar.R;
 
 import com.dou361.dialogui.DialogUIUtils;
@@ -70,6 +73,7 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import ext.func.AssertAlert;
 import ext.magr.HTTPData;
 import found.a.FoundList;
 import myinfo.a.MyinfoH5_Web;
@@ -77,6 +81,9 @@ import myinfo.logic.LoginInfo;
 import vip.a.VipList;
 
 import android.zh.home.NoScrollViewPager;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 
 public class H5Web_acty extends BaseActivity {
@@ -102,6 +109,7 @@ public class H5Web_acty extends BaseActivity {
     private boolean isCheckPrivacy = false;
     private long versionCode;
     private long currentVersionCode;
+
 
     private TimerTask taskReloadPage = new TimerTask() {
         public void run() {

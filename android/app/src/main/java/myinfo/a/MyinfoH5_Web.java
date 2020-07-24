@@ -31,13 +31,20 @@ import android.zh.home.BaseFragment;
 import android.zh.home.MainActivity;
 
 import com.dou361.dialogui.DialogUIUtils;
+import com.fm.openinstall.OpenInstall;
+import com.fm.openinstall.listener.AppInstallAdapter;
+import com.fm.openinstall.model.AppData;
 import com.xiaoxiongcar.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import ext.func.AssertAlert;
 import ext.magr.HTTPData;
 import found.a.FoundList;
 import myinfo.logic.LoginInfo;
@@ -50,6 +57,8 @@ public class MyinfoH5_Web extends BaseFragment {
     Dialog loadDialog;
     View g_view=null;
     SwipeRefreshLayout mSwipe=null;
+
+    String invitationCode;
 
     String my_url;
     Timer timer=null;
@@ -137,6 +146,32 @@ public class MyinfoH5_Web extends BaseFragment {
 
         urlstr = HTTPData.sWebPhoneUrl_Center;
         to_url(urlstr);
+
+
+        // 获取安装携带的参数
+        OpenInstall.getInstall(new AppInstallAdapter() {
+            @Override
+            public void onInstall(AppData appData) {
+                // 打印数据便于调试
+                Log.d("OpenInstall", "getInstall : installData = " + appData.toString());
+                // 获取渠道数据
+                String channelCode = appData.getChannel();
+                // 获取自定义数据
+                String bindData = appData.getData();
+
+                //
+                JSONObject person = null;
+                try {
+                    person = new JSONObject(bindData);
+                    invitationCode = person.getString("invitationCode");
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
 
         //覆盖WebView默认使用第三方或系统默认浏览器打开网页的行为，使网页用WebView打开
         webView.setWebViewClient(new WebViewClient() {
@@ -307,6 +342,27 @@ public class MyinfoH5_Web extends BaseFragment {
                 else if(message.startsWith("url:"))
                 {
                     String newurl=message.replace("url:","");
+
+
+                   // AssertAlert.show(context,"1",newurl);
+
+                    if(null!=invitationCode && !invitationCode.equals("") &&
+                            (newurl.startsWith("https://www.daichepin.com/webphone_ios/webphone/client_register/#/client/register") ||
+                             newurl.startsWith("https://www.daichepin.com/webphone_ios/webphone/business_register/#/business/register")))
+                    {
+                        boolean status = newurl.contains("?");
+                        if(status){
+                            System.out.println("包含");
+                            newurl=newurl+"&invitationCode="+invitationCode;
+                        }else{
+                            System.out.println("不包含");
+                            newurl=newurl+"?invitationCode="+invitationCode;
+                        }
+
+                    }
+
+
+                   // AssertAlert.show(context,"2",newurl);
 
                     Intent intent = new Intent(context, H5Web_acty.class);
                     Bundle bundle = new Bundle();//该类用作携带数据
