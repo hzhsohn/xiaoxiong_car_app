@@ -637,6 +637,10 @@ public class H5Web_acty extends BaseActivity {
         {
             LoginInfo.saveStartPageDone(context,"ok");
         }
+        else if(command.startsWith("reg"))
+        {
+            OpenInstall.reportRegister();
+        }
         else if(command.startsWith("loginout"))
         {
             // alert("cmd:closefrm");
